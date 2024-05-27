@@ -61,7 +61,7 @@ var footerComment = {
 
     createComment: function () {
         footerComment.disable(footerComment.query('form-ptc-comment'), true);
-        let isReply = replied_to.length > 0;
+        let isReply = footerComment.replied_to.length > 0;
 
         if (isReply)
             footerComment.record_api = 'https://jsonblob.com/api/jsonBlob/' + footerComment.replied_to;
