@@ -3,9 +3,8 @@
 var footerComment = {
 
     // build comment_footer_url
-    comment_footer_url: window.location.href,
+    comment_footer_url: window.location.href.split('.html')[0] + '.html',
     record_api: 'https://jsonblob.com/api/jsonBlob/1242732119490158592',
-    comment_footer_url: footerComment.comment_footer_url.split('.html')[0] + '.html',
     replied_to: '',
     username: 'Guest',
     userid: 'https://storehaccounts.blogspot.com/p/create-account.html',
