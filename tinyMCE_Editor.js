@@ -16,7 +16,7 @@ var tinyMCE_Editor = {
             menubar: false,
             toolbar_mode: 'wrap',
             toolbar_drawer: false,
-            images_upload_handler: example_image_upload_handler,
+            images_upload_handler: tinyMCE_Editor.example_image_upload_handler,
             plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
             toolbar1: 'blocks alignleft aligncenter alignright alignjustify forecolor backcolor numlist bullist  outdent indent  blockquote undo redo link unlink image media table hr bold italic underline strikethrough cut copy paste',
             tinycomments_mode: 'embedded',
@@ -36,8 +36,8 @@ var tinyMCE_Editor = {
             content_css: 'dark',
             ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
         });
-
-        const example_image_upload_handler = (blobInfo, progress) => new Promise((resolve, reject) => {
+    },
+	example_image_upload_handler: (blobInfo, progress) => new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest();
             xhr.withCredentials = false;
             xhr.open('POST', 'https://api.imgbb.com/1/upload?key=07f1351d4e674784012d92ae6e03b49d');
@@ -78,5 +78,4 @@ var tinyMCE_Editor = {
             formData.append('image', blobInfo.blob());
             xhr.send(formData);
         });
-    }
 }
