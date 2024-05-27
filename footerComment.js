@@ -222,3 +222,5 @@ var footerComment = {
         });
     }
 }
+
+footerComment.start();
