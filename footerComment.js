@@ -64,9 +64,9 @@ var footerComment = {
         let isReply = replied_to.length > 0;
 
         if (isReply)
-            record_api = 'https://jsonblob.com/api/jsonBlob/' + footerComment.replied_to;
+            footerComment.record_api = 'https://jsonblob.com/api/jsonBlob/' + footerComment.replied_to;
 
-        JBLOBFunctions.PUTRecordBlob(record_api, function (data) {
+        JBLOBFunctions.PUTRecordBlob(footerComment.record_api, function (data) {
             let comment_value = footerComment.query('comment-value').value;
             let comment_data;
             let blob_id = '';
@@ -127,7 +127,7 @@ var footerComment = {
 
     // build comments
     buildComment: function () {
-        JBLOBFunctions.getBlobRecord(record_api, async function (data) {
+        JBLOBFunctions.getBlobRecord(footerComment.record_api, async function (data) {
             data = JSON.parse(data);
             if (data.hasOwnProperty(comment_footer_url)) {
                 footerComment.query('comment-count').innerText = data[comment_footer_url].comments.length;
