@@ -100,10 +100,10 @@ var footerComment = {
             if (isReply)
                 data.replies.push(blob_id);
             else {
-                if (data.hasOwnProperty(comment_footer_url))
-                    data[comment_footer_url].comments.push(blob_id);
+                if (data.hasOwnProperty(footerComment.comment_footer_url))
+                    data[footerComment.comment_footer_url].comments.push(blob_id);
                 else
-                    data[comment_footer_url] = {
+                    data[footerComment.comment_footer_url] = {
                         "comments": [blob_id]
                     };
             }
@@ -129,10 +129,10 @@ var footerComment = {
     buildComment: function () {
         JBLOBFunctions.getBlobRecord(footerComment.record_api, async function (data) {
             data = JSON.parse(data);
-            if (data.hasOwnProperty(comment_footer_url)) {
-                footerComment.query('comment-count').innerText = data[comment_footer_url].comments.length;
-                for (i = 0; i < data[comment_footer_url].comments.length; i++) {
-                    let comment_id = data[comment_footer_url].comments[i];
+            if (data.hasOwnProperty(footerComment.comment_footer_url)) {
+                footerComment.query('comment-count').innerText = data[footerComment.comment_footer_url].comments.length;
+                for (i = 0; i < data[footerComment.comment_footer_url].comments.length; i++) {
+                    let comment_id = data[footerComment.comment_footer_url].comments[i];
                     let temp_data;
                     await JBLOBFunctions.getBlobRecordSync('https://jsonblob.com/api/jsonBlob/' + comment_id, async function (data) {
                         temp_data = JSON.parse(data);
