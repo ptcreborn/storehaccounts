@@ -17,46 +17,46 @@ var tinyMCE_Editor = {
             toolbar_mode: 'wrap',
             toolbar_drawer: false,
             images_upload_handler: (blobInfo, progress) => new Promise((resolve, reject) => {
-            const xhr = new XMLHttpRequest();
-            xhr.withCredentials = false;
-            xhr.open('POST', 'https://api.imgbb.com/1/upload?key=07f1351d4e674784012d92ae6e03b49d');
+                const xhr = new XMLHttpRequest();
+                xhr.withCredentials = false;
+                xhr.open('POST', 'https://api.imgbb.com/1/upload?key=07f1351d4e674784012d92ae6e03b49d');
 
-            xhr.upload.onprogress = (e) => {
-                progress(e.loaded / e.total * 100);
-            };
+                xhr.upload.onprogress = (e) => {
+                    progress(e.loaded / e.total * 100);
+                };
 
-            xhr.onload = () => {
-                if (xhr.status === 403) {
-                    reject({
-                        message: 'HTTP Error: ' + xhr.status,
-                        remove: true
-                    });
-                    return;
-                }
+                xhr.onload = () => {
+                    if (xhr.status === 403) {
+                        reject({
+                            message: 'HTTP Error: ' + xhr.status,
+                            remove: true
+                        });
+                        return;
+                    }
 
-                if (xhr.status < 200 || xhr.status >= 300) {
-                    reject('HTTP Error: ' + xhr.status);
-                    return;
-                }
+                    if (xhr.status < 200 || xhr.status >= 300) {
+                        reject('HTTP Error: ' + xhr.status);
+                        return;
+                    }
 
-                const json = JSON.parse(xhr.responseText);
+                    const json = JSON.parse(xhr.responseText);
 
-                if (!json) {
-                    reject('Invalid JSON: ' + xhr.responseText);
-                    return;
-                }
+                    if (!json) {
+                        reject('Invalid JSON: ' + xhr.responseText);
+                        return;
+                    }
 
-                resolve(json.data.thumb.url);
-            };
+                    resolve(json.data.thumb.url);
+                };
 
-            xhr.onerror = () => {
-                reject('Image upload failed due to a XHR Transport error. Code: ' + xhr.status);
-            };
+                xhr.onerror = () => {
+                    reject('Image upload failed due to a XHR Transport error. Code: ' + xhr.status);
+                };
 
-            const formData = new FormData();
-            formData.append('image', blobInfo.blob());
-            xhr.send(formData);
-        }),
+                const formData = new FormData();
+                formData.append('image', blobInfo.blob());
+                xhr.send(formData);
+            }),
             plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
             toolbar1: 'blocks alignleft aligncenter alignright alignjustify forecolor backcolor numlist bullist  outdent indent  blockquote undo redo link unlink image media table hr bold italic underline strikethrough cut copy paste',
             tinycomments_mode: 'embedded',
