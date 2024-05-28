@@ -47,7 +47,7 @@ var tinyMCE_Editor = {
                         return;
                     }
 
-                    resolve(json.data.thumb.url);
+                    resolve(json.data.image.url);
                 };
 
                 xhr.onerror = () => {
