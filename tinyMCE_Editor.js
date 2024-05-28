@@ -79,7 +79,11 @@ var tinyMCE_Editor = {
         });
     },
 	
-	returnWordCount: function() {
+	returnCharacterCount: function() {
 		return tinymce.get(tinyMCE_Editor.textAreaId).plugins.wordcount.body.getCharacterCount();
+	},
+	
+	returnWordCount: function() {
+		return tinymce.get(tinyMCE_Editor.textAreaId).plugins.wordcount.body.getWordCount();
 	}
 }
