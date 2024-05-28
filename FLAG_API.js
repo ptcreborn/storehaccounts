@@ -18,8 +18,8 @@ regionNames.of('US');  // "United States"
 			flag_img = 'https://flagsapi.com/' + data.country + '/shiny/64.png';
 			country_code = data.country;
 			country_name = regionNames.of(country_code);
+			
+			parentElem.innerHTML = "<img style='width: 24px !important;height: 24px !important;object-fit: cover;' src='" + flag_img + "'/><span style='font-weight: 600;vertical-align: super;'>" + country_name + " (" + country_code + ")</span>";
 		});
-		
-		parentElem.innerHTML = "<img style='width: 24px !important;height: 24px !important;object-fit: cover;' src='" + flag_img + "'/><span style='font-weight: 600;vertical-align: super;'>" + country_name + " (" + country_code + ")</span>";
 	}
 }
