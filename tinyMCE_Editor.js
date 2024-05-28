@@ -9,10 +9,8 @@ var tinyMCE_Editor = {
     },
 
     setupEditor: function (parentElem) {
-        document.querySelector('#' + parentElem).innerHTML = "<textarea id='tinymce_ptc_editor'></textarea>";
-
         tinymce.init({
-            selector: '#tinymce_ptc_editor',
+            selector: '#' + parentElem,
             menubar: false,
             toolbar_mode: 'wrap',
             toolbar_drawer: false,
