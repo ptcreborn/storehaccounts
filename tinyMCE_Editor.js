@@ -74,5 +74,9 @@ var tinyMCE_Editor = {
             content_css: 'dark',
             ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
         });
-    }
+    },
+	
+	returnWordCount: function() {
+		return tinymce.activeEditor.plugins.wordcount.body.getCharacterCount();
+	}
 }
