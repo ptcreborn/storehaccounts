@@ -4,13 +4,16 @@ var tinyMCE_Editor = {
     // note this needs a script tag in the </head> using defer
     // <script defer='defer' referrerpolicy='origin' src='https://cdn.tiny.cloud/1/o5qu1o2naca2z6sbvhvmk99zkszzkl1g66h4wkg2riy4zlz9/tinymce/7/tinymce.min.js'/>
 
+	textAreaId: '',
+
     postContent: function () {
-        return tinymce.get("tinymce_ptc_editor").getContent();
+        return tinymce.get(tinyMCE_Editor.textAreaId).getContent();
     },
 
-    setupEditor: function (parentElem) {
+    setupEditor: function (parentElemId) {
+		tinyMCE_Editor.textAreaId = parentElemId;
         tinymce.init({
-            selector: '#' + parentElem,
+            selector: '#' + parentElemId,
             menubar: false,
             toolbar_mode: 'wrap',
             toolbar_drawer: false,
@@ -77,6 +80,6 @@ var tinyMCE_Editor = {
     },
 	
 	returnWordCount: function() {
-		return tinymce.activeEditor.plugins.wordcount.body.getCharacterCount();
+		return tinymce.get(tinyMCE_Editor.textAreaId).plugins.wordcount.body.getCharacterCount();
 	}
 }
