@@ -14,7 +14,7 @@ var PTCNotifications = {
         }
 
         FirebaseModule.patch(db_url, data);
-    }
+    },
 	
 	get: function(user_id, db_url) {
 		let user_notif = await FirebaseModule.get(db_url);
