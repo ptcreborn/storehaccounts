@@ -73,7 +73,7 @@ var footerComment = {
             let firebase_data = {
                 [new Date().getTime()]: {
                     "userimg": footerComment.userimg,
-                    "content": footerComment.comment_value,
+                    "content": comment_value,
                     "link": footerComment.comment_footer_url
                 }
             }
