@@ -70,6 +70,13 @@ var footerComment = {
             let comment_value = footerComment.query('comment-value').value;
             let comment_data;
             let blob_id = '';
+            let firebase_data = {
+                [new Date().getTime()]: {
+                    "userimg": footerComment.userimg,
+                    "content": footerComment.comment_value,
+                    "link": footerComment.comment_footer_url
+                }
+            }
 
             if (isReply)
                 comment_data = {
@@ -92,6 +99,8 @@ var footerComment = {
                     "date": new Date().getTime(),
                     "replies": []
                 };
+
+            FirebaseModule.patch('https://storehaccounts-comments-default-rtdb.firebaseio.com/comments.json', JSON.stringify(firebase_data));
 
             JBLOBFunctions.createRecordBlob(JSON.stringify(comment_data), function (data) {
                 blob_id = data.split('jsonBlob/')[1].replace('\r', '').replace('\n', '');
