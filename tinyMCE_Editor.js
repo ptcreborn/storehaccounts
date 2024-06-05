@@ -10,7 +10,7 @@ var tinyMCE_Editor = {
         return tinymce.get(tinyMCE_Editor.textAreaId).getContent();
     },
 
-    setupEditor: function (parentElemId, preLoadValues) {
+    setupEditor: function (parentElemId) {
         tinyMCE_Editor.textAreaId = parentElemId;
         tinymce.init({
             selector: '#' + parentElemId,
@@ -75,11 +75,6 @@ var tinyMCE_Editor = {
             },
             skin: 'oxide-dark',
             content_css: 'dark',
-            setup: function (editor) {
-                editor.on('init', function () {
-					tinymce.get('#' + parentElemId).setContent(preLoadValues, {format: 'raw'});
-                });
-            },
             ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
         });
     },
