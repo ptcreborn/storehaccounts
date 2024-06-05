@@ -104,6 +104,24 @@ var footerComment = {
                 blob_id = data.split('jsonBlob/')[1].replace('\r', '').replace('\n', '');
             });
 
+            let user;
+            if (localStorage.getItem('ptc_user')) {
+                user = JSON.parse(user);
+                user = user.user;
+            }
+
+            if (user)
+                JBLOBFunctions.PUTRecordBlob('https://jsonblob.com/api/jsonBlob/' + user, function (data) {
+                    if (data.hasOwnProperty('comments')) {
+                        data.comments = parseInt(data.comments) + 1;
+                    } else {
+                        data["comments"] = 1;
+                    }
+                    return data;
+                }, function (data) {
+                    console.log(data);
+                });
+
             if (isReply)
                 data.replies.push(blob_id);
             else {
