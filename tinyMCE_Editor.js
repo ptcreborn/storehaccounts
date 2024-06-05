@@ -4,14 +4,14 @@ var tinyMCE_Editor = {
     // note this needs a script tag in the </head> using defer
     // <script defer='defer' referrerpolicy='origin' src='https://cdn.tiny.cloud/1/o5qu1o2naca2z6sbvhvmk99zkszzkl1g66h4wkg2riy4zlz9/tinymce/7/tinymce.min.js'/>
 
-	textAreaId: '',
+    textAreaId: '',
 
     postContent: function () {
         return tinymce.get(tinyMCE_Editor.textAreaId).getContent();
     },
 
-    setupEditor: function (parentElemId) {
-		tinyMCE_Editor.textAreaId = parentElemId;
+    setupEditor: function (parentElemId, preLoadValues) {
+        tinyMCE_Editor.textAreaId = parentElemId;
         tinymce.init({
             selector: '#' + parentElemId,
             menubar: false,
@@ -75,15 +75,20 @@ var tinyMCE_Editor = {
             },
             skin: 'oxide-dark',
             content_css: 'dark',
+            setup: function (editor) {
+                editor.on('init', function () {
+					tinymce.get('#' + parentElemId).setContent(preLoadValues, {format: 'raw'});
+                });
+            },
             ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
         });
     },
-	
-	returnCharacterCount: function() {
-		return tinymce.get(tinyMCE_Editor.textAreaId).plugins.wordcount.body.getCharacterCount();
-	},
-	
-	returnWordCount: function() {
-		return tinymce.get(tinyMCE_Editor.textAreaId).plugins.wordcount.body.getWordCount();
-	}
+
+    returnCharacterCount: function () {
+        return tinymce.get(tinyMCE_Editor.textAreaId).plugins.wordcount.body.getCharacterCount();
+    },
+
+    returnWordCount: function () {
+        return tinymce.get(tinyMCE_Editor.textAreaId).plugins.wordcount.body.getWordCount();
+    }
 }
