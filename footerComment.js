@@ -199,9 +199,12 @@ var footerComment = {
 
     getUserInfos: async function () {
         // check if user is logged in
-        let user = localStorage.getItem('ptc_user');
+        let user;
 
-        if (user) {
+        if (localStorage.getItem('ptc_user')) {
+			user = localStorage.getItem('ptc_user');
+			user = JSON.parse(user);
+			
             // means logged in.
             let temp_data;
             user = JSON.parse(user);
