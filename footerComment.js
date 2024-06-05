@@ -212,17 +212,15 @@ var footerComment = {
 
             await JBLOBFunctions.getBlobRecordSync('https://jsonblob.com/api/jsonBlob/' + user.user, function (data) {
 				console.log(data);
-                temp_data = data;
+                // temp_data = data;
             });
-			
-			console.log(temp_data);
 
-            footerComment.username = temp_data.nickname;
+            /*footerComment.username = temp_data.nickname;
             footerComment.userimg = temp_data.prof_image;
             footerComment.userid = 'https://storehaccounts.blogspot.com/p/your-account-page.html?' + user.user;
             footerComment.userbackimg = temp_data.background_image;
 
-            footerComment.query('current-user').innerText = footerComment.username;
+            footerComment.query('current-user').innerText = footerComment.username;*/
         }
     },
 
