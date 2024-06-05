@@ -158,10 +158,8 @@ var footerComment = {
                 footerComment.query('comment-count').innerText = data[footerComment.comment_footer_url].comments.length;
                 for (i = 0; i < data[footerComment.comment_footer_url].comments.length; i++) {
                     let comment_id = data[footerComment.comment_footer_url].comments[i];
-                    let temp_data = await JBLOBFunctions.getBlobRecordSync('https://jsonblob.com/api/jsonBlob/' + comment_id, async function (data) {
-                        temp_data = JSON.parse(data);
-                    });
-
+                    let temp_data = await JBLOBFunctions.getBlobRecordSync('https://jsonblob.com/api/jsonBlob/' + comment_id, null);
+					temp_data = JSON.parse(temp_data);
                     let username = temp_data.username;
                     let userimg = temp_data.userimg;
                     let userid = temp_data.userid;
