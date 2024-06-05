@@ -207,9 +207,12 @@ var footerComment = {
             // means logged in.
             let temp_data;
             user = JSON.parse(user);
+			
+			console.log('https://jsonblob.com/api/jsonBlob/' + user.user);
 
             await JBLOBFunctions.getBlobRecordSync('https://jsonblob.com/api/jsonBlob/' + user.user, function (data) {
                 temp_data = JSON.parse(data);
+				console.log(data);
             });
 			
 			console.log(temp_data);
