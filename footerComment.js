@@ -66,7 +66,7 @@ var footerComment = {
         if (isReply)
             footerComment.record_api = 'https://jsonblob.com/api/jsonBlob/' + footerComment.replied_to;
 
-        JBLOBFunctions.PUTRecordBlob(footerComment.record_api, function (data) {
+        JBLOBFunctions.PUTRecordBlob(footerComment.record_api, async function (data) {
             let comment_value = footerComment.query('comment-value').value;
             let comment_data;
             let blob_id = '';
@@ -100,7 +100,7 @@ var footerComment = {
                     "replies": []
                 };
 
-            FirebaseModule.patch('https://storehaccounts-comments-default-rtdb.firebaseio.com/comments.json', JSON.stringify(firebase_data));
+            await FirebaseModule.patch('https://storehaccounts-comments-default-rtdb.firebaseio.com/comments.json', JSON.stringify(firebase_data));
 
             JBLOBFunctions.createRecordBlob(JSON.stringify(comment_data), function (data) {
                 blob_id = data.split('jsonBlob/')[1].replace('\r', '').replace('\n', '');
@@ -116,6 +116,24 @@ var footerComment = {
                         "comments": [blob_id]
                     };
             }
+
+            let user;
+            if (localStorage.getItem('ptc_user')) {
+                user = JSON.parse(user);
+                user = user.user;
+            }
+
+            if (user)
+                JBLOBFunctions.PUTRecordBlob('https://jsonblob.com/api/jsonBlob/' + user, function (data) {
+                    if (data.hasOwnProperty('comments')) {
+                        data.comments = parseInt(data.comments) + 1;
+                    } else {
+                        data["comments"] = 1;
+                    }
+                    return data;
+                }, function (data) {
+                    console.log(data);
+                });
 
             return data;
         }, function (data) {
