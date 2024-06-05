@@ -211,6 +211,8 @@ var footerComment = {
             await JBLOBFunctions.getBlobRecordSync('https://jsonblob.com/api/jsonBlob/' + user.user, function (data) {
                 temp_data = JSON.parse(data);
             });
+			
+			console.log(temp_data);
 
             footerComment.username = temp_data.nickname;
             footerComment.userimg = temp_data.prof_image;
