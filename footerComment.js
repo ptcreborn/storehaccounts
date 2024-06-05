@@ -71,7 +71,7 @@ var footerComment = {
             let firebase_data = {
                 [new Date().getTime()]: {
                     "userimg": footerComment.userimg,
-                    "content": footerComment.comment_value,
+                    "content": comment_value,
                     "link": footerComment.comment_footer_url
                 }
             }
@@ -158,8 +158,7 @@ var footerComment = {
                 footerComment.query('comment-count').innerText = data[footerComment.comment_footer_url].comments.length;
                 for (i = 0; i < data[footerComment.comment_footer_url].comments.length; i++) {
                     let comment_id = data[footerComment.comment_footer_url].comments[i];
-                    let temp_data;
-                    await JBLOBFunctions.getBlobRecordSync('https://jsonblob.com/api/jsonBlob/' + comment_id, async function (data) {
+                    let temp_data = await JBLOBFunctions.getBlobRecordSync('https://jsonblob.com/api/jsonBlob/' + comment_id, async function (data) {
                         temp_data = JSON.parse(data);
                     });
 
@@ -178,15 +177,15 @@ var footerComment = {
 
                     for (j = 0; j < temp_data.replies.length; j++) {
                         let reply_comment_id = temp_data.replies[j];
-                        await JBLOBFunctions.getBlobRecordSync('https://jsonblob.com/api/jsonBlob/' + reply_comment_id, function (data) {
-                            data = JSON.parse(data);
+                        let new_data = await JBLOBFunctions.getBlobRecordSync('https://jsonblob.com/api/jsonBlob/' + reply_comment_id, null);
 
-                            let div_imgs = document.createElement('div');
-                            div_imgs.setAttribute('class', 'image-attachments');
-                            div_imgs.innerHTML = data.imgs;
+                        new_data = JSON.parse(new_data);
 
-                            reply_build += "<div id=" + reply_comment_id + " class='comment-replied'><img class='user-profile' src='" + data.userimg + "'/><a target='_blank' href='" + data.userid + "'>" + data.username + "</a><span>replied " + moment(parseInt(data.date)).fromNow() + "</span><p>" + data.content.replaceAll('\n', '<br/>') + "</p>" + div_imgs.outerHTML + "</div>";
-                        });
+                        let div_imgs = document.createElement('div');
+                        div_imgs.setAttribute('class', 'image-attachments');
+                        div_imgs.innerHTML = new_data.imgs;
+
+                        reply_build += "<div id=" + reply_comment_id + " class='comment-replied'><img class='user-profile' src='" + new_data.userimg + "'/><a target='_blank' href='" + new_data.userid + "'>" + new_data.username + "</a><span>replied " + moment(parseInt(new_data.date)).fromNow() + "</span><p>" + new_data.content.replaceAll('\n', '<br/>') + "</p>" + div_imgs.outerHTML + "</div>";
                     }
 
                     footerComment.query('comment-container').innerHTML += "<div id=" + comment_id + " class='comment-thread' style='background-image: linear-gradient(to bottom, rgb(0,0,0,0.6) 10%, rgb(0,0,0,0.9) 90%), url(\"" + background + "\"); background-repeat: no-repeat; background-size: cover; background-position: center center;'><img class='user-profile' src='" + userimg + "'/><a target='_blank' href='" + userid + "'>" + username + "</a><span>commented " + date + " " + num_of_replies + "</span><p>" + content + "</p>" + div_imgs.outerHTML + "" + reply_build + "<div style='position: relative; width: 100%;margin: 10px 0 50px 0;'><button style='font-size: 12px !important; color: black !important;' onclick='footerComment.addElementToNext(this, footerComment.query(\"form-ptc-comment\"), \"" + comment_id + "\")'>Add reply</button></div></div>";
@@ -201,12 +200,10 @@ var footerComment = {
 
         if (user) {
             // means logged in.
-            let temp_data;
             user = JSON.parse(user);
 
-            await JBLOBFunctions.getBlobRecordSync('https://jsonblob.com/api/jsonBlob/' + user.user, function (data) {
-                temp_data = JSON.parse(data);
-            });
+            let temp_data = await JBLOBFunctions.getBlobRecordSync('https://jsonblob.com/api/jsonBlob/' + user.user, null);
+            temp_data = JSON.parse(temp_data);
 
             footerComment.username = temp_data.nickname;
             footerComment.userimg = temp_data.prof_image;
