@@ -1,5 +1,3 @@
-
-
 var footerComment = {
 
     // build comment_footer_url
@@ -66,14 +64,14 @@ var footerComment = {
         if (isReply)
             footerComment.record_api = 'https://jsonblob.com/api/jsonBlob/' + footerComment.replied_to;
 
-        JBLOBFunctions.PUTRecordBlob(footerComment.record_api, async function (data) {
+        JBLOBFunctions.PUTRecordBlob(footerComment.record_api, function (data) {
             let comment_value = footerComment.query('comment-value').value;
             let comment_data;
             let blob_id = '';
             let firebase_data = {
                 [new Date().getTime()]: {
                     "userimg": footerComment.userimg,
-                    "content": comment_value,
+                    "content": footerComment.comment_value,
                     "link": footerComment.comment_footer_url
                 }
             }
@@ -100,7 +98,7 @@ var footerComment = {
                     "replies": []
                 };
 
-            await FirebaseModule.patch('https://storehaccounts-comments-default-rtdb.firebaseio.com/comments.json', JSON.stringify(firebase_data));
+            FirebaseModule.patch('https://storehaccounts-comments-default-rtdb.firebaseio.com/comments.json', JSON.stringify(firebase_data));
 
             JBLOBFunctions.createRecordBlob(JSON.stringify(comment_data), function (data) {
                 blob_id = data.split('jsonBlob/')[1].replace('\r', '').replace('\n', '');
@@ -116,24 +114,6 @@ var footerComment = {
                         "comments": [blob_id]
                     };
             }
-
-            let user;
-            if (localStorage.getItem('ptc_user')) {
-                user = JSON.parse(user);
-                user = user.user;
-            }
-
-            if (user)
-                JBLOBFunctions.PUTRecordBlob('https://jsonblob.com/api/jsonBlob/' + user, function (data) {
-                    if (data.hasOwnProperty('comments')) {
-                        data.comments = parseInt(data.comments) + 1;
-                    } else {
-                        data["comments"] = 1;
-                    }
-                    return data;
-                }, function (data) {
-                    console.log(data);
-                });
 
             return data;
         }, function (data) {
@@ -199,28 +179,23 @@ var footerComment = {
 
     getUserInfos: async function () {
         // check if user is logged in
-        let user;
+        let user = localStorage.getItem('ptc_user');
 
-        if (localStorage.getItem('ptc_user')) {
-			user = localStorage.getItem('ptc_user');
-			
+        if (user) {
             // means logged in.
             let temp_data;
             user = JSON.parse(user);
-			
-			console.log('https://jsonblob.com/api/jsonBlob/' + user.user);
 
             await JBLOBFunctions.getBlobRecordSync('https://jsonblob.com/api/jsonBlob/' + user.user, function (data) {
-				console.log(data);
-                // temp_data = data;
+                temp_data = JSON.parse(data);
             });
 
-            /*footerComment.username = temp_data.nickname;
+            footerComment.username = temp_data.nickname;
             footerComment.userimg = temp_data.prof_image;
             footerComment.userid = 'https://storehaccounts.blogspot.com/p/your-account-page.html?' + user.user;
             footerComment.userbackimg = temp_data.background_image;
 
-            footerComment.query('current-user').innerText = footerComment.username;*/
+            footerComment.query('current-user').innerText = footerComment.username;
         }
     },
 
