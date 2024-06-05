@@ -106,7 +106,7 @@ var footerComment = {
 
             let user;
             if (localStorage.getItem('ptc_user')) {
-                user = JSON.parse(user);
+                user = JSON.parse(localStorage.getItem('ptc_user'));
                 user = user.user;
             }
 
