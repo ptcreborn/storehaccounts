@@ -211,8 +211,8 @@ var footerComment = {
 			console.log('https://jsonblob.com/api/jsonBlob/' + user.user);
 
             await JBLOBFunctions.getBlobRecordSync('https://jsonblob.com/api/jsonBlob/' + user.user, function (data) {
-                temp_data = JSON.parse(data);
 				console.log(data);
+                temp_data = data;
             });
 			
 			console.log(temp_data);
