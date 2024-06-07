@@ -3,7 +3,7 @@ var Ranks = {
         let threadsCount = 0;
         let commentsCount = 0;
         let upvotesCount = 0;
-        let total = 0;
+        let totalCount = 0;
 
         let ranknames = {
             "ranks": [{
@@ -101,7 +101,7 @@ var Ranks = {
         if (jsonData.hasOwnProperty('upvotes'))
             upvotesCount = Math.ceil(parseInt(jsonData["upvotes"]) * 1);
 
-        total = threadsCount + commentsCount + upvotesCount;
+        totalCount = threadsCount + commentsCount + upvotesCount;
 
         let dataOut;
 
