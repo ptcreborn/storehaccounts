@@ -40,7 +40,12 @@ var quillEditor = {
 
     getContents: function () {
 		let q = quillEditor.quill;
-        return q.getSemanticHTML();
+		let temp_div = document.createElement('div');
+		temp_div.setAttribute('class', 'ql-editor');
+		temp_div.style.color = 'white';
+		temp_div.style.background = 'black';
+		temp_div.innerHTML = q.getSemanticHTML;
+        return temp_div.outerHTML();
     },
 
     setContents: function (html) {
