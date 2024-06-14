@@ -1,7 +1,7 @@
 
 
 var quillEditor = {
-	quill: '',
+    quill: '',
     initiate: function (editor) {
         quillEditor.quill = new Quill('#' + editor, {
             modules: {
@@ -39,10 +39,13 @@ var quillEditor = {
     },
 
     getContents: function () {
-		return quillEditor.quill.getSemanticHTML();
-	},
+		let q = quillEditor.quill;
+        return q.getSemanticHTML();
+    },
 
     setContents: function (html) {
-		quillEditor.quill.setText(html);
-	}
+		let q = quillEditor.quill;
+        const delta = q.clipboard.convert(html);
+        q.setContents(delta, 'silent');
+    }
 }
