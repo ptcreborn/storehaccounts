@@ -45,7 +45,7 @@ var quillEditor = {
 		temp_div.style.color = 'white';
 		temp_div.style.background = 'black';
 		temp_div.innerHTML = q.getSemanticHTML;
-        return temp_div.outerHTML();
+        return temp_div;
     },
 
     setContents: function (html) {
