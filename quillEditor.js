@@ -2,8 +2,8 @@
 
 var quillEditor = {
     quill: '',
-    initiate: function (editor) {
-        quillEditor.quill = new Quill('#' + editor, {
+    init: function () {
+        quill = new Quill('#ptc_quill_editor', {
             modules: {
                 toolbar: [
                     ['bold', 'italic', 'underline', 'strike'], // toggled buttons
@@ -20,7 +20,7 @@ var quillEditor = {
                     ],
 
                     [{
-                            'size': ['small', false, 'large', 'huge']
+                            'size': ['small', false, 'large']
                         }
                     ], // custom dropdown
                     [{
@@ -38,19 +38,11 @@ var quillEditor = {
         });
     },
 
-    getContents: function () {
-		let q = quillEditor.quill;
-		let temp_div = document.createElement('div');
-		temp_div.setAttribute('class', 'ql-editor');
-		temp_div.style.color = 'white';
-		temp_div.style.background = 'black';
-		temp_div.innerHTML = q.getSemanticHTML();
-        return temp_div.outerHTML;
+    setContent: function (htmlValue) {
+        quillEditor.quill.clipboard.dangerouslyPasteHTML(0, htmlValue);
     },
 
-    setContents: function (html) {
-		let q = quillEditor.quill;
-        const delta = q.clipboard.convert(html);
-        q.setContents(delta, 'silent');
+    getContent: function () {
+        return quillEditor.quill.getSemanticHTML();
     }
 }
