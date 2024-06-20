@@ -44,5 +44,9 @@ var quillEditor = {
 
     getContent: function () {
         return quillEditor.quill.getSemanticHTML();
+    },
+
+    getText: function() {
+        return quillEditor.quill.getText();
     }
 }
