@@ -2,8 +2,8 @@
 
 var quillEditor = {
     quill: '',
-    init: function () {
-        quill = new Quill('#ptc_quill_editor', {
+    init: function (elem_id) {
+        quill = new Quill('#' + elem_id, {
             modules: {
                 toolbar: [
                     ['bold', 'italic', 'underline', 'strike'], // toggled buttons
