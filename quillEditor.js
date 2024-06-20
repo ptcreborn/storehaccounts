@@ -3,7 +3,7 @@
 var quillEditor = {
     quill: '',
     init: function (elem_id) {
-        quill = new Quill('#' + elem_id, {
+        quillEditor.quill = new Quill('#' + elem_id, {
             modules: {
                 toolbar: [
                     ['bold', 'italic', 'underline', 'strike'], // toggled buttons
