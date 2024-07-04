@@ -77,7 +77,7 @@ var quillEditor = {
                     ],
 
                     [{
-                            'size': ['large']
+                            'size': ['small', false, 'large']
                         }
                     ], // custom dropdown
                     [{
