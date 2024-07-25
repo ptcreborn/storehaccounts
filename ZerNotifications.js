@@ -22,12 +22,17 @@ let ZerNotifications = {
             if (data != null || data != "null") {
                 data = JSON.parse(data);
                 data = Object.entries(data);
+				
+				let total_notif = 0;
 
                 for (let i = data.length-1; i > -1; i--) {
                     let id = data[i][0];
                     let content = data[i][1];
 
                     let myDoc = ZerNotifications.qpro('zer-notif-template').content.cloneNode(true).children[0];
+					
+					if(!content.read)
+						total_notif += 1;
 
                     myDoc.id = id;
                     myDoc.querySelector('[zer-notif-user-img]').src = content.prof_img;
@@ -64,6 +69,12 @@ let ZerNotifications = {
                     </template>
                      */
                 }
+				
+				
+				if(total_notif > 0) {
+					document.getElementById('zer-notif-count').innerText = total_notif;
+					document.getElementById('zer-notif-count').style.display = "block";
+				}
             }
         }
     }
