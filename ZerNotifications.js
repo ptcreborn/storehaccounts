@@ -39,7 +39,7 @@ let ZerNotifications = {
                     myDoc.querySelector('[zer-notif-snippet]').innerText = content.snippet;
                     myDoc.querySelector('[zer-notif-images]').src = content.thumb;
 
-                    qpro('zer-notification-parent').appendChild(myDoc);
+                    ZerNotifications.qpro('zer-notification-parent').appendChild(myDoc);
 
                     /*
                     <template zer-notif-template>
