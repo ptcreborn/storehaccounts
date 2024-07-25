@@ -31,7 +31,7 @@ let ZerNotifications = {
 
                     myDoc.id = id;
                     myDoc.querySelector('[zer-notif-user-img]').src = content.prof_img;
-                    myDoc.querySelector('[zer-notif-time-ago]').innerText = moment(parseInt(new Date(id))).timeNow();
+                    myDoc.querySelector('[zer-notif-time-ago]').innerText = moment(parseInt(new Date(id))).fromNow();
                     myDoc.querySelector('[zer-notif-nickname]').innerText = content.nickname;
                     myDoc.querySelector('[zer-notif-action]').innerText = content.action;
 
