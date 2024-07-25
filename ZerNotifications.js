@@ -36,9 +36,7 @@ let ZerNotifications = {
 
                     myDoc.id = id;
 					myDoc.style.cursor = "pointer";
-					myDoc.onclick = function() {
-					 window.location.href = content.link;
-					};
+					myDoc.setAttribute('onclick', 'window.location.href = ' + content.link;);
                     myDoc.querySelector('[zer-notif-user-img]').src = content.prof_img;
                     myDoc.querySelector('[zer-notif-time-ago]').innerText = moment(parseInt(id)).fromNow();
                     myDoc.querySelector('[zer-notif-nickname]').innerText = content.nickname;
