@@ -23,7 +23,7 @@ let ZerNotifications = {
                 data = JSON.parse(data);
                 data = Object.entries(data);
 
-                for (let i = 0; i < data.length; i++) {
+                for (let i = data.length-1; i > -1; i--) {
                     let id = data[i][0];
                     let content = data[i][1];
 
