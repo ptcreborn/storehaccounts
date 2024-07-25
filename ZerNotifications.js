@@ -8,7 +8,7 @@ let ZerNotifications = {
         return document.querySelector('[' + str + ']');
     },
 
-   fetchNotifs: function() {
+   fetchNotifs: async function() {
         // check if the user is logged on.
         // get the firebase list if exists
         // create a template and append to the div parent container
