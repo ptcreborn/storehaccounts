@@ -27,7 +27,7 @@ let ZerNotifications = {
                     let id = data[i][0];
                     let content = data[i][1];
 
-                    let myDoc = ZerNotifications.qpro(zer - notif - template).content.cloneNode(true).children[0];
+                    let myDoc = ZerNotifications.qpro('zer-notif-template').content.cloneNode(true).children[0];
 
                     myDoc.id = id;
                     myDoc.querySelector('[zer-notif-user-img]').src = content.prof_img;
