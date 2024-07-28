@@ -4,25 +4,25 @@ let ZerNotifications = {
     // This file handles the load of the notifications from the user in storehaccounts website.
     // This should control the bell and all its children.
 
-    qpro: function(str) {
+    qpro: function (str) {
         return document.querySelector('[' + str + ']');
     },
-	
-	markRead: async function(notif_id, content_link) {
-		// by clicking the notification, 
-		// the notif card must be lessen the opacity
-		// the notif from firebase must be marked as read
-		
-		let data = {
-			"read": true
-		}
-		
-		await FirebaseModule.patch(notif_id, JSON.stringify(data));
-		
-		window.location.href = content_link;
-	},
 
-   fetchNotifs: async function() {
+    markRead: async function (notif_id, content_link) {
+        // by clicking the notification,
+        // the notif card must be lessen the opacity
+        // the notif from firebase must be marked as read
+
+        let data = {
+            "read": true
+        }
+
+        await FirebaseModule.patch(notif_id, JSON.stringify(data));
+
+        window.location.href = content_link;
+    },
+
+    fetchNotifs: async function () {
         // check if the user is logged on.
         // get the firebase list if exists
         // create a template and append to the div parent container
@@ -36,27 +36,27 @@ let ZerNotifications = {
             if (data != null || data != "null") {
                 data = JSON.parse(data);
                 data = Object.entries(data);
-				
-				let total_notif = 0;
 
-                for (let i = data.length-1; i > -1; i--) {
+                let total_notif = 0;
+
+                for (let i = data.length - 1; i > -1; i--) {
                     let id = data[i][0];
                     let content = data[i][1];
 
                     let myDoc = ZerNotifications.qpro('zer-notif-template').content.cloneNode(true).children[0];
-					
-					if(!content.read)
-						total_notif += 1;
-					else {
-						myDoc.style.opacity = '0.6';
-						myDoc.querySelector('[zer-notif-read-status]').remove();
-					}
+
+                    if (!content.read) {
+                        total_notif += 1;
+                        myDoc.addEventListener('click', function () {
+                            ZerNotifications.markRead('https://storehaccounts-notifications-default-rtdb.firebaseio.com/' + user + '/' + id + '.json', content.link);
+                        });
+                    } else {
+                        myDoc.style.opacity = '0.6';
+                        myDoc.querySelector('[zer-notif-read-status]').remove();
+                    }
 
                     myDoc.id = id;
-					myDoc.style.cursor = "pointer";
-					myDoc.addEventListener('click', function(){
-						ZerNotifications.markRead('https://storehaccounts-notifications-default-rtdb.firebaseio.com/' + user + '/' + id + '.json', content.link);
-					});
+                    myDoc.style.cursor = "pointer";
                     myDoc.querySelector('[zer-notif-user-img]').src = content.prof_img;
                     myDoc.querySelector('[zer-notif-time-ago]').innerText = moment(parseInt(id)).fromNow();
                     myDoc.querySelector('[zer-notif-nickname]').innerText = content.nickname;
@@ -74,7 +74,7 @@ let ZerNotifications = {
                     <img zer-notif-user-img src='https://raw.githubusercontent.com/Codelessly/FlutterLoadingGIFs/master/packages/cupertino_activity_indicator_square_small.gif'/>
                     <div class='notif-content notif-content1'>
                     <p class='notif-user-info'>
-					<span zer-notif-read-status style="font-weight: 600; margin-right: 5px; font-size: 12px; background: red; padding: 1px 3px; border-radius: 5px; color: white;">UNREAD</span>
+                    <span zer-notif-read-status style="font-weight: 600; margin-right: 5px; font-size: 12px; background: red; padding: 1px 3px; border-radius: 5px; color: white;">UNREAD</span>
                     <small zer-notif-time-ago class='notif-date-published'>Loading...</small>
                     <br/>
                     <span zer-notif-nickname class='notif-user-name'>Loading...</span>
@@ -92,12 +92,11 @@ let ZerNotifications = {
                     </template>
                      */
                 }
-				
-				
-				if(total_notif > 0) {
-					document.getElementById('zer-notif-count').innerText = total_notif;
-					document.getElementById('zer-notif-count').style.display = "block";
-				}
+
+                if (total_notif > 0) {
+                    document.getElementById('zer-notif-count').innerText = total_notif;
+                    document.getElementById('zer-notif-count').style.display = "block";
+                }
             }
         }
     }
