@@ -19,8 +19,7 @@ let ZerNotifications = {
 
         if(!isRead) await FirebaseModule.patch(notif_id, JSON.stringify(data));
 
-		console.log(content_link);
-        window.location.href = content_link;
+        window.location.href = content_link + '\'';
     },
 
     fetchNotifs: async function () {
@@ -55,8 +54,6 @@ let ZerNotifications = {
 
                     myDoc.id = id;
                     myDoc.style.cursor = "pointer";
-					
-					console.log(content.link);
 					
                     myDoc.addEventListener('click', function () {
                         ZerNotifications.markRead('https://storehaccounts-notifications-default-rtdb.firebaseio.com/' + user + '/' + id + '.json', content.link, content.read);
