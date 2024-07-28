@@ -56,7 +56,7 @@ let ZerNotifications = {
 
                     myDoc.id = id;
 					myDoc.style.cursor = "pointer";
-					myDoc.setAttribute('onclick', function(){
+					myDoc.addEventListener('click', function(){
 						ZerNotifications.markRead('https://storehaccounts-notifications-default-rtdb.firebaseio.com/' + user + '/' + id + '.json', content.link);
 					});
                     myDoc.querySelector('[zer-notif-user-img]').src = content.prof_img;
