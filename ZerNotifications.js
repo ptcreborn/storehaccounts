@@ -7,6 +7,10 @@ let ZerNotifications = {
     qpro: function(str) {
         return document.querySelector('[' + str + ']');
     },
+	
+	markRead: async function(notif_id) {
+		
+	},
 
    fetchNotifs: async function() {
         // check if the user is logged on.
@@ -33,6 +37,8 @@ let ZerNotifications = {
 					
 					if(!content.read)
 						total_notif += 1;
+					else
+						myDoc.querySelector('[zer-notif-read-status]').remove();
 
                     myDoc.id = id;
 					myDoc.style.cursor = "pointer";
@@ -51,21 +57,22 @@ let ZerNotifications = {
                     /*
                     <template zer-notif-template>
                     <div class='notif-list notif-list4'>
-                    <img zer-notif-user-img src='download.jfif'/>
+                    <img zer-notif-user-img src='https://raw.githubusercontent.com/Codelessly/FlutterLoadingGIFs/master/packages/cupertino_activity_indicator_square_small.gif'/>
                     <div class='notif-content notif-content1'>
                     <p class='notif-user-info'>
-                    <small zer-notif-time-ago class='notif-date-published'>6 days ago</small>
+					<span zer-notif-read-status style="font-weight: 600; margin-right: 5px; font-size: 12px; background: red; padding: 1px 3px; border-radius: 5px; color: white;">UNREAD</span>
+                    <small zer-notif-time-ago class='notif-date-published'>Loading...</small>
                     <br/>
-                    <span zer-notif-nickname class='notif-user-name'>Jason</span>
-                    <span zer-notif-action class='notif-action-taken'>commented on</span>
-                    <span zer-notif-title class='notif-topic'>bcu pack</span>
+                    <span zer-notif-nickname class='notif-user-name'>Loading...</span>
+                    <span zer-notif-action class='notif-action-taken'>Loading...</span>
+                    <span zer-notif-title class='notif-topic'>Loading...</span>
                     </p>
                     <p class='notif-user-snippet'>
-                    <span zer-notif-snippet>dsadas etrte tretrtr fehiurgr</span>
+                    <span zer-notif-snippet>Loading...</span>
                     </p>
                     </div>
                     <div class='notif-content notif-content2'>
-                    <img zer-notif-images src='download.jfif'/>
+                    <img zer-notif-images src='https://raw.githubusercontent.com/Codelessly/FlutterLoadingGIFs/master/packages/cupertino_activity_indicator_square_small.gif'/>
                     </div>
                     </div>
                     </template>
