@@ -55,6 +55,9 @@ let ZerNotifications = {
 
                     myDoc.id = id;
                     myDoc.style.cursor = "pointer";
+					
+					console.log(content.link);
+					
                     myDoc.addEventListener('click', function () {
                         ZerNotifications.markRead('https://storehaccounts-notifications-default-rtdb.firebaseio.com/' + user + '/' + id + '.json', content.link, content.read);
                     });
