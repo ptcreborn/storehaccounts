@@ -8,7 +8,7 @@ let ZerNotifications = {
         return document.querySelector('[' + str + ']');
     },
 
-    markRead: async function (notif_id, content_link) {
+    markRead: async function (notif_id, content_link, isRead) {
         // by clicking the notification,
         // the notif card must be lessen the opacity
         // the notif from firebase must be marked as read
@@ -17,7 +17,7 @@ let ZerNotifications = {
             "read": true
         }
 
-        await FirebaseModule.patch(notif_id, JSON.stringify(data));
+        if(!isRead) await FirebaseModule.patch(notif_id, JSON.stringify(data));
 
         window.location.href = content_link;
     },
@@ -45,18 +45,18 @@ let ZerNotifications = {
 
                     let myDoc = ZerNotifications.qpro('zer-notif-template').content.cloneNode(true).children[0];
 
-                    if (!content.read) {
-                        total_notif += 1;
-                        myDoc.addEventListener('click', function () {
-                            ZerNotifications.markRead('https://storehaccounts-notifications-default-rtdb.firebaseio.com/' + user + '/' + id + '.json', content.link);
-                        });
-                    } else {
+                    if (!content.read) 
+                        total_notif += 1; 
+					else {
                         myDoc.style.opacity = '0.8';
                         myDoc.querySelector('[zer-notif-read-status]').remove();
                     }
 
                     myDoc.id = id;
                     myDoc.style.cursor = "pointer";
+                    myDoc.addEventListener('click', function () {
+                        ZerNotifications.markRead('https://storehaccounts-notifications-default-rtdb.firebaseio.com/' + user + '/' + id + '.json', content.link, content.read);
+                    });
                     myDoc.querySelector('[zer-notif-user-img]').src = content.prof_img;
                     myDoc.querySelector('[zer-notif-time-ago]').innerText = moment(parseInt(id)).fromNow();
                     myDoc.querySelector('[zer-notif-nickname]').innerText = content.nickname;
