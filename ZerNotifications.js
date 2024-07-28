@@ -51,7 +51,7 @@ let ZerNotifications = {
                             ZerNotifications.markRead('https://storehaccounts-notifications-default-rtdb.firebaseio.com/' + user + '/' + id + '.json', content.link);
                         });
                     } else {
-                        myDoc.style.opacity = '0.6';
+                        myDoc.style.opacity = '0.8';
                         myDoc.querySelector('[zer-notif-read-status]').remove();
                     }
 
