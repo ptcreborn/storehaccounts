@@ -8,7 +8,7 @@ let ZerNotifications = {
         return document.querySelector('[' + str + ']');
     },
 
-    markRead: async function (notif_id, content_link, isRead) {
+    markRead: async function (notif_id, content_link, isRead, thisID) {
         // by clicking the notification,
         // the notif card must be lessen the opacity
         // the notif from firebase must be marked as read
@@ -18,6 +18,10 @@ let ZerNotifications = {
         }
 
         if(!isRead) await FirebaseModule.patch(notif_id, JSON.stringify(data));
+		
+		document.getElementById(thisID).style.opacity = '0.7';
+		document.getElementById(thisID).style.background = '#3d3d3d';
+        document.getElementById(thisID).querySelector('[zer-notif-read-status]').remove();
 
         window.location.href = content_link.replaceAll("'", "");
     },
@@ -48,7 +52,6 @@ let ZerNotifications = {
                     if (!content.read) 
                         total_notif += 1; 
 					else {
-						myDoc.style.opacity = '0.7';
 						myDoc.style.background = '#3d3d3d';
                         myDoc.querySelector('[zer-notif-read-status]').remove();
                     }
@@ -57,7 +60,7 @@ let ZerNotifications = {
                     myDoc.style.cursor = "pointer";
 					
                     myDoc.addEventListener('click', function () {
-                        ZerNotifications.markRead('https://storehaccounts-notifications-default-rtdb.firebaseio.com/' + user + '/' + id + '.json', content.link, content.read);
+                        ZerNotifications.markRead('https://storehaccounts-notifications-default-rtdb.firebaseio.com/' + user + '/' + id + '.json', content.link, content.read, id);
                     });
                     myDoc.querySelector('[zer-notif-user-img]').src = content.prof_img;
                     myDoc.querySelector('[zer-notif-time-ago]').innerText = moment(parseInt(id)).fromNow();
