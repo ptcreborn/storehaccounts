@@ -56,7 +56,9 @@ let ZerNotifications = {
 
                     myDoc.id = id;
 					myDoc.style.cursor = "pointer";
-					myDoc.setAttribute('onclick', ZerNotifications.markRead('https://storehaccounts-notifications-default-rtdb.firebaseio.com/' + user + '/' + id + '.json', content.link));
+					myDoc.setAttribute('onclick', function(){
+						ZerNotifications.markRead('https://storehaccounts-notifications-default-rtdb.firebaseio.com/' + user + '/' + id + '.json', content.link);
+					});
                     myDoc.querySelector('[zer-notif-user-img]').src = content.prof_img;
                     myDoc.querySelector('[zer-notif-time-ago]').innerText = moment(parseInt(id)).fromNow();
                     myDoc.querySelector('[zer-notif-nickname]').innerText = content.nickname;
