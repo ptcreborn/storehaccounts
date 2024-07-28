@@ -51,7 +51,7 @@ let ZerNotifications = {
                     if (!content.read) 
                         total_notif += 1; 
 					else {
-						myDoc.style.background = '#3d3d3d';
+						myDoc.style.background = '#1E1F22';
                         myDoc.querySelector('[zer-notif-read-status]').remove();
                     }
 
