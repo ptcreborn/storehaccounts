@@ -19,7 +19,7 @@ let ZerNotifications = {
 
         if(!isRead) await FirebaseModule.patch(notif_id, JSON.stringify(data));
 
-        window.location.href = content_link + '\'';
+        window.location.href = content_link.replaceAll("'", "");
     },
 
     fetchNotifs: async function () {
