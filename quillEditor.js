@@ -90,7 +90,7 @@ var quillEditor = {
                     ]
                 ],
             },
-            placeholder: "Compose a thread",
+            placeholder: "",
             theme: 'snow', // or 'bubble'
         });
     },
