@@ -159,33 +159,38 @@ var footerComment = {
                 for (i = 0; i < data[footerComment.comment_footer_url].comments.length; i++) {
                     let comment_id = data[footerComment.comment_footer_url].comments[i];
                     let temp_data = await JBLOBFunctions.getBlobRecordSync('https://jsonblob.com/api/jsonBlob/' + comment_id, null);
-					temp_data = JSON.parse(temp_data);
-                    let username = temp_data.username;
-                    let userimg = temp_data.userimg;
-                    let userid = temp_data.userid;
-                    let content = temp_data.content.replaceAll('\n', '<br/>');
-                    let date = moment(parseInt(temp_data.date)).fromNow();
-                    let background = temp_data.background;
-                    let reply_build = '';
-                    let num_of_replies = (temp_data.replies.length > 0 ? " - about " + temp_data.replies.length + " replies" : "");
-
-                    let div_imgs = document.createElement('div');
-                    div_imgs.setAttribute('class', 'image-attachments');
-                    div_imgs.innerHTML = temp_data.imgs;
-
-                    for (j = 0; j < temp_data.replies.length; j++) {
-                        let reply_comment_id = temp_data.replies[j];
-                        let new_data = await JBLOBFunctions.getBlobRecordSync('https://jsonblob.com/api/jsonBlob/' + reply_comment_id, null);
-
-                        new_data = JSON.parse(new_data);
+                    if (temp_data == null) {console.log('deleted comment');}
+                    else {
+                        temp_data = JSON.parse(temp_data);
+                        let username = temp_data.username;
+                        let userimg = temp_data.userimg;
+                        let userid = temp_data.userid;
+                        let content = temp_data.content.replaceAll('\n', '<br/>');
+                        let date = moment(parseInt(temp_data.date)).fromNow();
+                        let background = temp_data.background;
+                        let reply_build = '';
+                        let num_of_replies = (temp_data.replies.length > 0 ? " - about " + temp_data.replies.length + " replies" : "");
 
                         let div_imgs = document.createElement('div');
                         div_imgs.setAttribute('class', 'image-attachments');
-                        div_imgs.innerHTML = new_data.imgs;
+                        div_imgs.innerHTML = temp_data.imgs;
 
-                        reply_build += "<div id=" + reply_comment_id + " class='comment-replied'><img class='user-profile' src='" + new_data.userimg + "'/><a target='_blank' href='" + new_data.userid + "'>" + new_data.username + "</a><span>replied " + moment(parseInt(new_data.date)).fromNow() + "</span><p>" + new_data.content.replaceAll('\n', '<br/>') + "</p>" + div_imgs.outerHTML + "</div>";
+                        for (j = 0; j < temp_data.replies.length; j++) {
+                            let reply_comment_id = temp_data.replies[j];
+                            let new_data = await JBLOBFunctions.getBlobRecordSync('https://jsonblob.com/api/jsonBlob/' + reply_comment_id, null);
+
+                            if (new_data == null) {console.log('deleted reply');}
+                            else {
+                                new_data = JSON.parse(new_data);
+
+                                let div_imgs = document.createElement('div');
+                                div_imgs.setAttribute('class', 'image-attachments');
+                                div_imgs.innerHTML = new_data.imgs;
+
+                                reply_build += "<div id=" + reply_comment_id + " class='comment-replied'><img class='user-profile' src='" + new_data.userimg + "'/><a target='_blank' href='" + new_data.userid + "'>" + new_data.username + "</a><span>replied " + moment(parseInt(new_data.date)).fromNow() + "</span><p>" + new_data.content.replaceAll('\n', '<br/>') + "</p>" + div_imgs.outerHTML + "</div>";
+                            }
+                        }
                     }
-
                     footerComment.query('comment-container').innerHTML += "<div id=" + comment_id + " class='comment-thread' style='background-image: linear-gradient(to bottom, rgb(0,0,0,0.6) 10%, rgb(0,0,0,0.9) 90%), url(\"" + background + "\"); background-repeat: no-repeat; background-size: cover; background-position: center center;'><img class='user-profile' src='" + userimg + "'/><a target='_blank' href='" + userid + "'>" + username + "</a><span>commented " + date + " " + num_of_replies + "</span><p>" + content + "</p>" + div_imgs.outerHTML + "" + reply_build + "<div style='position: relative; width: 100%;margin: 10px 0 50px 0;'><button style='font-size: 12px !important; color: black !important;' onclick='footerComment.addElementToNext(this, footerComment.query(\"form-ptc-comment\"), \"" + comment_id + "\")'>Add reply</button></div></div>";
                 }
             }
