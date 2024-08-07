@@ -153,7 +153,7 @@ var footerComment = {
     // build comments
     buildComment: function () {
         JBLOBFunctions.getBlobRecord(footerComment.record_api, async function (data) {
-            if (data != undefined) {
+            if (data != "undefined") {
                 data = JSON.parse(data);
                 if (data.hasOwnProperty(footerComment.comment_footer_url)) {
                     footerComment.query('comment-count').innerText = data[footerComment.comment_footer_url].comments.length;
@@ -161,7 +161,7 @@ var footerComment = {
                         let comment_id = data[footerComment.comment_footer_url].comments[i];
                         let temp_data = '';
 						await JBLOBFunctions.getBlobRecordSync('https://jsonblob.com/api/jsonBlob/' + comment_id, (data) => {temp_data = data;});
-                        if (temp_data != undefined) {
+                        if (temp_data != "undefined") {
                             console.log('deleted comment');
                         } else {
                             temp_data = JSON.parse(temp_data);
@@ -183,7 +183,7 @@ var footerComment = {
                                 let new_data = '';
 								await JBLOBFunctions.getBlobRecordSync('https://jsonblob.com/api/jsonBlob/' + reply_comment_id, (data) => {new_data = data;});
 
-                                if (new_data != undefined) {
+                                if (new_data != "undefined") {
                                     console.log('deleted reply');
                                 } else {
                                     new_data = JSON.parse(new_data);
