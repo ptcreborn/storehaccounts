@@ -3,7 +3,7 @@ var tinyURLShortener = {
     shortenUrl: async function (url) {
         let new_url = '';
         let body = {
-            url: 'https://stackoverflow.com/questions/66991259/how-to-make-a-fetch-request-to-tinyurl',
+            url: url,
             domain: 'tiny.one'
         }
 
