@@ -18,10 +18,10 @@ var ImgurXHR = {
             xhr.onload = function () {
 
                 if (xhr.status == 200) {
-                    img_file = JSON.parse(xhr.responseText).data.link;
+                    imgLink = JSON.parse(xhr.responseText).data.link;
                 } else {
                     window.alert('ImgurXHR error: Error in uploading... Please try again');
-                    img_file = "error uploading";
+                    imgLink = "error uploading";
                 }
             }
             xhr.setRequestHeader('Authorization', 'Client-ID FOO');
