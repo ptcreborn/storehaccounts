@@ -22,7 +22,7 @@ var ImgurXHR = {
                     // callback(img_file);
                 } else {
                     window.alert('ImgurXHR error: Error in uploading... Please try again');
-                    imgLink.img = "Error Uploading in ImgUr";
+                    imgLink.error = "Error Uploading in ImgUr";
                     //callback("error in uploading...");
                 }
             }
@@ -31,5 +31,6 @@ var ImgurXHR = {
         }, false);
     }
 }
+
 
 
