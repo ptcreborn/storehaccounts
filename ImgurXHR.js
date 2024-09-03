@@ -5,31 +5,32 @@
 
 
 var ImgurXHR = {
-    uploadImgUr: function (inputID, imgLink) {
-        document.getElementById(inputID).addEventListener('change', async function (e, imgLink) {
-            await new Promise(function (resolve, reject) {
-                var file = e.target.files[0];
-                if (!file || !file.type.match(/image.*/))
-                    return;
+    uploadImgUr: function (inputID, callback) {
+        document.getElementById(inputID).addEventListener('change', function (e, callback) {
+			let img_file = '';
+            var file = e.target.files[0];
+            if (!file || !file.type.match(/image.*/))
+                return;
 
-                var fd = new FormData();
-                fd.append("image", file); // Append the file
-                var xhr = new XMLHttpRequest(); // Create the XHR (Cross-Domain XHR FTW!!!) Thank you sooooo much imgur.com
-                xhr.open("POST", "https://api.imgur.com/3/image.json"); // Boooom!
-                xhr.onload = function () {
+            var fd = new FormData();
+            fd.append("image", file); // Append the file
+            var xhr = new XMLHttpRequest(); // Create the XHR (Cross-Domain XHR FTW!!!) Thank you sooooo much imgur.com
+            xhr.open("POST", "https://api.imgur.com/3/image.json"); // Boooom!
+            xhr.onload = function () {
 
-                    if (xhr.status == 200) {
-                        img_file = JSON.parse(xhr.responseText).data.link;
-						resolve(imgLink);
-                    } else {
-                        window.alert('ImgurXHR error: Error in uploading... Please try again');
-						reject(imgLink);
-                    }
+                if (xhr.status == 200) {
+                    img_file = JSON.parse(xhr.responseText).data.link;
+					callback(img_file);
+                } else {
+                    window.alert('ImgurXHR error: Error in uploading... Please try again');
+					callback("error in uploading...");
                 }
-                xhr.setRequestHeader('Authorization', 'Client-ID FOO');
-                xhr.send(fd);
-            });
+            }
+            xhr.setRequestHeader('Authorization', 'Client-ID FOO');
+            xhr.send(fd);
         }, false);
     }
+}
+
 }
 
