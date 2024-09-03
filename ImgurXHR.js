@@ -1,7 +1,7 @@
 // USAGE YOU MUST HAVE INPUT ELEMENT
 // ADD THE INPUT ID IN THE FUNCTION PARAMETER
-// ADD THE STRING VARIABLE IN THE 2ND PARAMETER
-// THE STRING IMGLINK WILL HOLD THE LINK OF THE IMAGE BEING UPLOADED.
+// ADD THE OBJECT VARIABLE IN THE 2ND PARAMETER
+// THE OBJECT IMGLINK WILL HOLD THE LINK OF THE IMAGE BEING UPLOADED.
 
 
 var ImgurXHR = {
@@ -18,11 +18,11 @@ var ImgurXHR = {
             xhr.onload = function () {
 
                 if (xhr.status == 200) {
-                    imgLink = JSON.parse(xhr.responseText).data.link;
+                    imgLink.img = JSON.parse(xhr.responseText).data.link;
                     // callback(img_file);
                 } else {
                     window.alert('ImgurXHR error: Error in uploading... Please try again');
-                    imgLink = "Error Uploading in ImgUr";
+                    imgLink.img = "Error Uploading in ImgUr";
                     //callback("error in uploading...");
                 }
             }
