@@ -6,7 +6,8 @@
 
 var ImgurXHR = {
     uploadImgUr: function (inputID, callback) {
-        document.getElementById(inputID).addEventListener('change', function (e, callback) {
+        console.log(callback);
+        document.getElementById(inputID).addEventListener('change', function (e) {
             let img_file = '';
             var file = e.target.files[0];
             if (!file || !file.type.match(/image.*/))
