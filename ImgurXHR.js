@@ -7,7 +7,7 @@
 var ImgurXHR = {
     uploadImgUr: function (inputID, callback) {
         document.getElementById(inputID).addEventListener('change', function (e, callback) {
-			let img_file = '';
+            let img_file = '';
             var file = e.target.files[0];
             if (!file || !file.type.match(/image.*/))
                 return;
@@ -20,10 +20,10 @@ var ImgurXHR = {
 
                 if (xhr.status == 200) {
                     img_file = JSON.parse(xhr.responseText).data.link;
-					callback(img_file);
+                    callback(img_file);
                 } else {
                     window.alert('ImgurXHR error: Error in uploading... Please try again');
-					callback("error in uploading...");
+                    callback("error in uploading...");
                 }
             }
             xhr.setRequestHeader('Authorization', 'Client-ID FOO');
@@ -32,5 +32,4 @@ var ImgurXHR = {
     }
 }
 
-}
 
