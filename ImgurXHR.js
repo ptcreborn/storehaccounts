@@ -19,6 +19,7 @@ var ImgurXHR = {
 
                 if (xhr.status == 200) {
                     imgLink = JSON.parse(xhr.responseText).data.link;
+                    console.log('done uploading: ' + imgLink);
                 } else {
                     window.alert('ImgurXHR error: Error in uploading... Please try again');
                     imgLink = "error uploading";
