@@ -1,3 +1,9 @@
+// USAGE YOU MUST HAVE INPUT ELEMENT
+// ADD THE INPUT ID IN THE FUNCTION PARAMETER
+// ADD THE STRING VARIABLE IN THE 2ND PARAMETER
+// THE STRING IMGLINK WILL HOLD THE LINK OF THE IMAGE BEING UPLOADED.
+
+
 var ImgurXHR = {
     uploadImgUr: function (inputID, imgLink) {
         document.getElementById(inputID).addEventListener('change', function (e, imgLink) {
