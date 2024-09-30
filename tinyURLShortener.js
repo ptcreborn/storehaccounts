@@ -4,7 +4,7 @@ var tinyURLShortener = {
         let new_url = '';
         let body = {
             url: url,
-            domain: 'tiny.one'
+            domain: 'tinyurl.com' //domain: 'tiny.one'
         }
 
         let response = await fetch('https://api.tinyurl.com/create', {
