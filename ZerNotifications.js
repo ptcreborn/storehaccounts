@@ -24,6 +24,8 @@ let ZerNotifications = {
 		let currentCount = document.getElementById('zer-notif-count');
 		currentCount.innerText = parseInt(currentCount.innerText)-1;
 		
+		if(currentCount.innerText == "0") currentCount.remove();
+		
 		//document.getElementById(thisID).style.opacity = '0.95';
         if(document.getElementById(thisID).querySelector('[zer-notif-read-status]')) document.getElementById(thisID).querySelector('[zer-notif-read-status]').remove();
 
