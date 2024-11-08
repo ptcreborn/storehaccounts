@@ -19,7 +19,7 @@ let ZerNotifications = {
 
         if(!isRead) await FirebaseModule.patch(notif_id, JSON.stringify(data));
 		
-		//document.getElementById(thisID).style.background = '#3d3d3d';
+	document.getElementById(thisID).style.background = '#3d3d3d';
 		//document.getElementById(thisID).style.opacity = '0.95';
         if(document.getElementById(thisID).querySelector('[zer-notif-read-status]')) document.getElementById(thisID).querySelector('[zer-notif-read-status]').remove();
 
