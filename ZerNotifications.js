@@ -43,7 +43,7 @@ let ZerNotifications = {
             user = user.user;
 
             let data = await FirebaseModule.get('https://storehaccounts-notifications-default-rtdb.firebaseio.com/' + user + '.json');
-            if (data != null || data != "null") {
+            if (data != null && data != "null") {
                 data = JSON.parse(data);
                 data = Object.entries(data);
 
