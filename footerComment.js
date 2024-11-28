@@ -1,8 +1,9 @@
 var footerComment = {
 
     // build comment_footer_url
+	// record_api: 'https://jsonblob.com/api/jsonBlob/1242732119490158592',
     comment_footer_url: window.location.href.split('.html')[0] + '.html',
-    record_api: 'https://jsonblob.com/api/jsonBlob/1242732119490158592',
+    record_api: 'https://jsonblob.com/api/jsonBlob/1311554306020925440',
     replied_to: '',
     username: 'Guest',
     userid: 'https://storehaccounts.blogspot.com/p/create-account.html',
