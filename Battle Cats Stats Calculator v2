@@ -1,0 +1,561 @@
+<style>
+  input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: inherit;       
+  opacity: 0.8;
+}
+  input.inputDesign{
+   background-color: inherit !important; 
+   color: inherit;
+  }
+  .postBody select option {
+  background-color: black;
+   color: white;
+}
+</style>
+
+<div class='zmImg'>
+<img class='lazy' src='https://cdn.dribbble.com/users/374101/screenshots/5885738/calculator.gif'/>
+</div>
+
+<h2>Instruction</h2>
+<ul>
+<li>
+<p><strong><u>Chosen Enemy HP</u></strong>: This is the original HP of the enemy unit regardless of buff. Usually can be seen from battle cats wiki fandom and battle cats gamatoto. You can also see this from battle cats ultimate application. Type in the original of HP. For example: One horn hp is 800.</p>
+</li>
+</ul>
+<ul>
+<li>
+<p><strong><u>Chosen Enemy DMG</u></strong>: This is the original damage of the enemy unit regardless of buff. It can be found from battle cats wiki fandom, battle cats gamatoto and or battle cats ultimate. Example: One horn damage is 3,200 damage.</p>
+</li>
+</ul>
+<ul>
+<li>
+<p><strong><u>DPS</u></strong>: DPS stands for damage per second, techanically this is the unit average damage per second and can be measured on how slow or fast the unit attack depending on the animation. Since we're not talking foreswing or pre attack animation here, we will directly get DPS from battle cats wiki fandom, battle cats gamatoto or battle cats ultimate. Example: One horn has DPS of 937.5, disregard decimal, so 937.</p>
+</li>
+</ul>
+<ul>
+<li>
+<p><strong><u>Cat Rarity</u></strong>: This is the group of cat by which you want to replace the enemy unit. For example One horn will be replaced to a cat that belongs to Rare Cat, then select Rare Cat. Note that, though crazed and bahamut cats are in the rarity, you must choose Crazed or Bahamut Rarity rather than rare or super rare. If none of the above like Legend Rare, then choose Other Cats.</p>
+</li>
+</ul>
+<ul>
+<li>
+<p><strong><u>Buffness</u></strong>: This is the multiplier, you can increase or decrease the damage and hp of the said unit based on percentage. If you want to double up the damage and hp, then you need to type in 200, else if you want to reduce you need to type in 50. The formula for this is the {buff}/{100} * hp &amp; dmg. Example One Horn has HP of 800, then buffing up to 200% = {200/100 * 800} = {2 * 800} = 1,600. Hp of one horn is now doubled.</p>
+</li>
+</ul>
+<p><em>Cooldown depends on DPS.&nbsp;<u>Higher DPS longer cooldown.<br /></u></em><em>Cost depends on HP.&nbsp;<u>Higher HP expensive costs.</u></em></p>
+<ul>However, sometimes I don't follow the cooldown from the calculator, I reduce it to some degree like 1/4. It's up to you. The calculator for me is balance. If you are modding OP units, then you might be decreasing Cost and Cooldown depending on your preference. Though i have included max and low, so you can choose between the two. If the max values are too much for you, then you can pick the low.</ul>
+<ul>
+<li>
+<p><strong><u>Damage &amp; HP at level 1</u></strong>: This signifies the amount of hp and damage of your unit at level 1.&nbsp;</p>
+</li>
+</ul>
+<ul>
+<li>
+<p><strong><u>Damage &amp; HP at max level</u></strong>: This signifies the amount of hp and damage of your unit at max level.</p>
+</li>
+</ul>
+<blockquote>Cat Number of Levels<br />This is the maximum levels of cats for rarity.
+<ul>
+<li>Normal Cats: 110</li>
+<li>Special Cats: 50</li>
+<li>Bahamut Cats: 50</li>
+<li>Rare Cats: 130</li>
+<li>Super Rare Cats: 120</li>
+<li>Crazed Cats: 50</li>
+<li>Uber Rare: 130</li>
+<li>Other Cats: 59</li>
+</ul>
+</blockquote>
+<p>If you are wondering how these calculations work, you might need the <a href="https://storehaccounts.blogspot.com/p/battle-cats-stats-calculator-v10.html" target="_blank">version 1 of the calculator</a>.<br />To recalculate battle dogs units (enemy) from <a href="https://storehaccounts.blogspot.com/p/ptc-battle-dogs-dictionary.html" target="_blank">dictionary</a>, kindly fill up the level and change the buff. Recalculation only happens when you're forwarded from <a href="https://storehaccounts.blogspot.com/p/ptc-battle-dogs-dictionary.html" target="_blank">PTC Dictionary</a>.</p>
+
+
+<div id='ptc_calculator' style="background-color: inherit; color: inherit; display: inline-block; height: auto; padding-bottom: 20px; text-align: left; width: 100%;">
+  <h1 style="color: inherit; margin-bottom: -1px; margin-top: 20px;">The Battle Cats Calculator</h1>
+  <small>By PTC Reborn Feb. 27, 2023</small>
+  <div style="display: block; margin-left: 20px; margin-top: 10px; text-align: left;">
+    <p style="display: inline-block; margin: auto;">Chosen Enemy HP: </p>
+    <input placeholder='Final HP' class="inputDesign" id="finalHP" value="0" style="background-color: inherit; color: inherit; display: inline-block; font-size: 14px; margin: auto; text-align: left; width: 50%;" type="text" />
+  </div>
+  <div style="display: block; margin-left: 20px; margin-top: 10px; text-align: left;">
+    <p style="display: inline-block; margin: auto;">Chosen Enemy 1st DMG: </p>
+    <input placeholder='Final DMG' class="inputDesign" id="finalDMG" value="0" style="background-color: inherit; color: inherit; display: inline-block; font-size: 14px; margin: auto; text-align: left; width: 50%;" type="text" />
+  </div>
+  <div style="display: block; margin-left: 20px; margin-top: 10px; text-align: left;">
+    <p style="display: inline-block; margin: auto;">Chosen Enemy 2nd DMG: </p>
+    <input placeholder='Final DMG' class="inputDesign" id="finalDMG2" value="0" style="background-color: inherit; color: inherit; display: inline-block; font-size: 14px; margin: auto; text-align: left; width: 50%;" type="text" />
+  </div>
+  <div style="display: block; margin-left: 20px; margin-top: 10px; text-align: left;">
+    <p style="display: inline-block; margin: auto;">Chosen Enemy 3rd DMG: </p>
+    <input placeholder='Final DMG' class="inputDesign" id="finalDMG3" value="0" style="background-color: inherit; color: inherit; display: inline-block; font-size: 14px; margin: auto; text-align: left; width: 50%;" type="text" />
+  </div>
+  <div style="display: block; margin-left: 20px; margin-top: 10px; text-align: left;">
+    <p style="display: inline-block; margin: auto;">Chosen Enemy DPS: </p>
+    <input value='200' placeholder='DPS' class="inputDesign" id="finalDPS" style="background-color: inherit; color: inherit; display: inline-block; font-size: 14px; margin: auto; text-align: left; width: 50%;" type="text" />
+  </div>
+  <div style="display: block; margin-left: 20px; margin-top: 10px; text-align: left;">
+    <p style="display: inline-block;">Cat Rarity: </p>
+    <select id="Rarity" name="rarity" style='display: inline-block; text-align: left; width: 50%;background-color: inherit; color: inherit;'>
+      <option value="nc">Normal Cats</option>
+      <option value="sc">Special Cats</option>
+      <option value="bc">Bahamut Cats</option>
+      <option value="rc">Rare Cats</option>
+      <option value="src">Super Rare Cats</option>
+      <option value="cc">Crazed Cats</option>
+      <option value="usrc">Uber Super Rare Cats</option>
+      <option value="oc">Other Cats</option>
+    </select>
+  </div>
+  <div style="display: block; margin: 5px 0px 0px 20px; text-align: left;">
+    <p style="display: inline-block; margin: auto;">Cat Number of levels: </p>
+    <input placeholder='Levels' class="inputDesign" id="numLevels" style="background-color: inherit; color: inherit; display: inline-block; font-size: 14px; margin: auto; text-align: center; width: 50%;" type="number" />
+  </div>
+  <div style="display: block; margin: 25px 0px 0px 20px; text-align: left;">
+    <p style="display: inline-block; margin: auto;">Buffness(100% is original): </p>
+    <input value='100' placeholder='Buffness' class="inputDesign" id="buffness" style="background-color: inherit; color: inherit; display: inline-block; font-size: 14px; margin: auto; text-align: center; width: 50%;" type="number" />
+  </div>    
+  
+  <!--PTC IN ARTICLE-->
+<ins class="adsbygoogle" data-ad-client="ca-pub-6328531102448868" data-ad-format="auto" data-ad-slot="1377496358" data-full-width-responsive="true" style="display: block;"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+  
+  <div style="display: block; text-align: left;"><br>
+    <a class="button ln" id="calculateBHP" role="button" style="text-align: center;margin-top: 10px;font-size: 16px; width: 40%;"> Calculate </a>
+    <a class="button ln" id="reset" role="button" style="text-align: center;margin-top: 10px;font-size: 16px; width: 40%;"> Reset </a>
+  </div>
+</div>
+
+<table class="tg" style='font-size: 14px;'>
+<thead>
+  <tr>
+    <th class="tg-t34s" colspan="2" id="orgStats"><span style="color: #7ff4ec;">Original Stats (this is the stats at 100% buff)</span></th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-cl2j">HP/DMG at lvl 1 (aka <u>Base HP/DMG</u>):</td>
+    <td class="tg-e5lu"><span id="baseHP" style="color: inherit;">unknown</span></td>
+  </tr>
+  <!--<tr>
+    <td class="tg-cl2j">DMG at lvl 1 (aka <u>Base DMG)</u>:</td>
+    <td class="tg-e5lu"><span id="baseDMG" style="color: inherit;">unknown</span></td>
+  </tr>-->
+  <tr>
+    <td class="tg-cl2j">HP/DMG at (max lvl. <span class="maxLvl" style="color: orange;">unknown</span>) (aka <u>Final HP/DMG)</u>:</td>
+    <td class="tg-e5lu"><span id="spanfinalHP" style="color: inherit;">unknown</span></td>
+  </tr>
+  <!--<tr>
+    <td class="tg-cl2j">DMG at (max lvl. <span class="maxLvl" style="color: orange;">unknown</span>) (aka <u>Final DMG)</u>:</td>
+    <td class="tg-e5lu"><span id="spanfinalDMG" style="color: inherit;">unknown</span></td>
+  </tr>-->
+  <tr>
+    <td class="tg-cl2j">Cooldown (max ~ low) | DPS:</td>
+    <td class="tg-e5lu"><span id="cooldown" style="color: inherit;">unknown</span></td>
+  </tr>
+  <tr>
+    <td class="tg-cl2j">Cooldown (max ~ low) | DPS:</td>
+    <td class="tg-e5lu"><span id="bfcooldown" style="color: inherit;">unknown</span></td>
+  </tr>
+  <tr>
+    <td class="tg-cl2j">Cost (max ~ low):</td>
+    <td class="tg-e5lu"><span id="bfcost" style="color: inherit;">unknown</span></td>
+  </tr>
+  <tr>
+    <td class="tg-cl2j">Cost (max ~ low):</td>
+    <td class="tg-e5lu"><span id="cost" style="color: inherit;">unknown</span></td>
+  </tr>
+</tbody>
+</table>
+<div id='outputtable'>
+<table class="tg" style='font-size: 12px; margin: 0 !important;'>
+<thead>
+  <tr>
+    <th class="tg-t34s" colspan="2" id="buffStats"><span style="color: #edfe33; text-align: center;">Buffed (increased/decreased) Stats at (<span id="buffnessPerc">n</span>)</span></th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-cl2j">Level 1 :</td>
+    <td class="tg-e5lu"><span id="bfbaseHP" style="color: inherit;">unknown</span></td>
+  </tr>
+ <!-- <tr>
+    <td class="tg-cl2j">HP/DMG at lvl 1 (aka <u>Base HP/ 2nd DMG</u>):</td>
+    <td class="tg-e5lu"><span id="bfbaseHP2" style="color: inherit;">unknown</span></td>
+  </tr>
+  <tr>
+    <td class="tg-cl2j">HP/DMG at lvl 1 (aka <u>Base HP/ 3rd DMG</u>):</td>
+    <td class="tg-e5lu"><span id="bfbaseHP3" style="color: inherit;">unknown</span></td>
+  </tr>
+  <tr>
+    <td class="tg-cl2j">DMG at lvl 1 (aka <u>Base DMG</u>):</td>
+    <td class="tg-e5lu"><span id="bfbaseDMG" style="color: inherit;">unknown</span></td>
+  </tr>-->
+  <tr>
+    <td class="tg-cl2j">Level <span class="maxLvl" style="color: orange;">unknown</span> :</td>
+    <td class="tg-e5lu"><span id="bffinalHP" style="color: inherit;">unknown</span></td>
+  </tr>
+  <!--<tr>
+    <td class="tg-cl2j">HP/DMG at (max lvl. <span class="maxLvl" style="color: orange;">unknown</span>) (aka <u>Final HP/ 2nd DMG)</u>:</td>
+    <td class="tg-e5lu"><span id="bffinalHP2" style="color: inherit;">unknown</span></td>
+  </tr>
+  <tr>
+    <td class="tg-cl2j">HP/DMG at (max lvl. <span class="maxLvl" style="color: orange;">unknown</span>) (aka <u>Final HP/ 3rd DMG)</u>:</td>
+    <td class="tg-e5lu"><span id="bffinalHP3" style="color: inherit;">unknown</span></td>
+  </tr>
+  <tr>
+    <td class="tg-cl2j">DMG at (max lvl. <span class="maxLvl" style="color: orange;">unknown</span>) (aka <u>Final DMG)</u>:</td>
+    <td class="tg-e5lu"><span id="bffinalDMG" style="color: inherit;">unknown</span></td>
+  </tr>
+  <tr>
+    <td class="tg-cl2j">Cooldown (max ~ low) | DPS:</td>
+    <td class="tg-e5lu"><span id="bfcooldown" style="color: inherit;">unknown</span></td>
+  </tr>
+  <tr>
+    <td class="tg-cl2j">Cost (max ~ low):</td>
+    <td class="tg-e5lu"><span id="bfcost" style="color: inherit;">unknown</span></td>
+  </tr>-->
+</tbody>
+</table>
+</div>
+
+<blockquote id='outputbq'></blockquote>
+
+<a class='button' onclick='importStats();'>Import to Unit Stats Editor</a>
+
+<!--<div height="400px" style="text-align: center; display: block;width: 100%; background-color: black; margin: auto;" width="100%">
+  <p style='color: white;'>ADVERTISEMENT!</p>    
+  <div style="display: block; text-align: left; margin-left: 5px; color:white;">
+    <p style='color: #7FF4EC'>Original Stats (this is the stats at 100% buff)</p>
+    <p>Base HP (lvl. 1): <span id="baseHP" style="color: inherit;">unknown</span>
+    </p>
+    <p>Base DMG (lvl. 1): <span id="baseDMG" style="color: inherit;">unknown</span>
+    </p>
+    <p>Final HP (max lvl. <span style='color: orange' class='maxLvl'>unknown</span>): <span id="baseDMG" style="color: inherit;">unknown</span>
+    </p>
+    <p>Final DMG (max lvl. <span style='color: orange' class='maxLvl'>unknown</span>): <span id="baseDMG" style="color: inherit;">unknown</span>
+    </p>
+    <p>Cooldown (max ~ low): <span id="cooldown" style="color: inherit;">unknown</span>
+    </p>
+    <p>Cost (max ~ low): <span id="cost" style="color: inherit;">unknown</span>
+    </p>
+  </div>
+</div>-->
+
+<script>
+  function importStats() {
+    window.location.href = 'https://battlecatsmoddingtools.blogspot.com/p/unit-stats-editor_1.html';
+  }
+  
+  
+  let healthLists = [1000, 2500, 5000, 7500, 10000, 20000, 25000, 50000, 100000, 250000, 500000, 1000000, 5000000, 10000000, 25000000, 500000000, 100000000, 250000000, 500000000, 750000000, 1000000000];
+  let costLists = [75, 450, 830, 1200, 1500, 1900, 2300, 2700, 3100, 3500, 3800, 4300, 4600, 5000, 5400, 5700, 6100, 6500, 7000, 7300, 8250];
+  //let costLists = [75, 90, 120, 150, 180, 300, 450, 600, 750, 900, 1200, 1500, 1800, 2400, 3000, 4500, 6000, 7500, 9000, 12000, 15000];
+  let rarity = ['nc', 'sc', 'bc', 'rc', 'src', 'cc', 'usrc', 'oc'];
+  let firstReduction = [60, 60, 30, 70, 60, 20, 60, 0];
+  let secondReduction = [0, 0, 0, 90, 80, 0, 80, 0];
+  document.getElementById('calculateBHP').addEventListener('click', checkInputs, false);
+  getElemById('reset').addEventListener('click', resetFields, false);
+  getElemById('finalHP').addEventListener('keyup', (event) => {
+    getElemById('finalHP').value = numberWithCommas(getElemById('finalHP').value.replaceAll(",", ""));
+  }, false);
+  getElemById('finalDMG').addEventListener('keyup', (event) => {
+    getElemById('finalDMG').value = numberWithCommas(getElemById('finalDMG').value.replaceAll(",", ""));
+  }, false);
+  getElemById('finalDMG2').addEventListener('keyup', (event) => {
+    getElemById('finalDMG2').value = numberWithCommas(getElemById('finalDMG2').value.replaceAll(",", ""));
+  }, false);
+  getElemById('finalDMG3').addEventListener('keyup', (event) => {
+    getElemById('finalDMG3').value = numberWithCommas(getElemById('finalDMG3').value.replaceAll(",", ""));
+  }, false);
+  getElemById('finalDPS').addEventListener('keyup', (event) => {
+    getElemById('finalDPS').value = numberWithCommas(getElemById('finalDPS').value.replaceAll(",", ""));
+  }, false);
+  
+  function returnReductionLevel(index, redPos) {
+	if (redPos == 1) return firstReduction[index];
+    else if (redPos == 2) return secondReduction[index];
+  }
+  function calculateNormal(finalStat, numLevels) {    
+    return Math.floor(finalStat / (((numLevels + 4)/5)*2.5));
+  }
+  function calculateFirstRed(finalStat, numLevels, index) {
+    let m = returnReductionLevel(index, 1);
+    return Math.floor(finalStat /((((m + 4) / 5) + ((numLevels - m) / 10)) * 2.5));
+  }
+  function calculateSecondRed(finalStat, numLevels, index) {
+    let m = returnReductionLevel(index, 1);
+    let p = returnReductionLevel(index, 2);
+    return Math.floor(finalStat /((((m+4)/5) + ((p-m)/10) + ((numLevels-p)/20)) * 2.5));
+  }
+  
+  function calculateStats(finalStat, numLevels, rarity) {
+    let statsCalc = 0;
+    let index = 0;
+   	switch(rarity) {
+      case 'nc': 
+        if(numLevels < returnReductionLevel(0, 1)) statsCalc= calculateNormal(finalStat, numLevels);
+        else statsCalc = calculateFirstRed(finalStat, numLevels, 0);
+        index = 0;
+      break;
+      case 'sc': 
+        if(numLevels < returnReductionLevel(1, 1)) statsCalc= calculateNormal(finalStat, numLevels);
+        else statsCalc = calculateFirstRed(finalStat, numLevels, 1);
+        index = 1;
+        break;
+      case 'bc': 
+        if(numLevels < returnReductionLevel(2, 1)) statsCalc= calculateNormal(finalStat, numLevels);
+        else statsCalc = calculateFirstRed(finalStat, numLevels, 2);
+        index = 2;
+        break;
+      case 'rc': 
+        if(numLevels > returnReductionLevel(3, 2)) statsCalc=calculateSecondRed(finalStat, numLevels, 3);
+        else if(numLevels < returnReductionLevel(3, 1)) statsCalc= calculateNormal(finalStat, numLevels);
+        else statsCalc = calculateFirstRed(finalStat, numLevels, 3);
+        index = 3;
+        break;
+      case 'src': 
+        if(numLevels > returnReductionLevel(4, 2)) statsCalc=calculateSecondRed(finalStat, numLevels, 4);
+        else if(numLevels < returnReductionLevel(4, 1)) statsCalc= calculateNormal(finalStat, numLevels);
+        else statsCalc = calculateFirstRed(finalStat, numLevels, 4);
+        index = 4;
+        break;
+      case 'cc': 
+        if(numLevels < returnReductionLevel(5, 0)) statsCalc= calculateNormal(finalStat, numLevels);
+        else statsCalc = calculateFirstRed(finalStat, numLevels, 5);
+        index = 5;
+        break;
+      case 'usrc': 
+        if(numLevels > returnReductionLevel(6, 2)) statsCalc=calculateSecondRed(finalStat, numLevels, 6);
+        else if(numLevels < returnReductionLevel(6, 1)) statsCalc= calculateNormal(finalStat, numLevels);
+        else statsCalc = calculateFirstRed(finalStat, numLevels, 6);
+        index = 6;
+        break;
+      case 'oc': 
+        statsCalc= calculateNormal(finalStat, numLevels);
+        index = 7;
+        break;
+    }
+    console.log(statsCalc);
+    console.log(index);
+    return statsCalc;
+  }
+
+  function getElemById(id) {
+    return document.getElementById(id);
+  }
+
+  function resetFields() {
+    getElemById('finalHP').value = '';
+    getElemById('numLevels').value = '';
+    getElemById('finalDMG').value = '';
+    getElemById('finalDMG2').value = '';
+    getElemById('finalDMG3').value = '';
+    getElemById('finalDPS').value = '';
+    getElemById('buffness').value = '';
+    getElemById('baseHP').innerText = 'unknown';
+    //getElemById('baseDMG').innerText = 'unknown';
+    getElemById('cooldown').innerText = 'unknown';
+    getElemById('cost').innerText = 'unknown';
+    updateTextClass('maxLvl', '?');
+    getElemById('bffinalHP').innerHTML = 'unknown';
+    getElemById('bffinalHP2').innerHTML = 'unknown';
+    getElemById('bffinalHP3').innerHTML = 'unknown';
+    //getElemById('bffinalDMG').innerHTML = 'unknown';
+    getElemById('buffnessPerc').innerText = '(?)';
+    getElemById('bfbaseHP').innerHTML = 'unknown';
+    getElemById('bfbaseHP2').innerHTML = 'unknown';
+    getElemById('bfbaseHP3').innerHTML = 'unknown';
+    //getElemById('bfbaseDMG').innerHTML = 'unknown';
+    getElemById('bfcooldown').innerHTML = 'unknown';
+    getElemById('bfcost').innerHTML = 'unknown';
+ getElemById('spanfinalHP').innerHTML = 'unknown';
+   // getElemById('spanfinalDMG').innerHTML = 'unknown';
+  }
+
+  function getBuyCost(finalHP) {
+    //if((int)(baseHP / 6.17 / 2) >= 9000) return 8250;
+    let cost = 75;
+    for (let a = 0; a < healthLists.length; a++) {
+      if (finalHP < healthLists[a]) {
+        cost = costLists[a];
+        break;
+      }
+    }
+    return cost;
+    //if((int)(baseHP * 0.0005556) >= 11000) return 11000;
+    //else return (int)(baseHP / 6.17 / 2);
+    //else return (int)(baseHP * 0.0005556);
+  }
+
+  function checkInputs() {
+    if (getElemById('finalHP').value.replaceAll(",", "") > 0 && getElemById('numLevels').value > 0 && getElemById('finalDMG').value.replaceAll(",", "") > 0 && getElemById('buffness').value.replaceAll(",", "") > 0 && getElemById('finalDPS').value.replaceAll(",", "") > 0) {
+      calculateBHP(getElemById('finalHP').value.replaceAll(",", ""), 
+                   getElemById('numLevels').value, getElemById('finalDMG').value.replaceAll(",", ""),
+                  getElemById('Rarity').value);
+    } else {
+      window.alert('Complete all the fields and enter only numeric value greater than 0!');
+    }
+  }
+
+  function multiplier(level) {
+    return (2 + (level / 2.0));
+  }
+
+  function getCooldown(finalDPS) {
+    //if (Math.ceil(baseHP / 308.5) >= 950) return 950;
+    //return Math.floor(finalDPS / 53.24);
+    return Math.floor(finalDPS / 53.24 / 2.0);
+  }
+
+  function getBaseDMG(maxDMG, initDMG, finalDmg) {
+    let baseDMG = Math.ceil((finalDmg * (getElemById('buffness').value / 100)) - (maxDMG - initDMG));
+    if (baseDMG <= 100) return initDMG;
+    else return baseDMG;
+    //return Math.ceil(finalDmg / multiplier(numOfLvl));
+    //return (long)(finalDmg - ((numOfLvl-1) * additive));
+  }
+  
+  function updateTextClass(clss, str) {
+    let elems = document.getElementsByClassName(clss);
+    for(i = 0; i < elems.length; i++) {
+     	elems[i].innerText= str + ''; 
+    }
+  }
+  
+  function scrollToElemId(id) {    
+  setTimeout(function() {
+			const yOffset = -400; 
+			const element = document.getElementById(id);
+			const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+			window.scrollTo({top: y, behavior: 'smooth'});          
+  }, 300);  
+  }
+
+  function calculateBHP(finalHP, numOfLvl, finalDMG, rarity) {        
+    let baseHP = Math.floor(calculateStats(parseInt(finalHP), parseInt(numOfLvl), rarity));
+    let baseDMG = Math.floor(calculateStats(parseInt(finalDMG), parseInt(numOfLvl), rarity));
+    let incHp = Math.floor((finalHP - baseHP) / (numOfLvl - 1));
+    let incDmg = Math.floor((finalDMG - baseDMG) / (numOfLvl - 1));
+    //let baseHP1 = Math.ceil(finalHP / multiplier(numOfLvl) * (buffmult / 100));    
+    let DPS = Math.floor(getElemById('finalDPS').value.replaceAll(",",""));
+    if(document.querySelectorAll('#Rarity')[0].selectedIndex == 1) {DPS /= 4;}
+    if(document.querySelectorAll('#Rarity')[0].selectedIndex == 2) {DPS /= 4;}
+    if(document.querySelectorAll('#Rarity')[0].selectedIndex == 3) {DPS /= 4;}
+    if(document.querySelectorAll('#Rarity')[0].selectedIndex == 4) {DPS /= 3;}
+    if(document.querySelectorAll('#Rarity')[0].selectedIndex == 5) {DPS /= 3;}
+    if(document.querySelectorAll('#Rarity')[0].selectedIndex == 6) {DPS /= 2;}    
+    updateTextClass('maxLvl', numOfLvl + '');
+    getElemById('spanfinalHP').innerHTML = '🔋' + numberWithCommas(finalHP) + ' hp / ⚔️' + numberWithCommas(finalDMG) + ' dmg <br/><br/>' + finalHP + '-hp | ' + finalDMG + '-dmg';
+    //getElemById('spanfinalDMG').innerHTML = '⚔️' + numberWithCommas(finalDMG) + ' dmg';
+    
+    
+    getElemById('baseHP').innerHTML = '[🔋' + numberWithCommas(baseHP) + ' hp / ⚔️' + numberWithCommas(baseDMG) + ' dmg]<br>each lvl (+' + numberWithCommas(incHp) + ' hp / +' + numberWithCommas(incDmg) + ' dmg.) <br/><br/>' + baseHP + '-hp |  ' + baseDMG + '-dmg';
+    //getElemById('baseDMG').innerHTML = '[⚔️' + numberWithCommas(baseDMG) + ' dmg] each lvl (+' + numberWithCommas(incDmg) + ' dmg.)';
+    
+    
+    getElemById('cooldown').innerHTML = '⏰ ' + numberWithCommas(getCooldown(DPS)) + ' ~ ⏰ ' + numberWithCommas(Math.floor(getCooldown(DPS) / 1.5)) + ' seconds / 🖼️' +  numberWithCommas(getCooldown(DPS) * 15) + ' ~ 🖼️' + numberWithCommas(Math.floor(getCooldown(DPS) * 15 / 1.5)) + ' frames | ' + getElemById('finalDPS').value + '.';
+    getElemById('cost').innerHTML = '💰' + numberWithCommas(getBuyCost(finalHP)) + ' ~ 💰' + numberWithCommas(Math.floor(getBuyCost(finalHP) / 1.5/100.0)*100)  + ' | ' +  getElemById('Rarity').options[getElemById('Rarity').selectedIndex].text;
+    
+    let buffmult = getElemById('buffness').value / 100;
+    finalHP = Math.floor(parseInt(finalHP) * buffmult);
+    console.log('final hp: ' + finalHP);
+    numOfLvl = Math.floor(parseInt(numOfLvl));
+    finalDMG = Math.floor(parseInt(finalDMG) * buffmult);
+    let finalDMG2 = Math.floor(parseInt(getElemById('finalDMG2').value.replaceAll(",", "")) * buffmult);
+    let finalDMG3 = Math.floor(parseInt(getElemById('finalDMG3').value.replaceAll(",", "")) * buffmult);
+    DPS = Math.floor(getElemById('finalDPS').value.replaceAll(",","") * buffmult);
+    baseHP = Math.floor(calculateStats(finalHP, numOfLvl, rarity));
+    baseDMG = Math.floor(calculateStats(finalDMG, numOfLvl, rarity));
+    let baseDMG2 = Math.floor(calculateStats(finalDMG2, numOfLvl, rarity));
+    let baseDMG3 = Math.floor(calculateStats(finalDMG3, numOfLvl, rarity));
+    incHp = Math.floor((finalHP - baseHP) / (numOfLvl - 1));
+    incDmg = Math.floor((finalDMG - baseDMG) / (numOfLvl - 1));
+    let unitCost = getBuyCost(finalHP);
+        
+    if(document.querySelectorAll('#Rarity')[0].selectedIndex == 1) {DPS /= 4;unitCost /= 4;}
+    if(document.querySelectorAll('#Rarity')[0].selectedIndex == 2) {DPS /= 4;unitCost /= 4;}
+    if(document.querySelectorAll('#Rarity')[0].selectedIndex == 3) {DPS /= 4;unitCost /= 4;}
+    if(document.querySelectorAll('#Rarity')[0].selectedIndex == 4) {DPS /= 3;unitCost /= 3;}
+    if(document.querySelectorAll('#Rarity')[0].selectedIndex == 5) {DPS /= 3;unitCost /= 3;}
+    if(document.querySelectorAll('#Rarity')[0].selectedIndex == 6) {DPS /= 2;unitCost /= 2;}    
+    
+    unitCost = Math.ceil(unitCost / 100) * 100;
+    
+    if(document.querySelectorAll('#Rarity')[0].selectedIndex == 1) {DPS /= 4;unitCost /= 4;}
+    if(document.querySelectorAll('#Rarity')[0].selectedIndex == 2) {DPS /= 4;unitCost /= 4;}
+    if(document.querySelectorAll('#Rarity')[0].selectedIndex == 3) {DPS /= 4;unitCost /= 4;}
+    if(document.querySelectorAll('#Rarity')[0].selectedIndex == 4) {DPS /= 3;unitCost /= 3;}
+    if(document.querySelectorAll('#Rarity')[0].selectedIndex == 5) {DPS /= 3;unitCost /= 3;}
+    if(document.querySelectorAll('#Rarity')[0].selectedIndex == 6) {DPS /= 2;unitCost /= 2;}    
+    
+    getElemById('bffinalHP').innerHTML = '' + numberWithCommas(finalHP) + ' health ... ' + numberWithCommas(finalDMG) + ' dmg / ' + numberWithCommas(finalDMG2) + ' dmg / ' + numberWithCommas(finalDMG3) + ' dmg<br/>';
+    //getElemById('bffinalHP2').innerHTML = '' + numberWithCommas(finalHP) + ' hp / ' + numberWithCommas(finalDMG2) + ' dmg<br/>';
+    //getElemById('bffinalHP3').innerHTML = '' + numberWithCommas(finalHP) + ' hp / ' + numberWithCommas(finalDMG3) + ' dmg<br/>';
+    //getElemById('bffinalDMG').innerHTML = '' + numberWithCommas(finalDMG) + ' dmg';
+    
+    
+    
+    getElemById('buffnessPerc').innerText = getElemById('buffness').value + '%';
+    getElemById('bfbaseHP').innerHTML = '' + numberWithCommas(baseHP) + ' health ... ' + numberWithCommas(baseDMG) + ' dmg / ' +  numberWithCommas(baseDMG2) + ' dmg / ' + numberWithCommas(baseDMG3) + ' dmg<br>each lvl (+' + numberWithCommas(incHp) + ' hp / +' + numberWithCommas(incDmg) + ' dmg.) <br/>';
+    //getElemById('bfbaseDMG').innerHTML = '[' + numberWithCommas(baseDMG) + ' dmg] each lvl (+' + numberWithCommas(incDmg) + ' dmg.)'; getElemById('finalDMG').value.replaceAll(",", "")
+   // getElemById('bfbaseHP2').innerHTML = '[' + numberWithCommas(baseHP) + ' hp / ' + numberWithCommas(baseDMG2) + ' dmg]<br>each lvl (+' + numberWithCommas(incHp) + ' hp / +' + numberWithCommas(incDmg) + ' dmg.) <br/>';
+   // getElemById('bfbaseHP3').innerHTML = '[' + numberWithCommas(baseHP) + ' hp / ' + numberWithCommas(baseDMG3) + ' dmg]<br>each lvl (+' + numberWithCommas(incHp) + ' hp / +' + numberWithCommas(incDmg) + ' dmg.) <br/>';
+    
+    
+    localStorage.setItem('bfcooldown', Math.floor(getCooldown(DPS)));
+    localStorage.setItem('bfcost', Math.floor(unitCost));    
+    localStorage.setItem('baseHP', baseHP);
+    localStorage.setItem('baseDMG', baseDMG);
+    localStorage.setItem('baseDMG2', baseDMG2);
+    localStorage.setItem('baseDMG3', baseDMG3);
+    
+    getElemById('bfcooldown').innerHTML = '⏰ ' + Math.floor(getCooldown(DPS) > 60 ? 60 : getCooldown(DPS)) + ' ~ ⏰ ' + numberWithCommas(Math.floor(getCooldown(DPS) / 1.5)) + ' seconds / 🖼️' +  numberWithCommas(getCooldown(DPS) * 15) + ' ~ 🖼️' + numberWithCommas(Math.floor(getCooldown(DPS) * 15 / 1.5)) + ' frames | ' + getElemById('finalDPS').value + '.';
+    getElemById('bfcost').innerHTML = '💰' + Math.floor(unitCost) + '- ~ 💰' + Math.floor(unitCost / 1.5/100.0)*100 + '- | ' +  getElemById('Rarity').options[getElemById('Rarity').selectedIndex].text;
+    if(getElemById('buffness').value == 100) scrollToElemId('orgStats');
+    else scrollToElemId('buffStats');
+    //getElemById('buff').innerHTML = getElemById('buffness').value + '% | Final HP: ' +  numberWithCommas(finalHP) + ' | Final DMG: ' + numberWithCommas(finalDMG);
+    
+    document.querySelector('#outputbq').innerText = document.querySelector('#outputtable').innerHTML.replaceAll('\n', '');
+  }
+  
+  document.getElementById('Rarity').addEventListener('click', getLevels, false);
+  
+  function getLevels() {
+   	 switch(document.getElementById('Rarity').selectedIndex){
+       case 0: document.getElementById('numLevels').value = 110; break;
+       case 1: document.getElementById('numLevels').value = 50; break;
+       case 2: document.getElementById('numLevels').value = 50; break;
+       case 3: document.getElementById('numLevels').value = 130; break;
+       case 4: document.getElementById('numLevels').value = 120; break;
+       case 5: document.getElementById('numLevels').value = 50; break;
+       case 6: document.getElementById('numLevels').value = 130; break;
+       case 7: document.getElementById('numLevels').value = 59; break;
+     }
+  }
+  
+  window.onload = function() {
+   	getLevels(); 
+  }
+
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+  function checkUrlInput() {
+   	try {
+      if(window.location.href.includes('#')) {
+       	let myUrl = window.location.href.split('&'); //1 = hp 2 = dmg 3 = dps 4 = rarity = 5 = buff
+        getElemById('finalHP').value = myUrl[1];
+        getElemById('finalDMG').value = myUrl[2];
+        getElemById('finalDPS').value = myUrl[3];
+        getElemById('Rarity').selectedIndex = myUrl[4];
+        getElemById('buffness').value = myUrl[5];
+        scrollToElemId('ptc_calculator');
+      }
+    }catch(err) {
+      console.log(err);
+    }
+  }
+  checkUrlInput();
+</script>
