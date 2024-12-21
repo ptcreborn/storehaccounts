@@ -1,0 +1,132 @@
+<blockquote>This tool is for free! When you are changing the id of mamodel, usually you got from battle cats ultimate, all you need to do is to open mamodel.txt and copy all the contents, now paste the content on the left box, then enter the cat id of the replaced unit to the input box and click the button replace, copy all content from the output and repaste it on your mamodel.txt.</blockquote>
+
+<div style="display: block; width: 100%;">
+<textarea id="model" style="background-color: black; color: white; display: inline-block; font-size: 14px; height: 300px; margin: auto; text-align: center; width: 100%;"></textarea>
+  <textarea class="inputDesign" id="output" readonly="" style="background-color: black; color: white; display: inline-block; font-size: 14px; height: 300px; margin: auto; text-align: center; width: 100%;"></textarea>
+</div>
+
+<div style="display: block; width: 100%;">
+<input id="catID" style="background-color: black; color: white; display: inline-block; font-size: 14px; margin: auto; text-align: center; width: 100%;" type="text" />
+</div>
+<div style="display: block; width: 100%;"><a id="replace" onclick="javascript:replaceID(document.getElementById(&quot;model&quot;).value);">Replace/button</a></div>
+
+<div style="display: block; width: 100%;">
+<textarea id="maanim" style="background-color: black; color: white; display: inline-block; font-size: 14px; height: 300px; margin: auto; text-align: center; width: 100%;"></textarea>
+<textarea id="maanim_output" style="background-color: black; color: white; display: inline-block; font-size: 14px; height: 300px; margin: auto; text-align: center; width: 100%;"></textarea>
+</div>
+
+<div style="display: block; width: 100%;"><a onclick="javascript:unsort();">Fix/button</a></div>
+
+<script>  
+  function unsort() {
+   	let str = document.getElementById('maanim').value;
+    let overall = '';
+    str = str.trim();
+    let st = str.split('\n');
+    let parts=[];
+    let header = st[0] + '\n' + st[1] + '\n' + st[2] + '\n';
+    let finalized = header;
+    for(i=3; i<st.length; i++) {
+     	if(st[i].split(',').length == 6) {          	 
+             let arrTemp = st[i].split(',');
+          	 if(arrTemp[2] == '-1') arrTemp[2] = 1;
+          	 arrTemp = arrTemp.join(',');       
+         	 let temp = arrTemp + '\n';
+          	 temp += st[i+1] + '\n';
+           for(b=0; b<parseInt(st[i+1]); b++) {
+             temp += st[i+2+b] + '\n';
+           }
+          parts.push(temp);
+          i += 2;
+        }
+    }
+    for(i=parts.length-1; i > -1; i--) {
+      header += parts[i];
+    }
+    document.getElementById('maanim_output').value = header;
+  }
+  function fixOpacity() {
+    let str = document.getElementById('maanim').value;
+    let overall = '';
+    str = str.trim();
+    let st = str.split('\n');
+    for(i=0; i< st.length; i++) {
+      if(st[i] == '[maanim]') overall += '[modelanim:animation2]\n';
+      else if(i == 1 && st[i] == 1) overall += '2\n'; 
+      else if(st[i].includes(',')) {
+        ///overall += st[i] + '\n';
+       	let part = st[i].split(',');
+        if(part.length == 6) {
+          console.log('part detected');
+          part[2] = 1;
+          overall += part.join(',') + '\n';
+          overall += st[i+1] + '\n'; // number of parts
+          for(b=0; b < st[i+1]; b++) {
+            console.log('number of parts: '+ st[i+1]);
+            // add two as default index
+            let part_opacity = st[i+2+b].substring(0, st[i+2+b].lastIndexOf(','));
+            overall += part_opacity + '\n';
+          }
+          i += parseInt(st[i+1]) + 1;
+          // jump to next part
+        } else overall += st[i] + '\n';
+      }
+      else overall += st[i] + '\n';
+    }
+    document.getElementById('maanim_output').value = overall;
+  }
+  
+  function fixModelOpac() {
+   	let model = document.getElementById('model') .value;
+    
+  }
+  
+  function replaceID(str) {
+    isLast = false;
+    str = str.trim();
+   	let sentences = str.split('\n');
+    let tempStr = '';
+    let finalize = '';
+    let pivx = 0;
+    let pivy = 0;
+    for(i=0; i<sentences.length; i++) {      
+      if(i == 3) {
+        if(sentences[i].split(',')[6] != '0') pivx = sentences[i].split(',')[6];
+        if(sentences[i].split(',')[7] != '0') pivy = sentences[i].split(',')[7];
+        tempStr= sentences[i].split(',');
+        tempStr[6] = 0;
+        tempStr[7] = 0;
+        //if(tempStr[11] == 1000) tempStr[11] = 255;
+        tempStr = tempStr.join(',');
+        finalize += tempStr + '\n';
+      }
+      else if(i >= 4 && sentences[i].split(',').length > 3 && i < sentences.length - 3) {
+        let commas = sentences[i].split(',');
+        if(commas[1] != -1)	commas[1] = document.getElementById('catID').value;
+        //if(commas[11] == 1000) commas[11] = 255;
+      	let temp = commas.join(',');
+      	finalize += temp + '\n';
+      } else {
+        if(sentences[i] == '1') finalize += '2' + '\n';
+        else if(sentences[i].split(',').length == 3) {
+          	 tempStr = sentences[i] + ',1';
+         	 //tempStr = sentences[i].split(',');
+          	 //if(tempStr[2] == 1000) tempStr[2] = 255;
+          	 //tempStr = tempStr.join(',');
+             finalize += tempStr + '\n';
+        } else if(sentences[i].split(',').length == 7 && !isLast) {
+          tempStr = sentences[i].split(',');
+          tempStr[2] = parseInt(pivx) * -1;
+          tempStr[3] = parseInt(pivy) * -1;
+          finalize += tempStr.join(',') + '\n';
+          isLast = true; //modifies the last part
+        }
+       	else finalize += sentences[i] + '\n'; 
+      }
+    }
+    if(sentences[sentences.length-1] != sentences[sentences.length-2]) finalize += sentences[sentences.length-1];
+    finalize = finalize.trim();
+    console.log(finalize);
+    document.getElementById('output').value = finalize.trim();
+  }    
+</script>
