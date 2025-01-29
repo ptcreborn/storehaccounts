@@ -1,5 +1,8 @@
- 
- console.log('imported everything');
+
+
+ import {initializeApp} from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+
+ console.log(initializeApp);
 
  var FirebaseApp = {
      firebaseConfig: '',
