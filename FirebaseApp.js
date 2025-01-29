@@ -73,9 +73,10 @@ var FirebaseApp = {
         });
     },
 
-    signOutUser: function () {
-        await FirebaseApp.auth.signOut(() => {
+    signOutUser: function (callback) {
+        FirebaseApp.auth.signOut(() => {
             window.alert('logged out!');
+            callback();
         }, (e) => {
             window.error('error: ' + e);
         });
