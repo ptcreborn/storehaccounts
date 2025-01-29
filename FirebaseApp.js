@@ -1,5 +1,25 @@
 
 
+import {
+    initializeApp
+}
+from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup
+}
+from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
+
+import {
+    getDatabase,
+    ref,
+    set,
+    child,
+    get
+}
+from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
+
 var FirebaseApp {
     firebaseConfig: {
         apiKey: "AIzaSyDXd2n0yLGZS1mkFgLRctgtVZadsOK7JIs",
