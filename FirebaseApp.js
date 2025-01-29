@@ -42,20 +42,12 @@ export var FirebaseApp = {
         FirebaseApp.provider = new GoogleAuthProvider();
     },
 
-    signInWithGoogle: function () {
+    signInWithGoogle: function (data) {
         signInWithPopup(FirebaseApp.auth, FirebaseApp.provider)
         .then((result) => {
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const token = credential.accessToken;
             const user = result.user;
-
-            let data = {
-                "fullname": user.displayName,
-                "emailVerified": user.emailVerified,
-                "email": user.email,
-                "photoURL": user.photoURL,
-                "UID": user.uid
-            }
 
             FirebaseApp.writeDataJSON(user.uid, "users", data);
 
