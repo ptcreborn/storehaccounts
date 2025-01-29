@@ -34,32 +34,9 @@ var FirebaseApp = {
     app: initializeApp(FirebaseApp.firebaseConfig),
     auth: getAuth(FirebaseApp.app),
     provider: new GoogleAuthProvider(),
-    FirebaseApp.auth.languageCode: 'en',
 
     initialize: function () {
-        // Import the functions you need from the SDKs you need
-        import {
-            initializeApp
-        }
-        from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
-        import {
-            getAuth,
-            GoogleAuthProvider,
-            signInWithPopup
-        }
-        from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
-
-        import {
-            getDatabase,
-            ref,
-            set,
-            child,
-            get
-        }
-        from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
-
-        // for Storehaccounts!
-
+        FirebaseApp.auth.languageCode = 'en'
     },
 
     signInWithGoogle: function () {
