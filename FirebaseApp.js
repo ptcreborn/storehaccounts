@@ -1,10 +1,4 @@
 
-
- import {initializeApp} from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
-
- console.log(initializeApp);
- console.log("Editing something");
-
  var FirebaseApp = {
      firebaseConfig: '',
      app: '',
@@ -85,5 +79,3 @@
          });
      }
  }
-console.log('end');
-console.log(FirebaseApp);
