@@ -30,13 +30,14 @@ export var FirebaseApp = {
 
     initialize: function () {
         FirebaseApp.firebaseConfig = {
-            apiKey: "AIzaSyDXd2n0yLGZS1mkFgLRctgtVZadsOK7JIs",
-            authDomain: "login-project-2efef.firebaseapp.com",
-            databaseURL: "https://login-project-2efef-default-rtdb.firebaseio.com",
-            projectId: "login-project-2efef",
-            storageBucket: "login-project-2efef.firebasestorage.app",
-            messagingSenderId: "470352098",
-            appId: "1:470352098:web:4a095dc9e58a5ee461debb"
+            apiKey: "AIzaSyAC5eiXYGlEslYrau8A7DVSvmUszgaD3OI",
+            authDomain: "storehaccounts-users.firebaseapp.com",
+            databaseURL: "https://storehaccounts-users-default-rtdb.firebaseio.com",
+            projectId: "storehaccounts-users",
+            storageBucket: "storehaccounts-users.firebasestorage.app",
+            messagingSenderId: "445561746761",
+            appId: "1:445561746761:web:4820f757f522f20f791698",
+            measurementId: "G-MPP91JYHVN"
         };
         FirebaseApp.app = initializeApp(FirebaseApp.firebaseConfig);
         FirebaseApp.auth = getAuth(FirebaseApp.app);
@@ -50,6 +51,8 @@ export var FirebaseApp = {
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const token = credential.accessToken;
             const user = result.user;
+
+            // checking the list if the user is already existing
 
             let data = {
                 "public": {
