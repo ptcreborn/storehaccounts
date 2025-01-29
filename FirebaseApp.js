@@ -34,7 +34,7 @@ var FirebaseApp = {
     app: initializeApp(FirebaseApp.firebaseConfig),
     auth: getAuth(FirebaseApp.app),
     provider: new GoogleAuthProvider(),
-    auth.languageCode: 'en',
+    FirebaseApp.auth.languageCode: 'en',
 
     initialize: function () {
         // Import the functions you need from the SDKs you need
