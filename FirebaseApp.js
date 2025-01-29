@@ -42,7 +42,7 @@ export var FirebaseApp = {
         FirebaseApp.provider = new GoogleAuthProvider();
     },
 
-    signInWithGoogle: function (data) {
+    signInWithGoogle: function () {
         signInWithPopup(FirebaseApp.auth, FirebaseApp.provider)
         .then((result) => {
             const credential = GoogleAuthProvider.credentialFromResult(result);
