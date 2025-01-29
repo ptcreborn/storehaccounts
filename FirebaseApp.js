@@ -49,6 +49,17 @@ export var FirebaseApp = {
             const token = credential.accessToken;
             const user = result.user;
 
+            let data = {
+                "public": {
+					"fullname": user.displayName,
+					"emailVerified": user.emailVerified,
+					"photoURL": user.photoURL,
+				}
+                "secret": {
+					"email": user.email,
+				}
+            }
+
             FirebaseApp.writeDataJSON(user.uid, "users", data);
 
         }).catch((error) => {
