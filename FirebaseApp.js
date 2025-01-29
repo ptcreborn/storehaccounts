@@ -54,7 +54,7 @@ export var FirebaseApp = {
 					"fullname": user.displayName,
 					"emailVerified": user.emailVerified,
 					"photoURL": user.photoURL,
-				}
+				},
                 "secret": {
 					"email": user.email,
 				}
