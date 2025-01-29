@@ -20,7 +20,7 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
 
-var FirebaseApp {
+var FirebaseApp = {
     firebaseConfig: {
         apiKey: "AIzaSyDXd2n0yLGZS1mkFgLRctgtVZadsOK7JIs",
         authDomain: "login-project-2efef.firebaseapp.com",
