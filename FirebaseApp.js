@@ -45,7 +45,7 @@ export var FirebaseApp = {
         FirebaseApp.provider = new GoogleAuthProvider();
     },
 
-    signInWithGoogle: async function () {
+    signInWithGoogle: async function (callback) {
         signInWithPopup(FirebaseApp.auth, FirebaseApp.provider)
         .then(async(result) => {
             const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -68,7 +68,7 @@ export var FirebaseApp = {
 
                 FirebaseApp.writeDataJSON("users", user.uid, data);
                 FirebaseApp.writeDataJSON("users_lists", user.uid, new Date().getTime());
-                console.log("done creating record");
+                callback();
             }
         }).catch((error) => {
             window.alert(error);
