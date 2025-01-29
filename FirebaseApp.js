@@ -17,8 +17,10 @@
      get
  }
  from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
+ 
+ console.log('imported everything');
 
-var FirebaseApp = {
+ var FirebaseApp = {
      firebaseConfig: '',
      app: '',
      auth: '',
