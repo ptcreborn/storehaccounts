@@ -1,5 +1,24 @@
+ import {
+     initializeApp
+ }
+ from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+ import {
+     getAuth,
+     GoogleAuthProvider,
+     signInWithPopup
+ }
+ from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
 
- var FirebaseApp = {
+ import {
+     getDatabase,
+     ref,
+     set,
+     child,
+     get
+ }
+ from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
+ 
+ export var FirebaseApp = {
      firebaseConfig: '',
      app: '',
      auth: '',
