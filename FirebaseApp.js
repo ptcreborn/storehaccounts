@@ -71,9 +71,9 @@ var FirebaseApp = {
             else
                 return false;
         });
-    }
+    },
 
-    signOutGoogle: function () {
+    signOutUser: function () {
         await FirebaseApp.auth.signOut(() => {
             window.alert('logged out!');
         }, (e) => {
