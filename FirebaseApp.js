@@ -21,22 +21,25 @@ import {
 from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
 
 var FirebaseApp = {
-    firebaseConfig: {
-        apiKey: "AIzaSyDXd2n0yLGZS1mkFgLRctgtVZadsOK7JIs",
-        authDomain: "login-project-2efef.firebaseapp.com",
-        databaseURL: "https://login-project-2efef-default-rtdb.firebaseio.com",
-        projectId: "login-project-2efef",
-        storageBucket: "login-project-2efef.firebasestorage.app",
-        messagingSenderId: "470352098",
-        appId: "1:470352098:web:4a095dc9e58a5ee461debb"
-    },
-
-    app: initializeApp(FirebaseApp.firebaseConfig),
-    auth: getAuth(FirebaseApp.app),
-    provider: new GoogleAuthProvider(),
+    firebaseConfig: '',
+    app: '',
+    auth: '',
+    provider: '',
 
     initialize: function () {
-        FirebaseApp.auth.languageCode = 'en'
+        FirebaseApp.firebaseConfig = {
+            apiKey: "AIzaSyDXd2n0yLGZS1mkFgLRctgtVZadsOK7JIs",
+            authDomain: "login-project-2efef.firebaseapp.com",
+            databaseURL: "https://login-project-2efef-default-rtdb.firebaseio.com",
+            projectId: "login-project-2efef",
+            storageBucket: "login-project-2efef.firebasestorage.app",
+            messagingSenderId: "470352098",
+            appId: "1:470352098:web:4a095dc9e58a5ee461debb"
+        };
+        FirebaseApp.auth.languageCode = 'en';
+        FirebaseApp.app = initializeApp(FirebaseApp.firebaseConfig);
+        FirebaseApp.auth = getAuth(FirebaseApp.app);
+        FirebaseApp.provider = new GoogleAuthProvider();
     },
 
     signInWithGoogle: function () {
@@ -61,7 +64,22 @@ var FirebaseApp = {
         })
     },
 
-    signOutGoogle: function () {},
+    verifyUserLogStatus: function () {
+        FirebaseApp.auth.onAuthStateChanged(function (user) {
+            if (user)
+                return true;
+            else
+                return false;
+        });
+    }
+
+    signOutGoogle: function () {
+        await FirebaseApp.auth.signOut(() => {
+            window.alert('logged out!');
+        }, (e) => {
+            window.error('error: ' + e);
+        });
+    },
 
     writeDataJSON: function (uid, path, data) {
         const db = getDatabase();
