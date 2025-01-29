@@ -62,8 +62,9 @@
          })
      },
 
-     verifyUserLogStatus: function () {
-         FirebaseApp.auth.onAuthStateChanged(function (user) {
+     verifyUserLogStatus: function () {		 
+		 console.log(FirebaseApp.auth);
+         FirebaseApp.auth.onAuthStateChanged(function (user) {			 
              if (user)
                  return true;
              else
@@ -72,6 +73,7 @@
      },
 
      signOutUser: function (callback) {
+		 console.log(FirebaseApp.auth);
          FirebaseApp.auth.signOut(() => {
              window.alert('logged out!');
              callback();
