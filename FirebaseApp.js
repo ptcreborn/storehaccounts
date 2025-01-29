@@ -58,7 +58,7 @@
              FirebaseApp.writeDataJSON(user.uid, "users", data);
 
          }).catch((error) => {
-             window.error(error);
+             window.alert(error);
          })
      },
 
@@ -76,7 +76,7 @@
              window.alert('logged out!');
              callback();
          }, (e) => {
-             window.error('error: ' + e);
+             window.alert('error: ' + e);
          });
      },
 
@@ -94,7 +94,7 @@
                  return null;
              }
          }).catch((error) => {
-             window.error(error);
+             window.alert(error);
          });
      }
  }
