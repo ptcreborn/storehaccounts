@@ -16,7 +16,9 @@ import {
     ref,
     set,
     child,
-    get
+    get,
+    push,
+    update
 }
 from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
 
@@ -51,19 +53,21 @@ export var FirebaseApp = {
 
             let data = {
                 "public": {
-					"fullname": user.displayName,
-					"emailVerified": user.emailVerified,
-					"photoURL": user.photoURL,
-				},
+                    "fullname": user.displayName,
+                    "emailVerified": user.emailVerified,
+                    "photoURL": user.photoURL,
+                },
                 "secret": {
-					"email": user.email,
-				}
+                    "email": user.email,
+                }
             }
 
             FirebaseApp.writeDataJSON(user.uid, "users", data);
-
+            FirebaseApp.writeDataJSON(user.uid, "users_lists", {
+                "l": new Date().getTime()
+            });
         }).catch((error) => {
-            window.error(error);
+            window.alert(error);
         })
     },
 
@@ -111,7 +115,7 @@ export var FirebaseApp = {
                 return null;
             }
         }).catch((error) => {
-            window.error(error);
+            window.alert(error);
         });
     }
 }
