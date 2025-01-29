@@ -45,42 +45,42 @@ export var FirebaseApp = {
         FirebaseApp.provider = new GoogleAuthProvider();
     },
 
-    signInWithGoogle: function () {
+    signInWithGoogle: async function () {
         signInWithPopup(FirebaseApp.auth, FirebaseApp.provider)
-        .then((result) => {
+        .then(async(result) => {
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const token = credential.accessToken;
             const user = result.user;
 
-            // checking the list if the user is already existing
-
-            let data = {
-                "public": {
-                    "fullname": user.displayName,
-                    "emailVerified": user.emailVerified,
-                    "photoURL": user.photoURL,
-                },
-                "secret": {
-                    "email": user.email,
+            let res = await FirebaseModule.get('https://storehaccounts-users-default-rtdb.firebaseio.com/users_lists/' + user.uid + '.json');
+            if (res == "null") {
+                // means new account!
+                let data = {
+                    "public": {
+                        "fullname": user.displayName,
+                        "emailVerified": user.emailVerified,
+                        "photoURL": user.photoURL,
+                    },
+                    "secret": {
+                        "email": user.email,
+                    }
                 }
-            }
 
-            FirebaseApp.writeDataJSON(user.uid, "users", data);
-            FirebaseApp.writeDataJSON(user.uid, "users_lists", {
-                "l": new Date().getTime()
-            });
+                FirebaseApp.writeDataJSON("users", user.uid, data);
+                FirebaseApp.writeDataJSON("users_lists", user.uid, new Date().getTime());
+                console.log("done creating record");
+            }
         }).catch((error) => {
             window.alert(error);
         })
     },
 
     isUserLoggedIn: async function () {
-        let isUserLoggedIn = false;
+        let isUserLoggedIn;
         try {
-            await FirebaseApp.verifyUserLogStatus();
-            isUserLoggedIn = true;
+            isUserLoggedIn = await FirebaseApp.verifyUserLogStatus();
         } catch (e) {
-            isUserLoggedIn = false;
+            isUserLoggedIn = null;
         }
         return isUserLoggedIn;
     },
@@ -89,7 +89,7 @@ export var FirebaseApp = {
         return new Promise((resolve, reject) => {
             onAuthStateChanged(FirebaseApp.auth, function (user) {
                 if (user)
-                    resolve(true);
+                    resolve(user.uid);
                 else
                     reject("User not logged in.");
             });
@@ -104,9 +104,9 @@ export var FirebaseApp = {
         });
     },
 
-    writeDataJSON: function (uid, path, data) {
+    writeDataJSON: function (path, child, data) {
         const db = getDatabase();
-        set(ref(db, path + '/' + uid), data);
+        set(ref(db, path + "/" + child), data);
     },
 
     getDataJSON: function (path) {
