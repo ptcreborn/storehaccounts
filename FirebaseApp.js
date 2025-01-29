@@ -36,9 +36,9 @@ var FirebaseApp = {
             messagingSenderId: "470352098",
             appId: "1:470352098:web:4a095dc9e58a5ee461debb"
         };
-        FirebaseApp.auth.languageCode = 'en';
         FirebaseApp.app = initializeApp(FirebaseApp.firebaseConfig);
         FirebaseApp.auth = getAuth(FirebaseApp.app);
+        FirebaseApp.auth.languageCode = 'en';
         FirebaseApp.provider = new GoogleAuthProvider();
     },
 
