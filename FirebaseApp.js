@@ -111,15 +111,17 @@ export var FirebaseApp = {
     },
 
     getDataJSON: function (path) {
-        const dbRef = ref(getDatabase());
-        get(child(dbRef, path)).then((snapshot) => {
-            if (snapshot.exists()) {
-                return snapshot.val();
-            } else {
-                return null;
-            }
-        }).catch((error) => {
-            window.alert(error);
+        return new Promise(function (resolve, reject) {
+            const dbRef = ref(getDatabase());
+            get(child(dbRef, path)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    resolve(snapshot.val());
+                } else {
+                    return null;
+                }
+            }).catch((error) => {
+                window.alert(error);
+            });
         });
     }
 }
