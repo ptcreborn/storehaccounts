@@ -101,10 +101,13 @@ export var FirebaseApp = {
     },
 
     signOutUser: function () {
-        signOut(FirebaseApp.auth).then(() => {
-            console.log("Signed out successfully");
-        }).catch((error) => {
-            window.alert("Error " + error);
+        return new Promise((resolve, reject) => {
+            signOut(FirebaseApp.auth).then(() => {
+                resolve("Signed out successfully");
+            }).catch((error) => {
+				resolve(null);
+                window.alert("Error " + error);
+            });
         });
     },
 
