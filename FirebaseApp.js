@@ -46,7 +46,7 @@ export var FirebaseApp = {
     },
 
     signInWithGoogle: async function (callback) {
-		// callback function will execute after a successful logged in.
+        // callback function will execute after a successful logged in.
         signInWithPopup(FirebaseApp.auth, FirebaseApp.provider)
         .then(async(result) => {
             const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -78,8 +78,8 @@ export var FirebaseApp = {
     },
 
     isUserLoggedIn: async function () {
-		// this will return uid if the user is still logged in
-		// or will return null if the user is not logged in anymore
+        // this will return uid if the user is still logged in
+        // or will return null if the user is not logged in anymore
         let isUserLoggedIn;
         try {
             isUserLoggedIn = await FirebaseApp.verifyUserLogStatus();
@@ -109,26 +109,26 @@ export var FirebaseApp = {
     },
 
     writeDataJSON: function (path, child, data) {
-		// path is the directory of where the child will be written
-		// child is the new key to be added (can be variable and not a json)
-		// data is the value of the child or the key
+        // path is the directory of where the child will be written
+        // child is the new key to be added (can be variable and not a json)
+        // data is the value of the child or the key
         const db = getDatabase();
         set(ref(db, path + "/" + child), data);
     },
 
     getDataJSON: function (path) {
-		// will return the value of path if exists
-		// will return false if the path does not exists
-		// will return error if the path is not allowed to be viewed.
+        // will return the value of path if exists
+        // will return false if the path does not exists
+        // will return error if the path is not allowed to be viewed.
         return new Promise(function (resolve, reject) {
             const dbRef = ref(getDatabase());
             get(child(dbRef, path)).then((snapshot) => {
                 if (snapshot.exists()) {
                     resolve(snapshot.val());
                 } else if (!snapshot.exists()) {
-					resolve(false);
-				} else {
-                    return null;
+                    resolve(false);
+                } else {
+                    resolve(null);
                 }
             }).catch((error) => {
                 window.alert(error);
