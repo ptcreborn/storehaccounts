@@ -60,6 +60,7 @@ export var FirebaseApp = {
                         "fullname": user.displayName,
                         "emailVerified": user.emailVerified,
                         "photoURL": user.photoURL,
+                        "joined": new Date().getTime()
                     },
                     "secret": {
                         "email": user.email,
@@ -68,11 +69,11 @@ export var FirebaseApp = {
 
                 FirebaseApp.writeDataJSON("users", user.uid, data);
                 FirebaseApp.writeDataJSON("users_lists", user.uid, new Date().getTime());
-                callback();
             }
+            callback();
         }).catch((error) => {
             window.alert(error);
-        })
+        });
     },
 
     isUserLoggedIn: async function () {
