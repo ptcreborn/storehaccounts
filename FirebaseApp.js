@@ -62,14 +62,11 @@ export var FirebaseApp = {
                         "emailVerified": user.emailVerified,
                         "photoURL": user.photoURL,
                         "joined": new Date().getTime()
-                    },
-                    "secret": {
-                        "email": user.email,
+                        "email": user.email
                     }
-                }
+				}
 
-                FirebaseApp.writeDataJSON("users", user.uid, data);
-                FirebaseApp.writeDataJSON("users_lists", user.uid, new Date().getTime());
+                FirebaseApp.writeDataJSON("users_lists", user.uid, data);
             }
             callback();
         }).catch((error) => {
@@ -105,7 +102,7 @@ export var FirebaseApp = {
             signOut(FirebaseApp.auth).then(() => {
                 resolve("Signed out successfully");
             }).catch((error) => {
-				resolve(null);
+                resolve(null);
                 window.alert("Error " + error);
             });
         });
