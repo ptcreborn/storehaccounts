@@ -61,10 +61,10 @@ export var FirebaseApp = {
                         "fullname": user.displayName,
                         "emailVerified": user.emailVerified,
                         "photoURL": user.photoURL,
-                        "joined": new Date().getTime()
+                        "joined": new Date().getTime(),
                         "email": user.email
                     }
-				}
+                }
 
                 FirebaseApp.writeDataJSON("users_lists", user.uid, data);
             }
