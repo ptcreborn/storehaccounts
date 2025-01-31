@@ -57,13 +57,11 @@ export var FirebaseApp = {
             if (res == "null") {
                 // means new account!
                 let data = {
-                    "public": {
-                        "fullname": user.displayName,
-                        "emailVerified": user.emailVerified,
-                        "photoURL": user.photoURL,
-                        "joined": new Date().getTime(),
-                        "email": user.email
-                    }
+                    "fullname": user.displayName,
+                    "emailVerified": user.emailVerified,
+                    "photoURL": user.photoURL,
+                    "joined": new Date().getTime(),
+                    "email": user.email
                 }
 
                 FirebaseApp.writeDataJSON("users_lists", user.uid, data);
