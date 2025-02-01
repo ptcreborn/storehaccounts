@@ -22,7 +22,7 @@ var ImgurXHR = {
                 if (xhr.status == 200) {
                     let temp_img = document.createElement('img');
                     temp_img.src = JSON.parse(xhr.responseText).data.link;
-                    imgDIV.innerHMTL = '';
+                    imgDIV.innerHTML = '';
                     imgDIV.appendChild(temp_img);
                     // callback(img_file);
                 } else {
