@@ -7,7 +7,7 @@
 
 
 var ImgurXHR = {
-    uploadImgUr: function (inputID, imgDIV) {
+    uploadImgUr: function (inputID, imgDIV, successCallback, failedCallback) {
         document.getElementById(inputID).addEventListener('change', function (e) {
             var file = e.target.files[0];
             if (!file || !file.type.match(/image.*/))
@@ -24,10 +24,11 @@ var ImgurXHR = {
                     temp_img.src = JSON.parse(xhr.responseText).data.link;
                     imgDIV.innerHTML = '';
                     imgDIV.appendChild(temp_img);
-                    // callback(img_file);
+                    successCallback();
                 } else {
                     window.alert('ImgurXHR error: Error in uploading... Please try again');
                     imgLink.error = "Error Uploading in ImgUr";
+					failedCallback();
                 }
             }
             xhr.setRequestHeader('Authorization', 'Client-ID 33f63d5902f27e5');
@@ -35,5 +36,3 @@ var ImgurXHR = {
         }, false);
     }
 }
-
-
