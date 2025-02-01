@@ -9,7 +9,7 @@
 var ImgurXHR = {
     uploadImgUr: function (inputID, imgDIV, uploadCallback, doneUploadCallback) {
         document.getElementById(inputID).addEventListener('change', function (e) {
-            if(!uploadCallback()) uploadCallback();
+            if(!uploadCallback) uploadCallback();
             var file = e.target.files[0];
             if (!file || !file.type.match(/image.*/))
                 return;
@@ -25,12 +25,12 @@ var ImgurXHR = {
                     temp_img.src = JSON.parse(xhr.responseText).data.link;
                     imgDIV.innerHMTL = '';
                     imgDIV.appendChild(temp_img);
-                    if(!doneUploadCallback()) doneUploadCallback();
+                    if(!doneUploadCallback) doneUploadCallback();
                     // callback(img_file);
                 } else {
                     window.alert('ImgurXHR error: Error in uploading... Please try again');
                     imgLink.error = "Error Uploading in ImgUr";
-                    if(!doneUploadCallback()) doneUploadCallback();
+                    if(!doneUploadCallback) doneUploadCallback();
                 }
             }
             xhr.setRequestHeader('Authorization', 'Client-ID 33f63d5902f27e5');
