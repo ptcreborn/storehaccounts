@@ -30,14 +30,14 @@ export var FirebaseApp = {
 
     initialize: function () {
         FirebaseApp.firebaseConfig = {
-            apiKey: "AIzaSyAC5eiXYGlEslYrau8A7DVSvmUszgaD3OI",
-            authDomain: "storehaccounts-users.firebaseapp.com",
-            databaseURL: "https://storehaccounts-users-default-rtdb.firebaseio.com",
-            projectId: "storehaccounts-users",
-            storageBucket: "storehaccounts-users.firebasestorage.app",
-            messagingSenderId: "445561746761",
-            appId: "1:445561746761:web:4820f757f522f20f791698",
-            measurementId: "G-MPP91JYHVN"
+            apiKey: "AIzaSyD4GHojZREGEcgfylKb7GhaN3al_oQQi6Y",
+    authDomain: "ptc-database.firebaseapp.com",
+    databaseURL: "https://ptc-database-default-rtdb.firebaseio.com",
+    projectId: "ptc-database",
+    storageBucket: "ptc-database.firebasestorage.app",
+    messagingSenderId: "531205168782",
+    appId: "1:531205168782:web:63d1dfdf6606c4cb13b3df",
+    measurementId: "G-6FEEGZ1VQ9"
         };
         FirebaseApp.app = initializeApp(FirebaseApp.firebaseConfig);
         FirebaseApp.auth = getAuth(FirebaseApp.app);
