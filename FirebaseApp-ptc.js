@@ -69,6 +69,7 @@ export var FirebaseApp = {
             callback();
         }).catch((error) => {
             window.alert(error);
+            window.alert("Please reload the page and fix the issue.");
         });
     },
 
@@ -102,6 +103,7 @@ export var FirebaseApp = {
             }).catch((error) => {
                 resolve(null);
                 window.alert("Error " + error);
+                window.alert("Please reload the page and fix the issue.");
             });
         });
     },
@@ -130,6 +132,7 @@ export var FirebaseApp = {
                 }
             }).catch((error) => {
                 window.alert(error);
+                window.alert("Please reload the page and fix the issue.");
             });
         });
     }
