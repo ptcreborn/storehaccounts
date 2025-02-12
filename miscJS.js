@@ -3,14 +3,14 @@ function query(id) {
 }
 
 function disableElem(elemID, text) {
-    let elem = document.getElementById(elemID).style;
+    let elem = query(elemID).style;
     elem.opacity = '0.7';
     elem.pointerEvents = 'none';
     elem.innerText = text;
 }
 
 function enableElem(elemID, text) {
-    let elem = document.getElementById(elemID).style;
+    let elem = query(elemID).style;
     elem.opacity = '1';
     elem.pointerEvents = 'auto';
     elem.innerText = text;
