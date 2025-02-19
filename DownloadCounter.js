@@ -26,7 +26,7 @@ async function get_dl_views(url) {
     let data = await FirebaseModule.get(LT_url + url + ".json");
     data = JSON.parse(data).clicks;
 
-    query(url).querySelector('b')[1].innerText = data;
+    query(url).querySelectorAll('b')[1].innerText = data;
 }
 
 async function get_dl_counts(url) {
@@ -34,5 +34,5 @@ async function get_dl_counts(url) {
     let data = await FirebaseModule.get(LT_url + url + ".json");
     data = JSON.parse(data).downloads;
 
-    query(url).querySelector('b')[2].innerText = data;
+    query(url).querySelectorAll('b')[2].innerText = data;
 }
