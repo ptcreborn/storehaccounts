@@ -525,3 +525,144 @@ window.addEventListener('load', async function () {
 
     document.getElementById('user-upper-right').style.display = 'block';
 }, false);
+
+//OneSignal Lazyload By Wendy Code
+var onsignal=!1;window.addEventListener("scroll",function(){(0!=document.documentElement.scrollTop&&!1===onsignal||0!=document.body.scrollTop&&!1===onsignal)&&(!function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="https://cdn.onesignal.com/sdks/OneSignalSDK.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(e,a)}(),onsignal=!0)},!0);
+  
+  function buildGallery() {
+   	// Check if the post has images
+    let allImgs = document.querySelectorAll('.postBody img:not(#ptc-preview)');
+    if(allImgs.length > 0 && !window.location.href.includes('/p/')) {
+      for(i=0; i<allImgs.length; i++) {
+       	let subParentDiv = document.createElement('div');
+        let imglets = document.createElement('img');        
+		let temp = allImgs[i].getAttribute('data-src').split('/');
+        if(temp.length == 9) {
+			temp[7] = 's80-rw';
+        	temp = temp.join('/');
+			imglets.setAttribute('src', temp);
+		}
+		else if(temp.length == 6) {
+			temp = temp.join('/');
+			temp = temp.split('=');
+			temp[1] = 'w80-h80-rw';
+			temp = temp.join('=');
+			imglets.setAttribute('src', temp);
+		}
+        else {
+			imglets.setAttribute('src', allImgs[i].getAttribute('data-src'));
+		}
+        imglets.setAttribute('class', 'lazy');
+		imglets.setAttribute('alt', document.title);
+        imglets.setAttribute('onclick', 'letsPreview(this)');      	
+      	subParentDiv.appendChild(imglets);
+      	document.querySelectorAll('.ptc-snaps')[0].appendChild(subParentDiv);     
+  		if(i == 1) letsPreview(document.querySelectorAll('.ptc-snaps img')[0]);
+      }        
+    }
+  }
+  
+  function letsPreview(myData) {
+    document.querySelector('#ptc-preview').removeAttribute('src');
+	let temp = myData.src.split('/');
+        if(temp.length == 9) {
+			temp[7] = 's16000-rw';
+        	temp = temp.join('/');
+		}
+		else if(temp.length == 6) {
+			temp = temp.join('/');
+			temp = temp.split('=');
+			temp[1] = 'w16000-h16000-rw';
+			temp = temp.join('=');
+		}
+        else {
+			temp = myData.src;
+		}
+document.querySelector('#ptc-preview').setAttribute('src', temp);
+	document.querySelector('#ptc-preview').setAttribute('alt', document.title);
+    /*document.querySelector('.blogCont').style.background = "linear-gradient(to bottom, rgba(0,0,0,0.8) -50%, rgba(0,0,0,0.9)), url(" + temp + ") no-repeat center center fixed";	
+	document.querySelector('.blogCont').style.backgroundSize = '100% 700px';
+	document.querySelector('.blogCont').style.backgroundPosition = 'fixed';
+document.querySelector('.blogCont').style.top = '0';
+document.querySelector('.blogCont').style.left = '0';
+	document.querySelector('.blogCont').willChange = 'transform';*/
+  }
+
+window.addEventListener('load', function () {
+    let shareThis = document.createElement('script');
+    shareThis.setAttribute('async', 'async');
+    shareThis.setAttribute('src', 'https://platform-api.sharethis.com/js/sharethis.js#property=6501dd359dda6c0012ae1168&product=inline-reaction-buttons&source=platform');
+    shareThis.setAttribute('type', 'text/javascript');
+    document.querySelector('head').appendChild(shareThis);
+	//if(!window.location.href.includes('m=1')) document.querySelector('#offNav').click();
+
+    // Check oauth for users moderators
+    if (window.location.href.includes('#state=pass-through%20value&access_token=')) {
+        let url = window.location.href;
+        url = url.split('access_token=')[1];
+        url = url.split('&token_type=Bearer')[0];
+        setCookie('user_oauth', url, 3599);
+        //window.alert('you are successfully logged in!');
+        window.location.href = 'https://storehaccounts.blogspot.com/p/moderators-thread.html';
+    }
+
+    if (document.querySelector('#comment-editor'))
+        document.querySelector('.postBody').appendChild(document.querySelector('#comment-editor'));   
+
+ZerNotifications.fetchNotifs();
+}, false);
+
+
+/*document.addEventListener("DOMContentLoaded", function (event) {
+    document.querySelectorAll('img').forEach(function (img) {
+        img.onerror = function () {
+
+            if (img.src == 'https://blogger.googleusercontent.com/img/a/AVvXsEi6Y6rFsSugm3xKe9NU9Rsh39ss9vnZVFKMGWsZqNrhDASaUnJdohRzA4AOwtASsCVQCeKwlGtUqwaRl4qQNLBDzr16krThC9BMIFpd9bp62t1gOoMqWTd_7Rap_7HuUAAs6jTKn03wr004cNKfZAOrlAULTELvK3HqG2ThJU8gwufHVodd9vsAjC_OJ9Rt=w118-h32-rw-rw')
+                img.src = 'https://i.imgur.com/GI8mAri.png';
+            else if (img.src == 'https://blogger.googleusercontent.com/img/a/AVvXsEhDWSIyu5jHzJXuA_XTaxRNzZgsebpE9FgdyhNdEwpuaZtkFe20BuQiTbVvygpIAuGtSo7tygRf0Z4UiG71wJOfrUYSciGXcjfoeBzL6emb-D-SujkdwschUsaMnlRCB0oxPLrD08-TXUNQiGBUb_lBEwAHQDzEE_IvHPzseMpEWkh95Pc067jSQC6d6_TJ=w32-h32-rw-rw')
+                img.src = 'https://i.imgur.com/sZ7wNQn.png';
+            else
+                img.src = 'https://i.imgur.com/XhMSPwG.gif';
+        };
+    })
+});
+*/
+
+
+function findPost() {
+    	let str = document.querySelector('#searchStr').value;
+        document.querySelector('#result').innerHTML = '';
+    	if(document.querySelector('#authorGal')) document.querySelector('#authorGal').remove();
+        let numposts = 50;
+        let authorGal = document.createElement('script');
+        authorGal.setAttribute('async', 'async');
+    	authorGal.id = "authorGal";
+        authorGal.setAttribute('src', 'https://storehaccounts.blogspot.com/feeds/posts/default?alt=json-in-script&q=' + str + '&max-results=' + numposts + '&callback=whatshot213');
+        document.querySelector('head').appendChild(authorGal);
+ 
+  }
+
+function whatshot213(json) {
+    let myfeeds = json.feed.openSearch$totalResults.$t;
+    let length = 10;
+    if(length > myfeeds.length) length = myfeeds;
+    if(length == 0) 
+        document.querySelector('#result').innerHTML = 'Cant find any results...';
+    for(i=0; i<length; i++) {
+      	let atag = document.createElement('a');
+   	 	atag.innerText = json.feed.entry[i].title.$t.replaceAll('"', '');
+      	let aimg = document.createElement('img');
+        aimg.src = json.feed.entry[i].media$thumbnail.url;
+      
+      	for(j=0; j<json.feed.entry[i].link.length; j++) 
+          if(json.feed.entry[i].link[j].rel == 'alternate') {                              
+      		atag.href = json.feed.entry[i].link[j].href
+      		atag.setAttribute('target', '_blank');
+      		atag.setAttribute('class', 'extL');
+            break;
+          }
+      	//document.querySelector('#result').appendChild(atag);
+      	//document.querySelector('#result').innerHTML += '<br/>';
+		document.querySelector('#result').innerHTML += "<div style='display: inline-block; max-width: 30%; margin: 2px;'><img src='" + aimg.src + "' style='display: inline-block; vertical-align: bottom; object-fit: cover; border-radius: 10px; width: 142px  !important; height: 80px !important;'/><a href='" + atag.href + "' style='text-decoration: underline; display: block; overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical; max-width: 150px;'><small>" + atag.innerText + "</small></a></div>"
+    }
+  }
