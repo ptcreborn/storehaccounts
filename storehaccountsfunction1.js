@@ -1,5 +1,6 @@
 if(document.querySelector('.cmnt.tIc')) document.querySelector('.cmnt.tIc').setAttribute('onclick', 'document.querySelector("#comment-container").scrollIntoView()');
-window.addEventListener('load', async function () {
+
+(() => {
     let allLinks = document.querySelectorAll(".postBody a");
     if (allLinks) {
         for (i = 0; i < allLinks.length; i++)
@@ -31,7 +32,7 @@ window.addEventListener('load', async function () {
     loadComments();
     clickNotif(0);
     findPost1();
-}, false);
+})();
 
 
 
@@ -95,7 +96,7 @@ function getCookieName(e) {
 }
 
 
-window.addEventListener("load", function () {
+(() => {
     document.querySelector('.mainWrp').style.backgroundImage = "linear-gradient(to bottom, rgb(0,0,0,0.5) 10%, rgb(0,0,0,0.9) 90%), url(https://i.imgur.com/HF6SOyn.png)";
     document.querySelector('.mainWrp').style.backgroundRepeat = "no-repeat;"
     document.querySelector('.mainWrp').style.backgroundSize = "cover";
@@ -215,7 +216,7 @@ if (PTC_Cookies.checkIfStorageSupported()) {
     } else {
 		document.getElementById("popup_greet1").style.display = "none";
 	}
-}, !1);
+})();
 
 let loadeda = !1;
 
@@ -235,7 +236,7 @@ function checkAdblockDetect() {
 }
 if(!localStorage.getItem('lem')) checkAdblockDetect();
 
-window.addEventListener("load", function() { /*document.addEventListener("contextmenu", t => t.preventDefault()), */
+(() => {
         if (document.querySelectorAll(".pIm div").length > 0 && document.querySelector("#authorInfo")) {
                 let t = document.querySelectorAll(".pIm div")[0].getAttribute("data-style").split("/"),
                         e = document.querySelectorAll(".pNm bdi")[0].getAttribute("data-text");
@@ -244,7 +245,7 @@ window.addEventListener("load", function() { /*document.addEventListener("contex
         for (i = 0; i < document.querySelectorAll(".cmAv div").length; i++) document.querySelectorAll(".cmAv div")[i].getAttribute("data-style").includes("resources.blogblog") && document.querySelectorAll(".cmAv div")[i].setAttribute("data-style", "background-image: url(https://pa1.aminoapps.com/8304/888dd417dd1d7f964587c98f08d52c21f9a1e1a7r1-320-320_hq.gif)");
 
         
-}, !1);
+})();
 
 function r(t, e, r, l, o) {
                 let s = !1;
@@ -323,7 +324,7 @@ function r(t, e, r, l, o) {
                 }
         })
 
-window.addEventListener('load', async function () {
+(() => {
     // this is to load data from the user informations...
     document.querySelector('#user_profile_pic').onclick = (e) => {
         e.preventDefault();
@@ -355,7 +356,7 @@ window.addEventListener('load', async function () {
     }
 
     document.getElementById('user-upper-right').style.display = 'block';
-}, false);
+})();
 
 //OneSignal Lazyload By Wendy Code
 var onsignal=!1;window.addEventListener("scroll",function(){(0!=document.documentElement.scrollTop&&!1===onsignal||0!=document.body.scrollTop&&!1===onsignal)&&(!function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="https://cdn.onesignal.com/sdks/OneSignalSDK.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(e,a)}(),onsignal=!0)},!0);
@@ -413,7 +414,7 @@ document.querySelector('#ptc-preview').setAttribute('src', temp);
 	document.querySelector('#ptc-preview').setAttribute('alt', document.title);
   }
 
-window.addEventListener('load', function () {
+(() => {
     let shareThis = document.createElement('script');
     shareThis.setAttribute('async', 'async');
     shareThis.setAttribute('src', 'https://platform-api.sharethis.com/js/sharethis.js#property=6501dd359dda6c0012ae1168&product=inline-reaction-buttons&source=platform');
@@ -431,7 +432,7 @@ window.addEventListener('load', function () {
         document.querySelector('.postBody').appendChild(document.querySelector('#comment-editor'));   
 
 ZerNotifications.fetchNotifs();
-}, false);
+})();
 
 
 function findPost() {
