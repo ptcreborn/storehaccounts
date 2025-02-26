@@ -666,3 +666,14 @@ function whatshot213(json) {
 		document.querySelector('#result').innerHTML += "<div style='display: inline-block; max-width: 30%; margin: 2px;'><img src='" + aimg.src + "' style='display: inline-block; vertical-align: bottom; object-fit: cover; border-radius: 10px; width: 142px  !important; height: 80px !important;'/><a href='" + atag.href + "' style='text-decoration: underline; display: block; overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical; max-width: 150px;'><small>" + atag.innerText + "</small></a></div>"
     }
   }
+
+  window.addEventListener('load', function() {
+    findPost1();
+  }, false);    
+
+window.addEventListener('load', function () {
+    loadThreads();
+    loadMembers();
+    loadComments();
+    clickNotif(0);
+}, false);
