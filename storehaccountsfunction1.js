@@ -1,5 +1,5 @@
 if(document.querySelector('.cmnt.tIc')) document.querySelector('.cmnt.tIc').setAttribute('onclick', 'document.querySelector("#comment-container").scrollIntoView()');
-window.addEventListener('load', function () {
+window.addEventListener('load', async function () {
     let allLinks = document.querySelectorAll(".postBody a");
     if (allLinks) {
         for (i = 0; i < allLinks.length; i++)
@@ -26,6 +26,11 @@ window.addEventListener('load', function () {
                 }
             }
     }
+    loadThreads();
+    loadMembers();
+    loadComments();
+    clickNotif(0);
+    findPost1();
 }, false);
 
 
@@ -88,29 +93,12 @@ function getCookieName(e) {
         }
         return decodeURI(t.substring(o + l.length, n))
 }
-/*window.addEventListener("load", function() {
-        if (!1 === lazyadsense) {
-                var e, t, l;
-                async function o(e) {
-                        let t = e.srcElement;
-                        t.innerText = "Copied", await navigator.clipboard.writeText(t.parentElement.querySelector("code").innerText), t.classList.add("copyed"), setTimeout(() => {
-                                t.classList.remove("copyed"), t.innerText = "Copy"
-                        }, 1e3)
-                }
-                e = document.createElement("script"), (t = document.createAttribute("crossorigin")).value = "anonymous", e.setAttributeNode(t), e.async = !0, e.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6328531102448868", (l = document.getElementsByTagName("head")[0]).parentNode.insertBefore(e, l), lazyadsense = !0, document.querySelectorAll("pre").forEach(e => {
-                        if (navigator.clipboard) {
-                                let t = document.createElement("button");
-                                t.classList.add("preCopy"), t.innerText = "Copy", t.addEventListener("click", o), e.appendChild(t)
-                        }
-                })
-        }
-}, !1);*/
 
 
 window.addEventListener("load", function () {
-      document.querySelector('.mainWrp').style.backgroundImage = "linear-gradient(to bottom, rgb(0,0,0,0.5) 10%, rgb(0,0,0,0.9) 90%), url(https://i.imgur.com/HF6SOyn.png)";
+    document.querySelector('.mainWrp').style.backgroundImage = "linear-gradient(to bottom, rgb(0,0,0,0.5) 10%, rgb(0,0,0,0.9) 90%), url(https://i.imgur.com/HF6SOyn.png)";
     document.querySelector('.mainWrp').style.backgroundRepeat = "no-repeat;"
-        document.querySelector('.mainWrp').style.backgroundSize = "cover";
+    document.querySelector('.mainWrp').style.backgroundSize = "cover";
     document.querySelector('.mainWrp').style.backgroundPosition = "center center";
     document.querySelector('.mainWrp').style.backgroundAttachment = "fixed";
 if (PTC_Cookies.checkIfStorageSupported()) {
@@ -156,26 +144,6 @@ if (PTC_Cookies.checkIfStorageSupported()) {
 
 		// set notify timer
 		let now = new Date().getTime();
-
-		//To display popup
-		/*if(localStorage.getItem('ptc_notifier') == null) {
-			document.getElementsByClassName("overlay_greet")[0].style.opacity = '1';
-        	document.getElementsByClassName("overlay_greet")[0].style.visibility = "visible";		
-            document.querySelectorAll(".popup_greet .close")[0].style.pointerEvents = "auto";
-            document.querySelectorAll(".popup_greet .close")[0].setAttribute("onclick", "(function(){  document.getElementsByClassName('overlay_greet')[0].style.opacity = '0.00001';  document.querySelectorAll('.popup_greet .close')[0].style.pointerEvents = 'auto';document.getElementById('popup_greet1').style.visibility = 'hidden';})();");	
-			localStorage.setItem('ptc_notifier', new Date().getTime());
-		} else {
-			if(now - localStorage.getItem('ptc_notifier') > 600000) {
-				localStorage.removeItem('ptc_notifier');
-				document.getElementsByClassName("overlay_greet")[0].style.opacity = '1';
-        		document.getElementsByClassName("overlay_greet")[0].style.visibility = "visible";
-            	document.querySelectorAll(".popup_greet .close")[0].style.pointerEvents = "auto";
-            	document.querySelectorAll(".popup_greet .close")[0].setAttribute("onclick", "(function(){  document.getElementsByClassName('overlay_greet')[0].style.opacity = '0.00001';  document.querySelectorAll('.popup_greet .close')[0].style.pointerEvents = 'auto';document.getElementById('popup_greet1').style.visibility = 'hidden';})();");	
-			} else {
-				document.getElementsByClassName("overlay_greet")[0].style.opacity = '0.00001';
-        		document.getElementsByClassName("overlay_greet")[0].style.visibility = "hidden";
-			}
-		}*/
 
 		if(sessionStorage.getItem('catters_ads')) {
         	document.getElementsByClassName("overlay_greet")[0].style.display = "block";
@@ -249,103 +217,6 @@ if (PTC_Cookies.checkIfStorageSupported()) {
 	}
 }, !1);
 
-
-
-/*function supportBCHGA(iframe_id) {
-    let isUnloaded = false;
-    let isOpenTab = false;
-    let isInitiated = false;
-    let e = new Date().getHours(),
-    t = ["🌄 Good morning", "🌞 Good afternoon", "🌜 Good evening"],
-    l = "";
-    l = e < 12 ? t[0] : e < 18 ? t[1] : t[2],
-    document.getElementById("popup_greet1").style.display = "block",
-    document.getElementById("overlay_greet_greet").innerText = l + " Catters!",
-    document.getElementById("popup_greet1").style.visibility = "visible",
-    document.getElementById("popup_greet1").style.opacity = "1";
-    let o = !1,
-    n = !1;
-	
-    let isFrameFocus = false;
-    let isFrameFocus2 = false;
-
-    if (getCookieName(iframe_id)) {
-        document.getElementById(iframe_id).style.display = "none";
-        document.getElementById(iframe_id).style.opacity = '0';
-        document.getElementById(iframe_id).style.visibility = "hidden";
-    } else if (!localStorage.getItem('ptc-click')) {
-        document.getElementById(iframe_id).style.display = "block";
-        document.getElementById(iframe_id).style.opacity = '1';
-        document.getElementById(iframe_id).style.visibility = "visible";
-    }
-
-    if (localStorage.getItem('ptc-click')) {
-        localStorage.removeItem('ptc-click');
-        closeoverlay_greet(iframe_id);
-    }
-
-    document.querySelectorAll(".popup_greet .close")[0].style.opacity = '1';
-    window.focus();
-
-    if (document.querySelector('#' + iframe_id + ' iframe') && document.querySelector('#' + iframe_id + ' iframe').getAttribute('data-load-complete') == 'true') {
-        window.focus();
-        window.addEventListener('blur', function () {
-            if (document.activeElement == document.querySelectorAll('#' + iframe_id + ' iframe')[0]) {
-                console.log('focus');
-                isFrameFocus = true;
-                isFrameFocus2 = true;
-                setTimeout(function () {
-                    window.focus();
-                    document.activeElement.blur();
-                    isFrameFocus = false;
-                }, 700);
-            }
-        });
-        document.addEventListener("visibilitychange", () => {
-            if (document.visibilityState === "hidden") {
-                if (isFrameFocus) {
-                    localStorage.setItem('ptc-click', 'set');
-                }
-            }
-            if (document.visibilityState === "visible") {
-                if (localStorage.getItem('ptc-click')) {
-                    localStorage.removeItem('ptc-click');
-                    closeoverlay_greet(iframe_id);
-                }
-            }
-        }, false);
-        window.addEventListener("pagehide", function (event) {
-            window.event.cancelBubble = true; // Don't know if this works on iOS but it might!
-            if (isFrameFocus2)
-                localStorage.setItem('ptc-click', 'set');
-        }, false);
-        window.addEventListener("beforeunload", function (event) {
-            if (isFrameFocus2)
-                localStorage.setItem('ptc-click', 'set');
-        }, false);
-
-        window.focus();
-    } else if (localStorage.getItem('lem')) {
-        document.querySelectorAll(".popup_greet .close")[0].style.pointerEvents = "auto",
-        document.querySelectorAll(".popup_greet .close")[0].setAttribute("onclick", "closeoverlay_greet('" + iframe_id + "')");
-    } else {
-        document.querySelectorAll(".popup_greet .close")[0].style.pointerEvents = "auto";
-        document.querySelectorAll(".popup_greet .close")[0].setAttribute("onclick", "closeoverlay_greet('" + iframe_id + "')");
-    }
-}
-
-function closeoverlay_greet(id) {
-    setCookie(id, 'set', 60);
-    document.getElementById(id).style.opacity = "0.001";
-    document.getElementById(id).style.visibility = "hidden";
-    document.getElementById(id).style.display = "none";
-}
-
-window.addEventListener('load', function () {
-    supportBCHGA('popup_greet1');
-}, false);*/
-
-
 let loadeda = !1;
 
 function checkAdblockDetect() {
@@ -363,13 +234,6 @@ function checkAdblockDetect() {
         }
 }
 if(!localStorage.getItem('lem')) checkAdblockDetect();
-
-/*window.addEventListener("DOMContentLoaded", function() {
-        checkAdblockDetect()
-}, !1),
-window.addEventListener("load", function() {
-        document.querySelectorAll(".cmShw label")[0] && (window.location.href.includes("?showComment=") || window.location.href.includes("?sc") || window.location.href.includes("?commentPage")) && document.querySelectorAll(".cmShw label")[0].click();
-}, !1),*/
 
 window.addEventListener("load", function() { /*document.addEventListener("contextmenu", t => t.preventDefault()), */
         if (document.querySelectorAll(".pIm div").length > 0 && document.querySelector("#authorInfo")) {
@@ -440,29 +304,6 @@ function r(t, e, r, l, o) {
 		if(document.querySelector('#ptc_title')) document.querySelector('#ptc_title').innerText = document.title;
         l = document.querySelector("#articlesmidpost"), o = !0, g = !1, window.addEventListener("load", function() {
 
-/*
-let enhancerTimer = 0;				
-let enhancer = setInterval(function() {
-let allRandImgs = document.querySelectorAll('pbprandompost img');
-if(allRandImgs.length > 0) { 
-for(i=0; i< allRandImgs.length; i++) {
-       let tempRI = allRandImgs[i].src.split('/');
-		if(tempRI.length == 9) {
-			tempRI[7] = 's1600-h400-w400-c-rw';
-			tempRI = tempRI.join('/');
-			allRandImgs[i].src = tempRI;
-		} else if(tempRI.length == 6) {
-			tempRI[5] = tempRI[5].split('=')[0] + '=s1600-h400-w400-c-rw'
-			tempRI = tempRI.join('/');
-			allRandImgs[i].src = tempRI;
-		}
-}
-clearInterval(enhancer);
-}
-enhancerTimer++;
-if(enhancerTimer > 100) clearInterval(enhancer);
-}, 100);*/
-
 
                 if (!g) {
                         g = !0;
@@ -512,16 +353,6 @@ window.addEventListener('load', async function () {
             user_temp.innerHTML = '<img class="ui tiny left spaced image" src="' + userdata.profile + '" /><div class="ui black image label"><div class="ui black label">' + userdata.dname + '</div><div class="ui black label"><span>Lvl. 1 (Cat)</span> <img class="ui mini right spaced image" src="https://static.wikitide.net/battlecatswiki/5/58/Uni000_f00.png" /></div></div> <br /><a class="ui inverted fluid green label">Create Post<div class="detail"><i class="pencil alternate icon"></i></div> </a><br /><a class="ui black fluid label">Edit Profile<div class="detail"><i class="user circle icon"></i></div> </a><br /><a class="ui black fluid label">Settings<div class="detail"><i class="codepen icon"></i></div> </a><br /><a href="https://storehaccountsdummy.blogspot.com/p/logout_10.html" class="ui black fluid label">Logout<div class="detail"><i class="power off icon"></i></div> </a><br /><a class="ui inverted fluid red label">Report Problem<div class="detail"><i class="exclamation icon"></i></div> </a><br />';
         }
     }
-
-    /*if (localStorage.getItem('ptc_user')) {
-    let user_id = JSON.parse(localStorage.getItem('ptc_user')).user.replaceAll('\r', '').replaceAll('\n', '');
-    JBLOBFunctions.getBlobRecord('https://jsonblob.com/api/jsonBlob/' + user_id, function (data) {
-    data = JSON.parse(data);
-    user_temp.querySelector('.content').innerHTML = "<span>Welcome back, ptcrebornofficial</span><br><br><button onclick='javascript:window.location.href=\"https://storehaccounts.blogspot.com/p/your-account-page.html?" + user_id + "\"'>Profile</button><br><button onclick='javascript:window.location.href=\"https://storehaccounts.blogspot.com/p/ptc-official-post-creator.html\"'>Create Post</button><br><button onclick='javascript:(function() {    PTC_Cookies.deleteStorage(\"ptc_user\");PTC_Cookies.deleteCookies(\"ptc_user_data\");PTC_Cookies.deleteStorage(\"ptc_background_image\");window.location.href = \"https://storehaccounts.blogspot.com/p/login_20.html\";})();'>Logout</button>";
-    user_temp.querySelector('img').src = data.prof_image;
-    user_temp.querySelector('span').innerText = 'Welcome back, ' + data.nickname;
-    });
-    }*/
 
     document.getElementById('user-upper-right').style.display = 'block';
 }, false);
@@ -580,12 +411,6 @@ var onsignal=!1;window.addEventListener("scroll",function(){(0!=document.documen
 		}
 document.querySelector('#ptc-preview').setAttribute('src', temp);
 	document.querySelector('#ptc-preview').setAttribute('alt', document.title);
-    /*document.querySelector('.blogCont').style.background = "linear-gradient(to bottom, rgba(0,0,0,0.8) -50%, rgba(0,0,0,0.9)), url(" + temp + ") no-repeat center center fixed";	
-	document.querySelector('.blogCont').style.backgroundSize = '100% 700px';
-	document.querySelector('.blogCont').style.backgroundPosition = 'fixed';
-document.querySelector('.blogCont').style.top = '0';
-document.querySelector('.blogCont').style.left = '0';
-	document.querySelector('.blogCont').willChange = 'transform';*/
   }
 
 window.addEventListener('load', function () {
@@ -594,15 +419,11 @@ window.addEventListener('load', function () {
     shareThis.setAttribute('src', 'https://platform-api.sharethis.com/js/sharethis.js#property=6501dd359dda6c0012ae1168&product=inline-reaction-buttons&source=platform');
     shareThis.setAttribute('type', 'text/javascript');
     document.querySelector('head').appendChild(shareThis);
-	//if(!window.location.href.includes('m=1')) document.querySelector('#offNav').click();
-
-    // Check oauth for users moderators
     if (window.location.href.includes('#state=pass-through%20value&access_token=')) {
         let url = window.location.href;
         url = url.split('access_token=')[1];
         url = url.split('&token_type=Bearer')[0];
         setCookie('user_oauth', url, 3599);
-        //window.alert('you are successfully logged in!');
         window.location.href = 'https://storehaccounts.blogspot.com/p/moderators-thread.html';
     }
 
@@ -611,22 +432,6 @@ window.addEventListener('load', function () {
 
 ZerNotifications.fetchNotifs();
 }, false);
-
-
-/*document.addEventListener("DOMContentLoaded", function (event) {
-    document.querySelectorAll('img').forEach(function (img) {
-        img.onerror = function () {
-
-            if (img.src == 'https://blogger.googleusercontent.com/img/a/AVvXsEi6Y6rFsSugm3xKe9NU9Rsh39ss9vnZVFKMGWsZqNrhDASaUnJdohRzA4AOwtASsCVQCeKwlGtUqwaRl4qQNLBDzr16krThC9BMIFpd9bp62t1gOoMqWTd_7Rap_7HuUAAs6jTKn03wr004cNKfZAOrlAULTELvK3HqG2ThJU8gwufHVodd9vsAjC_OJ9Rt=w118-h32-rw-rw')
-                img.src = 'https://i.imgur.com/GI8mAri.png';
-            else if (img.src == 'https://blogger.googleusercontent.com/img/a/AVvXsEhDWSIyu5jHzJXuA_XTaxRNzZgsebpE9FgdyhNdEwpuaZtkFe20BuQiTbVvygpIAuGtSo7tygRf0Z4UiG71wJOfrUYSciGXcjfoeBzL6emb-D-SujkdwschUsaMnlRCB0oxPLrD08-TXUNQiGBUb_lBEwAHQDzEE_IvHPzseMpEWkh95Pc067jSQC6d6_TJ=w32-h32-rw-rw')
-                img.src = 'https://i.imgur.com/sZ7wNQn.png';
-            else
-                img.src = 'https://i.imgur.com/XhMSPwG.gif';
-        };
-    })
-});
-*/
 
 
 function findPost() {
@@ -661,19 +466,6 @@ function whatshot213(json) {
       		atag.setAttribute('class', 'extL');
             break;
           }
-      	//document.querySelector('#result').appendChild(atag);
-      	//document.querySelector('#result').innerHTML += '<br/>';
 		document.querySelector('#result').innerHTML += "<div style='display: inline-block; max-width: 30%; margin: 2px;'><img src='" + aimg.src + "' style='display: inline-block; vertical-align: bottom; object-fit: cover; border-radius: 10px; width: 142px  !important; height: 80px !important;'/><a href='" + atag.href + "' style='text-decoration: underline; display: block; overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical; max-width: 150px;'><small>" + atag.innerText + "</small></a></div>"
     }
   }
-
-  window.addEventListener('load', function() {
-    findPost1();
-  }, false);    
-
-window.addEventListener('load', function () {
-    loadThreads();
-    loadMembers();
-    loadComments();
-    clickNotif(0);
-}, false);
