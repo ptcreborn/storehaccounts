@@ -324,7 +324,7 @@ function r(t, e, r, l, o) {
                 }
         })
 
-(() => {
+(async () => {
     // this is to load data from the user informations...
     document.querySelector('#user_profile_pic').onclick = (e) => {
         e.preventDefault();
