@@ -264,7 +264,7 @@ function r(t, e, r, l, o) {
         r(document.querySelector("#novaupdates"), "NOVA", "24", !1, "load"), r(document.querySelector("#dogsupdates"), "DOGS", "24", !1, "load"), r(document.querySelector("#bcmupdates"), "BCM", "24", !1, "load"), r(document.querySelector("#authorsupdates"), "NEWS", "30", !0, "load"), r(document.querySelector("#exploremore"), "NEWS", "30", !0, "load");
         var l, o, s, n, u = "MODPACK";
         let a;
-        s = document.querySelector("#bcupacks"), n = !1, a = !1, window.addEventListener("load", function() {
+        s = document.querySelector("#bcupacks"), n = !1, a = !1, (() => {
                 if (!a) {
                         a = !0;
                         let t = document.createElement("script");
@@ -274,10 +274,10 @@ function r(t, e, r, l, o) {
                         }
                         t.setAttribute("numberofposts", "5"), t.setAttribute("label", u), t.setAttribute("display", "vertical"), t.setAttribute("boxrounding", "5"), t.setAttribute("boxbackground", "inherit"), t.setAttribute("boxpadding", "5"), t.setAttribute("lineheight", "1.2"), t.setAttribute("borderwidth", "1"), t.setAttribute("borderstyle", "outset"), t.setAttribute("bordercolor", "#474747"), t.setAttribute("showimage", "left"), t.setAttribute("imagesize", "40"), t.setAttribute("imagerounding", "10"), t.setAttribute("noimage", "https://thumbs.dreamstime.com/b/no-death-sign-vector-illustration-no-death-sign-113929382.jpg"), t.setAttribute("showtitle", "left"), t.setAttribute("titlefont", "Inherit"), t.setAttribute("titlesize", "14"), t.setAttribute("boldtitle", "true"), t.setAttribute("titlecolor", "inherit"), t.setAttribute("showinfo", "none"), t.setAttribute("showlabels", "none"), (window.location.href.includes('?m=1') ? t.setAttribute("excerptlength", "0") : t.setAttribute("excerptlength", "100")), t.setAttribute("excerptalign", "justify"), t.setAttribute("textfont", "Inherit"), t.setAttribute("textsize", "12"), t.setAttribute("textcolor", "inherit"), t.setAttribute("src", "https://cdn.jsdelivr.net/gh/bloggerwidgets/scripts@1.1.7/randomposts.js"), s && (s.innerHTML = "", s.appendChild(t))
                 }
-        });
+        })();
 (function(){var l, o, s, n, u = "PTC";
         let a;
-        s = document.querySelector("#ptcmods"), n = !1, a = !1, window.addEventListener("load", function() {
+        s = document.querySelector("#ptcmods"), n = !1, a = !1, (() => {
                 if (!a) {
                         a = !0;
                         let t = document.createElement("script");
@@ -287,10 +287,10 @@ function r(t, e, r, l, o) {
                         }
                         t.setAttribute("numberofposts", "5"), t.setAttribute("label", u), t.setAttribute("display", "vertical"), t.setAttribute("boxrounding", "5"), t.setAttribute("boxbackground", "inherit"), t.setAttribute("boxpadding", "5"), t.setAttribute("lineheight", "1.2"), t.setAttribute("borderwidth", "1"), t.setAttribute("borderstyle", "outset"), t.setAttribute("bordercolor", "#474747"), t.setAttribute("showimage", "left"), t.setAttribute("imagesize", "40"), t.setAttribute("imagerounding", "10"), t.setAttribute("noimage", "https://thumbs.dreamstime.com/b/no-death-sign-vector-illustration-no-death-sign-113929382.jpg"), t.setAttribute("showtitle", "left"), t.setAttribute("titlefont", "Inherit"), t.setAttribute("titlesize", "14"), t.setAttribute("boldtitle", "true"), t.setAttribute("titlecolor", "inherit"), t.setAttribute("showinfo", "none"), t.setAttribute("showlabels", "none"), (window.location.href.includes('?m=1') ? t.setAttribute("excerptlength", "0") : t.setAttribute("excerptlength", "100")), t.setAttribute("excerptalign", "justify"), t.setAttribute("textfont", "Inherit"), t.setAttribute("textsize", "12"), t.setAttribute("textcolor", "inherit"), t.setAttribute("src", "https://cdn.jsdelivr.net/gh/bloggerwidgets/scripts@1.1.7/randomposts.js"), s && (s.innerHTML = "", s.appendChild(t))
                 }
-        });})();
+        })();})();
         var b, c, d = "NEWS";
         let A;
-        b = document.querySelector("#bcnews"), c = !1, A = !1, window.addEventListener("load", function() {
+        b = document.querySelector("#bcnews"), c = !1, A = !1, (() => {
                 if (!A) {
                         A = !0;
                         let t = document.createElement("script");
@@ -300,10 +300,10 @@ function r(t, e, r, l, o) {
                         }
                         t.setAttribute("numberofposts", "30"), t.setAttribute("label", d), t.setAttribute("display", "vertical"), t.setAttribute("boxrounding", "5"), t.setAttribute("boxbackground", "inherit"), t.setAttribute("boxpadding", "5"), t.setAttribute("lineheight", "1.2"), t.setAttribute("borderwidth", "1"), t.setAttribute("borderstyle", "outset"), t.setAttribute("bordercolor", "#474747"), t.setAttribute("showimage", "left"), t.setAttribute("imagesize", "40"), t.setAttribute("imagerounding", "10"), t.setAttribute("noimage", "https://thumbs.dreamstime.com/b/no-death-sign-vector-illustration-no-death-sign-113929382.jpg"), t.setAttribute("showtitle", "none"), t.setAttribute("titlefont", "Inherit"), t.setAttribute("titlesize", "14"), t.setAttribute("boldtitle", "true"), t.setAttribute("titlecolor", "inherit"), t.setAttribute("showinfo", "none"), t.setAttribute("showlabels", "none"), t.setAttribute("excerptlength", "190"), t.setAttribute("excerptalign", "left"), t.setAttribute("textfont", "Inherit"), t.setAttribute("textsize", "12"), t.setAttribute("textcolor", "inherit"), t.setAttribute("src", "https://cdn.jsdelivr.net/gh/bloggerwidgets/scripts@1.1.7/randomposts.js"), b && (b.innerHTML = "", b.appendChild(t))
                 }
-        });
+        })();
         let g;
 		if(document.querySelector('#ptc_title')) document.querySelector('#ptc_title').innerText = document.title;
-        l = document.querySelector("#articlesmidpost"), o = !0, g = !1, window.addEventListener("load", function() {
+        l = document.querySelector("#articlesmidpost"), o = !0, g = !1, (() => {
 
 
                 if (!g) {
@@ -322,7 +322,7 @@ function r(t, e, r, l, o) {
                                 }
                         }
                 }
-        })
+        })();
 
 (async () => {
     // this is to load data from the user informations...
