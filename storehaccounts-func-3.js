@@ -70,6 +70,7 @@ function letsPreview(myData) {
 }
 
 (function () {
+	initFunctions(['ZerNotifications']);
     let shareThis = document.createElement('script');
     shareThis.setAttribute('async', 'async');
     shareThis.setAttribute('src', 'https://platform-api.sharethis.com/js/sharethis.js#property=6501dd359dda6c0012ae1168&product=inline-reaction-buttons&source=platform');
