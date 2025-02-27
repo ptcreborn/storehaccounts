@@ -54,7 +54,7 @@ document.querySelectorAll(".cmShw label")[0] && (window.location.href.includes("
 
 function r(t, e, r, l, o) {
     let s = !1;
-    window.addEventListener(o, function () {
+    (function () {
         if (!s) {
             s = !0;
             let o = document.createElement("script");
@@ -91,7 +91,7 @@ function r(t, e, r, l, o) {
             o.setAttribute("src", "https://cdn.jsdelivr.net/gh/bloggerwidgets/scripts@1.1.7/randomposts.js"),
             t && (t.innerHTML = "", t.appendChild(o))
         }
-    })
+    })();
 }
 r(document.querySelector("#novaupdates"), "NOVA", "24", !1, "load"), r(document.querySelector("#dogsupdates"), "DOGS", "24", !1, "load"), r(document.querySelector("#bcmupdates"), "BCM", "24", !1, "load"), r(document.querySelector("#authorsupdates"), "NEWS", "30", !0, "load"), r(document.querySelector("#exploremore"), "NEWS", "30", !0, "load");
 var l, o, s, n, u = "MODPACK";
@@ -273,7 +273,7 @@ l = document.querySelector("#articlesmidpost"), o = !0, g = !1, window.addEventL
 
 (async function () {
     // this is to load data from the user informations...
-	await initFunctions(['JBLOBFunctions', 'PTC_Cookies']);
+    await initFunctions(['JBLOBFunctions', 'PTC_Cookies']);
     if (localStorage.getItem('ptc_user')) {
         let user_temp = document.querySelector('#profile-circle-header');
         let user_id = JSON.parse(localStorage.getItem('ptc_user')).user.replaceAll('\r', '').replaceAll('\n', '');
@@ -288,4 +288,3 @@ l = document.querySelector("#articlesmidpost"), o = !0, g = !1, window.addEventL
 
     document.getElementById('user-upper-right').style.display = 'block';
 })();
-
