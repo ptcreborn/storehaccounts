@@ -1,4 +1,4 @@
-if (!window.location.href.includes('/p/') && window.location.href.includes('/')) {
+if (!window.location.href.includes('/p/') && window.location.href.includes('.html') && window.location.href.includes('/')) {
     var randomRelatedIndex,
     showRelatedPost;
     (function (n, m, k) {
