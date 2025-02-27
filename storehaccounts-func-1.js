@@ -135,7 +135,7 @@ function getCookieName(e) {
 })();
 
 (function () {
-	initFunctions(['PTC_Cookies ']);
+    initFunctions(['PTC_Cookies ']);
     if (PTC_Cookies.checkIfStorageSupported()) {
         if (PTC_Cookies.getLocalStorage('ptc_background_image')) {
             document.querySelector('.mainWrp').style.backgroundImage = "linear-gradient(to bottom, rgb(0,0,0,0.5) 10%, rgb(0,0,0,0.9) 90%), url(\"" + PTC_Cookies.getLocalStorage('ptc_background_image').img + "\")";
@@ -171,7 +171,7 @@ function getCookieName(e) {
         let isFrameFocus = false;
         let isFrameFocus2 = false;
 
-        if (0 == 1) {
+        if (1 == 1) {
             document.getElementsByClassName("overlay_greet")[0].style.display = "block";
             document.getElementsByClassName("overlay_greet")[0].style.opacity = '1';
             document.getElementsByClassName("overlay_greet")[0].style.visibility = "visible";
