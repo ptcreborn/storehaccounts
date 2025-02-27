@@ -15,7 +15,7 @@ var footerComment = {
             footerComment.buildCommentHTML();
 
         (async function () {
-            await initFunctions(['FirebaseModule', 'JBLOBFunctions']);
+            await initFunctions(['FirebaseModule', 'JBLOBFunctions', 'moment']);
             if (!window.location.href.includes('/p/') && footerComment.query('postBody')) {
                 footerComment.getUserInfos();
                 footerComment.buildComment();
