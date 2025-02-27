@@ -1,8 +1,8 @@
 
 
-(function () {
+(async function () {
     let allDownloadsBtns = document.querySelectorAll('button');
-	initFunctions(['FirebaseModule']);
+	await initFunctions(['FirebaseModule']);
     allDownloadsBtns = Array.from(allDownloadsBtns);
 
     allDownloadsBtns = allDownloadsBtns.filter(items => {return items.id.charAt(0) === '-' ? items : null});
