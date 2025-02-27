@@ -1,0 +1,7 @@
+/* Poppins */
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Poppins'), url('https://fonts.cdnfonts.com/s/16009/Poppins-Regular.woff') format('woff');
+}
