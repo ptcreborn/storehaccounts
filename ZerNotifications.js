@@ -37,6 +37,8 @@ let ZerNotifications = {
         // get the firebase list if exists
         // create a template and append to the div parent container
 
+	await initFunctions(['FirebaseModule']);
+	    
         let user = localStorage.getItem('ptc_user');
         if (user) {
             user = JSON.parse(user);
