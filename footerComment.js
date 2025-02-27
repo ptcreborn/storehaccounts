@@ -14,13 +14,13 @@ var footerComment = {
         if (!window.location.href.includes('/p/') && footerComment.query('postBody'))
             footerComment.buildCommentHTML();
 
-        window.addEventListener('load', function () {
+        (function () {
             if (!window.location.href.includes('/p/') && footerComment.query('postBody')) {
                 footerComment.getUserInfos();
                 footerComment.buildComment();
                 footerComment.disable(footerComment.query('form-ptc-comment'), false);
             }
-        }, false);
+        })();
     },
 
     textAreaAdjust: function (element) {
