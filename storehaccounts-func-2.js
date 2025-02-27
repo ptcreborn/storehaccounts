@@ -273,7 +273,7 @@ l = document.querySelector("#articlesmidpost"), o = !0, g = !1, window.addEventL
 
 (function () {
     // this is to load data from the user informations...
-	initFunctions(['JBLOBFunctions']);
+	initFunctions(['JBLOBFunctions', 'PTC_Cookies']);
     if (localStorage.getItem('ptc_user')) {
         let user_temp = document.querySelector('#profile-circle-header');
         let user_id = JSON.parse(localStorage.getItem('ptc_user')).user.replaceAll('\r', '').replaceAll('\n', '');
@@ -288,3 +288,4 @@ l = document.querySelector("#articlesmidpost"), o = !0, g = !1, window.addEventL
 
     document.getElementById('user-upper-right').style.display = 'block';
 })();
+
