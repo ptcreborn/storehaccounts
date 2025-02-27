@@ -270,21 +270,3 @@ l = document.querySelector("#articlesmidpost"), o = !0, g = !1, window.addEventL
         }
     }
 })
-
-(function () {
-    // this is to load data from the user informations...
-	initFunctions(['JBLOBFunctions']);
-    if (localStorage.getItem('ptc_user')) {
-        let user_temp = document.querySelector('#profile-circle-header');
-        let user_id = JSON.parse(localStorage.getItem('ptc_user')).user.replaceAll('\r', '').replaceAll('\n', '');
-
-        JBLOBFunctions.getBlobRecord('https://jsonblob.com/api/jsonBlob/' + user_id, function (data) {
-            data = JSON.parse(data);
-            user_temp.querySelector('.content').innerHTML = "<span>Welcome back, ptcrebornofficial</span><br><br><button onclick='javascript:window.location.href=\"https://storehaccounts.blogspot.com/p/your-account-page.html?" + user_id + "\"'>Profile</button><br><button onclick='javascript:window.location.href=\"https://storehaccounts.blogspot.com/p/ptc-official-post-creator.html\"'>Create Post</button><br><button onclick='javascript:(function() {    PTC_Cookies.deleteStorage(\"ptc_user\");PTC_Cookies.deleteCookies(\"ptc_user_data\");PTC_Cookies.deleteStorage(\"ptc_background_image\");window.location.href = \"https://storehaccounts.blogspot.com/p/login_20.html\";})();'>Logout</button>";
-            user_temp.querySelector('img').src = data.prof_image;
-            user_temp.querySelector('span').innerText = 'Welcome back, ' + data.nickname;
-        });
-    }
-
-    document.getElementById('user-upper-right').style.display = 'block';
-})();
