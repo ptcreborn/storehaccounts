@@ -1,7 +1,8 @@
 
 
-window.addEventListener('load', async function () {
+(function () {
     let allDownloadsBtns = document.querySelectorAll('button');
+	initFunctions(['FirebaseModule']);
     allDownloadsBtns = Array.from(allDownloadsBtns);
 
     allDownloadsBtns = allDownloadsBtns.filter(items => {return items.id.charAt(0) === '-' ? items : null});
@@ -19,7 +20,7 @@ window.addEventListener('load', async function () {
             window.location.href = "https://storehaccounts.blogspot.com/p/link-terminal.html#fb?" + id;
         }
     });
-}, false);
+})();
 
 async function get_dl_views(url) {
     let LT_url = 'https://storehaccounts-users-default-rtdb.firebaseio.com/link_terminal/';
