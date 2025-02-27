@@ -14,7 +14,8 @@ var footerComment = {
         if (!window.location.href.includes('/p/') && footerComment.query('postBody'))
             footerComment.buildCommentHTML();
 
-        (function () {
+        (async function () {			
+			await initFunctions(['FirebaseModule'], ['JBLOBFunctions']);
             if (!window.location.href.includes('/p/') && footerComment.query('postBody')) {
                 footerComment.getUserInfos();
                 footerComment.buildComment();
