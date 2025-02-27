@@ -1,7 +1,7 @@
 var footerComment = {
 
     // build comment_footer_url
-	// record_api: 'https://jsonblob.com/api/jsonBlob/1242732119490158592',
+    // record_api: 'https://jsonblob.com/api/jsonBlob/1242732119490158592',
     comment_footer_url: window.location.href.split('.html')[0] + '.html',
     record_api: 'https://jsonblob.com/api/jsonBlob/1311554306020925440',
     replied_to: '',
@@ -14,8 +14,8 @@ var footerComment = {
         if (!window.location.href.includes('/p/') && footerComment.query('postBody'))
             footerComment.buildCommentHTML();
 
-        (async function () {			
-			await initFunctions(['FirebaseModule'], ['JBLOBFunctions']);
+        (async function () {
+            await initFunctions(['FirebaseModule', 'JBLOBFunctions']);
             if (!window.location.href.includes('/p/') && footerComment.query('postBody')) {
                 footerComment.getUserInfos();
                 footerComment.buildComment();
@@ -161,7 +161,7 @@ var footerComment = {
                 for (i = 0; i < data[footerComment.comment_footer_url].comments.length; i++) {
                     let comment_id = data[footerComment.comment_footer_url].comments[i];
                     let temp_data = await JBLOBFunctions.getBlobRecordSync('https://jsonblob.com/api/jsonBlob/' + comment_id, null);
-					temp_data = JSON.parse(temp_data);
+                    temp_data = JSON.parse(temp_data);
                     let username = temp_data.username;
                     let userimg = temp_data.userimg;
                     let userid = temp_data.userid;
