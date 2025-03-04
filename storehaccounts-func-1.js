@@ -137,7 +137,7 @@ function getCookieName(e) {
         let isFrameFocus = false;
         let isFrameFocus2 = false;
 
-        if (1 == 1) {
+        if (1 == 0) {
             document.getElementsByClassName("overlay_greet")[0].style.display = "block";
             document.getElementsByClassName("overlay_greet")[0].style.opacity = '1';
             document.getElementsByClassName("overlay_greet")[0].style.visibility = "visible";
