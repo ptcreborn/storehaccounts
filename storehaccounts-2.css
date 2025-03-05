@@ -1,3 +1,4 @@
+
 ins.adsbygoogle[data-ad-status="unfilled"] {
     display: none !important;
 }
@@ -57,107 +58,6 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
   	 backdrop-filter: blur(5px);
   }
 }
-
-
-.overlay_greet {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.9);
-    transition: opacity 500ms;
-    visibility: hidden;
-    opacity: 0;
-    z-index: 2000;
-  }
-  .overlay_greet:target {
-    visibility: visible;
-    opacity: 1;
-  }
-
-  .popup_ad {
-    margin: 30px auto;
-    padding: 20px;
-    background: #333;
-    border-radius: 5px;
-	width: 100%;
-    max-width: 100%;
-	height: 400px;
-	max-height: 90%;
-    position: relative;
-    /*transition: all 5s ease-in-out;
-position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);*/
-  }
-
-   .popup_ad .close {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    transition: all 200ms;
-    font-size: 30px;
-    font-weight: bold;
-    text-decoration: none;
-	background: #000;
-    color: #fff;
-    cursor: pointer;
-  }
-  .popup_ad .close:hover {
-    color: #06D85F;
-  }
-
-  .popup_greet {
-    margin: 30px auto;
-    padding: 20px;
-    background: #171716;
-    border-radius: 5px;
-    width: 80%;
-	max-width: 340px;
-	max-height: 90%;
-    position: relative;
-	overflow: auto;
-    /*transition: all 5s ease-in-out;*/
-  }
-
-  .popup_greet h2 {
-    margin-top: 0;
-	padding-right: 30px;
-    color: #fff;
-    font-family: Tahoma, Arial, sans-serif;
-  }
-  .popup_greet .close {
-    position: absolute;
-    top: 25px;
-    right: 20px;
-    transition: all 200ms;
-    font-size: 60px;
-    font-weight: bold;
-    height: 40px;
-    text-decoration: none;
-    color: #fff;
-	text-shadow: 5px 5px #000;
-    pointer-events: none;
-    cursor: pointer;
-  }
-  .popup_greet .close:hover {
-    color: #06D85F;
-  }
-  .popup_greet .content {
-    padding-top: 10px;
-    padding-left: 10px;
-    max-height: 250px;
-    height: auto;
-    color: #fff;
-    overflow-y: scroll;
-	overflow-x: hidden;
-  }
-
-  .popup_greet .content a {
-   	color: #fff !important;
-  }
 
   @media screen and (max-width: 700px){
     .box{
@@ -453,21 +353,20 @@ vertical-align: text-top;
 
 /* CSS */
 .button-7 {
-  background: #FF4742;
-  border: 1px solid #FF4742;
+  background: #2a475e;
+  border: 1px solid #66c0f4;
   border-radius: 6px;
   box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
   box-sizing: border-box;
-  color: #FFFFFF !important;
+  color: rgba(255,255,255,0.95) !important;
   cursor: pointer;
-  display: inline-block;
+  display: flex;
   font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 800;
-  line-height: 16px;
-  min-height: 40px;
+  line-height: 14px;
   outline: 0;
-  padding: 12px 14px;
+  padding: 7px 7px;
   text-align: center;
   text-rendering: geometricprecision;
   text-transform: none;
@@ -565,8 +464,8 @@ li a, span a {
 }
 
 .postBody blockquote {
-	font-size: 14px;
-	opacity: 0.9 !important;
+	font-size: 16px;
+	opacity: 1 !important;
 
 /* Warning: Needed for oldIE support, but words are broken up letter-by-letter */
     -ms-word-break: break-all;
@@ -783,16 +682,14 @@ background-color:rgba(0, 0, 0, 0.3);
 }
 
 .postBody a:not([class]):not(:has(*)) {
-	font-weight: 600 !important;
+	font-weight: 650 !important;
 	margin: 5px !important;
 	text-decoration: none !important;
-	border-bottom: 1px solid rgba(255,255,255,0.6);
 	cursor: pointer !important;
 }
 
 .postBody a:hover {
-	opacity: 1 !important;
-	color: #fff !important;
+	color: white !important;
 }
 
 #articlesmidpost div:not([id]):not([class]) {
@@ -1270,21 +1167,20 @@ blockquote {
 }
 
 .button-24 {
-  background: #FF4742;
-  border: 1px solid #FF4742;
+  background: #2a475e;
+  border: 1px solid #66c0f4;
   border-radius: 6px;
   box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
   box-sizing: border-box;
-  color: #FFFFFF;
+  color: rgba(255,255,255,0.95) !important;
   cursor: pointer;
-  display: inline-block;
+  display: flex;
   font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 800;
-  line-height: 16px;
-  min-height: 40px;
+  line-height: 14px;
   outline: 0;
-  padding: 12px 14px;
+  padding: 7px 7px;
   text-align: center;
   text-rendering: geometricprecision;
   text-transform: none;
@@ -1310,4 +1206,12 @@ blockquote {
 
 .button-24:active {
   opacity: .5;
+}
+
+ol {
+	margin-top: 5px !important;
+}
+
+ul {
+	margin-top: 5px !important;
 }
