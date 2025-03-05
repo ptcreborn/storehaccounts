@@ -18,7 +18,6 @@ if (document.querySelector('.cmnt.tIc'))
                     s.setAttribute("class", "videoYt");
                     let a = document.createElement("iframe");
                     a.setAttribute("title", "Youtube Video"),
-                    a.setAttribute("class", "lazy"),
                     a.setAttribute("src", "https://www.youtube.com/embed/" + youtube_parser(allLinks[i].href)),
                     a.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"),
                     a.setAttribute("allowfullscreen", ""),
