@@ -76,7 +76,7 @@ function closeoverlay_greet() {
     document.getElementsByClassName("overlay_greet")[0].style.opacity = "0";
     document.getElementsByClassName("overlay_greet")[0].style.visibility = "hidden";
     document.getElementsByClassName("overlay_greet")[0].style.display = "none";
-    setCookie('link-exhaust3', 'set', 120);
+    setCookie('link-exhaust3', 'set', 1);
 }
 
 function setCookie(e, t, l) {
@@ -192,7 +192,7 @@ function getCookieName(e) {
         document.addEventListener("visibilitychange", function () {
             if (document.visibilityState === "hidden") {
                 if (isFrameFocus) {
-                    setCookie('link-exhaust3', 'set', 120); // when successfully clicked, set exhaust to disable for next 20 minutes..
+                    setCookie('link-exhaust3', 'set', 1); // when successfully clicked, set exhaust to disable for next 20 minutes..
                     localStorage.setItem('link-pop-click', 'set'); // means redirected to ADS page
                 }
             }
@@ -206,7 +206,7 @@ function getCookieName(e) {
         window.addEventListener("beforeunload", function () {
             setTimeout(function () {
                 if (isFrameFocus2) {
-                    setCookie('link-exhaust3', 'set', 120); // when successfully clicked, set exhaust to disable for next 20 minutes..
+                    setCookie('link-exhaust3', 'set', 1); // when successfully clicked, set exhaust to disable for next 20 minutes..
                     localStorage.setItem('link-pop-click', 'set');
                     let win = window.open(window.location.href);
                     window.oldOpen = window.open;
