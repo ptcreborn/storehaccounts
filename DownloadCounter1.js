@@ -31,7 +31,7 @@
                 // creating id
                 // stores for 20 minutes
                 if (data.hasOwnProperty('numads')) {					
-                    PTC.storeCookies(key + '-' + new Date().getTime(),
+                    PTC_Cookies.storeCookies(key + '-' + new Date().getTime(),
                         JSON.stringify({
                             'click': 0,
                             'numads': data.numads
