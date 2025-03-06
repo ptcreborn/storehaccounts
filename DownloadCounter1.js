@@ -13,6 +13,7 @@
         let btn = filterBtn[i];
         let key = '-' + filterBtn[i].id.split('ndm-')[1];
         let db = 'https://account-requests-default-rtdb.firebaseio.com/shortenedLinks';
+		let uid = '';
 
         spanText.innerText = 'DOWNLOAD';
         icon.className = 'cloud download icon';
@@ -37,7 +38,7 @@
                             'numads': data.numads
                         }),
                         1200);
-					key = 'download=' + data.title + '&id=' + btoa(key);
+					uid = 'download=' + data.title + '&id=' + btoa(key);
 				}
 
                 await FirebaseModule.patch(db + '/' + key + '.json', JSON.stringify({
@@ -46,7 +47,7 @@
                 smallCtr.innerText = data.count + 1;
                 btn.style.pointerEvents = 'none';
                 btn.style.opacity = '0.8';
-                window.location.href = 'https://storehaccounts.blogspot.com/p/link-terminal.html?' + key;
+                window.location.href = 'https://storehaccounts.blogspot.com/p/link-terminal.html?' + uid;
             } else {
                 window.alert("Please Enable Cookies in your browser. You can use Incognito mode or Private Mode. If this is a problem please email jasonbourne181997@gmail.com.");
             }
