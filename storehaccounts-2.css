@@ -1215,3 +1215,46 @@ ol {
 ul {
 	margin-top: 5px !important;
 }
+
+/* CSS */
+.button-15 {
+  background: #2a475e;
+  border: 1px solid #66c0f4;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: rgba(255,255,255,0.95) !important;
+  cursor: pointer;
+  display: flex;
+  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 14px;
+  outline: 0;
+  padding: 7px 7px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  margin-bottom: 20px;
+}
+  
+  .button-15 small {
+   	font-weight: 400;
+    padding-right: 5px;
+    text-align: left;
+  }
+
+.button-15:hover,
+.button-15:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #FF4742;
+}
+
+.button-15:active {
+  opacity: .5;
+}
