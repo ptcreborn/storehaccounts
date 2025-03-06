@@ -13,25 +13,43 @@
         let btn = filterBtn[i];
         let key = '-' + filterBtn[i].id.split('ndm-')[1];
         let db = 'https://account-requests-default-rtdb.firebaseio.com/shortenedLinks';
-		
-		spanText.innerText = 'DOWNLOAD';
-		icon.className = 'cloud download icon';
+
+        spanText.innerText = 'DOWNLOAD';
+        icon.className = 'cloud download icon';
 
         let data = await FirebaseModule.get(db + '/' + key + '.json');
         data = JSON.parse(data);
         smallCtr.innerText = data.count;
 
         btn.onclick = async() => {
-            data = await FirebaseModule.get(db + '/' + key + '.json');
-            data = JSON.parse(data);
-            smallCtr.innerText = data.count;
-            await FirebaseModule.patch(db + '/' + key + '.json', JSON.stringify({
-                    'count': parseInt(data.count) + 1
-                }));
-            smallCtr.innerText = data.count + 1;
-            btn.style.pointerEvents = 'none';
-            btn.style.opacity = '0.8';
-            window.location.href = 'https://storehaccounts.blogspot.com/p/link-terminal.html?' + key;
+            if (PTC_Cookies.checkIfCookiesSupported) {
+                data = await FirebaseModule.get(db + '/' + key + '.json');
+                data = JSON.parse(data);
+
+                smallCtr.innerText = data.count;
+
+                // creating id
+                // stores for 20 minutes
+                if (data.hasOwnProperty('numads')) {					
+                    PTC.storeCookies(key + '-' + new Date().getTime(),
+                        JSON.stringify({
+                            'click': 0,
+                            'numads': data.numads
+                        }),
+                        1200);
+					key = 'download=' + data.title;
+				}
+
+                await FirebaseModule.patch(db + '/' + key + '.json', JSON.stringify({
+                        'count': parseInt(data.count) + 1
+                    }));
+                smallCtr.innerText = data.count + 1;
+                btn.style.pointerEvents = 'none';
+                btn.style.opacity = '0.8';
+                window.location.href = 'https://storehaccounts.blogspot.com/p/link-terminal.html?' + key;
+            } else {
+                window.alert("Please Enable Cookies in your browser. You can use Incognito mode or Private Mode. If this is a problem please email jasonbourne181997@gmail.com.");
+            }
         }
         btn.removeAttribute('disabled');
     }
