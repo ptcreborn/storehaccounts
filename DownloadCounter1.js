@@ -37,7 +37,7 @@
                             'numads': data.numads
                         }),
                         1200);
-					key = 'download=' + data.title;
+					key = 'download=' + data.title + '&id=' + btoa(key);
 				}
 
                 await FirebaseModule.patch(db + '/' + key + '.json', JSON.stringify({
