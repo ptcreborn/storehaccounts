@@ -40,7 +40,7 @@
                             'numads': data.numads
                         }),
                         1200);
-					console.log(PTC_Cookies.retrieveCookies(btoa(key));
+					console.log(PTC_Cookies.retrieveCookies(btoa(key)));
                     uid = 'download=' + data.title + '&id=' + btoa(key) + '&ver=' + data.version;
                 }
 
