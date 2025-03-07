@@ -1,5 +1,5 @@
 (async() => {
-    await initFunctions(['FirebaseModule']);
+    await initFunctions(['FirebaseModule', 'PTC_Cookies']);
     let allBtns = document.querySelectorAll('button[disabled]');
     let filterBtn = Array.from(allBtns);
     filterBtn = filterBtn.filter(items => {
@@ -13,7 +13,7 @@
         let btn = filterBtn[i];
         let key = '-' + filterBtn[i].id.split('ndm-')[1];
         let db = 'https://account-requests-default-rtdb.firebaseio.com/shortenedLinks';
-		let uid = '';
+        let uid = '';
 
         spanText.innerText = 'DOWNLOAD';
         icon.className = 'cloud download icon';
@@ -31,15 +31,15 @@
 
                 // creating id
                 // stores for 20 minutes
-                if (data.hasOwnProperty('numads')) {					
+                if (data.hasOwnProperty('numads')) {
                     PTC_Cookies.storeCookies(btoa(key),
                         JSON.stringify({
                             'click': 0,
                             'numads': data.numads
                         }),
                         1200);
-					uid = 'download=' + data.title + '&id=' + btoa(key) + '&ver=' + data.version;
-				}
+                    uid = 'download=' + data.title + '&id=' + btoa(key) + '&ver=' + data.version;
+                }
 
                 await FirebaseModule.patch(db + '/' + key + '.json', JSON.stringify({
                         'count': parseInt(data.count) + 1
