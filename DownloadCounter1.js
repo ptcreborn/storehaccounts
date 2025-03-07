@@ -39,7 +39,9 @@
                         }),
                         1200);
                     uid = 'download=' + data.title + '&id=' + btoa(key) + '&ver=' + data.version;
-                }
+                } else {
+					uid = key;
+				}
 
                 await FirebaseModule.patch(db + '/' + key + '.json', JSON.stringify({
                         'count': parseInt(data.count) + 1
