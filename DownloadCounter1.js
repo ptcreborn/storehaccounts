@@ -24,7 +24,6 @@
 
         btn.onclick = async() => {
             if (PTC_Cookies.checkIfCookiesSupported) {
-				console.log('has in');
                 data = await FirebaseModule.get(db + '/' + key + '.json');
                 data = JSON.parse(data);
 
@@ -33,14 +32,12 @@
                 // creating id
                 // stores for 20 minutes
                 if (data.hasOwnProperty('numads')) {
-					console.log('set cookies!');
                     PTC_Cookies.storeCookies(btoa(key),
                         JSON.stringify({
                             'click': 0,
                             'numads': data.numads
                         }),
                         1200);
-					console.log(PTC_Cookies.retrieveCookies(btoa(key)));
                     uid = 'download=' + data.title + '&id=' + btoa(key) + '&ver=' + data.version;
                 }
 
