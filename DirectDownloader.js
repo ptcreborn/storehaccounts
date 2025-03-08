@@ -12,7 +12,7 @@
         let btn = myBtns[i];
         let btnText = btn.querySelector('span');
         let smallText = btn.querySelector('small');
-        let icon = filterBtn[i].querySelector('i');
+        let icon = btn.querySelector('i');
 
         let db = 'https://account-requests-default-rtdb.firebaseio.com/shortenedLinks';
         let key = '-' + btn.id.split('dl?-')[1];
