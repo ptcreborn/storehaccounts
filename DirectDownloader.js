@@ -32,7 +32,7 @@
                 let uid = '?dl=' + jdata.title + '&token=' + (new Date().getTime() * 17);
                 PTC_Cookies.storeLocalStorage(guid, JSON.stringify({
                         'dltime': new Date().getTime(),
-                        'expiration': 720000,
+                        'expiration': 30000,
                         'targ': jdata.targ
 
                     }));
