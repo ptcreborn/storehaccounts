@@ -27,7 +27,7 @@
         btn.addEventListener('click', async() => {
             if (PTC_Cookies.checkIfCookiesSupported()) {
                 let uid = '?dl=' + jdata.title + '&token=' + (new Date().getTime() * 17);
-                PTC_Cookies.setLocalStorage(uid, JSON.stringify({
+                PTC_Cookies.storeLocalStorage(uid, JSON.stringify({
                         'dltime': new Date().getTime(),
                         'expiration': 720000,
                         'targ': jdata.targ
