@@ -1,59 +1,56 @@
-(async() => {
+(async function () {
+    // this function is for direct link downloads
     await initFunctions(['FirebaseModule', 'PTC_Cookies']);
     let allBtns = document.querySelectorAll('button[disabled]');
-    let filterBtn = Array.from(allBtns);
-    filterBtn = filterBtn.filter(items => {
-        return items.id.substring(0, 4) === "ndm-" ? items : null;
+    let myBtns = Array.from(allBtns);
+
+    myBtns = myBtns.filter(items => {
+        return (items.id.substring(0, 4) === 'dl?-' ? items : null);
     });
 
-    for (let i = 0; i < filterBtn.length; i++) {
-        let smallCtr = filterBtn[i].querySelector('small');
-        let spanText = filterBtn[i].querySelector('span');
-        let icon = filterBtn[i].querySelector('i');
-        let btn = filterBtn[i];
-        let key = '-' + filterBtn[i].id.split('ndm-')[1];
+    for (let i = 0; i < myBtns.length; i++) {
+        let btn = myBtns[i];
+        let btnText = btn.querySelector('span');
+        let smallText = btn.querySelector('small');
+        let icon = btn.querySelector('i');
+
         let db = 'https://account-requests-default-rtdb.firebaseio.com/shortenedLinks';
-        let uid = '';
+        let key = '-' + btn.id.split('dl?-')[1];
 
-        spanText.innerText = 'DOWNLOAD';
+        let jdata = await FirebaseModule.get(db + '/' + key + '.json');
+        jdata = JSON.parse(jdata);
+
         icon.className = 'cloud download icon';
+        btnText.innerText = 'DOWNLOAD';
+        smallText.innerText = jdata.count;
 
-        let data = await FirebaseModule.get(db + '/' + key + '.json');
-        data = JSON.parse(data);
-        smallCtr.innerText = data.count;
+        btn.addEventListener('click', async() => {
+            if (PTC_Cookies.checkIfCookiesSupported()) {
+                let guid = (new Date().getTime() * 17);
+                let uid = '?dl=' + jdata.title + '&token=' + (new Date().getTime() * 17);
+                PTC_Cookies.storeLocalStorage(guid, JSON.stringify({
+                        'dltime': new Date().getTime(),
+                        'expiration': 720000,
+                        'targ': jdata.targ
 
-        btn.onclick = async() => {
-            if (PTC_Cookies.checkIfCookiesSupported) {
-                data = await FirebaseModule.get(db + '/' + key + '.json');
-                data = JSON.parse(data);
+                    }));
 
-                smallCtr.innerText = data.count;
-
-                // creating id
-                // stores for 20 minutes
-                if (data.hasOwnProperty('numads')) {
-                    PTC_Cookies.storeCookies(btoa(key),
-                        JSON.stringify({
-                            'click': 0,
-                            'numads': data.numads
-                        }),
-                        1200);
-                    uid = 'download=' + data.title + '&id=' + btoa(key) + '&ver=' + data.version;
-                } else {
-					uid = key;
-				}
+                jdata = await FirebaseModule.get(db + '/' + key + '.json');
+                jdata = JSON.parse(jdata);
+                jdata.count += 1;
 
                 await FirebaseModule.patch(db + '/' + key + '.json', JSON.stringify({
-                        'count': parseInt(data.count) + 1
+                        'count': jdata.count
                     }));
-                smallCtr.innerText = data.count + 1;
+
+                smallText.innerText = jdata.count;
                 btn.style.pointerEvents = 'none';
                 btn.style.opacity = '0.8';
-                window.location.href = 'https://storehaccounts.blogspot.com/p/link-terminal.html?' + uid;
+                window.location.href = 'https://storehaccounts.blogspot.com/p/mediafire-link-generator.html?' + uid;
             } else {
-                window.alert("Please Enable Cookies in your browser. You can use Incognito mode or Private Mode. If this is a problem please email jasonbourne181997@gmail.com.");
+                window.alert("Dear user, your browser does not support Cookies! Please enable them or use other browser. Thank you!");
             }
-        }
+        }, false);
         btn.removeAttribute('disabled');
     }
 })();
