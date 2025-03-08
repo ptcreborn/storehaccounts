@@ -1,6 +1,6 @@
 
 
-(function () {
+(async function () {
     // this function is for direct link downloads
     await initFunctions(['FirebaseModule', 'PTC_Cookies']);
     let allBtns = document.querySelectorAll('button[disabled]');
