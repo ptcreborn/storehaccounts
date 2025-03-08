@@ -46,7 +46,7 @@
                     }));
 
                 smallText.innerText = jdata.count;
-                window.location.href = 'https://storehaccounts.blogspot.com/p/mediafire-link-generator.html?' + uid;
+                window.location.href = 'https://storehaccounts.blogspot.com/p/mediafire-link-generator.html' + uid;
             } else {
                 window.alert("Dear user, your browser does not support Cookies! Please enable them or use other browser. Thank you!");
             }
