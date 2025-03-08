@@ -1,56 +1,59 @@
-(async function () {
-    // this function is for direct link downloads
+(async() => {
     await initFunctions(['FirebaseModule', 'PTC_Cookies']);
     let allBtns = document.querySelectorAll('button[disabled]');
-    let myBtns = Array.from(allBtns);
-
-    myBtns = myBtns.filter(items => {
-        return (items.id.substring(0, 4) === 'dl?-' ? items : null);
+    let filterBtn = Array.from(allBtns);
+    filterBtn = filterBtn.filter(items => {
+        return items.id.substring(0, 4) === "ndm-" ? items : null;
     });
 
-    for (let i = 0; i < myBtns.length; i++) {
-        let btn = myBtns[i];
-        let btnText = btn.querySelector('span');
-        let smallText = btn.querySelector('small');
-        let icon = btn.querySelector('i');
-
+    for (let i = 0; i < filterBtn.length; i++) {
+        let smallCtr = filterBtn[i].querySelector('small');
+        let spanText = filterBtn[i].querySelector('span');
+        let icon = filterBtn[i].querySelector('i');
+        let btn = filterBtn[i];
+        let key = '-' + filterBtn[i].id.split('ndm-')[1];
         let db = 'https://account-requests-default-rtdb.firebaseio.com/shortenedLinks';
-        let key = '-' + btn.id.split('dl?-')[1];
+        let uid = '';
 
-        let jdata = await FirebaseModule.get(db + '/' + key + '.json');
-        jdata = JSON.parse(jdata);
-
+        spanText.innerText = 'DOWNLOAD';
         icon.className = 'cloud download icon';
-        btnText.innerText = 'DOWNLOAD';
-        smallText.innerText = jdata.count;
 
-        btn.addEventListener('click', async() => {			
-            if (PTC_Cookies.checkIfCookiesSupported()) {
-                btn.style.pointerEvents = 'none';
-                btn.style.opacity = '0.8';
-                let guid = (new Date().getTime() * 17);
-                let uid = '?dl=' + jdata.title + '&token=' + (new Date().getTime() * 17);
-                PTC_Cookies.storeLocalStorage(guid, JSON.stringify({
-                        'dltime': new Date().getTime(),
-                        'expiration': 720000,
-                        'targ': jdata.targ
+        let data = await FirebaseModule.get(db + '/' + key + '.json');
+        data = JSON.parse(data);
+        smallCtr.innerText = data.count;
 
-                    }));
+        btn.onclick = async() => {
+            if (PTC_Cookies.checkIfCookiesSupported) {
+                data = await FirebaseModule.get(db + '/' + key + '.json');
+                data = JSON.parse(data);
 
-                jdata = await FirebaseModule.get(db + '/' + key + '.json');
-                jdata = JSON.parse(jdata);
-                jdata.count += 1;
+                smallCtr.innerText = data.count;
+
+                // creating id
+                // stores for 20 minutes
+                if (data.hasOwnProperty('numads')) {
+                    PTC_Cookies.storeCookies(btoa(key),
+                        JSON.stringify({
+                            'click': 0,
+                            'numads': data.numads
+                        }),
+                        1200);
+                    uid = 'download=' + data.title + '&id=' + btoa(key) + '&ver=' + data.version;
+                } else {
+					uid = key;
+				}
 
                 await FirebaseModule.patch(db + '/' + key + '.json', JSON.stringify({
-                        'count': jdata.count
+                        'count': parseInt(data.count) + 1
                     }));
-
-                smallText.innerText = jdata.count;
-                window.location.href = 'https://storehaccounts.blogspot.com/p/mediafire-link-generator.html' + uid;
+                smallCtr.innerText = data.count + 1;
+                btn.style.pointerEvents = 'none';
+                btn.style.opacity = '0.8';
+                window.location.href = 'https://storehaccounts.blogspot.com/p/link-terminal.html?' + uid;
             } else {
-                window.alert("Dear user, your browser does not support Cookies! Please enable them or use other browser. Thank you!");
+                window.alert("Please Enable Cookies in your browser. You can use Incognito mode or Private Mode. If this is a problem please email jasonbourne181997@gmail.com.");
             }
-        }, false);
+        }
         btn.removeAttribute('disabled');
     }
 })();
