@@ -28,7 +28,7 @@
             if (PTC_Cookies.checkIfCookiesSupported()) {
                 btn.style.pointerEvents = 'none';
                 btn.style.opacity = '0.8';
-                let guid = (new Date().getTime() * 17);
+                let guid = btoa(jdata.title);
                 let uid = '?dl=' + jdata.title + '&token=' + (new Date().getTime() * 17);
                 PTC_Cookies.storeLocalStorage(guid, JSON.stringify({
                         'dltime': new Date().getTime(),
