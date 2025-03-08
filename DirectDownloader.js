@@ -33,21 +33,22 @@
                         'dltime': new Date().getTime(),
                         'expiration': 720000,
                         'targ': jdata.targ
-                    });
 
-                    jdata = await FirebaseModule.get(db + '/' + key + '.json');
-                    jdata = JSON.parse(jdata);
-                    let curcount = jdata.count;
+                    }));
 
-                    await FirebaseModule.patch(db + '/' + key + '.json', JSON.stringify({
-                            'count': curcount + 1
-                        }));
+                jdata = await FirebaseModule.get(db + '/' + key + '.json');
+                jdata = JSON.parse(jdata);
+                let curcount = jdata.count;
 
-                    window.location.href = 'https://storehaccounts.blogspot.com/p/mediafire-link-generator.html?' + uid;
-                } else {
-                    window.alert("Dear user, your browser does not support Cookies! Please enable them or use other browser. Thank you!");
-                }
-            }, false);
-            btn.removeAttribute('disabled');
-        }
-    })();
+                await FirebaseModule.patch(db + '/' + key + '.json', JSON.stringify({
+                        'count': curcount + 1
+                    }));
+
+                window.location.href = 'https://storehaccounts.blogspot.com/p/mediafire-link-generator.html?' + uid;
+            } else {
+                window.alert("Dear user, your browser does not support Cookies! Please enable them or use other browser. Thank you!");
+            }
+        }, false);
+        btn.removeAttribute('disabled');
+    }
+})();
