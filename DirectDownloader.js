@@ -6,7 +6,7 @@
     let allBtns = document.querySelectorAll('button[disabled]');
     let myBtns = Array.from(allBtns);
 
-    myBtns = myBtns.map(items => {
+    myBtns = myBtns.filter(items => {
         return (items.id.substring(0, 4) === 'dl?-' ? items : null);
     });
 
