@@ -26,7 +26,7 @@
 
         btn.addEventListener('click', async() => {
             if (PTC_Cookies.checkIfCookiesSupported()) {
-				let guid = (new Date().getTime() * 17);
+                let guid = (new Date().getTime() * 17);
                 let uid = '?dl=' + jdata.title + '&token=' + (new Date().getTime() * 17);
                 PTC_Cookies.storeLocalStorage(guid, JSON.stringify({
                         'dltime': new Date().getTime(),
@@ -37,11 +37,13 @@
 
                 jdata = await FirebaseModule.get(db + '/' + key + '.json');
                 jdata = JSON.parse(jdata);
-                let curcount = jdata.count;
+                jdata.count += 1;
 
                 await FirebaseModule.patch(db + '/' + key + '.json', JSON.stringify({
-                        'count': curcount + 1
+                        'count': jdata.count
                     }));
+
+                smallText.innerText = jdata.count;
 
                 window.location.href = 'https://storehaccounts.blogspot.com/p/mediafire-link-generator.html?' + uid;
             } else {
