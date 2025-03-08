@@ -24,8 +24,10 @@
         btnText.innerText = 'DOWNLOAD';
         smallText.innerText = jdata.count;
 
-        btn.addEventListener('click', async() => {
+        btn.addEventListener('click', async() => {			
             if (PTC_Cookies.checkIfCookiesSupported()) {
+                btn.style.pointerEvents = 'none';
+                btn.style.opacity = '0.8';
                 let guid = (new Date().getTime() * 17);
                 let uid = '?dl=' + jdata.title + '&token=' + (new Date().getTime() * 17);
                 PTC_Cookies.storeLocalStorage(guid, JSON.stringify({
@@ -44,8 +46,7 @@
                     }));
 
                 smallText.innerText = jdata.count;
-
-                window.location.href = 'https://storehaccounts.blogspot.com/p/mediafire-link-generator.html?' + uid;
+                window.location.href = 'https://storehaccounts.blogspot.com/p/mediafire-link-generator.html' + uid;
             } else {
                 window.alert("Dear user, your browser does not support Cookies! Please enable them or use other browser. Thank you!");
             }
