@@ -23,7 +23,7 @@
         smallCtr.innerText = data.count;
 
         btn.onclick = async() => {
-            if (PTC_Cookies.checkIfCookiesSupported) {
+            if (PTC_Cookies.checkIfStorageSupported) {
                 data = await FirebaseModule.get(db + '/' + key + '.json');
                 data = JSON.parse(data);
 
@@ -32,16 +32,15 @@
                 // creating id
                 // stores for 20 minutes
                 if (data.hasOwnProperty('numads')) {
-                    PTC_Cookies.storeCookies(btoa(key),
+                    PTC_Cookies.storeLocalStorage(btoa(key),
                         JSON.stringify({
                             'click': 0,
                             'numads': data.numads
-                        }),
-                        1200);
+                        }));
                     uid = 'download=' + data.title + '&id=' + btoa(key) + '&ver=' + data.version;
                 } else {
-					uid = key;
-				}
+                    uid = key;
+                }
 
                 await FirebaseModule.patch(db + '/' + key + '.json', JSON.stringify({
                         'count': parseInt(data.count) + 1
