@@ -47,29 +47,15 @@ export var FirebaseApp = {
 
     signInWithGoogle: async function (callback) {
         // callback function will execute after a successful logged in.
-        signInWithPopup(FirebaseApp.auth, FirebaseApp.provider)
+        signInWithDirect(FirebaseApp.auth, FirebaseApp.provider)
             .then(async (result) => {
                 const credential = GoogleAuthProvider.credentialFromResult(result);
                 const token = credential.accessToken;
                 const user = result.user;
-
-                let res = await FirebaseModule.get('https://storehaccounts-users-default-rtdb.firebaseio.com/users_lists/' + user.uid + '.json');
-                if (res == "null") {
-                    // means new account!
-                    let data = {
-                        "fullname": user.displayName,
-                        "emailVerified": user.emailVerified,
-                        "photoURL": user.photoURL,
-                        "joined": new Date().getTime(),
-                        "email": user.email
-                    }
-
-                    FirebaseApp.writeDataJSON("users_lists", user.uid, data);
-                }
-                callback();
+                const uid = user.uid;
+                callback(uid);
             }).catch((error) => {
-                window.alert(error);
-                window.alert("Please reload the page and fix the issue.");
+                window.alert("Please reload the page and fix the issue. Error: " + error);
             });
     },
 
