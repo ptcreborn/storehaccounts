@@ -18,8 +18,9 @@ function checkAdblockDetect() {
         e.parentNode.insertBefore(t, e)
     }
 }
-if (!localStorage.getItem('lem'))
-    checkAdblockDetect();
+
+/*if (!localStorage.getItem('lem'))
+    checkAdblockDetect();*/
 
 /*window.addEventListener("DOMContentLoaded", function() {
 checkAdblockDetect()
