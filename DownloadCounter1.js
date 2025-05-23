@@ -61,7 +61,7 @@
                 btn.style.pointerEvents = 'none';
                 btn.style.opacity = '0.8';
                 if (numads == 0)
-                    window.location.href = 'https://storehaccounts.blogspot.com/p/mediafire-link-generator.html?download=' + title + '&id=' + btoa(key) + '=&ver=' + version;
+                    window.location.href = 'https://storehaccounts.blogspot.com/p/mediafire-link-generator.html?download=' + title + '&id=' + btoa(key) + '&ver=' + version;
                 else
                     window.location.href = 'https://storehaccounts.blogspot.com/p/link-terminal.html?' + uid;
             } else {
