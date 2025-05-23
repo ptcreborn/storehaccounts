@@ -1,3 +1,11 @@
+
+
+// This function serves all Download buttons
+// that has been registered to Firebase 
+// and Mediafire Links 
+// Checking the number of ads to be bypassed
+
+
 (async() => {
     await initFunctions(['FirebaseModule', 'PTC_Cookies']);
     let allBtns = document.querySelectorAll('button[disabled]');
@@ -13,7 +21,7 @@
         let btn = filterBtn[i];
         let key = '-' + filterBtn[i].id.split('ndm-')[1];
         let db = 'https://account-requests-default-rtdb.firebaseio.com/shortenedLinks';
-        let uid = '';
+        let uid = '';		
 
         spanText.innerText = 'DOWNLOAD';
         icon.className = 'cloud download icon';
@@ -21,9 +29,14 @@
         let data = await FirebaseModule.get(db + '/' + key + '.json');
         data = JSON.parse(data);
         smallCtr.innerText = data.count;
+		
+		let title = data.title;
+		let version = data.version;
+		let numads = data.numads;
 
         btn.onclick = async() => {
-            if (PTC_Cookies.checkIfStorageSupported) {
+			if(numads == 0) window.location.href = 'https://storehaccounts.blogspot.com/p/mediafire-link-generator.html?download=' + title + '&id=' + btoa(key) + '=&ver=' + version;
+            else if (PTC_Cookies.checkIfStorageSupported) {
                 data = await FirebaseModule.get(db + '/' + key + '.json');
                 data = JSON.parse(data);
 
