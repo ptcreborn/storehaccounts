@@ -17,7 +17,7 @@
         // ADS#2
         [
             "adsterra_mid",
-            "atOptions = { 		'key' : 'dbb081bd229885ddc0aa9d909e761042', 		'format' : 'iframe', 		'height' : 90, 		'width' : 720, 		'params' : {} 	};",
+            "atOptions = { 'key' : 'dbb081bd229885ddc0aa9d909e761042', 'format' : 'iframe', 'height' : 90, 'width' : 720, 'params' : {} };",
             "//www.highperformanceformat.com/dbb081bd229885ddc0aa9d909e761042/invoke.js"
         ]
     ];
