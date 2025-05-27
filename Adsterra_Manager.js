@@ -30,7 +30,7 @@
             let scriptB = document.createElement('script');
 
             scriptA.innerHTML = items[1];
-            scriptB.innerHTML = items[2];
+            scriptB.src = items[2];
 
             tempo_div.appendChild(scriptA);
             tempo_div.appendChild(scriptB);
