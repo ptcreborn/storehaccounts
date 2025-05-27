@@ -199,6 +199,7 @@ function getCookieName(e) {
                 if (localStorage.getItem('link-pop-click')) { // got back from the ADS page
                     localStorage.removeItem('link-pop-click');
                     document.querySelectorAll(".popup_greet .close")[0].style.pointerEvents = "auto";
+					closeoverlay_greet();
                 }
             }
         }, false);
