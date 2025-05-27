@@ -145,7 +145,7 @@ function getCookieName(e) {
             document.querySelectorAll(".popup_greet .close")[0].innerText = "X";
         } else {
             document.getElementsByClassName("overlay_greet")[0].style.display = "block";
-            document.getElementsByClassName("overlay_greet")[0].style.opacity = '0.0001';
+            document.getElementsByClassName("overlay_greet")[0].style.opacity = '1';
             document.getElementsByClassName("overlay_greet")[0].style.visibility = "visible";
         }
 
@@ -164,7 +164,7 @@ function getCookieName(e) {
                 localStorage.removeItem('link-pop-click');
             closeoverlay_greet();
         }
-        if (document.querySelectorAll("#ptcmenupop ins")[0].getAttribute("data-ad-status") && "filled" == document.querySelectorAll("#ptcmenupop ins")[0].getAttribute("data-ad-status")) { // && document.querySelector('#popup iframe').clientHeight != 0
+        if (true || document.querySelectorAll("#ptcmenupop ins")[0].getAttribute("data-ad-status") && "filled" == document.querySelectorAll("#ptcmenupop ins")[0].getAttribute("data-ad-status")) { // && document.querySelector('#popup iframe').clientHeight != 0
             window.focus(); // focusing to window and not to any iframe
             window.addEventListener('blur', function () {
                 setTimeout(function () {
