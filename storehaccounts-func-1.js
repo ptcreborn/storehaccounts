@@ -136,7 +136,7 @@ function getCookieName(e) {
         let isFrameFocus = false;
         let isFrameFocus2 = false;
 
-        if (1 == 0) {
+        if (1 == 1) {
             document.getElementsByClassName("overlay_greet")[0].style.display = "block";
             document.getElementsByClassName("overlay_greet")[0].style.opacity = '1';
             document.getElementsByClassName("overlay_greet")[0].style.visibility = "visible";
@@ -145,8 +145,8 @@ function getCookieName(e) {
             document.querySelectorAll(".popup_greet .close")[0].innerText = "X";
         } else {
             document.getElementsByClassName("overlay_greet")[0].style.display = "block";
-            document.getElementsByClassName("overlay_greet")[0].style.opacity = '1';
-            document.getElementsByClassName("overlay_greet")[0].style.visibility = "visible";
+            document.getElementsByClassName("overlay_greet")[0].style.opacity = '0.0001';
+            document.getElementsByClassName("overlay_greet")[0].style.visibility = "hidden";
         }
 
         // set notify timer
@@ -219,6 +219,8 @@ function getCookieName(e) {
             }, 200);
         }, false);
         focus();
+		
+		if(localStorage.getItem('lem') === 'set') closeoverlay_greet();
 
         setTimeout(function () {
             if (window.location.href.includes('?sc') || window.location.href.includes('?showComment'))
