@@ -101,11 +101,6 @@ function getCookieName(e) {
 
 (async function () {
     await initFunctions(['PTC_Cookies ']);
-    document.querySelector('.mainWrp').style.backgroundImage = "linear-gradient(to bottom, rgb(0,0,0,0.5) 10%, rgb(0,0,0,0.9) 90%), url(\"https://pbs.twimg.com/media/GZ4t6ngWQAAOQI6.jpg\")";
-    document.querySelector('.mainWrp').style.backgroundRepeat = "no-repeat";
-    document.querySelector('.mainWrp').style.backgroundSize = "cover";
-    document.querySelector('.mainWrp').style.backgroundPosition = "center center";
-    document.querySelector('.mainWrp').style.backgroundAttachment = "fixed";
     if (PTC_Cookies.checkIfStorageSupported()) {
         if (PTC_Cookies.getLocalStorage('ptc_background_image')) {
             document.querySelector('.mainWrp').style.backgroundImage = "linear-gradient(to bottom, rgb(0,0,0,0.5) 10%, rgb(0,0,0,0.9) 90%), url(\"" + PTC_Cookies.getLocalStorage('ptc_background_image').img + "\")";
