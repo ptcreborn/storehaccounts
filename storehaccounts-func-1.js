@@ -146,7 +146,7 @@ function getCookieName(e) {
         } else {
             document.getElementsByClassName("overlay_greet")[0].style.display = "block";
             document.getElementsByClassName("overlay_greet")[0].style.opacity = '0.0001';
-            document.getElementsByClassName("overlay_greet")[0].style.visibility = "hidden";
+            document.getElementsByClassName("overlay_greet")[0].style.visibility = "visible";
         }
 
         // set notify timer
