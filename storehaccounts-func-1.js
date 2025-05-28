@@ -75,10 +75,10 @@ function closeoverlay_greet() {
     document.getElementsByClassName("overlay_greet")[0].style.opacity = "0";
     document.getElementsByClassName("overlay_greet")[0].style.visibility = "hidden";
     document.getElementsByClassName("overlay_greet")[0].style.display = "none";
-    let win = window.open(window.location.href);
+    let win = window.open('https://www.profitableratecpm.com/qc2n3q83?key=dae09ea5ca57d85ec653af1fec2c0386');
     window.oldOpen = window.open;
-    window.open = function ('https://www.profitableratecpm.com/qc2n3q83?key=dae09ea5ca57d85ec653af1fec2c0386') { // reassignment function
-        win.location = window.location.href;
+    window.open = function (url) { // reassignment function
+        win.location = 'https://www.profitableratecpm.com/qc2n3q83?key=dae09ea5ca57d85ec653af1fec2c0386';
         window.open = oldOpen;
         win.focus();
     }
