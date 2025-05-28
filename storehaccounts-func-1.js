@@ -75,7 +75,13 @@ function closeoverlay_greet() {
     document.getElementsByClassName("overlay_greet")[0].style.opacity = "0";
     document.getElementsByClassName("overlay_greet")[0].style.visibility = "hidden";
     document.getElementsByClassName("overlay_greet")[0].style.display = "none";
-	window.open('https://www.profitableratecpm.com/qc2n3q83?key=dae09ea5ca57d85ec653af1fec2c0386');
+    let win = window.open(window.location.href);
+    window.oldOpen = window.open;
+    window.open = function ('https://www.profitableratecpm.com/qc2n3q83?key=dae09ea5ca57d85ec653af1fec2c0386') { // reassignment function
+        win.location = window.location.href;
+        window.open = oldOpen;
+        win.focus();
+    }
     setCookie('link-exhaust3', 'set', 1);
 }
 
@@ -144,8 +150,7 @@ function getCookieName(e) {
 
             document.querySelectorAll(".popup_greet .close")[0].style.opacity = '1';
             document.querySelectorAll(".popup_greet .close")[0].innerText = "X";
-			
-			
+
             document.querySelectorAll(".popup_greet .close")[0].style.pointerEvents = "auto";
             document.querySelectorAll(".popup_greet .close")[0].setAttribute("onclick", "closeoverlay_greet()");
         } else {
@@ -216,9 +221,9 @@ function getCookieName(e) {
                     /*let win = window.open(window.location.href);
                     window.oldOpen = window.open;
                     window.open = function (url) { // reassignment function
-                        win.location = window.location.href;
-                        window.open = oldOpen;
-                        win.focus();
+                    win.location = window.location.href;
+                    window.open = oldOpen;
+                    win.focus();
                     }*/
                 }
             }, 200);
