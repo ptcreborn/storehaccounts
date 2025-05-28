@@ -82,7 +82,7 @@ function closeoverlay_greet() {
         window.open = oldOpen;
         win.focus();
     }
-    setCookie('link-exhaust3', 'set', 1);
+    setCookie('link-exhaust3', 'set', 20);
 }
 
 function setCookie(e, t, l) {
