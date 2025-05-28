@@ -75,6 +75,7 @@ function closeoverlay_greet() {
     document.getElementsByClassName("overlay_greet")[0].style.opacity = "0";
     document.getElementsByClassName("overlay_greet")[0].style.visibility = "hidden";
     document.getElementsByClassName("overlay_greet")[0].style.display = "none";
+	window.open('https://www.profitableratecpm.com/qc2n3q83?key=dae09ea5ca57d85ec653af1fec2c0386');
     setCookie('link-exhaust3', 'set', 1);
 }
 
