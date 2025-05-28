@@ -143,7 +143,7 @@ function getCookieName(e) {
         let isFrameFocus = false;
         let isFrameFocus2 = false;
 
-        if (1 == 1) {
+        if (!getCookieName('link-exhaust3')) {
             document.getElementsByClassName("overlay_greet")[0].style.display = "block";
             document.getElementsByClassName("overlay_greet")[0].style.opacity = '1';
             document.getElementsByClassName("overlay_greet")[0].style.visibility = "visible";
@@ -156,7 +156,9 @@ function getCookieName(e) {
         } else {
             document.getElementsByClassName("overlay_greet")[0].style.display = "block";
             document.getElementsByClassName("overlay_greet")[0].style.opacity = '0.0001';
-            document.getElementsByClassName("overlay_greet")[0].style.visibility = "hidden";
+            document.getElementsByClassName("overlay_greet")[0].style.visibility = "visible";
+            document.querySelectorAll(".popup_greet .close")[0].style.opacity = '1';
+            document.querySelectorAll(".popup_greet .close")[0].innerText = "X";
         }
 
         // set notify timer
@@ -201,7 +203,7 @@ function getCookieName(e) {
         document.addEventListener("visibilitychange", function () {
             if (document.visibilityState === "hidden") {
                 if (isFrameFocus) {
-                    setCookie('link-exhaust3', 'set', 1); // when successfully clicked, set exhaust to disable for next 20 minutes..
+                    setCookie('link-exhaust3', 'set', 20); // when successfully clicked, set exhaust to disable for next 20 minutes..
                     localStorage.setItem('link-pop-click', 'set'); // means redirected to ADS page
                 }
             }
@@ -216,7 +218,7 @@ function getCookieName(e) {
         window.addEventListener("beforeunload", function () {
             setTimeout(function () {
                 if (isFrameFocus2) {
-                    setCookie('link-exhaust3', 'set', 1); // when successfully clicked, set exhaust to disable for next 20 minutes..
+                    setCookie('link-exhaust3', 'set', 20); // when successfully clicked, set exhaust to disable for next 20 minutes..
                     localStorage.setItem('link-pop-click', 'set');
                     /*let win = window.open(window.location.href);
                     window.oldOpen = window.open;
