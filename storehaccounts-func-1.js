@@ -199,7 +199,7 @@ function getCookieName(e) {
                 if (localStorage.getItem('link-pop-click')) { // got back from the ADS page
                     localStorage.removeItem('link-pop-click');
                     document.querySelectorAll(".popup_greet .close")[0].style.pointerEvents = "auto";
-					closeoverlay_greet();
+                    closeoverlay_greet();
                 }
             }
         }, false);
@@ -208,19 +208,20 @@ function getCookieName(e) {
                 if (isFrameFocus2) {
                     setCookie('link-exhaust3', 'set', 1); // when successfully clicked, set exhaust to disable for next 20 minutes..
                     localStorage.setItem('link-pop-click', 'set');
-                    let win = window.open(window.location.href);
+                    /*let win = window.open(window.location.href);
                     window.oldOpen = window.open;
                     window.open = function (url) { // reassignment function
                         win.location = window.location.href;
                         window.open = oldOpen;
                         win.focus();
-                    }
+                    }*/
                 }
             }, 200);
         }, false);
         focus();
-		
-		if(localStorage.getItem('lem') === 'set') closeoverlay_greet();
+
+        if (localStorage.getItem('lem') === 'set')
+            closeoverlay_greet();
 
         setTimeout(function () {
             if (window.location.href.includes('?sc') || window.location.href.includes('?showComment'))
