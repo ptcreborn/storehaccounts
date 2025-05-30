@@ -13,7 +13,7 @@ if (document.querySelector('.cmnt.tIc'))
                 }
                 let t = document.createElement("span"),
                 n = document.createElement("svg");
-                if ((allLinks[i].innerHTML.includes("/download/button") || allLinks[i].innerHTML.toLowerCase().includes("download")) ? (n.setAttribute("class", "downloadLink"), allLinks[i].setAttribute('class', 'button-7')) : allLinks[i].innerHTML.includes("/overlay") ? (n.setAttribute("class", "downloadLink"), t.innerText = " " + allLinks[i].innerText.split("/")[0], allLinks[i].innerHTML = "", allLinks[i].appendChild(n), allLinks[i].appendChild(t), allLinks[i].setAttribute("class", "button"), allLinks[i].setAttribute("onclick", "onOverlay('" + allLinks[i].href + "')"), allLinks[i].removeAttribute("href")) : allLinks[i].innerHTML.includes("/preview/button") ? (n.setAttribute("class", "previewLink"), t.innerText = " " + allLinks[i].innerText.split("/")[0], allLinks[i].innerHTML = "", allLinks[i].appendChild(n), allLinks[i].appendChild(t), allLinks[i].setAttribute("class", "button")) : allLinks[i].innerHTML.includes("/link/button") ? (n.setAttribute("class", "linkLink"), t.innerText = " " + allLinks[i].innerText.split("/")[0], allLinks[i].innerHTML = "", allLinks[i].appendChild(n), allLinks[i].appendChild(t), allLinks[i].setAttribute("class", "button")) : allLinks[i].innerHTML.includes("/button") ? (n.setAttribute("class", "buttonLink"), t.innerText = " " + allLinks[i].innerText.split("/")[0], allLinks[i].innerHTML = "", allLinks[i].appendChild(n), allLinks[i].appendChild(t), allLinks[i].setAttribute("class", "button")) : "_blank" == allLinks[i].target && allLinks[i].setAttribute("class", "extL"), allLinks[i].href.includes("youtube.com") || allLinks[i].href.includes("youtu.be")) {
+                if ((allLinks[i].innerHTML.includes("/download/button") || allLinks[i].innerHTML.toLowerCase().includes("download")) ? (n.setAttribute("class", "downloadLink"), allLinks[i].setAttribute('class', 'button-7')) : allLinks[i].innerHTML.includes("/overlay") ? (n.setAttribute("class", "downloadLink"), t.innerText = " " + allLinks[i].innerText.split("/")[0], allLinks[i].innerHTML = "", allLinks[i].appendChild(n), allLinks[i].appendChild(t), allLinks[i].setAttribute("class", "button"), allLinks[i].setAttribute("onclick", "onOverlay('" + allLinks[i].href + "')"), allLinks[i].removeAttribute("href")) : allLinks[i].innerHTML.includes("/preview/button") ? (n.setAttribute("class", "previewLink"), t.innerText = " " + allLinks[i].innerText.split("/")[0], allLinks[i].innerHTML = "", allLinks[i].appendChild(n), allLinks[i].appendChild(t), allLinks[i].setAttribute("class", "button")) : allLinks[i].innerHTML.includes("/link/button") ? (n.setAttribute("class", "linkLink"), t.innerText = " " + allLinks[i].innerText.split("/")[0], allLinks[i].innerHTML = "", allLinks[i].appendChild(n), allLinks[i].appendChild(t), allLinks[i].setAttribute("class", "button")) : allLinks[i].innerHTML.includes("/button") ? (n.setAttribute("class", "buttonLink"), t.innerText = " " + allLinks[i].innerText.split("/")[0], allLinks[i].innerHTML = "", allLinks[i].appendChild(n), allLinks[i].appendChild(t), allLinks[i].setAttribute("class", "button")) : "_blank" == allLinks[i].target && allLinks[i].classList.add("extL"), allLinks[i].href.includes("youtube.com") || allLinks[i].href.includes("youtu.be")) {
                     let s = document.createElement("div");
                     s.setAttribute("class", "videoYt");
                     let a = document.createElement("iframe");
@@ -78,9 +78,9 @@ function closeoverlay_greet() {
     /*let win = window.open('https://www.profitableratecpm.com/qc2n3q83?key=dae09ea5ca57d85ec653af1fec2c0386');
     window.oldOpen = window.open;
     window.open = function (url) { // reassignment function
-        win.location = 'https://www.profitableratecpm.com/qc2n3q83?key=dae09ea5ca57d85ec653af1fec2c0386';
-        window.open = oldOpen;
-        win.focus();
+    win.location = 'https://www.profitableratecpm.com/qc2n3q83?key=dae09ea5ca57d85ec653af1fec2c0386';
+    window.open = oldOpen;
+    win.focus();
     }*/
     setCookie('link-exhaust3', 'set', 20);
 }
@@ -151,8 +151,8 @@ function getCookieName(e) {
             document.querySelectorAll(".popup_greet .close")[0].style.opacity = '1';
             document.querySelectorAll(".popup_greet .close")[0].innerText = "X";
 
-           // document.querySelectorAll(".popup_greet .close")[0].style.pointerEvents = "auto";
-           // document.querySelectorAll(".popup_greet .close")[0].setAttribute("onclick", "closeoverlay_greet()");
+            // document.querySelectorAll(".popup_greet .close")[0].style.pointerEvents = "auto";
+            // document.querySelectorAll(".popup_greet .close")[0].setAttribute("onclick", "closeoverlay_greet()");
         } else {
             document.getElementsByClassName("overlay_greet")[0].style.display = "block";
             document.getElementsByClassName("overlay_greet")[0].style.opacity = '0.0001';
