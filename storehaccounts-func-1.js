@@ -12,18 +12,18 @@ if (document.querySelector('.cmnt.tIc'))
                         allLinks[i].href = "https://storehaccounts.blogspot.com/p/link-terminal.html#" + l
                 }
                 let t = document.createElement("span"),
-                n = document.createElement("svg");
+                    n = document.createElement("svg");
                 if ((allLinks[i].innerHTML.includes("/download/button") || allLinks[i].innerHTML.toLowerCase().includes("download")) ? (n.setAttribute("class", "downloadLink"), allLinks[i].setAttribute('class', 'button-7')) : allLinks[i].innerHTML.includes("/overlay") ? (n.setAttribute("class", "downloadLink"), t.innerText = " " + allLinks[i].innerText.split("/")[0], allLinks[i].innerHTML = "", allLinks[i].appendChild(n), allLinks[i].appendChild(t), allLinks[i].setAttribute("class", "button"), allLinks[i].setAttribute("onclick", "onOverlay('" + allLinks[i].href + "')"), allLinks[i].removeAttribute("href")) : allLinks[i].innerHTML.includes("/preview/button") ? (n.setAttribute("class", "previewLink"), t.innerText = " " + allLinks[i].innerText.split("/")[0], allLinks[i].innerHTML = "", allLinks[i].appendChild(n), allLinks[i].appendChild(t), allLinks[i].setAttribute("class", "button")) : allLinks[i].innerHTML.includes("/link/button") ? (n.setAttribute("class", "linkLink"), t.innerText = " " + allLinks[i].innerText.split("/")[0], allLinks[i].innerHTML = "", allLinks[i].appendChild(n), allLinks[i].appendChild(t), allLinks[i].setAttribute("class", "button")) : allLinks[i].innerHTML.includes("/button") ? (n.setAttribute("class", "buttonLink"), t.innerText = " " + allLinks[i].innerText.split("/")[0], allLinks[i].innerHTML = "", allLinks[i].appendChild(n), allLinks[i].appendChild(t), allLinks[i].setAttribute("class", "button")) : "_blank" == allLinks[i].target && allLinks[i].classList.add("extL"), allLinks[i].href.includes("youtube.com") || allLinks[i].href.includes("youtu.be")) {
                     let s = document.createElement("div");
                     s.setAttribute("class", "videoYt");
                     let a = document.createElement("iframe");
                     a.setAttribute("title", "Youtube Video"),
-                    a.setAttribute("src", "https://www.youtube.com/embed/" + youtube_parser(allLinks[i].href)),
-                    a.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"),
-                    a.setAttribute("allowfullscreen", ""),
-                    s.appendChild(a),
-                    allLinks[i].parentNode.insertBefore(s, allLinks[i].nextSibling),
-                    allLinks[i].remove()
+                        a.setAttribute("src", "https://www.youtube.com/embed/" + youtube_parser(allLinks[i].href)),
+                        a.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"),
+                        a.setAttribute("allowfullscreen", ""),
+                        s.appendChild(a),
+                        allLinks[i].parentNode.insertBefore(s, allLinks[i].nextSibling),
+                        allLinks[i].remove()
                 }
             }
     }
@@ -36,22 +36,22 @@ function youtube_parser(e) {
 
 function onOverlay(e) {
     document.getElementById("download-status").innerHTML = "<br/>Your request is now processing...",
-    document.getElementById("overlayptc").style.opacity = "1",
-    document.getElementById("overlayptc").style.visibility = "visible",
-    document.getElementById("overlayptc").style.display = "block",
-    document.getElementById("ptcoverlayads").removeAttribute("onclick");
+        document.getElementById("overlayptc").style.opacity = "1",
+        document.getElementById("overlayptc").style.visibility = "visible",
+        document.getElementById("overlayptc").style.display = "block",
+        document.getElementById("ptcoverlayads").removeAttribute("onclick");
     let t = document.querySelectorAll("#overlayptc")[0];
     t && t.appendChild(document.querySelectorAll("#ptcoverlayads")[0]),
-    setTimeout(function () {
-        document.getElementById("ptcoverlayads").setAttribute("onclick", "off();"),
-        document.getElementById("download-status").innerHTML = 'Download has started... Thanks for using PTC Services.<br/>Submit your work by posting on website <a class="button" href="https://storehaccounts.blogspot.com/p/become-author.html" target="_blank">apply as author now!</a><br/><br/><small style="cursor: pointer; text-decoration: underline;" onclick="hideOverlayAds();">Close this window.</small>',
-        "u.pcloud.link" == new URL(e).hostname ? downloadFilePCloud(e) : window.location.href = e
-    }, 5e3)
+        setTimeout(function () {
+            document.getElementById("ptcoverlayads").setAttribute("onclick", "off();"),
+                document.getElementById("download-status").innerHTML = 'Download has started... Thanks for using PTC Services.<br/>Submit your work by posting on website <a class="button" href="https://storehaccounts.blogspot.com/p/become-author.html" target="_blank">apply as author now!</a><br/><br/><small style="cursor: pointer; text-decoration: underline;" onclick="hideOverlayAds();">Close this window.</small>',
+                "u.pcloud.link" == new URL(e).hostname ? downloadFilePCloud(e) : window.location.href = e
+        }, 5e3)
 }
 
 function hideOverlayAds() {
     document.getElementById("overlayptc").style.opacity = "0",
-    document.getElementById("overlayptc").style.visibility = "hidden"
+        document.getElementById("overlayptc").style.visibility = "hidden"
 }
 
 function downloadFilePCloud(e) {
@@ -60,7 +60,7 @@ function downloadFilePCloud(e) {
         type: "GET",
         success: function (e) {
             let t = e.split("<script>"),
-            l = t.length;
+                l = t.length;
             window.location.href = t[l - 1].split('"downloadlink": ')[1].split('"')[1].replaceAll("\\", "")
         }
     })
@@ -75,27 +75,26 @@ function closeoverlay_greet() {
     document.getElementsByClassName("overlay_greet")[0].style.opacity = "0";
     document.getElementsByClassName("overlay_greet")[0].style.visibility = "hidden";
     document.getElementsByClassName("overlay_greet")[0].style.display = "none";
-}
-setCookie('link-exhaust3', 'set', 20);
+    setCookie('link-exhaust3', 'set', 20);
 }
 
 function setCookie(e, t, l) {
     var o = new Date;
     o = new Date(o.getTime() + 1e3 * l),
-    document.cookie = e + "=" + t + "; expires=" + o.toGMTString() + ";";
+        document.cookie = e + "=" + t + "; expires=" + o.toGMTString() + ";";
 }
 
 function getCookieName(e) {
     var t = document.cookie,
-    l = e + "=",
-    o = t.indexOf("; " + l);
+        l = e + "=",
+        o = t.indexOf("; " + l);
     if (-1 == o) {
         if (0 != (o = t.indexOf(l)))
             return null
     } else {
         o += 2;
         var n = document.cookie.indexOf(";", o);
-         - 1 == n && (n = t.length)
+        - 1 == n && (n = t.length)
     }
     return decodeURI(t.substring(o + l.length, n))
 }
@@ -124,15 +123,15 @@ function getCookieName(e) {
         !window.location.href.includes("p/account-giveaway-terminal.html") &&
         !window.location.href.includes("p/ptc-account-portal-automated-7.html")) {
         let e = new Date().getHours(),
-        t = ["🌄 Good morning", "🌞 Good afternoon", "🌜 Good evening"],
-        l = "";
+            t = ["🌄 Good morning", "🌞 Good afternoon", "🌜 Good evening"],
+            l = "";
         l = e < 12 ? t[0] : e < 18 ? t[1] : t[2],
-        document.getElementById("popup_greet1").style.display = "block",
-        document.getElementById("overlay_greet_greet").innerText = l + " Catters!",
-        document.getElementById("popup_greet1").style.visibility = "visible",
-        document.getElementById("popup_greet1").style.opacity = "1";
+            document.getElementById("popup_greet1").style.display = "block",
+            document.getElementById("overlay_greet_greet").innerText = l + " Catters!",
+            document.getElementById("popup_greet1").style.visibility = "visible",
+            document.getElementById("popup_greet1").style.opacity = "1";
         let o = !1,
-        n = !1;
+            n = !1;
 
         let isFrameFocus = false;
         let isFrameFocus2 = false;
