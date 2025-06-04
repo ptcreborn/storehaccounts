@@ -174,8 +174,8 @@ function getCookieName(e) {
             window.focus(); // focusing to window and not to any iframe
             window.addEventListener('blur', function () {
                 setTimeout(function () {
-                    if (document.activeElement == document.querySelector("#ptcmenupop iframe")) {
-                        if (document.querySelector("#ptcmenupop iframe").clientHeight == 0) {
+                    if (document.activeElement == document.querySelector("#ptcmenupop div")) {
+                        if (document.querySelector("#ptcmenupop div").clientHeight == 0) {
                             document.querySelectorAll(".popup_greet .close")[0].style.pointerEvents = "auto";
                             document.querySelectorAll(".popup_greet .close")[0].setAttribute("onclick", "closeoverlay_greet()");
                         }
