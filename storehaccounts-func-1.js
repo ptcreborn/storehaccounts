@@ -174,8 +174,8 @@ function getCookieName(e) {
             window.focus(); // focusing to window and not to any iframe
             window.addEventListener('blur', function () {
                 setTimeout(function () {
-                    if (document.activeElement == document.querySelector("#ptcmenupop div")) {
-                        if (document.querySelector("#ptcmenupop div").clientHeight == 0) {
+                    if (document.activeElement == document.querySelector("#ptcmenupop div div")) {
+                        if (document.querySelector("#ptcmenupop div div").clientHeight == 0) {
                             document.querySelectorAll(".popup_greet .close")[0].style.pointerEvents = "auto";
                             document.querySelectorAll(".popup_greet .close")[0].setAttribute("onclick", "closeoverlay_greet()");
                         }
@@ -185,7 +185,7 @@ function getCookieName(e) {
                     }
                 }, 0);
             }, false);
-        } else if ((document.querySelectorAll("#ptcmenupop ins")[0].getAttribute("data-ad-status") && "unfilled" == document.querySelectorAll("#ptcmenupop ins")[0].getAttribute("data-ad-status") && document.querySelectorAll("#ptcmenupop iframe")[0].getAttribute("data-load-complete") && "true" == document.querySelectorAll("#ptcmenupop iframe")[0].getAttribute("data-load-complete")) || localStorage.getItem('lem') || getCookieName('lem')) {
+        } else if ((document.querySelector("#ptcmenupop div div") && document.querySelectorAll("#ptcmenupop ins")[0].getAttribute("data-ad-status") && "unfilled" == document.querySelectorAll("#ptcmenupop ins")[0].getAttribute("data-ad-status") && document.querySelectorAll("#ptcmenupop iframe")[0].getAttribute("data-load-complete") && "true" == document.querySelectorAll("#ptcmenupop iframe")[0].getAttribute("data-load-complete")) || localStorage.getItem('lem') || getCookieName('lem')) {
             document.querySelectorAll(".popup_greet .close")[0].style.pointerEvents = "auto";
             document.querySelectorAll(".popup_greet .close")[0].setAttribute("onclick", "closeoverlay_greet()");
         } else {
