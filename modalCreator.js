@@ -2,8 +2,8 @@
 
 var Modal = {
     initiator: function (initiatorID, modalID, titleText, bodyText, buttonIcon, buttonText, buttonLink, moreButtonHTML) {
-        let doc = document.createElement('div');
-        let body = '<!--The Modal--> <div class="modal" id="' + modalID + '"> <!--Modal content--> <div class="ui info message modal-content"> <div class="header">' + titleText + '</div><div class="content"> <small>' + bodyText + '</small><br><br> <a href="' + buttonLink + '" class="ui blue image label"><i class="' + buttonIcon + '"></i>' + buttonText + '</a>' + moreButtonHTML + '</div> </div> </div>';    
+        let doc = document.createElement('div'); 
+        let body = '<!--The Modal--> <div class="modal" id="' + modalID + '"> <!--Modal content--> <div class="ui info message modal-content"> <div class="header">' + titleText + '</div><div class="content"> <small>' + bodyText + '</small><br><br> <a href="' + buttonLink + '" class="ui blue image label"><i class="' + buttonIcon + '"></i>' + buttonText + '</a>' + moreButtonHTML + '</div> </div> </div>';                  
         doc.innerHTML = body;
         document.querySelector('body').appendChild(doc);
         let modal = document.getElementById(modalID);
@@ -18,13 +18,13 @@ var Modal = {
         window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
-                modal.remove();
+                doc.remove();
             }
         }
     },
     pop: function(modalID, titleText, bodyText, buttonIcon, buttonText, buttonLink, moreButtonHTML) {
-        let doc = document.createElement('div');
-        let body = '<!--The Modal--> <div class="modal" id="' + modalID + '"> <!--Modal content--> <div class="ui info message modal-content"> <div class="header">' + titleText + '</div><div class="content"> <small>' + bodyText + '</small><br><br> <a href="' + buttonLink + '" class="ui blue image label"><i class="' + buttonIcon + '"></i>' + buttonText + '</a>' + moreButtonHTML + '</div> </div> </div>';    
+        let doc = document.createElement('div');    
+        let body = '<!--The Modal--> <div class="modal" id="' + modalID + '"> <!--Modal content--> <div class="ui info message modal-content"> <div class="header">' + titleText + '</div><div class="content"> <small>' + bodyText + '</small><br><br> <a href="' + buttonLink + '" class="ui blue image label"><i class="' + buttonIcon + '"></i>' + buttonText + '</a>' + moreButtonHTML + '</div> </div> </div>';                  
         doc.innerHTML = body;
         document.querySelector('body').appendChild(doc);
         let modal = document.getElementById(modalID);
@@ -37,7 +37,7 @@ var Modal = {
         window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
-                modal.remove();
+                doc.remove();
             }
         }
     }
