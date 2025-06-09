@@ -1,6 +1,6 @@
 
 
-var Modal = {
+var ModalCreator = {
     initiator: function (initiatorID, modalID, titleText, bodyText, buttonIcon, buttonText, buttonLink, moreButtonHTML) {
         let btn = document.getElementById(initiatorID);
         btn.parentNode.style.display = 'block';
