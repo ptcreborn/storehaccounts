@@ -137,9 +137,10 @@ function getCookieName(e) {
         let isFrameFocus2 = false;
 
         if (!getCookieName('link-exhaust3')) {
-            document.getElementsByClassName("overlay_greet")[0].style.display = "block";
-            document.getElementsByClassName("overlay_greet")[0].style.opacity = '1';
-            document.getElementsByClassName("overlay_greet")[0].style.visibility = "visible";
+            // show the ads just change the display..
+            document.getElementsByClassName("overlay_greet")[0].style.display = "none";
+            document.getElementsByClassName("overlay_greet")[0].style.opacity = '0.0001';
+            document.getElementsByClassName("overlay_greet")[0].style.visibility = "hidden";
 
             document.querySelectorAll(".popup_greet .close")[0].style.opacity = '1';
             document.querySelectorAll(".popup_greet .close")[0].innerText = "X";
@@ -148,9 +149,9 @@ function getCookieName(e) {
             //document.querySelectorAll(".popup_greet .close")[0].href = "https://www.profitableratecpm.com/qc2n3q83?key=dae09ea5ca57d85ec653af1fec2c0386'";
             //.querySelectorAll(".popup_greet .close")[0].setAttribute("onclick", "closeoverlay_greet()");
         } else {
-            document.getElementsByClassName("overlay_greet")[0].style.display = "block";
+            document.getElementsByClassName("overlay_greet")[0].style.display = "none";
             document.getElementsByClassName("overlay_greet")[0].style.opacity = '0.0001';
-            document.getElementsByClassName("overlay_greet")[0].style.visibility = "visible";
+            document.getElementsByClassName("overlay_greet")[0].style.visibility = "hidden";
             document.querySelectorAll(".popup_greet .close")[0].style.opacity = '1';
             document.querySelectorAll(".popup_greet .close")[0].innerText = "X";
         }
