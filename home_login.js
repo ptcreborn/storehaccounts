@@ -5,7 +5,7 @@
 
     let user = await supabase.auth.getSession();
 
-    if (user.error) {
+    if (user.session || user.error) {
         let msg = JSON.stringify(user.error);
         window.alert("Error message : " + msg);
 
