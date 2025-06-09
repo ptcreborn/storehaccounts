@@ -5,7 +5,7 @@
 
     let user = await supabase.auth.getSession();
 
-    if (!user.session || user.error) {
+    if (!user.data.session || user.error) {
         await initFunctions(['ModalCreator']);
         ModalCreator.initiator(
             'profile-circle-header',
