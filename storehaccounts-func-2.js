@@ -272,7 +272,7 @@ l = document.querySelector("#articlesmidpost"), o = !0, g = !1, window.addEventL
     }
 });
 
-(async function () {
+/*(async function () {
     // this is to load data from the user informations...
     await initFunctions(['JBLOBFunctions', 'PTC_Cookies']);
     if (localStorage.getItem('ptc_user')) {
@@ -288,4 +288,4 @@ l = document.querySelector("#articlesmidpost"), o = !0, g = !1, window.addEventL
     }
 
     document.getElementById('user-upper-right').style.display = 'block';
-})();
+})();*/
