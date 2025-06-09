@@ -8,7 +8,7 @@ function modalCreator(initiatorID, modalID, titleText, bodyText, buttonIcon, but
     content.style.width = '30%';
 
     let btn = document.getElementById(initiatorID);
-    btn.style.display = 'block';
+    btn.parentNode.style.display = 'block';
     btn.onclick = function () {
         modal.style.display = "block";
     }
