@@ -22,7 +22,9 @@
         return;
     }
 
-    let user_data = user.data.session.user.user_metadata;
-    document.querySelector('#profile-circle-header').innerHTML = "<img src=\"" + user_data.avatar_url + "\"/>";
-    document.querySelector('#profile-circle-header').href = "https://storehaccounts.blogspot.com/p/profile-page.html";
+    if(user && user.data) {
+        let user_data = user.data.session.user.user_metadata;
+        document.querySelector('#profile-circle-header').innerHTML = "<img src=\"" + user_data.avatar_url + "\"/>";
+        document.querySelector('#profile-circle-header').href = "https://storehaccounts.blogspot.com/p/profile-page.html";
+    }
 })();
