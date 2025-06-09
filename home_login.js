@@ -5,10 +5,7 @@
 
     let user = await supabase.auth.getSession();
 
-    if (user.session || user.error) {
-        let msg = JSON.stringify(user.error);
-        window.alert("Error message : " + msg);
-
+    if (!user.session || user.error) {
         await initFunctions(['ModalCreator']);
         ModalCreator.initiator(
             'profile-circle-header',
