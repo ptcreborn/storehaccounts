@@ -29,8 +29,6 @@ var ModalCreator = {
         let modal = document.getElementById(modalID);
         let content = modal.querySelector(".modal-content");
         content.style.width = '30%';
-        let btn = document.getElementById(initiatorID);
-        btn.parentNode.style.display = 'block';
         modal.style.display = "block";
         window.onclick = function (event) {
             if (event.target == modal) {
