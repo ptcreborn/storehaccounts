@@ -20,23 +20,11 @@
     }
 
     if (user && user.data) {
-        let data;
-        let profile = '';
-        if (localStorage.getItem('ptc_user'))
-            if (JSON.parse(localStorage.getItem('ptc_user')).prof_img)
-                if (JSON.parse(localStorage.getItem('ptc_user')).prof_img.length > 0)
-                    profile = JSON.parse(localStorage.getItem('ptc_user')).prof_img;
-
-        if (!profile) {
-            data = await supabase.from('users').select('prof_img').eq('email', user.data.session.user.email);
-            if (data.error) {
-                window.alert("Error in retrieving profile image: " + JSON.stringify(data.error));
-                return;
-            }
-            profile = data.data[0].prof_img;
-            localStorage.setItem('ptc_user', JSON.stringify({
-                prof_img: profile
-            }));
+        let data = await supabase.from('users').select('prof_img').eq('email', user.data.session.user.email);
+        let profile = data.data[0].prof_img;
+        if (data.error) {
+            window.alert("Error in retrieving profile image: " + JSON.stringify(data.error));
+            return;
         }
         document.querySelector('#profile-circle-header').parentNode.style.display = 'block';
         document.querySelector('#profile-circle-header').innerHTML = "<img src=\"" + profile + "\"/>";
