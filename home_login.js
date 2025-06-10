@@ -20,15 +20,13 @@
     }
 
     if (user && user.data) {
-        let data;
+        let data = await supabase.from('users').select('prof_img').eq('email', user.data.session.user.email);
         let profile = '';
         if (localStorage.getItem('ptc_user')) {
             if (JSON.parse(localStorage.getItem('ptc_user')).prof_img)
                 profile = JSON.parse(localStorage.getItem('ptc_user')).prof_img;
-        } else {
-            data = await supabase.from('users').select('prof_img').eq('email', user.data.session.user.email);
+        } else
             profile = data.data[0].prof_img;
-        }
 
         if (data.error) {
             window.alert("Error in retrieving profile image: " + JSON.stringify(data.error));
