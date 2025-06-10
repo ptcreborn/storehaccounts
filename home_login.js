@@ -19,13 +19,24 @@
         return;
     }
 
-    if(user && user.data) {
-        let data = await supabase.from('users').select('prof_img').eq('email', user.data.session.user.email);
-        if(data.error) {
+    if (user && user.data) {
+        let data;
+        let profile = '';
+        if (localStorage.getItem('ptc_user')) {
+            if (JSON.parse(localStorage.getItem('ptc_user')).prof_img)
+                profile = JSON.parse(localStorage.getItem('ptc_user')).prof_img;
+        } else {
+            data = await supabase.from('users').select('prof_img').eq('email', user.data.session.user.email);
+            profile = data.data[0].prof_img;
+        }
+
+        if (data.error) {
             window.alert("Error in retrieving profile image: " + JSON.stringify(data.error));
             return;
         }
-        let user_data = user.data.session.user.user_metadata;
+        localStorage.setItem('ptc_user', JSON.stringify({
+            prof_img: profile
+        }));
         document.querySelector('#profile-circle-header').parentNode.style.display = 'block';
         document.querySelector('#profile-circle-header').innerHTML = "<img src=\"" + data.data[0].prof_img + "\"/>";
         document.querySelector('#profile-circle-header').href = "https://storehaccounts.blogspot.com/p/profile-page.html";
