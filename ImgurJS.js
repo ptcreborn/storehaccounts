@@ -1,5 +1,5 @@
 var ImgurJS = {
-    uploadImgUr: function (inputID, imgSRC, uploadingCallback, doneUploadCallback) {
+    uploadImgUr: function (inputID, imgID, uploadingCallback, doneUploadCallback) {
         document.getElementById(inputID).addEventListener('change', function (e) {
             uploadingCallback();
             var file = e.target.files[0];
@@ -11,7 +11,7 @@ var ImgurJS = {
             xhr.open("POST", "https://api.imgur.com/3/image"); // Boooom!
             xhr.onload = function () {
                 if (xhr.status == 200) {
-                    imgSRC.src = JSON.parse(xhr.responseText).data.link;
+                    document.getElementById(imgID).src = JSON.parse(xhr.responseText).data.link;
                     doneUploadCallback();
                 }
                 else {
