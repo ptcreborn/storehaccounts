@@ -20,9 +20,14 @@
     }
 
     if(user && user.data) {
+        let data = await supabase.from('users').select('prof_img').eq('email', user.data.session.user.email);
+        if(data.error) {
+            window.alert("Error in retrieving profile image: " + JSON.stringify(data.error));
+            return;
+        }
         let user_data = user.data.session.user.user_metadata;
         document.querySelector('#profile-circle-header').parentNode.style.display = 'block';
-        document.querySelector('#profile-circle-header').innerHTML = "<img src=\"" + user_data.avatar_url + "\"/>";
+        document.querySelector('#profile-circle-header').innerHTML = "<img src=\"" + data.data[0].prof_img + "\"/>";
         document.querySelector('#profile-circle-header').href = "https://storehaccounts.blogspot.com/p/profile-page.html";
     }
 })();
