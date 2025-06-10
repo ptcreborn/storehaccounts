@@ -23,7 +23,7 @@
         let data = await supabase.from('users').select('prof_img').eq('email', user.data.session.user.email);
         let profile = '';
         if (localStorage.getItem('ptc_user')) {
-            if (JSON.parse(localStorage.getItem('ptc_user')).prof_img.length > 0)
+            if (JSON.parse(localStorage.getItem('ptc_user')).prof_img.length == 0)
                 profile = JSON.parse(localStorage.getItem('ptc_user')).prof_img;
         } else {
             profile = data.data[0].prof_img;
