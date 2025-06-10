@@ -20,7 +20,7 @@
     }
 
     if (user && user.data) {
-        let data = await supabase.from('users').select('prof_img').eq('email', user.data.session.user.email);
+        let data;
         let profile = '';
         if (localStorage.getItem('ptc_user'))
             if (JSON.parse(localStorage.getItem('ptc_user')).prof_img)
@@ -28,6 +28,7 @@
                     profile = JSON.parse(localStorage.getItem('ptc_user')).prof_img;
 
         if (!profile) {
+            data = await supabase.from('users').select('prof_img').eq('email', user.data.session.user.email);
             profile = data.data[0].prof_img;
             localStorage.setItem('ptc_user', JSON.stringify({
                 prof_img: profile
