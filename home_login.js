@@ -25,16 +25,17 @@
         if (localStorage.getItem('ptc_user')) {
             if (JSON.parse(localStorage.getItem('ptc_user')).prof_img)
                 profile = JSON.parse(localStorage.getItem('ptc_user')).prof_img;
-        } else
+        } else {
             profile = data.data[0].prof_img;
+            localStorage.setItem('ptc_user', JSON.stringify({
+                prof_img: profile
+            }));
+        }
 
         if (data.error) {
             window.alert("Error in retrieving profile image: " + JSON.stringify(data.error));
             return;
         }
-        localStorage.setItem('ptc_user', JSON.stringify({
-            prof_img: profile
-        }));
         document.querySelector('#profile-circle-header').parentNode.style.display = 'block';
         document.querySelector('#profile-circle-header').innerHTML = "<img src=\"" + data.data[0].prof_img + "\"/>";
         document.querySelector('#profile-circle-header').href = "https://storehaccounts.blogspot.com/p/profile-page.html";
