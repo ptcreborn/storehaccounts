@@ -58,7 +58,7 @@ var FirebaseModule = {
             }
 
             req.open('PATCH', url, true);
-            req.setRequestHeader('Content-Type', 'application/json');
+            req.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
             req.send(data);
         });
     },
