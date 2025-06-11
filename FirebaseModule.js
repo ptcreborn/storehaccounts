@@ -38,7 +38,7 @@ var FirebaseModule = {
             return;
         }
         data = data.json();
-        return JSON.parse(data);
+        return data == "" ? data : JSON.parse(data);
     },
 
     patch: function (url, data) {
