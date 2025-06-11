@@ -2,11 +2,10 @@
 
 (async () => {
     // this function is checking whether the user is logged in or not.
-
+    await initFunctions(['supabase', 'ModalCreator']);
     let user = await supabase.auth.getSession();
 
     if (!user.data.session || user.error) {
-        await initFunctions(['ModalCreator']);
         ModalCreator.initiator(
             'profile-circle-header',
             'loginModal',
@@ -17,6 +16,35 @@
             'https://storehaccounts.blogspot.com/p/sign-in-with-storehaccounts.html',
             '');
         return;
+    } else {
+        let email = user.data.session.user.email;
+        let isMember = await supabase.from('users').select('email').eq('email', email);
+
+        if (isMember.error) {
+            ModalCreator.initiator(
+                'profile-circle-header',
+                'loginModal',
+                'Welcome to Community!',
+                '<br/>Sign in and create your account with Storehaccounts. <br/>Store all the progress of downloads, battle cats packs, bcu tools and account requests. <br/>Also share your work with others who can love it and we will make a better mod out of community ideas.',
+                'user circle icon',
+                'Sign in Now',
+                'https://storehaccounts.blogspot.com/p/sign-in-with-storehaccounts.html',
+                '');
+            return;
+        }
+
+        if (isMember.data.length == 0) {
+            ModalCreator.initiator(
+                'profile-circle-header',
+                'loginModal',
+                'Welcome to Community!',
+                '<br/>Sign in and create your account with Storehaccounts. <br/>Store all the progress of downloads, battle cats packs, bcu tools and account requests. <br/>Also share your work with others who can love it and we will make a better mod out of community ideas.',
+                'user circle icon',
+                'Sign in Now',
+                'https://storehaccounts.blogspot.com/p/sign-in-with-storehaccounts.html',
+                '');
+            return;
+        }
     }
 
     if (user && user.data) {
