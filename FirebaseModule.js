@@ -27,15 +27,14 @@ var FirebaseModule = {
 
     fetchJSON: async function (json_url) {
         let data = await fetch(json_url);        
-        if (data.status != 200 && FB.tries < 10) {
+        if (data.status != 200 && FirebaseModule.tries < 5) {
             setTimeout(async () => {
-                console.log('retrying access...');
-                FB.tries++;
-                data = await FB.fetchJSON(json_url);                
-            }, 2000);
+                FirebaseModule.tries++;
+                data = await FirebaseModule.fetchJSON(json_url);                
+            }, 2500);
         }
-        if(FB.tries == 10) {
-            FB.tries = 1;
+        if(FirebaseModule.tries == 5) {
+            FirebaseModule.tries = 1;
             return;
         }
         data = data.json();
