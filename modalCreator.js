@@ -46,7 +46,7 @@ var ModalCreator = {
         let content = modal.querySelector(".modal-content");
         content.style.width = '30%';
         modal.style.display = "block";
-        document.querySelector('#' + modalID + ' a').addEventListener('click', () => {
+        document.querySelector('#' + modalID + ' a').addEventListener('click', async () => {
             await buttonFunc();
         });
         window.onclick = function (event) {
