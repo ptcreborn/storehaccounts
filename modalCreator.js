@@ -48,6 +48,8 @@ var ModalCreator = {
         modal.style.display = "block";
         document.getElementById(modalID).querySelector('a').addEventListener('click', async () => {
             await buttonFunc();
+            modal.style.display = "none";
+            doc.remove();
         });
         window.onclick = function (event) {
             if (event.target == modal) {
