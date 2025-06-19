@@ -70,7 +70,7 @@
             }
 
             // incrementing official download count
-            if(!document.querySelector('app-signature')) return;
+            if(!document.querySelector('[app-signature]')) return;
             let dl = await FirebaseModule.fetchJSON(`${official_db}/${btoa(document.querySelector('app-signature').innerText)}/downloads.json`);
             dl += 1;
 
