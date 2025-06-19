@@ -74,9 +74,9 @@
             let dl = await FirebaseModule.fetchJSON(`${official_db}/${btoa(document.querySelector('[app-signature]').innerText)}/downloads.json`);
             dl += 1;
 
-            console.log(dl);
-
-            await FirebaseModule.patch(`${official_db}/${btoa(document.querySelector('[app-signature]').innerText)}/downloads.json`, JSON.stringify(dl));
+            await FirebaseModule.patch(`${official_db}/${btoa(document.querySelector('[app-signature]').innerText)}.json`, JSON.stringify({
+                downloads: dl
+            }));
         }
         btn.removeAttribute('disabled');
     }
