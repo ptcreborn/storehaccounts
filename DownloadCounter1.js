@@ -71,10 +71,12 @@
 
             // incrementing official download count
             if(!document.querySelector('[app-signature]')) return;
-            let dl = await FirebaseModule.fetchJSON(`${official_db}/${btoa(document.querySelector('app-signature').innerText)}/downloads.json`);
+            let dl = await FirebaseModule.fetchJSON(`${official_db}/${btoa(document.querySelector('[app-signature]').innerText)}/downloads.json`);
             dl += 1;
 
-            await FirebaseModule.patch(`${official_db}/${btoa(document.querySelector('app-signature').innerText)}/downloads.json`, JSON.stringify(dl));
+            console.log(dl);
+
+            await FirebaseModule.patch(`${official_db}/${btoa(document.querySelector('[app-signature]').innerText)}/downloads.json`, JSON.stringify(dl));
         }
         btn.removeAttribute('disabled');
     }
