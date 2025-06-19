@@ -21,6 +21,7 @@
         let btn = filterBtn[i];
         let key = '-' + filterBtn[i].id.split('ndm-')[1];
         let db = 'https://account-requests-default-rtdb.firebaseio.com/shortenedLinks';
+        const official_db = 'https://ptc-database-default-rtdb.firebaseio.com/mods';
         let uid = '';
 
         spanText.innerText = 'DOWNLOAD';
@@ -67,6 +68,13 @@
             } else {
                 window.alert("Please Enable Cookies in your browser. You can use Incognito mode or Private Mode. If this is a problem please email jasonbourne181997@gmail.com.");
             }
+
+            // incrementing official download count
+            if(!document.querySelector('app-signature')) return;
+            let dl = await FirebaseModule.fetchJSON(`${official_db}/${btoa(document.querySelector('app-signature').innerText)}.json`);
+            dl = dl.downloads + 1;
+
+            console.log(dl);
         }
         btn.removeAttribute('disabled');
     }
