@@ -23,7 +23,7 @@ var ImgurJS = {
             xhr.send(fd);
         }, false);
     },
-    uploadMultipleImgs: function (inputID, divID, uploadingCallback, doneUploadCallback) {
+    uploadMultipleImgs: function (inputID, divID, uploadingCallback, doneUploadCallback, errorCallback) {
         document.getElementById(inputID).addEventListener('change', function (e) {
             uploadingCallback();
             var file = e.target.files[0];
@@ -43,6 +43,7 @@ var ImgurJS = {
                 else {
                     window.alert('ImgurXHR error: Error in uploading... Please try again');
                     imgLink.error = "Error Uploading in ImgUr";
+                    errorCallback();
                 }
             }
             xhr.setRequestHeader('Authorization', 'Client-ID 33f63d5902f27e5');
