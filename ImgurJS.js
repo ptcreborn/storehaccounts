@@ -42,8 +42,9 @@ var ImgurJS = {
                 }
                 else {
                     errorCallback();
-                    window.alert('ImgurXHR error: Error in uploading... Please try again');
-                    imgLink.error = "Error Uploading in ImgUr";
+                    window.alert(`ImgurXHR error: Error in uploading... Please try again
+                        Status: ${xhr.status}
+                        Please try again!`);
                 }
             }
             xhr.setRequestHeader('Authorization', 'Client-ID 33f63d5902f27e5');
@@ -51,6 +52,3 @@ var ImgurJS = {
         }, false);
     }
 }
-
-
-
