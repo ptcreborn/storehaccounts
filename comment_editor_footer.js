@@ -10,7 +10,7 @@ window.addEventListener('load', async () => {
     parent_editor.classList.add('ui', 'compact', 'floating', 'warning', 'message', 'inverted');
     parent_editor.innerHTML = `<h4>Please <a href="https://storehaccounts.blogspot.com/p/sign-in-with-storehaccounts.html">create account first</a> before commenting :)</h4>`;
     parent_editor.style.display = 'block';
-    document.getElementById('loader').remove();
+    document.getElementById('comment_editor_footer_loader').remove();
     if (userData.error) window.alert(`${userData.error.message}`);
     return;
   }
@@ -42,7 +42,7 @@ window.addEventListener('load', async () => {
   });
 
   parent_editor.style.display = 'block';
-  document.getElementById('loader').remove();
+  document.getElementById('comment_editor_footer_loader').remove();
 
   quill.clipboard.addMatcher(Node.ELEMENT_NODE, (node, delta) => {
     let ops = []
