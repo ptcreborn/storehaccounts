@@ -7,7 +7,7 @@
   // Checking if the user is logged in!
   // and storing users' important data
 
-  if(!document.querySelector('#postBody')) return;
+  if(!document.querySelector('#postBody') || window.location.href.includes('/p/')) return;
 
   await initFunctions(['supabase']);
   let userData = await supabase.auth.getSession();
