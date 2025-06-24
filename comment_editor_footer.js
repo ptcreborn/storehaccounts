@@ -7,7 +7,7 @@
   // Checking if the user is logged in!
   // and storing users' important data
 
-  if(!document.querySelector('#postBody')) return;
+  if (!document.querySelector('#postBody')) return;
 
   await initFunctions(['supabase']);
   let userData = await supabase.auth.getSession();
@@ -177,21 +177,32 @@
     }
 
     let comment_id = data.data[0].id;
-    // posting to websitepost table
-    data = await supabase.from('website-posts').insert({
-      date: "now()",
-      url: window.location.href,
-      thumb: document.querySelector('#postBody img') ? document.querySelector('#postBody img').src : null
-    }).select('id');
 
+    
+    // posting to websitepost table
+    data = await supabase.from('website-posts').select('id').eq('url', `${new URL(window.location.href).pathname}`);
     if (data.error) {
-      window.alert(`Some encountered problem!
+      window.alert(`${data.error.message}`);
+      return;
+    }
+
+    if (data.data.length == 0) {
+      data = await supabase.from('website-posts').insert({
+        date: "now()",
+        url: new URL(window.location.href).pathname,
+        thumb: document.querySelector('#postBody img') ? document.querySelector('#postBody img').src : null
+      }).select('id');
+
+      if (data.error) {
+        window.alert(`Some encountered problem!
         ~
         ~
         Logs:
         ${data.error.message}`);
-      return;
+        return;
+      }
     }
+
 
     let post_id = data.data[0].id;
     // posting to comments-website-post table
