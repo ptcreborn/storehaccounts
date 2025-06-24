@@ -1,5 +1,7 @@
 (async () => {
   // appending Quill script after load
+  if(!document.getElementById('ptc_comment_editor')) return;
+
   const postBtn = document.getElementById('postBtn');
   const editor = document.getElementById('ql-comment-editor');
   const parent_editor = document.getElementById('ptc_comment_editor');
@@ -17,9 +19,6 @@
     return;
   }
 
-  console.log('done checking!');
-
-
   (() => {
     let script = document.createElement('script');
     script.src = 'https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js';
@@ -29,8 +28,7 @@
     document.querySelector('body').appendChild(script);
   })();
 
-
-  if (!document.querySelector('#parent_editor')) return;
+  console.log("Added quill script");
 
   // setting up Quill Editor
   await initFunctions(['Quill']);
@@ -42,6 +40,8 @@
     placeholder: 'Make it something good bruh...',
     theme: "snow"
   });
+
+  console.log("Quill initialized.");
 
   parent_editor.style.display = 'block';
   document.getElementById('comment_editor_footer_loader').remove();
