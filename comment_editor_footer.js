@@ -1,86 +1,58 @@
+// This script works with Supabase and Storehaccounts website.
+// This will be the official editor for comments!
+
 (async () => {
-  // building comment_editor_html
-  // appending to postBody
-
-  let tempo_comment_html = document.createElement('div');
-  tempo_comment_html.innerHTML = `<div id='comment_editor_footer_loader' class="ui segment">
-  <div class="ui active dimmer">
-    <div class="ui indeterminate text loader">Preparing Comment Editor</div>
-  </div>
-  <br/>
-  <br/>
-  <br/>
-</div>
-<div id='ptc_comment_editor' style='display: none;'>
-  <div id="ql-comment-editor" class='ui loading  inverted attached segment'>
-</div>
-<div id="ql-toolbar-container" class='ui inverted attached segment'>
-  <div class="ui blue image label">
-  <img src="https://semantic-ui.com//images/avatar/small/ade.jpg">
-  Adrienne
-</div>
-  <span class="ql-formats">
-    <button class="ql-bold"></button>
-    <button class="ql-italic"></button>
-    <button class="ql-underline"></button>
-    <button class="ql-strike"></button>
-  </span>
-  <span class="ql-formats">
-    <select class="ql-color"></select>
-    <select class="ql-background"></select>
-  </span>
-  <span class="ql-formats">
-    <button class="ql-header" value="1"></button>
-    <button class="ql-header" value="2"></button>
-    <button class="ql-blockquote"></button>
-    <button class="ql-code-block"></button>
-  </span>
-  <span class="ql-formats">
-    <button class="ql-list" value="ordered"></button>
-    <button class="ql-list" value="bullet"></button>
-  </span>
-  <span class="ql-formats">
-    <button class="ql-link"></button>
-    <button class="ql-image"></button>
-    <button class="ql-video"></button>
-  </span>
-  <span class="ql-formats">
-    <button class="ql-clean"></button>
-  </span>
-</div>
-<div class='ui inverted attached segment'>
-  <button id='postBtn' class='ui blue disabled inverted button'>Type something...</button>
-</div>
-</div>`;
-  document.getElementById('postBody').appendChild(tempo_comment_html);
-
-  // appending Quill script after load
-  if (!document.getElementById('ptc_comment_editor')) return;
-
-  const postBtn = document.getElementById('postBtn');
-  const editor = document.getElementById('ql-comment-editor');
-  const parent_editor = document.getElementById('ptc_comment_editor');
 
   // Checking if the user is logged in!
+  // and storing users' important data
   await initFunctions(['supabase']);
   let userData = await supabase.auth.getSession();
+  let userid;
+  let useremail;
+
+  let parent_html = document.createElement('div');
+  parent_html.innerHTML = `<div id='comment_editor_footer_loader' class="ui segment"> <div class="ui active dimmer"> <div class="ui indeterminate text loader">Preparing Comment Editor</div> </div> <br/> <br/> <br/> </div> <div id='ptc_comment_editor' class='ui inverted message' style='display: none;'> </div>`;
+  document.querySelector('#postBody').appendChild(parent_html);
+  const parent_editor = document.getElementById('ptc_comment_editor');
 
   if (userData.error || !userData.data.session) {
     parent_editor.classList.add('ui', 'compact', 'floating', 'warning', 'message', 'inverted');
-    parent_editor.innerHTML = `<h4>Please <a href="https://storehaccounts.blogspot.com/p/sign-in-with-storehaccounts.html">create account first</a> before commenting :)</h4>`;
+    parent_editor.innerHTML = `<h4>Please <a class="ui blue basic label" href="https://storehaccounts.blogspot.com/p/sign-in-with-storehaccounts.html"><i icon="blind icon"></i>create account first</a> before commenting :)</h4>`;
     parent_editor.style.display = 'block';
     document.getElementById('comment_editor_footer_loader').remove();
     if (userData.error) window.alert(`${userData.error.message}`);
     return;
+  } else if (userData.data.session) {
+    // building comment_editor_html
+    // appending to postBody
+    useremail = userData.data.session.user.email;
+    userData = await supabase.from('users').select('id, username, prof_img').eq('email', `${userData.data.session.user.email}`);
+
+    if (userData.error) {
+      window.alert(`${userData.error.message}`);
+      return;
+    }
+
+    if (userData.data.length == 0) {
+      window.alert(`Invalid logged in! The user logged in cant be identified`);
+      return;
+    }
+
+    userid = userData.data[0].id;
+
+    let tempo_comment_html = document.createElement('div');
+    tempo_comment_html.innerHTML = `<div class='ui floating message'><div class='header'>Add your comment</div></div> <div id="ql-comment-editor" class='ui loading inverted attached segment'> </div> <div id="ql-toolbar-container" class='ui inverted attached segment'> <div class="ui blue image label"> <img src="${userData.data[0].prof_img}"> ${userData.data[0].username} </div> <span class="ql-formats"> <button class="ql-bold"></button> <button class="ql-italic"></button> <button class="ql-underline"></button> <button class="ql-strike"></button> </span> <span class="ql-formats"> <select class="ql-color"></select> <select class="ql-background"></select> </span> <span class="ql-formats"> <button class="ql-header" value="1"></button> <button class="ql-header" value="2"></button> <button class="ql-blockquote"></button> <button class="ql-code-block"></button> </span> <span class="ql-formats"> <button class="ql-list" value="ordered"></button> <button class="ql-list" value="bullet"></button> </span> <span class="ql-formats"> <button class="ql-link"></button> <button class="ql-image"></button> <button class="ql-video"></button> </span> <span class="ql-formats"> <button class="ql-clean"></button> </span> </div> <div class='ui inverted attached segment'> <button id='postBtn' class='ui blue disabled inverted button'>Type something...</button> </div>`;
+    document.getElementById('ptc_comment_editor').appendChild(tempo_comment_html);
   }
+
+  const postBtn = document.getElementById('postBtn');
+  const editor = document.getElementById('ql-comment-editor');
 
   (() => {
     let script = document.createElement('script');
     script.src = 'https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js';
     document.querySelector('body').appendChild(script);
   })();
-
-  console.log("Added quill script");
 
   // setting up Quill Editor
   await initFunctions(['Quill']);
@@ -92,8 +64,6 @@
     placeholder: 'Make it something good bruh...',
     theme: "snow"
   });
-
-  console.log("Quill initialized.");
 
   parent_editor.style.display = 'block';
   document.getElementById('comment_editor_footer_loader').remove();
@@ -114,7 +84,6 @@
   const limit = 1000;
   const minlimit = 10;
 
-  // listeners to handle user input
   quill.on('text-change', function (delta, old, source) {
     if (source == 'user') {
       if (quill.getLength() > limit) {
@@ -129,7 +98,6 @@
     }
   });
 
-  // changing the theme into dark mode
   let editorForm = document.querySelector('#ql-comment-editor > div');
   while (!editorForm) {
     setTimeout(() => {
@@ -173,8 +141,6 @@
     let allImgs = document.querySelector('#ql-comment-editor div').querySelectorAll('img');
     let img_json_arr = [];
 
-    console.log(allImgs);
-
     if (allImgs.length > 0)
       for (const items of allImgs) {
         let newsrc = await ImgurJS.uploadB64Img(dataURItoBlob(items.src));
@@ -189,9 +155,6 @@
         img: img_json_arr
       }
     }
-
-
-    console.log('Done');
 
     // posting to comments table
     let data = await supabase.from('comments').insert({
@@ -209,11 +172,7 @@
       return;
     }
 
-
-    console.log('posting to comments table');
-
     let comment_id = data.data[0].id;
-
     // posting to websitepost table
     data = await supabase.from('website-posts').insert({
       date: "now()",
@@ -230,11 +189,9 @@
       return;
     }
 
-    console.log('posting to posts table');
     let post_id = data.data[0].id;
-
     // posting to comments-website-post table
-    data = await supabase.from('websitepost-comments').insert({
+    data = await supabase.from('websiteposts-comments').insert({
       date: "now()",
       websiteposts_id: post_id,
       comments_id: comment_id
@@ -248,9 +205,28 @@
         ${data.error.message}`);
       return;
     }
-    postBtn.classList.remove('disabled');
-    postBtn.innerHTML = `Post`;
-    editor.querySelector('div').setAttribute('contenteditable', true);
+
+    // posting to users-comments table
+    data = await supabase.from('users-comments').insert({
+      comments_id: comment_id,
+      users_id: userid
+    });
+
+    if (data.error) {
+      window.alert(`Some encountered problem!
+        ~
+        ~
+        Logs:
+        ${data.error.message}`);
+      return;
+    }
+    postBtn.innerHTML = `Comment Posted!!`;
+    postBtn.classList.add('green');
+    setTimeout(() => {
+      postBtn.classList.remove('green');
+      editor.querySelector('div').setAttribute('contenteditable', true);
+      document.querySelector('#ql-comment-editor div').innerHTML = '';
+    }, 1000);
   });
 
   var ImgurJS = {
