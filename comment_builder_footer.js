@@ -29,7 +29,7 @@
         for (const obj of comments_data.data) {
             // build user data
             let countryname;
-            let rank_data = await supabase.from('ranks').select('rank_name, rank_image').eq('id', obj.users.rank_id);
+            let rank_data = await supabase.from('ranks').select('rank_image').eq('id', obj.users.rank_id);
             if (!handledErrorSupabase(rank_data)) return;
 
             let user_data = obj.users;
@@ -41,25 +41,20 @@
                 countryname = countryname[0].name.official;
             }
             let div = document.createElement('div');
-            html = `<div class="ui inverted attached floating segment" style="min-height: 100px;">
-            <img style="float: left; width: 64px !important; height: 64px !important; object-fit: cover; border: 1px solid white; margin: 0 10px 10px 0 !important;" src="${user_data.prof_img}"/>
-            <a class="ui blue label">  
+            html = `<div class="ui inverted attached floating segment">
+  <div class="ui ${user_data.gender == "M" ? `blue`: `red`} basic image right pointing label">
+    <img loading="lazy" src="${user_data.prof_img}">
     ${user_data.username} <span id="action">said</span>...
-</a>
-   <div class="ui basic small blue label">
-     <i class="hourglass half icon" style='margin-right: 0px !important;'></i>
-    ${moment(new Date(comments_data.date)).fromNow()}
   </div>
-  <div class="ui red basic image label">
-  <img loading="lazy" src="${user_data.country == "Anonymous" ? `https://i.ebayimg.com/images/g/BbUAAOSwLYdf02f4/s-l1200.jpg` : `https://flagsapi.com/${user_data.country}/shiny/64.png`}">
-        ${countryname}
-</div> 
-  <div class="ui red image label">
-  <img loading="lazy" src="${rank_data.data[0].rank_image}">
-  ${rank_data.data[0].rank_name}
-</div>
-<br/>
-  ${comments_data.content}`;
+
+  <div style='display: block; float: right;' class="ui mini basic blue label">
+    <img class='ui spaced image avatar'
+      src='${user_data.country == "Anonymous" ? `https://i.ebayimg.com/images/g/BbUAAOSwLYdf02f4/s-l1200.jpg` : `https://flagsapi.com/${user_data.country}/shiny/64.png'`} />
+    <img class='ui spaced image avatar'
+      src='${rank_data.data[0].rank_image}' />${moment(new Date(comments_data.date)).fromNow()}
+  </div>
+ ${comments_data.content}
+</div>`;
             div.innerHTML = html;
             comments_container.appendChild(div);
         }
