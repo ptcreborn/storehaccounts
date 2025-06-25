@@ -226,9 +226,6 @@
     postBtn.innerHTML = `Comment Posted!!`;
     postBtn.classList.add('green');
     setTimeout(() => {
-      postBtn.classList.remove('green');
-      editor.querySelector('div').setAttribute('contenteditable', true);
-      document.querySelector('#ql-comment-editor div').innerHTML = '';
       if (!document.querySelector('#ptc_comments_container')) return;
 
       let div = document.createElement('div');
@@ -245,6 +242,11 @@
 ${getContent()}`;
       div.innerHTML = div_html;
       document.querySelector('#ptc_comments_container').appendChild(div);
+
+
+      postBtn.classList.remove('green');
+      editor.querySelector('div').setAttribute('contenteditable', true);
+      document.querySelector('#ql-comment-editor div').innerHTML = '';
     }, 1000);
   });
 
