@@ -7,7 +7,7 @@
     url = url.pathname;
 
     const comments_container = document.getElementById('ptc_comments_container');
-    if(!comments_container) return;
+    if (!comments_container) return;
 
     // main core execution
     let websitepost_id = await getWebsitePostsId(url);
@@ -18,6 +18,13 @@
     async function buildCommentsData(comments_data) {
         if (!comments_data) return;
         let html = ``;
+        let comment_header_html = `<br/><br/><h4 class="ui inverted horizontal divider header">
+  <i class="comments icon"></i>
+  ${comments_data.data.length} ${comments_data.data.length > 1 ? `Comments` : `Comment`}
+</h4><br/>`;
+        let comment_div = document.createElement('div');
+        comment_div.innerHTML = comment_header_html;
+        comments_container.appendChild(comment_div);
 
         for (const obj of comments_data.data) {
             // build user data
@@ -31,10 +38,7 @@
                 countryname = countryname[0].name.official;
             }
             let div = document.createElement('div');
-            html = `<br/><br/><h4 class="ui inverted horizontal divider header">
-  <i class="comments icon"></i>
-  ${comments_data.data.length} ${comments_data.data.length > 1 ? `Comments`: `Comment`}
-</h4><br/><div class='ui attached inverted segment' style='width: 100%; overflow: hidden;'>
+            html = `<div class='ui attached inverted segment' style='width: 100%; overflow: hidden;'>
   <div class="ui ${obj.users.gender == "M" ? `blue` : `red`} image pointing below label"> <!--Gender Color -->
   <img style='margin-right: 0px !important; margin-left: 0px !important; width: 26px !important; height: 26px !important; object-fit: cover;' src="${obj.users.prof_img}"> <!--Profile Image-->
     ${obj.users.username}
