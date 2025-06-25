@@ -7,7 +7,7 @@
   // Checking if the user is logged in!
   // and storing users' important data
 
-  if (!document.querySelector('#postBody')) return;
+  if (!document.querySelector('#postBody') || window.location.href.includes('/p/')) return;
 
   await initFunctions(['supabase']);
   let userData = await supabase.auth.getSession();
@@ -21,7 +21,7 @@
 
   if (userData.error || !userData.data.session) {
     parent_editor.classList.add('ui', 'compact', 'floating', 'warning', 'message', 'inverted');
-    parent_editor.innerHTML = `<h4>Please <a class="ui blue basic label" href="https://storehaccounts.blogspot.com/p/sign-in-with-storehaccounts.html"><i icon="blind icon"></i>create account first</a> before commenting :)</h4>`;
+    parent_editor.innerHTML = `<h4>Please <a class="ui blue basic label" href="https://storehaccounts.blogspot.com/p/sign-in-with-storehaccounts.html"><i icon="blind icon"></i>sign in first</a> before commenting :)</h4>`;
     parent_editor.style.display = 'block';
     document.getElementById('comment_editor_footer_loader').remove();
     if (userData.error) window.alert(`${userData.error.message}`);
