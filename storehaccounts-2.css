@@ -1254,9 +1254,9 @@ blockquote {
 
 blockquote a {
   padding: 8px;
-  color: #3d3c3c;
-  font-weight: 600;
-  text-decoration: underline;
+  color: #3d3c3c !important;
+  font-weight: 600 !important;
+  text-decoration: underline !important;
 }
 
 
