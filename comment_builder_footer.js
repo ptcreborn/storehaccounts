@@ -58,6 +58,7 @@
   <img loading="lazy" src="${rank_data.data[0].rank_image}">
   ${rank_data.data[0].rank_name}
 </div>
+<br/>
   ${comments_data.content}`;
             div.innerHTML = html;
             comments_container.appendChild(div);
