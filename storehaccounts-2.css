@@ -749,10 +749,6 @@ span a {
   cursor: pointer !important;
 }
 
-.postBody a:hover {
-  text-decoration: underline;
-}
-
 #articlesmidpost div:not([id]):not([class]) {
   display: none;
 }
