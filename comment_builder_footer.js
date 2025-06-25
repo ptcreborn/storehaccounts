@@ -42,12 +42,12 @@
             }
             let div = document.createElement('div');
             html = `<div class="ui inverted attached floating segment">
-  <div class="ui ${user_data.gender == "M" ? `blue`: `red`} basic image right pointing label">
+  <div class="ui ${user_data.gender == "M" ? `blue`: `red`} basic image label">
     <img loading="lazy" src="${user_data.prof_img}">
     ${user_data.username} <span id="action">said</span>...
   </div>
 
-  <div style='display: block; float: right;' class="ui mini basic blue label">
+  <div style='display: block; float: right;' class="ui mini black label">
     <img class='ui spaced image avatar'
       src='${user_data.country == "Anonymous" ? `https://i.ebayimg.com/images/g/BbUAAOSwLYdf02f4/s-l1200.jpg` : `https://flagsapi.com/${user_data.country}/shiny/64.png'`} />
     <img class='ui spaced image avatar'
