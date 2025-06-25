@@ -52,10 +52,10 @@
         ${obj.users.country == "Anonymous" ? `Homeless` : `${countryname}`} <!--Country Name-->
 </div>
   <br/>
-  <div class='ui inverted message' style='margin: 0 auto !important;'>
+  <div class='ui info ignored inverted message' style='margin: 0 auto !important;'>
    ${obj.comments.content}
     <br/>
-  <span class='ui blue basic label'>${moment(new Date(obj.comments.date)).fromNow()}</span> <!--Time-->
+  <span class='ui grey mini inverted basic label'>${moment(new Date(obj.comments.date)).fromNow()}</span> <!--Time-->
   </div>
 </div>`;
             div.innerHTML = html;
