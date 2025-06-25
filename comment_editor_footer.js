@@ -205,24 +205,10 @@
 
 
     let post_id = data.data[0].id;
-    // posting to comments-website-post table
+    // posting to websiteposts-comments table
     data = await supabase.from('websiteposts-comments').insert({
       date: "now()",
       websiteposts_id: post_id,
-      comments_id: comment_id
-    });
-
-    if (data.error) {
-      window.alert(`Some encountered problem!
-        ~
-        ~
-        Logs:
-        ${data.error.message}`);
-      return;
-    }
-
-    // posting to users-comments table
-    data = await supabase.from('users-comments').insert({
       comments_id: comment_id,
       users_id: userid
     });
@@ -234,7 +220,7 @@
         Logs:
         ${data.error.message}`);
       return;
-    }
+    }    
     postBtn.innerHTML = `Comment Posted!!`;
     postBtn.classList.add('green');
     setTimeout(() => {
