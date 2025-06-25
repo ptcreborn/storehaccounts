@@ -27,11 +27,11 @@
         comments_container.appendChild(comment_div);
 
         for (const obj of comments_data.data) {
-            if (!handledErrorSupabase(rank_data)) return;
-
             // build user data
             let countryname;
             let rank_data = await supabase.from('ranks').select('rank_name, rank_image').eq('id', obj.users.rank_id);
+            if (!handledErrorSupabase(rank_data)) return;
+
             let user_data = obj.users;
             let comments_data = obj.comments;
 
