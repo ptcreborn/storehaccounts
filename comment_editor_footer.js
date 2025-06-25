@@ -13,7 +13,6 @@
   let userData = await supabase.auth.getSession();
   let userid;
   let useremail;
-  let username;
 
   let parent_html = document.createElement('div');
   parent_html.innerHTML = `<div id='comment_editor_footer_loader' class="ui segment"> <div class="ui active dimmer"> <div class="ui indeterminate text loader">Preparing Comment Editor</div> </div> <br/> <br/> <br/> </div> <div id='ptc_comment_editor' class='ui inverted message' style='display: none;'> </div>`;
@@ -31,7 +30,6 @@
     // building comment_editor_html
     // appending to postBody
     useremail = userData.data.session.user.email;
-    username = userData.data.session.user.username;
     userData = await supabase.from('users').select('id, username, prof_img').eq('email', `${userData.data.session.user.email}`);
 
     if (userData.error) {
@@ -232,7 +230,7 @@
       let div_html = `<div class="ui ignored warning message" style="min-height: 100px;">
             <img style="float: left; width: 64px !important; height: 64px !important; object-fit: cover; border: 1px solid white; margin: 0 10px 10px 0 !important;" src="https://static.wikia.nocookie.net/361735c0-7535-4dfe-b5d7-6f1683b4550b/scale-to-width/755">
             <a class="ui blue label">  
-    ${username} <span id="action">said</span>...
+    ${useremail} <span id="action">said</span>...
 </a>
    <div class="ui basic small blue label">
      <i class="hourglass half icon" style="margin-right: 0px !important;"></i>
