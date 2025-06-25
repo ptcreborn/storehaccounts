@@ -68,7 +68,7 @@
     async function getCommentsLists(websitepost_id) {
         if (!websitepost_id) return;
         const db = `websiteposts-comments`;
-        let data = await supabase.from(db).select(`users(country, gender, username, rank_id, prof_img), comments(content, date)`).eq('websiteposts_id', websitepost_id).order('id', { ascending: false });
+        let data = await supabase.from(db).select(`users(country, gender, username, rank_id, prof_img), comments(content, date)`).eq('websiteposts_id', websitepost_id).order('id', { ascending: true });
         if (!handledErrorSupabase(data)) return;
         return data;
     }
