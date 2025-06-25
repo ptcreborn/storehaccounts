@@ -27,10 +27,13 @@
         comments_container.appendChild(comment_div);
 
         for (const obj of comments_data.data) {
+            if (!handledErrorSupabase(rank_data)) return;
+
             // build user data
             let countryname;
             let rank_data = await supabase.from('ranks').select('rank_name, rank_image').eq('id', obj.users.rank_id);
-            if (!handledErrorSupabase(rank_data)) return;
+            let user_data = obj.users;
+            let comments_data = obj.comments;
 
             if (obj.users.country != "Anonymous") {
                 countryname = await fetch('https://restcountries.com/v3.1/alpha/' + obj.users.country);
@@ -38,26 +41,25 @@
                 countryname = countryname[0].name.official;
             }
             let div = document.createElement('div');
-            html = `<div class='ui attached inverted segment' style='width: 100%; overflow: hidden;'>
-  <div class="ui ${obj.users.gender == "M" ? `blue` : `red`} image pointing below label"> <!--Gender Color -->
-  <img style='margin-right: 0px !important; margin-left: 0px !important; width: 26px !important; height: 26px !important; object-fit: cover;' src="${obj.users.prof_img}"> <!--Profile Image-->
-    ${obj.users.username}
-</div>
-    <div class="ui red image label">
-  <img src="${rank_data.data[0].rank_image}">
-  ${rank_data.data[0].rank_name}
-</div>
-      <div class="ui red mini basic image label"> <!--Flag-->
-  <img src="${obj.users.country == "Anonymous" ? `https://i.ebayimg.com/images/g/BbUAAOSwLYdf02f4/s-l1200.jpg` : `https://flagsapi.com/${obj.users.country}/shiny/64.png`}">
-        ${obj.users.country == "Anonymous" ? `Homeless` : `${countryname}`} <!--Country Name-->
-</div>
-  <br/>
-  <div class='ui info ignored inverted message' style='margin: 0 auto !important;'>
-   ${obj.comments.content}
-    <br/>
-  <span class='ui grey mini inverted basic label'>${moment(new Date(obj.comments.date)).fromNow()}</span> <!--Time-->
+            html = `<div class="ui inverted attached floating segment">
+   <div class="ui blue label">
+     <i class="hourglass half icon" style='margin-right: 0px !important;'></i>
+    ${moment(new Date(comments_data.date)).fromNow()}
   </div>
-</div>`;
+  <div class="ui red basic image label">
+  <img loading="lazy" src="${user_data.country == "Anonymous" ? `https://i.ebayimg.com/images/g/BbUAAOSwLYdf02f4/s-l1200.jpg` : `https://flagsapi.com/${user_data.country}/shiny/64.png`}">
+        ${countryname}
+</div> 
+  <div class="ui red image label">
+  <img loading="lazy" src="${rank_data.rank_image}">
+  ${rank_data.rank_name}
+</div>
+  
+  <a class="ui blue basic small label">
+  <img class="ui right spaced avatar image" src="${user_data.prof_img}">
+    ${user_data.username} <span id="action">said</span>...
+</a>
+  ${comments_data.content}`;
             div.innerHTML = html;
             comments_container.appendChild(div);
         }
