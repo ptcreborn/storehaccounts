@@ -31,7 +31,10 @@
                 countryname = countryname[0].name.official;
             }
             let div = document.createElement('div');
-            html = `<div class='ui attached inverted segment' style='width: 100%; overflow: hidden;'>
+            html = `<br/><br/><h4 class="ui inverted horizontal divider header">
+  <i class="comments icon"></i>
+  ${comments_data.data.length} ${comments_data.data.length > 1 ? `Comments`: `Comment`}
+</h4><br/><div class='ui attached inverted segment' style='width: 100%; overflow: hidden;'>
   <div class="ui ${obj.users.gender == "M" ? `blue` : `red`} image pointing below label"> <!--Gender Color -->
   <img style='margin-right: 0px !important; margin-left: 0px !important; width: 26px !important; height: 26px !important; object-fit: cover;' src="${obj.users.prof_img}"> <!--Profile Image-->
     ${obj.users.username}
