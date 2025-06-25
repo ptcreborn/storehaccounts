@@ -750,7 +750,7 @@ span a {
 }
 
 .postBody a:hover {
-  color: white !important;
+  text-decoration: underline;
 }
 
 #articlesmidpost div:not([id]):not([class]) {
