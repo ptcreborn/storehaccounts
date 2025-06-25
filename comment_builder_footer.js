@@ -51,12 +51,12 @@
         ${countryname}
 </div> 
   <div class="ui red image label">
-  <img loading="lazy" src="${rank_data.rank_image}">
-  ${rank_data.rank_name}
+  <img loading="lazy" src="${rank_data.data[0].rank_image}">
+  ${rank_data.data[0].rank_name}
 </div>
   
   <a class="ui blue basic small label">
-  <img class="ui right spaced avatar image" src="${user_data.prof_img}">
+  <img class="ui right spaced avatar image" style="margin-right: 0px !important;" src="${user_data.prof_img}">
     ${user_data.username} <span id="action">said</span>...
 </a>
   ${comments_data.content}`;
