@@ -180,7 +180,7 @@
 
     let comment_id = data.data[0].id;
 
-    
+
     // posting to websitepost table
     data = await supabase.from('website-posts').select('id').eq('url', `${new URL(window.location.href).pathname}`);
     if (data.error) {
@@ -222,13 +222,14 @@
         Logs:
         ${data.error.message}`);
       return;
-    }    
+    }
     postBtn.innerHTML = `Comment Posted!!`;
     postBtn.classList.add('green');
     setTimeout(() => {
       postBtn.classList.remove('green');
       editor.querySelector('div').setAttribute('contenteditable', true);
       document.querySelector('#ql-comment-editor div').innerHTML = '';
+      if (!document.querySelector('#ptc_comments_container')) return;
 
       let div = document.createElement('div');
       let div_html = `<div class="ui ignored warning message" style="min-height: 100px;">
@@ -242,9 +243,8 @@
   </div>
 <br>
 ${getContent()}`;
-      if(!document.querySelector('#ptc_comments_container')) return;
-
-      document.querySelector('#ptc_comments_container').appendChild(div_html);
+      div.innerHTML = div_html;
+      document.querySelector('#ptc_comments_container').appendChild(div);
     }, 1000);
   });
 
