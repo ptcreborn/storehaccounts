@@ -41,8 +41,8 @@
                 countryname = countryname[0].name.official;
             }
             let div = document.createElement('div');
-            html = `<div class="ui inverted attached floating segment">
-            <img class="ui right small spaced bordered avatar image" style="margin-right: 0px !important;" src="${user_data.prof_img}"/>
+            html = `<div class="ui inverted attached floating segment" style="min-height: 100px;">
+            <img style="float: left; width: 64px !important; height: 64px !important; object-fit: cover; border: 1px solid white; margin-right: 10px !important;" src="${user_data.prof_img}"/>
             <a class="ui blue label">  
     ${user_data.username} <span id="action">said</span>...
 </a>
