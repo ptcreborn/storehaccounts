@@ -7,6 +7,7 @@
     url = url.pathname;
 
     const comments_container = document.getElementById('ptc_comments_container');
+    if(!comments_container) return;
 
     // main core execution
     let websitepost_id = await getWebsitePostsId(url);
