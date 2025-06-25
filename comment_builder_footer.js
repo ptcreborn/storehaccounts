@@ -42,7 +42,7 @@
             }
             let div = document.createElement('div');
             html = `<div class="ui inverted attached floating segment" style="min-height: 100px;">
-            <img style="float: left; width: 64px !important; height: 64px !important; object-fit: cover; border: 1px solid white; margin-right: 10px !important;" src="${user_data.prof_img}"/>
+            <img style="float: left; width: 64px !important; height: 64px !important; object-fit: cover; border: 1px solid white; margin: 0 10px 10px 0 !important;" src="${user_data.prof_img}"/>
             <a class="ui blue label">  
     ${user_data.username} <span id="action">said</span>...
 </a>
