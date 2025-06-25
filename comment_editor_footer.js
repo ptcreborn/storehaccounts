@@ -112,7 +112,7 @@
   document.querySelector('#ql-comment-editor').classList.remove('loading');
 
   function getContent() {
-    return quill.getSemanticHTML();
+    return document.querySelector('#ql-comment-editor div').innerHTML;
   }
 
   function getText() {
