@@ -42,7 +42,11 @@
             }
             let div = document.createElement('div');
             html = `<div class="ui inverted attached floating segment">
-   <div class="ui blue label">
+            <img class="ui right small spaced bordered avatar image" style="margin-right: 0px !important;" src="${user_data.prof_img}"/>
+            <a class="ui blue label">  
+    ${user_data.username} <span id="action">said</span>...
+</a>
+   <div class="ui basic small blue label">
      <i class="hourglass half icon" style='margin-right: 0px !important;'></i>
     ${moment(new Date(comments_data.date)).fromNow()}
   </div>
@@ -54,11 +58,6 @@
   <img loading="lazy" src="${rank_data.data[0].rank_image}">
   ${rank_data.data[0].rank_name}
 </div>
-  
-  <a class="ui blue basic mini label">
-  <img class="ui right spaced avatar image" style="margin-right: 0px !important;" src="${user_data.prof_img}">
-    ${user_data.username} <span id="action">said</span>...
-</a>
   ${comments_data.content}`;
             div.innerHTML = html;
             comments_container.appendChild(div);
