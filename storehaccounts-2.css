@@ -1243,7 +1243,8 @@ box-shadow: -14px 9px 50px -18px #FFF;*/
 blockquote {
   font: 14px/20px italic Times, serif;
   padding: 8px;
-  background-color: #2b2a27;
+  color: #161515;
+  background-color: #eeb50a;
   border-top: 1px solid #d1f349;
   border-bottom: 1px solid #e7e74e;
   margin: 5px;
