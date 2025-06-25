@@ -234,7 +234,7 @@
 </a>
    <div class="ui basic small blue label">
      <i class="hourglass half icon" style="margin-right: 0px !important;"></i>
-    14 minutes ago
+    ${moment(new Date()).fromNow()}
   </div>
 <br>
 ${getContent()}`;
