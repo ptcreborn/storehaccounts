@@ -193,12 +193,6 @@ a.button:not(.ln) {
   background: url("https://api.iconify.design/ic-baseline-face.svg?height=24") center no-repeat;
 }
 
-a {
-  -webkit-text-underline-position: under;
-  -ms-text-underline-position: below;
-  text-underline-position: under;
-}
-
 b {
   font-weight: 800 !important;
 }
@@ -1307,7 +1301,7 @@ ol {
 }
 
 ul {
-  margin-top: 5px !important;
+  margin: 5px !important;
 }
 
 /* CSS */
