@@ -55,7 +55,7 @@
   ${rank_data.data[0].rank_name}
 </div>
   
-  <a class="ui blue basic small label">
+  <a class="ui blue basic mini label">
   <img class="ui right spaced avatar image" style="margin-right: 0px !important;" src="${user_data.prof_img}">
     ${user_data.username} <span id="action">said</span>...
 </a>
