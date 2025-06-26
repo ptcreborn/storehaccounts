@@ -8,8 +8,6 @@
 
     await initFunctions(['supabase', 'moment', 'setCookie', 'getCookieName']);
 
-    // check if the cookies for all comments are stored
-
     let url = new URL(window.location.href);
     url = url.pathname;
 
@@ -17,6 +15,7 @@
     const comments_count_container = document.querySelector('#ptc_comment_count');
     comments_container.classList.add('notification-parent-comments');
 
+    // check if the cookies for all comments are stored
     if (getCookieName(url)) {
         let cached_comment = getCookieName(url);
         comments_container = JSON.parse(cached_comment);
