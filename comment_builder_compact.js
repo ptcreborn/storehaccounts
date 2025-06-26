@@ -8,6 +8,7 @@
 
     await initFunctions(['supabase', 'moment']);
     const comments_container = document.querySelector('#ptc_comment_container');
+    comments_container.classList.add('notification-parent-comments');
 
     let url = new URL(window.location.href);
     url = url.pathname;
@@ -29,41 +30,38 @@
             </h4><br/><br/>`;
     document.querySelector('.postBody').appendChild(comments_container);
 
-    if (window.location.href)
 
-        for (const items of user_comments_data) {
-            let clonedTemplate = qts('comment-container').cloneNode(true).content.children[0];
+    for (const items of user_comments_data) {
+        let clonedTemplate = qts('comment-container').cloneNode(true).content.children[0];
 
-            let country_name = '';
+        let country_name = '';
 
-            if (items.users.country == "Anonymous") {
-                country_name = 'Homeless Catter';
-            } else {
-                country_name = await fetch('https://restcountries.com/v3.1/alpha/' + items.users.country);
-                country_name = await country_name.json();
-                country_name = country_name[0].name.official;
-            }
-
-            // build user data first
-            qt(clonedTemplate, 'thread-user-img').src = items.users.prof_img;
-            qt(clonedTemplate, 'thread-country').querySelector('img').src = `${items.users.country == "Anonymous" ? `https://static.wikia.nocookie.net/361735c0-7535-4dfe-b5d7-6f1683b4550b/scale-to-width/755` : `https://flagsapi.com/${items.users.country}/shiny/64.png`}`;
-            qt(clonedTemplate, 'thread-country').querySelector('span').innerText = `${country_name}`;
-            qt(clonedTemplate, 'thread-user-name').innerText = items.users.username;
-
-            // build comments info
-            qt(clonedTemplate, 'thread-comments').innerHTML = items.comments.content;
-            qt(clonedTemplate, 'thread-action').innerText = "commented";
-            qt(clonedTemplate, 'thread-time-ago').innerText = moment(new Date(items.comments.date)).fromNow();
-
-            // build rank info
-            let ranks_data = await getRanksData(items.users.rank_id);
-            qt(clonedTemplate, 'thread-rank').querySelector('img').src = ranks_data.rank_image;
-            qt(clonedTemplate, 'thread-rank').querySelector('span').innerText = `Rank ${items.users.rank_id} ${ranks_data.rank_name}`;
-
-            comments_container.appendChild(clonedTemplate);
+        if (items.users.country == "Anonymous") {
+            country_name = 'Homeless Catter';
+        } else {
+            country_name = await fetch('https://restcountries.com/v3.1/alpha/' + items.users.country);
+            country_name = await country_name.json();
+            country_name = country_name[0].name.official;
         }
 
-    comments_container.classList.add('notification-parent-comments');
+        // build user data first
+        qt(clonedTemplate, 'thread-user-img').src = items.users.prof_img;
+        qt(clonedTemplate, 'thread-country').querySelector('img').src = `${items.users.country == "Anonymous" ? `https://static.wikia.nocookie.net/361735c0-7535-4dfe-b5d7-6f1683b4550b/scale-to-width/755` : `https://flagsapi.com/${items.users.country}/shiny/64.png`}`;
+        qt(clonedTemplate, 'thread-country').querySelector('span').innerText = `${country_name}`;
+        qt(clonedTemplate, 'thread-user-name').innerText = items.users.username;
+
+        // build comments info
+        qt(clonedTemplate, 'thread-comments').innerHTML = items.comments.content;
+        qt(clonedTemplate, 'thread-action').innerText = "commented";
+        qt(clonedTemplate, 'thread-time-ago').innerText = moment(new Date(items.comments.date)).fromNow();
+
+        // build rank info
+        let ranks_data = await getRanksData(items.users.rank_id);
+        qt(clonedTemplate, 'thread-rank').querySelector('img').src = ranks_data.rank_image;
+        qt(clonedTemplate, 'thread-rank').querySelector('span').innerText = `Rank ${items.users.rank_id} ${ranks_data.rank_name}`;
+
+        comments_container.appendChild(clonedTemplate);
+    }
 
     // ###################
     // ###################
