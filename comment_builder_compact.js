@@ -119,4 +119,12 @@
         if (data.length == 0) return;
         else return data[0];
     }
+
+    window.appendEditor = (elem) => {
+        const comments_container = document.querySelector('#ptc_comment_container');
+        const comments_count_container = document.querySelector('#ptc_comment_count');
+        let comment_target = document.getElementById(elem.parentNode.id);
+
+        comment_target.appendChild(ptc_comment_editor);
+    }
 })();
