@@ -7,6 +7,9 @@
   script.setAttribute('crossorigin', 'anonymous');
 
   body.appendChild(script);
+
+  await initFunctions(['jQuery']);
+  
   script = document.createElement('script');
   script.setAttribute('src', 'https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js');
   body.appendChild(script);
