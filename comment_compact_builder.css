@@ -1,0 +1,111 @@
+.notification-parent-comments {
+  background: #2a475e;
+  border: 1px gray black;
+  line-height: 1.2rem;
+  width: 100%;
+  overflow: auto;
+  position: relative;
+}
+
+.notification-container-comments {
+  color: #87A3BF;
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+  border-top: 1px solid rgba(255,255,255,0.3);
+  padding-top: 3px;
+  padding-left: 10px;
+  font-size: 12px;
+  line-height: 1.2rem;
+  padding-bottom: 10px;
+}
+  
+.notification-container-comments img {
+  height: 300px !important;
+  object-fit: cover;
+  float: none;
+}
+
+.notification-container-comments img.icons {
+  width: 32px !important;
+  height: 32px !important;
+  object-fit: cover;
+  margin-right: 5px;
+  float: left;
+}
+  
+.notification-container-comments img.footer-imgs {
+    width: 24px !important;
+    height: 16px !important;
+    object-fit: cover;
+    vertical-align: text-top;
+    padding-top: 0px;
+}
+  
+.notification-container-comments span blockquote {
+  display: block;
+  background: black;
+  color: white;
+  padding: 2px 5px;
+  margin-top: 30px;
+}
+  
+.notification-container-comments button {
+  background: #2a475e;
+  border: 1px gray black;
+  float: right;
+  color: white;
+}
+
+.notification-container-comments span {
+  font-size: 14px;
+  font-weight: 700;
+}
+  
+.notification-container-comments span.footer {
+  font-size: 12px;
+  color: white !important; 
+  font-weight: 500; 
+  font-style: italic; 
+  opacity: 0.7;  
+}
+
+.notification-date {
+  font-size: 12px !important;
+  opacity: 0.4;
+  font-weight: 300;
+  margin-left: 5px;
+  margin-right: 5px;
+  float: right;
+  color: white !important;
+}
+  
+  .notification-date-members {
+  font-size: 12px !important;
+  float: right;
+  opacity: 0.7;
+  font-weight: 600;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+  
+  .notification-title-heading {
+    display: inline-block;
+    font-weight: 14px;
+    line-height: 1.2rem;
+    font-weight: 400;
+    color: white;
+  	opacity: 0.7;
+  }
+  
+  .notification-title-heading span {
+   	font-size: 12px;
+    font-style: italic;
+    margin-left: 5px;
+  }
+  
+  .notifications button {
+     all: unset;
+   	 color: white;
+     cursor: pointer;
+     background: #2a475e;
+     padding: 10px;
+  }  
