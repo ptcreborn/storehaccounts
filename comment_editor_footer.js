@@ -1,6 +1,6 @@
 // This script works with Supabase and Storehaccounts website.
 // This will be the official editor for comments!
-// This also uses Quill Editor (Open Source) June 24, 2025.
+// This also uses Quill Editor (Open Source) June 24, 2025
 
 (async () => {
 
@@ -183,7 +183,7 @@
       }
     }
 
-    // posting to comments table
+    // STORING COMMENT TABLE
     if (actionText.innerText == "comment") {
       let data = await supabase.from('comments').insert({
         date: "now()",
@@ -266,7 +266,7 @@
 
       // posting to comments-replies
       data = await supabase.from('comments-replies').insert({
-        comments_id: replyid,
+        comments_id: commentid,
         replies_id: reply_id,
         users_id: userid
       }).select('id');
@@ -293,7 +293,10 @@
 <br>
 ${getContent()}`;
       div.innerHTML = div_html;
-      document.querySelector('#ptc_comment_container').appendChild(div);
+      if (actionText.innerText == "comment")
+        document.querySelector('#ptc_comment_container').appendChild(div);
+      else if (actionText.innerText = "reply")
+        document.getElementById(`${commentid}`).parentNode.insertBefore(div, document.getElementById(`${commentid}`).nextSibling);
 
       const comments_container = document.querySelector('#ptc_comment_container');
       const comments_count_container = document.querySelector('#ptc_comment_count');
