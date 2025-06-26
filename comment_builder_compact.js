@@ -1,6 +1,7 @@
 // This script contains the compact viewable content of comments
 // including users and comments data
 // including ranks data as well
+// June 25 2025
 
 (async () => {
     if (window.location.href.includes('/p/') || !document.querySelector('.postBody')) return;
