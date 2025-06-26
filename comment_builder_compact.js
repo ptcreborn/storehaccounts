@@ -6,13 +6,24 @@
 (async () => {
     if (window.location.href.includes('/p/') || !document.querySelector('.postBody')) return;
 
-    await initFunctions(['supabase', 'moment']);
+    await initFunctions(['supabase', 'moment', 'setCookie', 'getCookieName']);
+
+    // check if the cookies for all comments are stored
+
+    let url = new URL(window.location.href);
+    url = url.pathname;
+
     const comments_container = document.querySelector('#ptc_comment_container');
     const comments_count_container = document.querySelector('#ptc_comment_count');
     comments_container.classList.add('notification-parent-comments');
 
-    let url = new URL(window.location.href);
-    url = url.pathname;
+    if (getCookieName(url)) {
+        let cached_comment = getCookieName(url);
+        comments_container = JSON.parse(cached_comment);
+        comments_container.innerHTML = cached_comment.content;
+        comments_count_container.innerHTML = cached_comment.count;
+        return;
+    }
 
     const postid = await getPostID(url);
     if (!postid) {
@@ -62,6 +73,11 @@
 
         comments_container.appendChild(clonedTemplate);
     }
+
+    setCookie(url, `{
+            count: ${comments_count_container.innerHTML},
+            content: ${comments_container.innerHTML}
+        }`, 120);
 
     // ###################
     // ###################
