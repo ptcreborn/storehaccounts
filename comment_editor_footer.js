@@ -44,7 +44,7 @@
     userid = userData.data[0].id;
 
     let tempo_comment_html = document.createElement('div');
-    tempo_comment_html.innerHTML = `<div class='ui floating message'><div class='header'>Add your <span id='ql-comment-action'></span></div></div> <div id="ql-comment-editor" class='ui loading inverted attached segment'> </div> <div id="ql-toolbar-container" class='ui inverted attached segment'> <div class="ui blue image label"> <img src="${userData.data[0].prof_img}"> ${userData.data[0].username} </div> <span class="ql-formats"> <button class="ql-bold"></button> <button class="ql-italic"></button> <button class="ql-underline"></button> <button class="ql-strike"></button> </span> <span class="ql-formats"><button class="ql-blockquote"></button> <button class="ql-code-block"></button> </span> <span class="ql-formats"> <button class="ql-list" value="ordered"></button> <button class="ql-list" value="bullet"></button> </span> <span class="ql-formats"> <button class="ql-link"></button> <button class="ql-image"></button> <button class="ql-video"></button> </span> <span class="ql-formats"> <button class="ql-clean"></button> </span> </div> <div class="ui inverted attached segment" style="min-height: 80px;"> <button id="postBtn" class="ui blue disabled inverted button" style="float: left;">Type something...</button>
+    tempo_comment_html.innerHTML = `<div class='ui floating message'><div class='header'>Add your <span class='ui inverted large basic blue label' id='ql-comment-action'></span></div></div> <div id="ql-comment-editor" class='ui loading inverted attached segment'> </div> <div id="ql-toolbar-container" class='ui inverted attached segment'> <div class="ui blue image label"> <img src="${userData.data[0].prof_img}"> ${userData.data[0].username} </div> <span class="ql-formats"> <button class="ql-bold"></button> <button class="ql-italic"></button> <button class="ql-underline"></button> <button class="ql-strike"></button> </span> <span class="ql-formats"><button class="ql-blockquote"></button> <button class="ql-code-block"></button> </span> <span class="ql-formats"> <button class="ql-list" value="ordered"></button> <button class="ql-list" value="bullet"></button> </span> <span class="ql-formats"> <button class="ql-link"></button> <button class="ql-image"></button> <button class="ql-video"></button> </span> <span class="ql-formats"> <button class="ql-clean"></button> </span> </div> <div class="ui inverted attached segment" style="min-height: 80px;"> <button id="postBtn" class="ui blue disabled inverted button" style="float: left;">Type something...</button>
 <button id="cancelReplyBtn" style="display: none; float: right;" class="ui red inverted button">Cancel Reply</button> </div>`;
     document.getElementById('ptc_comment_editor').appendChild(tempo_comment_html);
   }
@@ -100,7 +100,7 @@
         postBtn.classList.add('disabled');
       } else if (quill.getLength() > minlimit && quill.getLength() < limit) {
         postBtn.classList.remove('disabled');
-        postBtn.innerText = "Post";
+        postBtn.innerText = `${actionText.innerText}`;
       }
     }
   });
@@ -141,7 +141,7 @@
 
   // Cancelling a reply
   cancelBtn.addEventListener('click', async () => {
-    document.getElementById('ptc_comment_container').parentNode.insertBefore(editor, document.getElementById('ptc_comment_container').nextSibling);
+    document.getElementById('ptc_comment_container').parentNode.insertBefore(document.getElementById('ptc_comment_editor'), document.getElementById('ptc_comment_container').nextSibling);
     actionText.innerText = "comment";
     postBtn.innerText = actionText.innerText;
     cancelBtn.remove();
@@ -162,7 +162,7 @@
   // Posting the comment
   postBtn.addEventListener('click', async () => {
     postBtn.classList.add('disabled');
-    postBtn.innerHTML = `<i class="loading spinner icon"></i>Posting...`;
+    postBtn.innerHTML = `<i class="loading spinner icon"></i>${actionText.innerText}ing...`;
     editor.querySelector('div').setAttribute('contenteditable', false);
 
     let allImgs = document.querySelector('#ql-comment-editor div').querySelectorAll('img');
