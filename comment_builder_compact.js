@@ -55,7 +55,7 @@
             // build rank info
             let ranks_data = await getRanksData(items.users.rank_id);
             qt(clonedTemplate, 'thread-rank').querySelector('img').src = ranks_data.rank_image;
-            qt(clonedTemplate, 'thread-rank').querySelector('span').src = `Rank ${items.users.rank_id} ${ranks_data.rank_name}`;
+            qt(clonedTemplate, 'thread-rank').querySelector('span').innerText = `Rank ${items.users.rank_id} ${ranks_data.rank_name}`;
 
             comments_container.appendChild(clonedTemplate);
         }
