@@ -44,7 +44,7 @@
     userid = userData.data[0].id;
 
     let tempo_comment_html = document.createElement('div');
-    tempo_comment_html.innerHTML = `<div class='ui floating message'><div class='header'>Add your <span class='ui inverted large basic blue label' id='ql-comment-action'></span></div></div> <div id="ql-comment-editor" class='ui loading inverted attached segment'> </div> <div id="ql-toolbar-container" class='ui inverted attached segment'> <div class="ui blue image label"> <img src="${userData.data[0].prof_img}"> ${userData.data[0].username} </div> <span class="ql-formats"> <button class="ql-bold"></button> <button class="ql-italic"></button> <button class="ql-underline"></button> <button class="ql-strike"></button> </span> <span class="ql-formats"><button class="ql-blockquote"></button> <button class="ql-code-block"></button> </span> <span class="ql-formats"> <button class="ql-list" value="ordered"></button> <button class="ql-list" value="bullet"></button> </span> <span class="ql-formats"> <button class="ql-link"></button> <button class="ql-image"></button> <button class="ql-video"></button> </span> <span class="ql-formats"> <button class="ql-clean"></button> </span> </div> <div class="ui inverted attached segment" style="min-height: 80px;"> <button id="postBtn" class="ui blue disabled inverted button" style="float: left;">Type something...</button>
+    tempo_comment_html.innerHTML = `<div class='ui floating message'><div class='header'>Please be respectful! Add your <span class='ui inverted large black label' id='ql-comment-action'></span></div></div> <div id="ql-comment-editor" class='ui loading inverted attached segment'> </div> <div id="ql-toolbar-container" class='ui inverted attached segment'> <div class="ui blue image label"> <img src="${userData.data[0].prof_img}"> ${userData.data[0].username} </div> <span class="ql-formats"> <button class="ql-bold"></button> <button class="ql-italic"></button> <button class="ql-underline"></button> <button class="ql-strike"></button> </span> <span class="ql-formats"><button class="ql-blockquote"></button> <button class="ql-code-block"></button> </span> <span class="ql-formats"> <button class="ql-list" value="ordered"></button> <button class="ql-list" value="bullet"></button> </span> <span class="ql-formats"> <button class="ql-link"></button> <button class="ql-image"></button> <button class="ql-video"></button> </span> <span class="ql-formats"> <button class="ql-clean"></button> </span> </div> <div class="ui inverted attached segment" style="min-height: 80px;"> <button id="postBtn" class="ui blue disabled inverted button" style="float: left;">Type something...</button>
 <button id="cancelReplyBtn" style="display: none; float: right;" class="ui red inverted button">Cancel Reply</button> </div>`;
     document.getElementById('ptc_comment_editor').appendChild(tempo_comment_html);
   }
@@ -53,7 +53,7 @@
   const editor = document.getElementById('ql-comment-editor');
   const cancelBtn = document.getElementById('cancelReplyBtn');
   const actionText = document.getElementById('ql-comment-action');
-  document.getElementById('ql-comment-action').innerText = "comment";
+  document.getElementById('ql-comment-action').innerText = "Comment";
 
   (() => {
     let script = document.createElement('script');
@@ -68,7 +68,6 @@
       syntax: false,
       toolbar: '#ql-toolbar-container'
     },
-    placeholder: 'Make it something good bruh...',
     theme: "snow"
   });
 
@@ -142,7 +141,7 @@
   // Cancelling a reply
   cancelBtn.addEventListener('click', async () => {
     document.getElementById('ptc_comment_container').parentNode.insertBefore(document.getElementById('ptc_comment_editor'), document.getElementById('ptc_comment_container').nextSibling);
-    actionText.innerText = "comment";
+    actionText.innerText = "Comment";
     postBtn.innerText = actionText.innerText;
     cancelBtn.remove();
   });
@@ -154,7 +153,7 @@
     commentid = elem.parentNode.id;
 
     comment_target.appendChild(comment_editor);
-    actionText.innerText = "reply";
+    actionText.innerText = "Reply";
     cancelBtn.style.display = 'block';
     postBtn.innerText = actionText.innerText;
   }
@@ -297,6 +296,9 @@ ${getContent()}`;
 
       const comments_container = document.querySelector('#ptc_comment_container');
       const comments_count_container = document.querySelector('#ptc_comment_count');
+
+      // after posting or replying make sure the editor is outside comment container
+      document.getElementById('ptc_comment_container').parentNode.insertBefore(document.getElementById('ptc_comment_editor'), document.getElementById('ptc_comment_container').nextSibling);
 
       sessionStorage.setItem(new URL(window.location.href).pathname, JSON.stringify({
         count: comments_count_container.innerHTML,
