@@ -121,10 +121,9 @@
     }
 
     window.appendEditor = (elem) => {
-        const comments_container = document.querySelector('#ptc_comment_container');
-        const comments_count_container = document.querySelector('#ptc_comment_count');
+        const comment_editor = document.querySelector('#ptc_comment_editor');
         let comment_target = document.getElementById(elem.parentNode.id);
 
-        comment_target.appendChild(ptc_comment_editor);
+        comment_editor.appendChild(comment_target);
     }
 })();
