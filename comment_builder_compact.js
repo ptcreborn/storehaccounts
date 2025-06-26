@@ -77,17 +77,11 @@
         comments_container.appendChild(clonedTemplate);
     }
 
-    console.log(url);
-    console.log(`{
-            count: ${comments_count_container.innerHTML},
-            content: ${comments_container.innerHTML}
-        }`);
-
-    sessionStorage.setItem(url, `{
-            count: ${comments_count_container.innerHTML},
-            content: ${comments_container.innerHTML},
-            date: ${new Date().getTime()}
-        }`);
+    sessionStorage.setItem(url, JSON.stringify({
+        count: comments_count_container.innerHTML,
+        content: comments_container.innerHTML,
+        date: new Date().getTime()
+    }));
 
     // ###################
     // ###################
