@@ -73,6 +73,12 @@
         comments_container.appendChild(clonedTemplate);
     }
 
+    console.log(url);
+    console.log(`{
+            count: ${comments_count_container.innerHTML},
+            content: ${comments_container.innerHTML}
+        }`);
+
     setCookie(url, `{
             count: ${comments_count_container.innerHTML},
             content: ${comments_container.innerHTML}
