@@ -32,6 +32,7 @@
 
     for (const items of user_comments_data) {
         let clonedTemplate = qts('comment-container').cloneNode(true).content.children[0];
+        clonedTemplate.id = `ptc-child-comment-${items.comments.id}`;
 
         let country_name = '';
 
@@ -82,7 +83,7 @@
         else return data[0].id;
     }
     async function getCommentsAndUsersData(id) {
-        let { data, error } = await supabase.from('websiteposts-comments').select('users(username, country, prof_img, rank_id), comments(content, date)').eq('websiteposts_id', id);
+        let { data, error } = await supabase.from('websiteposts-comments').select('users(username, country, prof_img, rank_id), comments(id, content, date)').eq('websiteposts_id', id);
         if (error) {
             window.alert(`${error.message}`);
             return;
