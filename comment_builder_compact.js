@@ -1,9 +1,8 @@
 (async () => {
-    if (window.location.href.includes('/p/')) return;
+    if (window.location.href.includes('/p/') || !document.querySelector('.postBody')) return;
 
     await initFunctions(['supabase', 'moment']);
     const comments_container = document.createElement('div');
-    comments_container.classList.add('ui', 'inverted', 'segment', 'loading');
 
     let url = new URL(window.location.href);
     url = url.pathname;
@@ -15,7 +14,6 @@
             Be the first one to comment!
             </h4><br/><br/>`;
         document.querySelector('.postBody').appendChild(comments_container);
-        comments_container.classList.remove('ui', 'inverted', 'segment', 'loading');
         return;
     }
 
@@ -60,11 +58,7 @@
             comments_container.appendChild(clonedTemplate);
         }
 
-    comments_container.classList.remove('ui', 'inverted', 'segment', 'loading');
     comments_container.classList.add('notification-parent-comments');
-
-
-
 
     // ###################
     // ###################
