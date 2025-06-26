@@ -1,8 +1,12 @@
+// This script contains the compact viewable content of comments
+// including users and comments data
+// including ranks data as well
+
 (async () => {
     if (window.location.href.includes('/p/') || !document.querySelector('.postBody')) return;
 
     await initFunctions(['supabase', 'moment']);
-    const comments_container = document.createElement('div');
+    const comments_container = document.querySelector('#ptc_comment_container');
 
     let url = new URL(window.location.href);
     url = url.pathname;
@@ -20,7 +24,7 @@
     let user_comments_data = await getCommentsAndUsersData(postid);
     comments_container.innerHTML = `<br/><br/><h4 class="ui inverted horizontal divider header">
             <i class="comments icon"></i>
-            ${user_comments_data.length > 1 ? `${user_comments_data.length} comment` : `${user_comments_data.length} comments`}
+            ${user_comments_data.length < 2 ? `${user_comments_data.length} comment` : `${user_comments_data.length} comments`}
             </h4><br/><br/>`;
     document.querySelector('.postBody').appendChild(comments_container);
 
