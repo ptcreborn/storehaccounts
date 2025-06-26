@@ -293,10 +293,7 @@
 <br>
 ${getContent()}`;
       div.innerHTML = div_html;
-      if (actionText.innerText == "comment")
-        document.querySelector('#ptc_comment_container').appendChild(div);
-      else if (actionText.innerText = "reply")
-        document.getElementById(`${commentid}`).parentNode.insertBefore(div, document.getElementById(`${commentid}`).nextSibling);
+      document.querySelector('#ptc_comment_container').appendChild(div);
 
       const comments_container = document.querySelector('#ptc_comment_container');
       const comments_count_container = document.querySelector('#ptc_comment_count');
