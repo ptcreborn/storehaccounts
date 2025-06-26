@@ -224,7 +224,7 @@
     postBtn.innerHTML = `Comment Posted!!`;
     postBtn.classList.add('green');
     setTimeout(() => {
-      if (!document.querySelector('.notification-parent-comments')) return;
+      if (!document.querySelector('#comments_container')) return;
 
       let div = document.createElement('div');
       let div_html = `<div class="ui ignored warning message" style="min-height: 100px;">
@@ -239,7 +239,7 @@
 <br>
 ${getContent()}`;
       div.innerHTML = div_html;
-      document.querySelector('.notification-parent-comments').appendChild(div);
+      document.querySelector('#comments_container').appendChild(div);
 
 
       postBtn.classList.remove('green');
