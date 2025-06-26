@@ -18,9 +18,9 @@
     // check if the cookies for all comments are stored
     if (sessionStorage.getItem(url)) {
         let cached_comment = JSON.parse(sessionStorage.getItem(url));
-        let seconds_expiration = 120;
+        let ms_expiration = 30000;
 
-        if ((parseInt(cached_comment.date) - new Date().getTime()) < seconds_expiration) {
+        if (new Date().getTime() - (parseInt(cached_comment.date)) < ms_expiration) {
             comments_container.innerHTML = cached_comment.content;
             comments_count_container.innerHTML = cached_comment.count;
             return;
