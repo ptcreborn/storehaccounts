@@ -143,7 +143,7 @@
     document.getElementById('ptc_comment_container').parentNode.insertBefore(document.getElementById('ptc_comment_editor'), document.getElementById('ptc_comment_container').nextSibling);
     actionText.innerText = "Comment";
     postBtn.innerText = actionText.innerText;
-    cancelBtn.remove();
+    cancelBtn.style.display = "none";
   });
 
   // Adding a reply
@@ -183,7 +183,7 @@
     }
 
     // STORING COMMENT TABLE
-    if (actionText.innerText == "comment") {
+    if (actionText.innerText == "Comment") {
       let data = await supabase.from('comments').insert({
         date: "now()",
         content: getContent(),
@@ -243,7 +243,7 @@
     }
 
     // STORING REPLY TABLE
-    else if (actionText.innerText == "reply") {
+    else if (actionText.innerText == "Reply") {
       let data = await supabase.from('replies').insert({
         date: "now()",
         content: getContent(),
@@ -292,13 +292,15 @@
 <br>
 ${getContent()}`;
       div.innerHTML = div_html;
-      document.querySelector('#ptc_comment_container').appendChild(div);
+      
+      if(actionText.innerText == "Comment") document.querySelector('#ptc_comment_container').appendChild(div);
+      else if (actionText.innerText = "Reply") document.querySelector(`${commentid}`).appendChild(div);
 
       const comments_container = document.querySelector('#ptc_comment_container');
       const comments_count_container = document.querySelector('#ptc_comment_count');
 
       // after posting or replying make sure the editor is outside comment container
-      document.getElementById('ptc_comment_container').parentNode.insertBefore(document.getElementById('ptc_comment_editor'), document.getElementById('ptc_comment_container').nextSibling);
+      cancelBtn.click();
 
       sessionStorage.setItem(new URL(window.location.href).pathname, JSON.stringify({
         count: comments_count_container.innerHTML,
