@@ -124,6 +124,6 @@
         const comment_editor = document.querySelector('#ptc_comment_editor');
         let comment_target = document.getElementById(elem.parentNode.id);
 
-        comment_editor.appendChild(comment_target);
+        comment_target.appendChild(comment_editor);
     }
 })();
