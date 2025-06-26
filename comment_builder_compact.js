@@ -6,7 +6,7 @@
 (async () => {
     if (window.location.href.includes('/p/') || !document.querySelector('.postBody')) return;
 
-    await initFunctions(['supabase', 'moment', 'setCookie', 'getCookieName']);
+    await initFunctions(['supabase', 'moment']);
 
     let url = new URL(window.location.href);
     url = url.pathname;
@@ -16,12 +16,16 @@
     comments_container.classList.add('notification-parent-comments');
 
     // check if the cookies for all comments are stored
-    if (getCookieName(url)) {
-        let cached_comment = getCookieName(url);
-        comments_container = JSON.parse(cached_comment);
-        comments_container.innerHTML = cached_comment.content;
-        comments_count_container.innerHTML = cached_comment.count;
-        return;
+    if (sessionStorage.getItem(url)) {
+        let cached_comment = JSON.parse(sessionStorage.getItem(url));
+        let seconds_expiration = 120;
+
+        if ((parseInt(cached_comment.date) - new Date().getTime()) < seconds_expiration) {
+            comments_container = JSON.parse(cached_comment);
+            comments_container.innerHTML = cached_comment.content;
+            comments_count_container.innerHTML = cached_comment.count;
+            return;
+        }
     }
 
     const postid = await getPostID(url);
@@ -79,10 +83,11 @@
             content: ${comments_container.innerHTML}
         }`);
 
-    setCookie(url, `{
+    sessionStorage.setItem(url, `{
             count: ${comments_count_container.innerHTML},
-            content: ${comments_container.innerHTML}
-        }`, 120);
+            content: ${comments_container.innerHTML},
+            date: ${new Date().getTime()}
+        }`);
 
     // ###################
     // ###################
