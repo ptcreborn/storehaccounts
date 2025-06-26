@@ -266,7 +266,7 @@
 
       // posting to comments-replies
       data = await supabase.from('comments-replies').insert({
-        comments_id: commentid,
+        comments_id: commentid.replace('ptc-child-comment-', ''),
         replies_id: reply_id,
         users_id: userid
       }).select('id');
