@@ -21,7 +21,6 @@
         let seconds_expiration = 120;
 
         if ((parseInt(cached_comment.date) - new Date().getTime()) < seconds_expiration) {
-            comments_container = JSON.parse(cached_comment);
             comments_container.innerHTML = cached_comment.content;
             comments_count_container.innerHTML = cached_comment.count;
             return;
