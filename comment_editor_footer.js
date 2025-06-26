@@ -244,7 +244,7 @@ ${getContent()}`;
       const comments_container = document.querySelector('#ptc_comment_container');
       const comments_count_container = document.querySelector('#ptc_comment_count');
 
-      sessionStorage.setItem(new URL(window.location.href), JSON.stringify({
+      sessionStorage.setItem(new URL(window.location.href).pathname, JSON.stringify({
         count: comments_count_container.innerHTML,
         content: comments_container.innerHTML,
         date: new Date().getTime()
