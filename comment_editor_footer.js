@@ -241,6 +241,14 @@ ${getContent()}`;
       div.innerHTML = div_html;
       document.querySelector('#ptc_comment_container').appendChild(div);
 
+      const comments_container = document.querySelector('#ptc_comment_container');
+      const comments_count_container = document.querySelector('#ptc_comment_count');
+
+      sessionStorage.setItem(new URL(window.location.href), JSON.stringify({
+        count: comments_count_container.innerHTML,
+        content: comments_container.innerHTML,
+        date: new Date().getTime()
+      }));
 
       postBtn.classList.remove('green');
       editor.querySelector('div').setAttribute('contenteditable', true);
