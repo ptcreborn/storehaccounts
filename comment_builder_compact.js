@@ -1,20 +1,14 @@
-// Created by Lem Mad 06-26-2025
-
 (async () => {
     if (window.location.href.includes('/p/')) return;
 
     await initFunctions(['supabase', 'moment']);
-
     const comments_container = document.createElement('div');
     comments_container.classList.add('ui', 'inverted', 'segment', 'loading');
 
     let url = new URL(window.location.href);
     url = url.pathname;
 
-    console.log(url);
-
     const postid = await getPostID(url);
-    console.log(postid);
     if (!postid) {
         comments_container.innerHTML = `<br/><br/><h4 class="ui inverted horizontal divider header">
             <i class="comments icon"></i>
