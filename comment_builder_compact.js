@@ -1,0 +1,112 @@
+// Created by Lem Mad 06-26-2025
+
+(async () => {
+    if (window.location.href.includes('/p/')) return;
+
+    await initFunctions(['supabase', 'moment']);
+
+    const comments_container = document.createElement('div');
+    comments_container.classList.add('ui', 'inverted', 'segment', 'loading');
+
+    let url = new URL(window.location.href);
+    url = url.pathname;
+
+    console.log(url);
+
+    const postid = await getPostID(url);
+    console.log(postid);
+    if (!postid) {
+        comments_container.innerHTML = `<br/><br/><h4 class="ui inverted horizontal divider header">
+            <i class="comments icon"></i>
+            Be the first one to comment!
+            </h4><br/><br/>`;
+        document.querySelector('.postBody').appendChild(comments_container);
+        comments_container.classList.remove('ui', 'inverted', 'segment', 'loading');
+        return;
+    }
+
+    let user_comments_data = await getCommentsAndUsersData(postid);
+    comments_container.innerHTML = `<br/><br/><h4 class="ui inverted horizontal divider header">
+            <i class="comments icon"></i>
+            ${user_comments_data.length > 1 ? `${user_comments_data.length} comment` : `${user_comments_data.length} comments`}
+            </h4><br/><br/>`;
+    document.querySelector('.postBody').appendChild(comments_container);
+
+    if (window.location.href)
+
+        for (const items of user_comments_data) {
+            let clonedTemplate = qts('comment-container').cloneNode(true).content.children[0];
+
+            let country_name = '';
+
+            if (items.users.country == "Anonymous") {
+                country_name = 'Homeless Catter';
+            } else {
+                country_name = await fetch('https://restcountries.com/v3.1/alpha/' + items.users.country);
+                country_name = await country_name.json();
+                country_name = country_name[0].name.official;
+            }
+
+            // build user data first
+            qt(clonedTemplate, 'thread-user-img').src = items.users.prof_img;
+            qt(clonedTemplate, 'thread-country').querySelector('img').src = `${items.users.country == "Anonymous" ? `https://static.wikia.nocookie.net/361735c0-7535-4dfe-b5d7-6f1683b4550b/scale-to-width/755` : `https://flagsapi.com/${items.users.country}/shiny/64.png`}`;
+            qt(clonedTemplate, 'thread-country').querySelector('span').innerText = `${country_name}`;
+            qt(clonedTemplate, 'thread-user-name').innerText = items.users.username;
+
+            // build comments info
+            qt(clonedTemplate, 'thread-comments').innerHTML = items.comments.content;
+            qt(clonedTemplate, 'thread-action').innerText = "commented";
+            qt(clonedTemplate, 'thread-time-ago').innerText = moment(new Date(items.comments.date)).fromNow();
+
+            // build rank info
+            let ranks_data = await getRanksData(items.users.rank_id);
+            qt(clonedTemplate, 'thread-rank').querySelector('img').src = ranks_data.rank_image;
+            qt(clonedTemplate, 'thread-rank').querySelector('span').src = `Rank ${items.users.rank_id} ${ranks_data.rank_name}`;
+
+            comments_container.appendChild(clonedTemplate);
+        }
+
+    comments_container.classList.remove('ui', 'inverted', 'segment', 'loading');
+    comments_container.classList.add('notification-parent-comments');
+
+
+
+
+    // ###################
+    // ###################
+    // ###################
+    // misc functions
+    function qts(str) { // queryselector for templates
+        return document.querySelector(`[${str}]`);
+    }
+    function qt(elem, str) { // queryselector for cloned templates
+        return elem.querySelector(`[${str}]`);
+    }
+    async function getPostID(url) {
+        let { data, error } = await supabase.from('website-posts').select('id').eq('url', url);
+        if (error) {
+            window.alert(`${error.message}`);
+            return;
+        }
+        if (data.length == 0) return;
+        else return data[0].id;
+    }
+    async function getCommentsAndUsersData(id) {
+        let { data, error } = await supabase.from('websiteposts-comments').select('users(username, country, prof_img, rank_id), comments(content, date)').eq('websiteposts_id', id);
+        if (error) {
+            window.alert(`${error.message}`);
+            return;
+        }
+        if (data.length == 0) return;
+        else return data;
+    }
+    async function getRanksData(id) {
+        let { data, error } = await supabase.from('ranks').select('rank_name, rank_image').eq('id', id);
+        if (error) {
+            window.alert(`${error.message}`);
+            return;
+        }
+        if (data.length == 0) return;
+        else return data[0];
+    }
+})();
