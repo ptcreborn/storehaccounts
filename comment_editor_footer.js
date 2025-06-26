@@ -11,8 +11,8 @@
 
   await initFunctions(['supabase', 'jQuery']);
   let userData = await supabase.auth.getSession();
-  let userid;
-  let useremail;
+  let userid = '';
+  let commentid = '';
 
   let parent_html = document.createElement('div');
   parent_html.innerHTML = `<div id='comment_editor_footer_loader' class="ui segment"> <div class="ui active dimmer"> <div class="ui indeterminate text loader">Preparing Comment Editor</div> </div> <br/> <br/> <br/> </div> <div id='ptc_comment_editor' class='ui inverted message' style='display: none;'> </div>`;
@@ -29,7 +29,6 @@
   } else if (userData.data.session) {
     // building comment_editor_html
     // appending to postBody
-    useremail = userData.data.session.user.email;
     userData = await supabase.from('users').select('id, username, prof_img').eq('email', `${userData.data.session.user.email}`);
 
     if (userData.error) {
@@ -45,12 +44,16 @@
     userid = userData.data[0].id;
 
     let tempo_comment_html = document.createElement('div');
-    tempo_comment_html.innerHTML = `<div class='ui floating message'><div class='header'>Add your comment</div></div> <div id="ql-comment-editor" class='ui loading inverted attached segment'> </div> <div id="ql-toolbar-container" class='ui inverted attached segment'> <div class="ui blue image label"> <img src="${userData.data[0].prof_img}"> ${userData.data[0].username} </div> <span class="ql-formats"> <button class="ql-bold"></button> <button class="ql-italic"></button> <button class="ql-underline"></button> <button class="ql-strike"></button> </span> <span class="ql-formats"><button class="ql-blockquote"></button> <button class="ql-code-block"></button> </span> <span class="ql-formats"> <button class="ql-list" value="ordered"></button> <button class="ql-list" value="bullet"></button> </span> <span class="ql-formats"> <button class="ql-link"></button> <button class="ql-image"></button> <button class="ql-video"></button> </span> <span class="ql-formats"> <button class="ql-clean"></button> </span> </div> <div class='ui inverted attached segment'> <button id='postBtn' class='ui blue disabled inverted button'>Type something...</button> </div>`;
+    tempo_comment_html.innerHTML = `<div class='ui floating message'><div class='header'>Add your <span id='ql-comment-action'></span></div></div> <div id="ql-comment-editor" class='ui loading inverted attached segment'> </div> <div id="ql-toolbar-container" class='ui inverted attached segment'> <div class="ui blue image label"> <img src="${userData.data[0].prof_img}"> ${userData.data[0].username} </div> <span class="ql-formats"> <button class="ql-bold"></button> <button class="ql-italic"></button> <button class="ql-underline"></button> <button class="ql-strike"></button> </span> <span class="ql-formats"><button class="ql-blockquote"></button> <button class="ql-code-block"></button> </span> <span class="ql-formats"> <button class="ql-list" value="ordered"></button> <button class="ql-list" value="bullet"></button> </span> <span class="ql-formats"> <button class="ql-link"></button> <button class="ql-image"></button> <button class="ql-video"></button> </span> <span class="ql-formats"> <button class="ql-clean"></button> </span> </div> <div class="ui inverted attached segment" style="min-height: 80px;"> <button id="postBtn" class="ui blue disabled inverted button" style="float: left;">Type something...</button>
+<button id="cancelReplyBtn" style="display: none; float: right;" class="ui red inverted button">Cancel Reply</button> </div>`;
     document.getElementById('ptc_comment_editor').appendChild(tempo_comment_html);
   }
 
   const postBtn = document.getElementById('postBtn');
   const editor = document.getElementById('ql-comment-editor');
+  const cancelBtn = document.getElementById('cancelReplyBtn');
+  const actionText = document.getElementById('ql-comment-action');
+  document.getElementById('ql-comment-action').innerText = "comment";
 
   (() => {
     let script = document.createElement('script');
@@ -136,6 +139,26 @@
     return new Blob([ia], { type: mimeString });
   }
 
+  // Cancelling a reply
+  cancelBtn.addEventListener('click', async () => {
+    document.getElementById('ptc_comment_container').parentNode.insertBefore(editor, document.getElementById('ptc_comment_container').nextSibling);
+    actionText.innerText = "comment";
+    postBtn.innerText = actionText.innerText;
+    cancelBtn.remove();
+  });
+
+  // Adding a reply
+  window.appendEditor = (elem) => {
+    const comment_editor = document.querySelector('#ptc_comment_editor');
+    let comment_target = document.getElementById(elem.parentNode.id);
+    commentid = elem.parentNode.id;
+
+    comment_target.appendChild(comment_editor);
+    actionText.innerText = "reply";
+    cancelBtn.style.display = 'block';
+    postBtn.innerText = actionText.innerText;
+  }
+
   // Posting the comment
   postBtn.addEventListener('click', async () => {
     postBtn.classList.add('disabled');
@@ -161,37 +184,54 @@
     }
 
     // posting to comments table
-    let data = await supabase.from('comments').insert({
-      date: "now()",
-      content: getContent(),
-      images: img_json_arr
-    }).select('id');
+    if (actionText.innerText == "comment") {
+      let data = await supabase.from('comments').insert({
+        date: "now()",
+        content: getContent(),
+        images: img_json_arr
+      }).select('id');
 
-    if (data.error) {
-      window.alert(`Some encountered problem!
+      if (data.error) {
+        window.alert(`Some encountered problem!
         ~
         ~
         Logs:
         ${data.error.message}`);
-      return;
-    }
+        return;
+      }
 
-    let comment_id = data.data[0].id;
+      let comment_id = data.data[0].id;
+      data = await supabase.from('website-posts').select('id').eq('url', `${new URL(window.location.href).pathname}`);
+      if (data.error) {
+        window.alert(`${data.error.message}`);
+        return;
+      }
+
+      if (data.data.length == 0) {
+        data = await supabase.from('website-posts').insert({
+          date: "now()",
+          url: new URL(window.location.href).pathname,
+          thumb: document.querySelector('#postBody img') ? document.querySelector('#postBody img').src : null
+        }).select('id');
+
+        if (data.error) {
+          window.alert(`Some encountered problem!
+        ~
+        ~
+        Logs:
+        ${data.error.message}`);
+          return;
+        }
+      }
 
 
-    // posting to websitepost table
-    data = await supabase.from('website-posts').select('id').eq('url', `${new URL(window.location.href).pathname}`);
-    if (data.error) {
-      window.alert(`${data.error.message}`);
-      return;
-    }
-
-    if (data.data.length == 0) {
-      data = await supabase.from('website-posts').insert({
+      let post_id = data.data[0].id;
+      data = await supabase.from('websiteposts-comments').insert({
         date: "now()",
-        url: new URL(window.location.href).pathname,
-        thumb: document.querySelector('#postBody img') ? document.querySelector('#postBody img').src : null
-      }).select('id');
+        websiteposts_id: post_id,
+        comments_id: comment_id,
+        users_id: userid
+      });
 
       if (data.error) {
         window.alert(`Some encountered problem!
@@ -203,25 +243,39 @@
       }
     }
 
+    // STORING REPLY TABLE
+    else if (actionText.innerText == "reply") {
+      let data = await supabase.from('replies').insert({
+        date: "now()",
+        content: getContent(),
+        images: img_json_arr,
+        url: window.location.href + '?' + commentid
+      }).select('id');
 
-    let post_id = data.data[0].id;
-    // posting to websiteposts-comments table
-    data = await supabase.from('websiteposts-comments').insert({
-      date: "now()",
-      websiteposts_id: post_id,
-      comments_id: comment_id,
-      users_id: userid
-    });
-
-    if (data.error) {
-      window.alert(`Some encountered problem!
+      if (data.error) {
+        window.alert(`Some encountered problem!
         ~
         ~
         Logs:
         ${data.error.message}`);
-      return;
+        return;
+      }
+
+      let reply_id = data.data[0].id;
+
+
+      // posting to comments-replies
+      data = await supabase.from('comments-replies').insert({
+        comments_id: replyid,
+        replies_id: reply_id,
+        users_id: userid
+      }).select('id');
+      if (data.error) {
+        window.alert(`${data.error.message}`);
+        return;
+      }
     }
-    postBtn.innerHTML = `Comment Posted!!`;
+    postBtn.innerHTML = `${actionText.innerText} Posted!!`;
     postBtn.classList.add('green');
     setTimeout(() => {
       if (!document.querySelector('#ptc_comment_container')) return;
@@ -230,7 +284,7 @@
       let div_html = `<div class="ui ignored warning message" style="min-height: 100px;">
             <img style="float: left; width: 64px !important; height: 64px !important; object-fit: cover; border: 1px solid white; margin: 0 10px 10px 0 !important;" src="https://static.wikia.nocookie.net/361735c0-7535-4dfe-b5d7-6f1683b4550b/scale-to-width/755">
             <a class="ui blue label">  
-    ${useremail} <span id="action">said</span>...
+    ${userData.data[0].username} <span id="action">said</span>...
 </a>
    <div class="ui basic small blue label">
      <i class="hourglass half icon" style="margin-right: 0px !important;"></i>
