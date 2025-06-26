@@ -283,18 +283,19 @@
       let div_html = `<div class="ui ignored warning message" style="min-height: 100px;">
             <img style="float: left; width: 64px !important; height: 64px !important; object-fit: cover; border: 1px solid white; margin: 0 10px 10px 0 !important;" src="https://static.wikia.nocookie.net/361735c0-7535-4dfe-b5d7-6f1683b4550b/scale-to-width/755">
             <a class="ui blue label">  
-    ${userData.data[0].username} <span id="action">said</span>...
-</a>
-   <div class="ui basic small blue label">
-     <i class="hourglass half icon" style="margin-right: 0px !important;"></i>
-    ${moment(new Date()).fromNow()}
-  </div>
-<br>
-${getContent()}`;
+             ${userData.data[0].username} <span id="action">said</span>...
+              </a>
+                <div class="ui basic small blue label">
+                  <i class="hourglass half icon" style="margin-right: 0px !important;"></i>
+                  ${moment(new Date()).fromNow()}
+                </div>
+              <br>
+              ${getContent()}`;
+
       div.innerHTML = div_html;
       
-      if(actionText.innerText == "Comment") document.querySelector('#ptc_comment_container').appendChild(div);
-      else if (actionText.innerText = "Reply") document.querySelector(`${commentid}`).appendChild(div);
+      if(actionText.innerText == "Comment") document.getElementById('ptc_comment_container').appendChild(div);
+      else if (actionText.innerText = "Reply") document.getElementById(`${commentid}`).appendChild(div);
 
       const comments_container = document.querySelector('#ptc_comment_container');
       const comments_count_container = document.querySelector('#ptc_comment_count');
