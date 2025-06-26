@@ -9,7 +9,7 @@
 
   if (!document.querySelector('#postBody') || window.location.href.includes('/p/')) return;
 
-  await initFunctions(['supabase']);
+  await initFunctions(['supabase', 'jQuery']);
   let userData = await supabase.auth.getSession();
   let userid;
   let useremail;
