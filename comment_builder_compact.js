@@ -8,6 +8,7 @@
 
     await initFunctions(['supabase', 'moment']);
     const comments_container = document.querySelector('#ptc_comment_container');
+    const comments_count_container = document.querySelector('#ptc_comment_count');
     comments_container.classList.add('notification-parent-comments');
 
     let url = new URL(window.location.href);
@@ -15,20 +16,20 @@
 
     const postid = await getPostID(url);
     if (!postid) {
-        comments_container.innerHTML = `<br/><br/><h4 class="ui inverted horizontal divider header">
+        comments_count_container.innerHTML = `<br/><br/><h4 class="ui inverted horizontal divider header">
             <i class="comments icon"></i>
             Be the first one to comment!
             </h4><br/><br/>`;
-        document.querySelector('.postBody').appendChild(comments_container);
+        comments_count_container.appendChild(comments_count_container);
         return;
     }
 
     let user_comments_data = await getCommentsAndUsersData(postid);
-    comments_container.innerHTML = `<br/><br/><h4 class="ui inverted horizontal divider header">
+    comments_count_container.innerHTML = `<br/><br/><h4 class="ui inverted horizontal divider header">
             <i class="comments icon"></i>
             ${user_comments_data.length < 2 ? `${user_comments_data.length} comment` : `${user_comments_data.length} comments`}
             </h4><br/><br/>`;
-    document.querySelector('.postBody').appendChild(comments_container);
+    comments_container.appendChild(comments_count_container);
 
 
     for (const items of user_comments_data) {
