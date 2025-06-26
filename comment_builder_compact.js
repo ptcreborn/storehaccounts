@@ -20,7 +20,6 @@
             <i class="comments icon"></i>
             Be the first one to comment!
             </h4><br/><br/>`;
-        comments_count_container.appendChild(comments_count_container);
         return;
     }
 
@@ -29,7 +28,6 @@
             <i class="comments icon"></i>
             ${user_comments_data.length < 2 ? `${user_comments_data.length} comment` : `${user_comments_data.length} comments`}
             </h4><br/><br/>`;
-    comments_container.appendChild(comments_count_container);
 
 
     for (const items of user_comments_data) {
