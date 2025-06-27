@@ -116,7 +116,9 @@
             qt(clonedTemplate, 'thread-rank').querySelector('img').src = ranks_data.rank_image;
             qt(clonedTemplate, 'thread-rank').querySelector('span').innerText = `Rank ${reply_user_rank.id} ${ranks_data.rank_name}`;
             
-            qt(clonedTemplate, 'thread-reply').remove();
+            qt(clonedTemplate, 'thread-reply').onclick = () => {
+                qt(clonedTemplate, 'thread-reply').parentNode.querySelector('button').click();
+            };
 
             comment_temp_container.appendChild(clonedTemplate);
         }
