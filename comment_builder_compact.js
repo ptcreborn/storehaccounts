@@ -1,7 +1,7 @@
 // This script contains the compact viewable content of comments
 // including users and comments data
 // including ranks data as well
-// June 25 2025...
+// June 25 2025
 
 (async () => {
 	if (window.location.href.includes('/p/') || !document.querySelector('.postBody')) return;
@@ -79,7 +79,7 @@
         // After comment has been built, lets check if there are replies within it..
         // checking for replies within a comment
         let replies_data = await getRepliesData(items.comments.id);
-        
+
         if(replies_data)
             for(const reply of replies_data) {
             let reply_user = reply.users;
@@ -115,6 +115,8 @@
             let ranks_data = await getRanksData(reply_user_rank.id);
             qt(clonedTemplate, 'thread-rank').querySelector('img').src = ranks_data.rank_image;
             qt(clonedTemplate, 'thread-rank').querySelector('span').innerText = `Rank ${reply_user_rank.id} ${ranks_data.rank_name}`;
+            
+            qt(clonedTemplate, 'thread-reply').remove();
 
             comment_temp_container.appendChild(clonedTemplate);
         }
