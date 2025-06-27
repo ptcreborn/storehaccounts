@@ -1,7 +1,7 @@
 // This script contains the compact viewable content of comments
 // including users and comments data
 // including ranks data as well
-// June 25 2025..
+// June 25 2025
 
 (async () => {
 	if (window.location.href.includes('/p/') || !document.querySelector('.postBody')) return;
@@ -40,7 +40,7 @@
 	comments_count_container.innerHTML = `<br/><br/><h4 class="ui inverted horizontal divider header">
 		<i class="comments icon"></i>
 		${user_comments_data.length < 2 ? `${user_comments_data.length} comment` : `${user_comments_data.length} comments`}
-		</h4><br/><br/>`;
+		</h4><br/><br/>`;    
 
 
 	for (const items of user_comments_data) {
@@ -79,7 +79,8 @@
         // After comment has been built, lets check if there are replies within it..
         // checking for replies within a comment
         let replies_data = await getRepliesData(items.comments.id);
-        console.log(replies_data);
+        if(!replies_data) return;
+        
         for(const reply of replies_data) {
             let reply_user = reply.users;
             let reply_content = reply.replies;
