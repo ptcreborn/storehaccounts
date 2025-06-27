@@ -116,12 +116,9 @@
             qt(clonedTemplate, 'thread-rank').querySelector('img').src = ranks_data.rank_image;
             qt(clonedTemplate, 'thread-rank').querySelector('span').innerText = `Rank ${reply_user_rank.id} ${ranks_data.rank_name}`;
             
-            qt(clonedTemplate, 'thread-reply').onclick = () => {
-                console.log('clicked!');
-                console.log(qt(clonedTemplate, 'thread-reply'));
-                console.log(qt(clonedTemplate, 'thread-reply').parentNode);
-                qt(clonedTemplate, 'thread-reply').parentNode.qts('thread-reply').click();
-            };
+            document.getElementById(clonedTemplate.id).addEventListener('click', () => {
+                document.getElementById(clonedTemplate.id).parentNode.querySelector('[thread-reply]').click();
+            });
 
             comment_temp_container.appendChild(clonedTemplate);
         }
