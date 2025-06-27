@@ -117,6 +117,7 @@
             qt(clonedTemplate, 'thread-rank').querySelector('span').innerText = `Rank ${reply_user_rank.id} ${ranks_data.rank_name}`;
             
             qt(clonedTemplate, 'thread-reply').onclick = () => {
+                console.log('clicked!');
                 qt(clonedTemplate, 'thread-reply').parentNode.querySelector('button').click();
             };
 
