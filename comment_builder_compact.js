@@ -172,6 +172,6 @@
 			return;
 		}
 		if (data.length == 0) return;
-		else return data[0];
+		else return data;
 	}
 })();
