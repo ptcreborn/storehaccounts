@@ -118,7 +118,9 @@
             
             qt(clonedTemplate, 'thread-reply').onclick = () => {
                 console.log('clicked!');
-                qt(clonedTemplate, 'thread-reply').parentNode.querySelector('button').click();
+                console.log(qt(clonedTemplate, 'thread-reply'));
+                console.log(qt(clonedTemplate, 'thread-reply').parentNode);
+                qt(clonedTemplate, 'thread-reply').parentNode.qts('thread-reply').click();
             };
 
             comment_temp_container.appendChild(clonedTemplate);
