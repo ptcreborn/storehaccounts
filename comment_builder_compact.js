@@ -87,7 +87,7 @@
             let reply_user_rank = reply_user.ranks;
 
             let clonedTemplate = qts('comment-container').cloneNode(true).content.children[0];
-            clonedTemplate.id = `ptc-child-reply-${items.comments.id}`;
+            clonedTemplate.id = `ptc-child-reply-${reply_content.id}`;
             clonedTemplate.className = 'ui warning message';
 
             let country_name = '';
