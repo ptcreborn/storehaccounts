@@ -79,9 +79,9 @@
         // After comment has been built, lets check if there are replies within it..
         // checking for replies within a comment
         let replies_data = await getRepliesData(items.comments.id);
-        if(!replies_data) return;
         
-        for(const reply of replies_data) {
+        if(replies_data)
+            for(const reply of replies_data) {
             let reply_user = reply.users;
             let reply_content = reply.replies;
             let reply_user_rank = reply_user.ranks;
