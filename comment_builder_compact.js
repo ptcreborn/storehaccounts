@@ -46,9 +46,11 @@
     let user_comments_data = await getCommentsAndUsersData(postid);
     comments_count_container.innerHTML = `<br/><br/><h4 class="ui inverted horizontal divider header">
                                 		<i class="comments icon"></i>
-                                		${user_comments_data.length < 2 ? `${user_comments_data.length} comment` : ` ${user_comments_data.length} comments`}</h4><br/><br/>`;
+                                		${user_comments_data.length < 2 ? `${user_comments_data.length} comment` : ` ${user_comments_data.length} comments`}</h4><br/><br/>`;                         
+                                                                                
+    await checkQueryComment();                                        
 
-    for (let items of user_comments_data) {
+    for (const items of user_comments_data) {
 
         let clonedTemplate = qts('comment-container').cloneNode(true).content.children[0];
         clonedTemplate.id = `ptc-child-comment-${items.comments.id}`;
@@ -141,6 +143,55 @@
     // ###################
     // ###################
     // misc functions
+    async function checkQueryComment() {
+        let comment_id = extractCommentIDQuery();
+
+        if(!comment_id) return;
+
+        let {data, error} = await getCommentsAndUsersDataviaCommentID(comment_id);
+
+        if(error) {
+            window.alert(`Error: 
+                ${error.message}`);
+            return;
+        }
+
+        let items = data;
+
+        let clonedTemplate = qts('comment-container').cloneNode(true).content.children[0];
+        clonedTemplate.id = `ptc-child-comment-${items.comments.id}`;
+
+        let country_name = '';
+
+        if (items.users.country == "Anonymous") {
+            country_name = 'Homeless Catter';
+        } else {
+            country_name = await fetch('https://restcountries.com/v3.1/alpha/' + items.users.country);
+            country_name = await country_name.json();
+            country_name = country_name[0].name.official;
+        }
+
+        // build user data first
+        qt(clonedTemplate, 'thread-user-img').src = items.users.prof_img;
+        qt(clonedTemplate, 'thread-country').querySelector('img').src = `${items.users.country == "Anonymous" ? ` https: //static.wikia.nocookie.net/361735c0-7535-4dfe-b5d7-6f1683b4550b/scale-to-width/755` : `https://flagsapi.com/${items.users.country}/shiny/64.png`}`;
+            qt(clonedTemplate, 'thread-country').querySelector('span').innerText = `${country_name}`;
+        qt(clonedTemplate, 'thread-user-name').innerText = items.users.username;
+
+        // build comments info
+        qt(clonedTemplate, 'thread-comments').innerHTML = items.comments.content;
+        qt(clonedTemplate, 'thread-action').innerText = "commented";
+        qt(clonedTemplate, 'thread-time-ago').innerText = moment(new Date(items.comments.date)).fromNow();
+
+        // build rank info
+        let ranks_data = await getRanksData(items.users.rank_id);
+        qt(clonedTemplate, 'thread-rank').querySelector('img').src = ranks_data.rank_image;
+        qt(clonedTemplate, 'thread-rank').querySelector('span').innerText = `Rank ${items.users.rank_id} ${ranks_data.rank_name}`;
+
+        comments_container.appendChild(clonedTemplate); 
+
+        scrollIntoViewport(comment_id);
+    }
+
     function extractCommentIDQuery() {
         let url = window.location.href;
         url = new URL(url).search;
@@ -183,6 +234,21 @@
             return;
         else
             return data[0].id;
+    }
+    async function getCommentsAndUsersDataviaCommentID(id) {
+        let {
+            data,
+            error
+        } = await supabase.from('websiteposts-comments').select('users(username, country, prof_img, rank_id), comments(id, content, date)').eq('comments_id', id);
+        if (error) {
+            window.alert(`getCommentsAndUsersData:
+                ${error.message}`);
+            return;
+        }
+        if (data.length == 0)
+            return;
+        else
+            return data[0];
     }
     async function getCommentsAndUsersData(id) {
         let {
