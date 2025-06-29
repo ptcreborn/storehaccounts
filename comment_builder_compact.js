@@ -14,7 +14,7 @@
 	const comments_container = document.querySelector('#ptc_comment_container');
 	const comments_count_container = document.querySelector('#ptc_comment_count');
 	comments_container.classList.add('notification-parent-comments');
-    let querid_comment_elem = '';
+    let queried_comment_elem = '';
 
 	// check if the cookies for all comments are stored
 	if (sessionStorage.getItem(url)) {
@@ -25,8 +25,8 @@
 			comments_container.innerHTML = cached_comment.content;
 			comments_count_container.innerHTML = cached_comment.count;
             
-            querid_comment_elem = extractCommentIDQuery();
-            if(comment_query_id) scrollIntoViewport(querid_comment_elem);
+            queried_comment_elem = extractCommentIDQuery();
+            if(queried_comment_elem) scrollIntoViewport(queried_comment_elem);
 			return;
 		}
 	}
@@ -127,8 +127,8 @@
         }
 
         // viewing the comment container
-        querid_comment_elem = extractCommentIDQuery();
-        if(comment_query_id) scrollIntoViewport(comment_query_id);
+        queried_comment_elem = extractCommentIDQuery();
+        if(queried_comment_elem) scrollIntoViewport(queried_comment_elem);
 	}
 
 	sessionStorage.setItem(url, JSON.stringify({
