@@ -109,9 +109,8 @@
         comments_container.appendChild(clonedTemplate);
 
         // viewing the comment container
-        queried_comment_elem = extractCommentIDQuery();
         if (queried_comment_elem && isViewingComment) {
-            scrollIntoViewport(queried_comment_elem);
+            scrollIntoViewport(document.getElementById(queried_comment_elem));
             isViewingComment = false;
         }            
 
