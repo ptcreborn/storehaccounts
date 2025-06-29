@@ -247,14 +247,14 @@
             error
         } = await supabase.from('websiteposts-comments').select('users(username, country, prof_img, rank_id), comments(id, content, date)').eq('comments_id', id);
         if (error) {
-            window.alert(`getCommentsAndUsersData:
+            window.alert(`getCommentsAndUsersDataviaCommentID:
                 ${error.message}`);
             return;
         }
         if (data.length == 0)
             return;
         else
-            return data[0];
+            return data;
     }
     async function getCommentsAndUsersData(id) {
         let {
