@@ -146,6 +146,8 @@
     async function checkQueryComment() {
         let comment_id = extractCommentIDQuery();
 
+        console.log(`comment_id ${comment_id}`);
+
         if(!comment_id) return;
 
         let {data, error} = await getCommentsAndUsersDataviaCommentID(comment_id);
@@ -156,7 +158,11 @@
             return;
         }
 
+        console.log(`data: ${data}`);
+
         let items = data;
+
+        console.log(`items ${items}`);
 
         let clonedTemplate = qts('comment-container').cloneNode(true).content.children[0];
         clonedTemplate.id = `ptc-child-comment-${items.comments.id}`;
