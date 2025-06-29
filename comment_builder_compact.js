@@ -55,7 +55,7 @@
     comments `}
 		</h4><br/><br/>`;
 
-    for (const items of user_comments_data) {
+    for (let items of user_comments_data) {
 
         // this is for highlight comment
         // use for queried comment or reply
@@ -196,7 +196,7 @@
         return url_params.get('comment');
     }
     function scrollIntoViewport(id) {
-        let elem = document.getElementById('ptc-child-comment-' + id);
+        let element = document.getElementById('ptc-child-comment-' + id);
         element.classList.add('ui', 'inverted', 'teal', 'message');
         element.scrollIntoView({
             block: "center",
