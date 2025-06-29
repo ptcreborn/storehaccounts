@@ -1,7 +1,7 @@
 // This script contains the compact viewable content of comments
 // including users and comments data
 // including ranks data as well
-// June 25 2025
+// June 25 2025..
 
 (async() => {
     if (window.location.href.includes('/p/') || !document.querySelector('.postBody'))
@@ -45,8 +45,8 @@
 
     let user_comments_data = await getCommentsAndUsersData(postid);
     comments_count_container.innerHTML = `<br/><br/><h4 class="ui inverted horizontal divider header">
-                        		<i class="comments icon"></i>
-                        		${user_comments_data.length < 2 ? ` $ {
+                                		<i class="comments icon"></i>
+                                		${user_comments_data.length < 2 ? ` $ {
         user_comments_data.length
     }
     comment ` : ` $ {
