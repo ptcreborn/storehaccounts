@@ -50,33 +50,6 @@
 
     for (let items of user_comments_data) {
 
-        // this is for highlight comment
-        // use for queried comment or reply
-        (async() => {
-            queried_comment_elem = extractCommentIDQuery();
-            if (queried_comment_elem)
-                isViewingComment = true;
-            if (isViewingComment) {
-                let {
-                    data,
-                    error
-                } = await supabase.from('websiteposts-comments')
-                    .select('users(username, country, prof_img, rank_id), comments(id, content, date)')
-                    .eq('comments_id', queried_comment_elem);
-
-                if (error) {
-                    window.alert(`Error
-                
-                ${error.message}`);
-                    return;
-                }
-
-                if (!data || data.length == 0)
-                    return;
-                items = data[0];
-            }
-        })();
-
         let clonedTemplate = qts('comment-container').cloneNode(true).content.children[0];
         clonedTemplate.id = `ptc-child-comment-${items.comments.id}`;
 
@@ -155,13 +128,7 @@
                 });
 
                 comment_temp_container.appendChild(clonedTemplate);
-            }
-            
-            // viewing the comment container
-            if (queried_comment_elem && isViewingComment) {
-                scrollIntoViewport(document.getElementById(queried_comment_elem));
-                isViewingComment = false;
-            }           
+            }  
     }
 
     sessionStorage.setItem(url, JSON.stringify({
