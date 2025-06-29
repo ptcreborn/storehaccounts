@@ -73,7 +73,6 @@
 
                 if (!data || data.length == 0)
                     return;
-                isViewingComment = false;
                 items = data[0];
             }
         })();
@@ -111,8 +110,10 @@
 
         // viewing the comment container
         queried_comment_elem = extractCommentIDQuery();
-        if (queried_comment_elem)
+        if (queried_comment_elem && isViewingComment) {
             scrollIntoViewport(queried_comment_elem);
+            isViewingComment = false;
+        }            
 
         let comment_temp_container = clonedTemplate;
 
