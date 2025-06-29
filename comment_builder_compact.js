@@ -46,14 +46,7 @@
     let user_comments_data = await getCommentsAndUsersData(postid);
     comments_count_container.innerHTML = `<br/><br/><h4 class="ui inverted horizontal divider header">
                                 		<i class="comments icon"></i>
-                                		${user_comments_data.length < 2 ? ` $ {
-        user_comments_data.length
-    }
-    comment ` : ` $ {
-        user_comments_data.length
-    }
-    comments `}
-		</h4><br/><br/>`;
+                                		${user_comments_data.length < 2 ? `${user_comments_data.length} comment` : ` ${user_comments_data.length} comments`}</h4><br/><br/>`;
 
     for (let items of user_comments_data) {
 
