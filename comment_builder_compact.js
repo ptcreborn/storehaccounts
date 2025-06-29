@@ -43,6 +43,8 @@
 		</h4><br/><br/>`;    
 
 
+    let comment_query_id = extractCommentIDQuery();
+
 	for (const items of user_comments_data) {
 		let clonedTemplate = qts('comment-container').cloneNode(true).content.children[0];
 		clonedTemplate.id = `ptc-child-comment-${items.comments.id}`;
@@ -122,6 +124,10 @@
 
             comment_temp_container.appendChild(clonedTemplate);
         }
+
+        // viewing the comment container
+        if(!comment_query_id) return;
+        scrollIntoViewport(comment_query_id);
 	}
 
 	sessionStorage.setItem(url, JSON.stringify({
@@ -134,6 +140,22 @@
 	// ###################
 	// ###################
 	// misc functions
+	function extractCommentIDQuery(){    
+        let url = window.location.href;
+        url = new URL(url).search;
+
+        if(!url) return;
+
+        let url_params = new URLSearchParams(url);
+
+        if(!url_params.get('comment')) return;
+
+        return document.getElementById('ptc-child-comment-' + url_params.get('comment'));
+    }
+    function scrollIntoViewport(element) {
+        element.classList.add('ui', 'inverted', 'teal', 'message');
+        element.scrollIntoView({block: "center", behavior: "smooth"});
+    }
 	function qts(str) { // queryselector for templates
 		return document.querySelector(`[${str}]`);
 	}
