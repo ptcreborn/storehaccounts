@@ -248,7 +248,7 @@
         if (data.length == 0)
             return;
         else
-            return data;
+            return data[0];
     }
     async function getCommentsAndUsersData(id) {
         let {
