@@ -150,13 +150,7 @@
 
         if(!comment_id) return;
 
-        let {data, error} = await getCommentsAndUsersDataviaCommentID(comment_id);
-
-        if(error) {
-            window.alert(`Error: 
-                ${error.message}`);
-            return;
-        }
+        let data = await getCommentsAndUsersDataviaCommentID(comment_id);
 
         console.log(`data: ${data}`);
 
