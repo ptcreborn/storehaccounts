@@ -69,7 +69,7 @@
                     error
                 } = await supabase.from('websiteposts-comments')
                     .select('users(username, country, prof_img, rank_id), comments(id, content, date)')
-                    .eq('comments_id', comment_id);
+                    .eq('comments_id', queried_comment_elem);
 
                 if (error) {
                     window.alert(`Error
