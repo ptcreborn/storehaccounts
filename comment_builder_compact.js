@@ -29,7 +29,7 @@
 
             queried_comment_elem = extractCommentIDQuery();
             if (queried_comment_elem)
-                scrollIntoViewport(queried_comment_elem);
+                scrollIntoViewport(document.getElementById(queried_comment_elem));
             return;
         }
     }
