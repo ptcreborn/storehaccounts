@@ -42,7 +42,6 @@
 		${user_comments_data.length < 2 ? `${user_comments_data.length} comment` : `${user_comments_data.length} comments`}
 		</h4><br/><br/>`;    
 
-
     let comment_query_id = extractCommentIDQuery();
 
 	for (const items of user_comments_data) {
@@ -126,8 +125,7 @@
         }
 
         // viewing the comment container
-        if(!comment_query_id) return;
-        scrollIntoViewport(comment_query_id);
+        if(comment_query_id) scrollIntoViewport(comment_query_id);
 	}
 
 	sessionStorage.setItem(url, JSON.stringify({
