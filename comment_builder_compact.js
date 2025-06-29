@@ -29,7 +29,7 @@
 
             queried_comment_elem = extractCommentIDQuery();
             if (queried_comment_elem)
-                scrollIntoViewport(document.getElementById(queried_comment_elem));
+                scrollIntoViewport(queried_comment_elem);
             return;
         }
     }
@@ -106,13 +106,7 @@
         qt(clonedTemplate, 'thread-rank').querySelector('img').src = ranks_data.rank_image;
         qt(clonedTemplate, 'thread-rank').querySelector('span').innerText = `Rank ${items.users.rank_id} ${ranks_data.rank_name}`;
 
-        comments_container.appendChild(clonedTemplate);
-
-        // viewing the comment container
-        if (queried_comment_elem && isViewingComment) {
-            scrollIntoViewport(document.getElementById(queried_comment_elem));
-            isViewingComment = false;
-        }            
+        comments_container.appendChild(clonedTemplate); 
 
         let comment_temp_container = clonedTemplate;
 
@@ -162,6 +156,12 @@
 
                 comment_temp_container.appendChild(clonedTemplate);
             }
+            
+            // viewing the comment container
+            if (queried_comment_elem && isViewingComment) {
+                scrollIntoViewport(document.getElementById(queried_comment_elem));
+                isViewingComment = false;
+            }           
     }
 
     sessionStorage.setItem(url, JSON.stringify({
@@ -181,7 +181,7 @@
         if (!url)
             return;
 
-        let url_params = new URLSearchParams(url);
+        let  url_params = new URLSearchParams(url);
 
         if (!url_params.get('comment'))
             return;
