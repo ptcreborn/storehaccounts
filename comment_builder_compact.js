@@ -14,6 +14,7 @@
 	const comments_container = document.querySelector('#ptc_comment_container');
 	const comments_count_container = document.querySelector('#ptc_comment_count');
 	comments_container.classList.add('notification-parent-comments');
+    let comment_query_id = extractCommentIDQuery();
 
 	// check if the cookies for all comments are stored
 	if (sessionStorage.getItem(url)) {
@@ -23,6 +24,8 @@
 		if (new Date().getTime() - (parseInt(cached_comment.date)) < ms_expiration) {
 			comments_container.innerHTML = cached_comment.content;
 			comments_count_container.innerHTML = cached_comment.count;
+            
+            if(comment_query_id) scrollIntoViewport(comment_query_id);
 			return;
 		}
 	}
@@ -41,8 +44,6 @@
 		<i class="comments icon"></i>
 		${user_comments_data.length < 2 ? `${user_comments_data.length} comment` : `${user_comments_data.length} comments`}
 		</h4><br/><br/>`;    
-
-    let comment_query_id = extractCommentIDQuery();
 
 	for (const items of user_comments_data) {
 		let clonedTemplate = qts('comment-container').cloneNode(true).content.children[0];
