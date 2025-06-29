@@ -1,7 +1,7 @@
 // This script contains the compact viewable content of comments
 // including users and comments data
 // including ranks data as well
-// June 25 2025..
+// June 25 2025
 
 (async () => {
 	if (window.location.href.includes('/p/') || !document.querySelector('.postBody')) return;
@@ -125,11 +125,11 @@
 
             comment_temp_container.appendChild(clonedTemplate);
         }
-
-        // viewing the comment container
-        queried_comment_elem = extractCommentIDQuery();
-        if(queried_comment_elem) scrollIntoViewport(queried_comment_elem);
 	}
+
+    // viewing the comment container
+    queried_comment_elem = extractCommentIDQuery();
+    if(queried_comment_elem) scrollIntoViewport(queried_comment_elem);
 
 	sessionStorage.setItem(url, JSON.stringify({
 		count: comments_count_container.innerHTML,
