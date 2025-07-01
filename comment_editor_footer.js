@@ -248,7 +248,7 @@
         date: "now()",
         content: getContent(),
         images: img_json_arr,
-        url: new URL(window.location.href).pathname + '/?comment=' + commentid.replace('ptc-child-comment-', '')
+        url: new URL(window.location.href).pathname + '?comment=' + commentid.replace('ptc-child-comment-', '')
       }).select('id');
 
       if (data.error) {
