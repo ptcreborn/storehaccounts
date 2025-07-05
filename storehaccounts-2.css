@@ -1248,8 +1248,12 @@ blockquote {
 
 blockquote a {
   padding: 8px;
-  color: #3d3c3c !important;
+  color: #a40a0a !important;
   font-weight: 600 !important;
+}
+
+blockquote a:hover {
+    opacity: 0.7;
 }
 
 
