@@ -25,8 +25,6 @@ l.parentNode.insertBefore(s, l);
 })({})
 </script>`;
 
-    let div = document.createElement('div');
+    let div = document.getElementById('hillTopAds1');
     div.innerHTML = html;
-
-    document.querySelector('body').appendChild(div);
 })();
