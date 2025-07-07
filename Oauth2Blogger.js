@@ -7,6 +7,17 @@
     let access_token = '';
     let expiry_seconds = 0;
 
+    // check expiry of the token...
+    if(localStorage.getItem('userBloggerToken')) {
+        let data = JSON.parse(localStorage.getItem('userBloggerToken'));
+        let end = data.expiry;
+        let start = data.start;
+
+        if((new Date().getTime() - start)/1000 > end) {
+            localStorage.removeItem('userBloggerToken');
+        }
+    }
+
     if (!url.hash) return;
 
     if (!url.hash.includes('#state=pass-through')) return;
@@ -16,7 +27,8 @@
 
     localStorage.setItem('userBloggerToken', JSON.stringify({
         token: access_token,
-        expiry: expiry_seconds
+        expiry: expiry_seconds,
+        start: new Date().getTime()
     }));
     
     if(!localStorage.getItem('beforeOauthUrl')) return;
