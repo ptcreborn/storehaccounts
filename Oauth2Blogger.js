@@ -18,5 +18,7 @@
         token: access_token,
         expiry: expiry_seconds
     }));
+    
+    if(!localStorage.getItem('beforeOauthUrl')) return;
     window.location.href = localStorage.getItem('beforeOauthUrl');
 })();
