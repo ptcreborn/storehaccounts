@@ -1,7 +1,7 @@
 // checks whether the user logged in from Blogger Users: Landing Point Page to Home page
 // gets the access token and expiry in seconds...
 
-((callback) => {
+(() => {
     url = new URL(window.location.href);
 
     let access_token = '';
@@ -18,7 +18,5 @@
         token: access_token,
         expiry: expiry_seconds
     }));
-
-    callback();
-
+    window.location.href = localStorage.getItem('beforeOauthUrl');
 })();
