@@ -80,6 +80,8 @@ if (!window.location.href.includes('/p/') && window.location.href.includes('.htm
                     M = month[parseInt(m - 1)];
 
                     // getting the image from the post
+                    console.log(x[q]);                    
+                    console.log(x[q].content.$t);                    
                     let temp_doc = document.createElement('div');
                     temp_doc.innerHTML = x[q].content.$t;
                     let img_thumb_src = temp_doc.querySelector('img').src;
