@@ -87,7 +87,12 @@ if (!window.location.href.includes('/p/') && window.location.href.includes('.htm
                     let img_thumb_src = temp_doc.querySelector('img').src;
                     r = img_thumb_src;
 
-                    u = ("content" in x[q] && d.summaryLength > 0) ? x[q].content.$t.replace(/<br ?\/?>/g, " ").replace(/<.*?>/g, "").replace(/[<>]/g, "").substring(0, d.summaryLength) + "&hellip;" : "";
+
+                    temp_doc.querySelector('style').remove();
+
+                    let desc = temp_doc.innerText;
+
+                    u = ("content" in x[q] && d.summaryLength > 0) ? desc.replace(/<br ?\/?>/g, " ").replace(/<.*?>/g, "").replace(/[<>]/g, "").substring(0, d.summaryLength) + "&hellip;" : "";
                     for (var p = 0, a = x[q].link.length; p < a; p++) {
                         v = (x[q].link[p].rel == "alternate") ? x[q].link[p].href : "#"
                     }
