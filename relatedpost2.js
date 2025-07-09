@@ -48,7 +48,7 @@ if (!window.location.href.includes('/p/') && window.location.href.includes('.htm
             h = function(b) {
                 var c = b.feed.openSearch$totalResults.$t - d.numPosts,
                     a = o(1, (c > 0 ? c : 1));
-                j(d.homePage.replace(/\/$/, "") + "/feeds/posts/summary" + e + "?alt=json-in-script&orderby=updated&start-index=" + a + "&max-results=" + d.numPosts + "&callback=showRelatedPost");
+                j(d.homePage.replace(/\/$/, "") + "/feeds/posts/default" + e + "?alt=json-in-script&orderby=updated&start-index=" + a + "&max-results=" + d.numPosts + "&callback=showRelatedPost");
             },
             g = function(z) {
                 var s = document.getElementById(d.containerId),
