@@ -86,7 +86,7 @@ if (!window.location.href.includes('/p/') && window.location.href.includes('.htm
                     r = img_thumb_src;
 
 
-                    temp_doc.querySelector('style').remove();
+                    if(temp_doc.querySelector('style')) temp_doc.querySelector('style').remove();
 
                     let desc = temp_doc.innerText;
 
