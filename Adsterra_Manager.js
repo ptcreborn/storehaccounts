@@ -44,7 +44,7 @@
         script.src = items.src;
 
         if (items.div.includes('<script>'))
-            document.getElementById(items.divid)?.appendChild(script);
+            document.getElementById(items.divid).appendChild(script);
         else
             document.querySelector('body').appendChild(script);
     });
