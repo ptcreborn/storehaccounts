@@ -34,8 +34,8 @@
     }];
 
     adsterra_ads.forEach(items => {
-        if(!document.getElementById(items.divid)) return;
-        
+        if (!document.getElementById(items.divid)) return;
+
         document.getElementById(items.divid).innerHTML = `${items.div}`;
         document.getElementById(items.divid).classList.remove('loading');
 
@@ -43,6 +43,9 @@
         script.async = 'async';
         script.src = items.src;
 
-        document.querySelector('body').appendChild(script);
+        if (items.div.includes('<script>'))
+            document.getElementById(items.divid)?.appendChild(script);
+        else
+            document.querySelector('body').appendChild(script);
     });
 })();
