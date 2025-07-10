@@ -1,4 +1,4 @@
-(() => {
+(() => { // ADSTERRA MANAGER
     let adsterra_ads = [{
         src: `//pl26726594.profitableratecpm.com/d43c359fe4d2caa5b747df7256cd242b/invoke.js`,
         div: '<div id="container-d43c359fe4d2caa5b747df7256cd242b"></div>',
