@@ -744,6 +744,10 @@ span a {
   cursor: pointer !important;
 }
 
+.postBody a:not([class]):not(:has(*)):hover {
+  opacity: 0.9 !important;
+}
+
 #articlesmidpost div:not([id]):not([class]) {
   display: none;
 }
@@ -1253,7 +1257,6 @@ blockquote a {
 }
 
 blockquote a:hover {
-    opacity: 0.7;
     color: rgb(209, 21, 21)0a !important;
 }
 
