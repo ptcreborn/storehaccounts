@@ -7,7 +7,7 @@
         src: `//pl26726594.profitableratecpm.com/d43c359fe4d2caa5b747df7256cd242b/invoke.js`,
         div: '<div id="container-d43c359fe4d2caa5b747df7256cd242b"></div>',
         divid: `adsterra_mid`
-    };
+    }];
 
     adsterra_ads.forEach(items => {
         if (!document.getElementById(items.divid)) return;
