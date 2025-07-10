@@ -41,7 +41,6 @@
 
         let script = document.createElement('script');
         script.async = 'async';
-        script.setAttribute('data-cfasync', 'false');
         script.src = items.src;
 
         document.querySelector('body').appendChild(script);
