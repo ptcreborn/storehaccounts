@@ -12,8 +12,9 @@
     if (!app_signature || !app_version || !download) return;
 
     download.addEventListener('click', async() => {
-        download.classList.add('loading', 'disabled');
-        
+        download.classList.add('disabled', 'placeholder');
+        download.innerText = "Downloading...";
+
         const db = `https://ptc-database-default-rtdb.firebaseio.com/mods`;
 
         await initFunctions(['FirebaseModule']);
