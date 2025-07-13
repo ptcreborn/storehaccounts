@@ -19,6 +19,40 @@
     document.querySelector('#postBody').appendChild(parent_html);
     const parent_editor = document.getElementById('ptc_comment_editor');
 
+    // Adding a reply
+    window.appendEditor = async(elem) => {
+        await initFunctions(['ModalCreator']);
+        const comment_editor = document.querySelector('#ptc_comment_editor');
+        let comment_target = document.getElementById(elem.parentNode.id);
+
+        if (!comment_target || !comment_editor) {
+            ModalCreator.popFunction(new Date().getTime(), "Please Login first before replying to a comment.",
+                "You are not yet logged in. To share your ideas and thoughts, you can log in with google account or discord account for free. Do you want to log in?",
+                'google icon', 'Login', () => {
+                    window.location.href = 'https://storehaccounts.blogspot.com/p/sign-in-with-storehaccounts.html';
+                });
+            return;
+        }
+
+        commentid = elem.parentNode.id;
+
+        comment_target.appendChild(comment_editor);
+
+        if (actionText) {
+            actionText.innerText = "Reply";
+            cancelBtn.style.display = 'block';
+            postBtn.innerText = actionText.innerText;
+        }
+        scrollIntoViewport(comment_editor);
+    }
+
+    function scrollIntoViewportByElement(element) {
+        element.scrollIntoView({
+            block: "center",
+            behavior: "smooth"
+        });
+    }
+
     if (userData.error || !userData.data.session) {
         parent_editor.classList.add('ui', 'compact', 'floating', 'warning', 'message', 'inverted');
         parent_editor.innerHTML = `<h4>Please <a class="ui blue basic label" href="https://storehaccounts.blogspot.com/p/sign-in-with-storehaccounts.html"><i icon="blind icon"></i>sign in first</a> before commenting :)</h4>`;
@@ -145,38 +179,6 @@
         postBtn.innerText = actionText.innerText;
         cancelBtn.style.display = "none";
     });
-
-    // Adding a reply
-    window.appendEditor = async(elem) => {
-        await initFunctions(['ModalCreator']);
-        const comment_editor = document.querySelector('#ptc_comment_editor');
-        let comment_target = document.getElementById(elem.parentNode.id);
-
-        if (!comment_target || !comment_editor) {
-            ModalCreator.popFunction(new Date().getTime(), "Please Login first before replying to a comment.",
-                "You are not yet logged in. To share your ideas and thoughts, you can log in with google account or discord account for free. Do you want to log in?",
-                'google icon', 'Login', () => {
-                    window.location.href = 'https://storehaccounts.blogspot.com/p/sign-in-with-storehaccounts.html';
-                });
-            return;
-        }
-
-        commentid = elem.parentNode.id;
-
-        comment_target.appendChild(comment_editor);
-        actionText.innerText = "Reply";
-        cancelBtn.style.display = 'block';
-        postBtn.innerText = actionText.innerText;
-
-        scrollIntoViewport(elem);
-    }
-
-    function scrollIntoViewport(element) {
-        element.scrollIntoView({
-            block: "center",
-            behavior: "smooth"
-        });
-    }
 
     // Posting the comment
     postBtn.addEventListener('click', async() => {
