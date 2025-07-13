@@ -35,14 +35,13 @@
         }
 
         commentid = elem.parentNode.id;
-
         comment_target.appendChild(comment_editor);
 
-        if (actionText) {
-            actionText.innerText = "Reply";
-            cancelBtn.style.display = 'block';
-            postBtn.innerText = actionText.innerText;
-        }
+        // if (actionText) {
+        //     actionText.innerText = "Reply";
+        //     cancelBtn.style.display = 'block';
+        //     postBtn.innerText = actionText.innerText;
+        // }
         scrollIntoViewport(comment_editor);
     }
 
