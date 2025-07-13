@@ -5,6 +5,13 @@
 
 
 (async() => {
+    // return if the post is not official...
+    const app_signature = document.querySelector('[app-signature]');
+    const app_version = document.querySelector('[app-version]');
+    const download = document.querySelector('div#download button');
+
+    if (app_signature || app_version || download) return;
+
     await initFunctions(['FirebaseModule', 'PTC_Cookies']);
     let allBtns = document.querySelectorAll('button[disabled]');
     let filterBtn = Array.from(allBtns);
@@ -22,15 +29,6 @@
         const official_db = 'https://ptc-database-default-rtdb.firebaseio.com/mods';
         let uid = '';
 
-        // return if the post is not official...
-        const app_signature = document.querySelector('[app-signature]');
-        const app_version = document.querySelector('[app-version]');
-        const download = document.querySelector('div#download button');
-
-        if (app_signature || app_version || download) return;
-
-        console.log('called!');
-
         spanText.innerText = 'DOWNLOAD';
         icon.className = 'cloud download icon';
 
@@ -42,7 +40,7 @@
         let version = data.version;
         let numads = data.numads;
 
-        btn.onclick = async() => {
+        btn.addEventListener('click', async() => {
             // incrementing official download count
             if (document.querySelector('[app-signature]')) {
                 let dl = await FirebaseModule.fetchJSON(`${official_db}/${btoa(document.querySelector('[app-signature]').innerText)}/downloads.json`);
@@ -87,7 +85,7 @@
             } else {
                 window.alert("Please Enable Cookies in your browser. You can use Incognito mode or Private Mode. If this is a problem please email jasonbourne181997@gmail.com.");
             }
-        }
+        });
         btn.removeAttribute('disabled');
     }
 })();
