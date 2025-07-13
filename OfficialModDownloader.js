@@ -7,9 +7,11 @@
     const app_signature = document.querySelector('[app-signature]');
     const app_version = document.querySelector('[app-version]');
     const download = document.querySelector('div#download button');
-    const app_downloads = document.querySelector('[app-dl-count]');
+    const app_downloads = document.querySelector('[app-dl-count]');    
 
     if (!app_signature || !app_version || !download) return;
+
+    download.classList.add('loading', 'disabled');
 
     download.addEventListener('click', async() => {
         const db = `https://ptc-database-default-rtdb.firebaseio.com/mods`;
