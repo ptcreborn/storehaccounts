@@ -42,7 +42,7 @@
         //     cancelBtn.style.display = 'block';
         //     postBtn.innerText = actionText.innerText;
         // }
-        scrollIntoViewport(comment_editor);
+        scrollIntoViewportByElement(comment_editor);
     }
 
     function scrollIntoViewportByElement(element) {
