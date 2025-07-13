@@ -5,6 +5,12 @@
 
 
 (async() => {
+    // return if the post is not official...
+    const app_signature = document.querySelector('[app-signature]');
+    const app_version = document.querySelector('[app-version]');
+    const download = document.querySelector('div#download button');
+    if(app_signature || app_version || download) return;
+
     await initFunctions(['FirebaseModule', 'PTC_Cookies']);
     let allBtns = document.querySelectorAll('button[disabled]');
     let filterBtn = Array.from(allBtns);
