@@ -36,12 +36,7 @@
 
         commentid = elem.parentNode.id;
         comment_target.appendChild(comment_editor);
-
-        // if (actionText) {
-        //     actionText.innerText = "Reply";
-        //     cancelBtn.style.display = 'block';
-        //     postBtn.innerText = actionText.innerText;
-        // }
+        checkActionText();
         scrollIntoViewportByElement(comment_editor);
     }
 
@@ -152,6 +147,14 @@
 
     function getText() {
         return quill.getText();
+    }
+
+    function checkActionText() {
+        if (actionText) {
+            actionText.innerText = "Reply";
+            cancelBtn.style.display = 'block';
+            postBtn.innerText = actionText.innerText;
+        }
     }
 
     function dataURItoBlob(dataURI) {
