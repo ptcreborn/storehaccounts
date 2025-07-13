@@ -1,12 +1,10 @@
-
-
 // This function serves all Download buttons
 // that has been registered to Firebase
 // and Mediafire Links
 // Checking the number of ads to be bypassed
 
 
-(async () => {
+(async() => {
     await initFunctions(['FirebaseModule', 'PTC_Cookies']);
     let allBtns = document.querySelectorAll('button[disabled]');
     let filterBtn = Array.from(allBtns);
@@ -35,7 +33,19 @@
         let version = data.version;
         let numads = data.numads;
 
-        btn.onclick = async () => {
+        btn.onclick = async() => {
+            // incrementing official download count
+            if (document.querySelector('[app-signature]')) {
+                let dl = await FirebaseModule.fetchJSON(`${official_db}/${btoa(document.querySelector('[app-signature]').innerText)}/downloads.json`);
+                dl += 1;
+                await FirebaseModule.patch(`${official_db}/${btoa(document.querySelector('[app-signature]').innerText)}.json`, JSON.stringify({
+                    downloads: dl
+                }));
+                if (document.querySelector('[app-dl-count]')) 
+                    document.querySelector('[app-dl-count]').innerText = dl;
+            }
+
+
             if (PTC_Cookies.checkIfStorageSupported) {
                 data = await FirebaseModule.get(db + '/' + key + '.json');
                 data = JSON.parse(data);
@@ -68,14 +78,6 @@
             } else {
                 window.alert("Please Enable Cookies in your browser. You can use Incognito mode or Private Mode. If this is a problem please email jasonbourne181997@gmail.com.");
             }
-
-            // incrementing official download count
-            if (!document.querySelector('[app-signature]')) return;
-            let dl = await FirebaseModule.fetchJSON(`${official_db}/${btoa(document.querySelector('[app-signature]').innerText)}/downloads.json`);
-            dl += 1;
-            await FirebaseModule.patch(`${official_db}/${btoa(document.querySelector('[app-signature]').innerText)}.json`, JSON.stringify({
-                downloads: dl
-            }));
         }
         btn.removeAttribute('disabled');
     }
