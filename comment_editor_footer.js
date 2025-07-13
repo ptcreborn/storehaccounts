@@ -9,7 +9,7 @@
 
     if (!document.querySelector('#postBody') || window.location.href.includes('/p/')) return;
 
-    await initFunctions(['supabase', 'jQuery', 'ModalCreator']);
+    await initFunctions(['supabase', 'jQuery']);
     let userData = await supabase.auth.getSession();
     let userid = '';
     let commentid = '';
@@ -147,7 +147,8 @@
     });
 
     // Adding a reply
-    window.appendEditor = (elem) => {
+    window.appendEditor = async(elem) => {
+        await initFunctions(['ModalCreator']);
         const comment_editor = document.querySelector('#ptc_comment_editor');
         let comment_target = document.getElementById(elem.parentNode.id);
 
