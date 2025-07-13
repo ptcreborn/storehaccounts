@@ -5,12 +5,6 @@
 
 
 (async() => {
-    // return if the post is not official...
-    const app_signature = document.querySelector('[app-signature]');
-    const app_version = document.querySelector('[app-version]');
-    const download = document.querySelector('div#download button');
-    if(app_signature || app_version || download) return;
-
     await initFunctions(['FirebaseModule', 'PTC_Cookies']);
     let allBtns = document.querySelectorAll('button[disabled]');
     let filterBtn = Array.from(allBtns);
@@ -27,6 +21,15 @@
         let db = 'https://account-requests-default-rtdb.firebaseio.com/shortenedLinks';
         const official_db = 'https://ptc-database-default-rtdb.firebaseio.com/mods';
         let uid = '';
+
+        // return if the post is not official...
+        const app_signature = document.querySelector('[app-signature]');
+        const app_version = document.querySelector('[app-version]');
+        const download = document.querySelector('div#download button');
+
+        if (app_signature || app_version || download) return;
+
+        console.log('called!');
 
         spanText.innerText = 'DOWNLOAD';
         icon.className = 'cloud download icon';
@@ -47,7 +50,7 @@
                 await FirebaseModule.patch(`${official_db}/${btoa(document.querySelector('[app-signature]').innerText)}.json`, JSON.stringify({
                     downloads: dl
                 }));
-                if (document.querySelector('[app-dl-count]')) 
+                if (document.querySelector('[app-dl-count]'))
                     document.querySelector('[app-dl-count]').innerText = dl;
             }
 
