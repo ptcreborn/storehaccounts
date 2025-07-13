@@ -9,7 +9,7 @@
 
     if (!document.querySelector('#postBody') || window.location.href.includes('/p/')) return;
 
-    await initFunctions(['supabase', 'jQuery']);
+    await initFunctions(['supabase', 'jQuery', 'ModalCreator']);
     let userData = await supabase.auth.getSession();
     let userid = '';
     let commentid = '';
@@ -150,6 +150,16 @@
     window.appendEditor = (elem) => {
         const comment_editor = document.querySelector('#ptc_comment_editor');
         let comment_target = document.getElementById(elem.parentNode.id);
+
+        if (!comment_target || !comment_editor) {
+            ModalCreator.popFunction(new Date().getTime(), "Please Login first before replying to a comment.",
+                "You are not yet logged in. To share your ideas and thoughts, you can log in with google account or discord account for free. Do you want to log in?",
+                'google icon', 'Login', () => {
+                    window.location.href = 'https://storehaccounts.blogspot.com/p/sign-in-with-storehaccounts.html';
+                });
+            return;
+        }
+
         commentid = elem.parentNode.id;
 
         comment_target.appendChild(comment_editor);
