@@ -33,10 +33,13 @@
                 });
             return;
         }
-
-        commentid = elem.parentNode.id;
         comment_target.appendChild(comment_editor);
         scrollIntoViewportByElement(comment_editor);
+
+        commentid = elem.parentNode.id;
+
+        if (document.getElementById('ql-comment-action'))
+            document.getElementById('ql-comment-action').innerText = "Reply";
     }
 
     function scrollIntoViewportByElement(element) {
