@@ -40,6 +40,8 @@
 
         if (document.getElementById('ql-comment-action'))
             document.getElementById('ql-comment-action').innerText = "Reply";
+        if(document.getElementById('cancelReplyBtn'))
+            document.getElementById('cancelReplyBtn').style.display = "block";
     }
 
     function scrollIntoViewportByElement(element) {
