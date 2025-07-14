@@ -15,7 +15,7 @@ var FirebaseModule = {
             }
 
             req.onerror = (err) => {
-                window.alert("Error detected in FirebaseModule: " + req.statusText + ". Please reload the page and try again!");
+                console.log("Error detected in FirebaseModule: " + req.statusText + ". Please reload the page and try again!");
             }
 
             req.open('GET', url, true);
@@ -54,7 +54,7 @@ var FirebaseModule = {
             }
 
             req.onerror = (err) => {
-                window.alert("Error detected in FirebaseModule: " + req.statusText + ". Please reload the page and try again!");
+                console.log("Error detected in FirebaseModule: " + req.statusText + ". Please reload the page and try again!");
             }
 
             req.open('PATCH', url, true);
@@ -76,7 +76,7 @@ var FirebaseModule = {
             }
 
             req.onerror = (err) => {
-                window.alert("Error detected in FirebaseModule: " + req.statusText + ". Please reload the page and try again!");
+                console.log("Error detected in FirebaseModule: " + req.statusText + ". Please reload the page and try again!");
             }
 
             req.open('POST', url, true);
