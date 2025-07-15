@@ -2,7 +2,7 @@
     // check if the post is official download page
     // by checking app-signature
     // by checking app-version
-    // by checking div with id "download"
+    // by checking div with id "download"..
 
     const app_signature = document.querySelector('[app-signature]');
     const app_version = document.querySelector('[app-version]');
