@@ -24,7 +24,13 @@
     window.appendEditor = async(elem) => {
         await initFunctions(['ModalCreator']);
         const comment_editor = document.querySelector('#ptc_comment_editor');
-        let comment_target = document.getElementById(elem.parentNode.id);
+        let comment_target;
+
+        if (document.getElementById(elem.parentNode.id).includes('reply'))
+            comment_target = document.getElementById(elem.parentNode.parentNode.id);
+        else
+            comment_target = document.getElementById(elem.parentNode.id);
+
 
         if (!comment_target || !comment_editor) {
             ModalCreator.popFunction(new Date().getTime(), "Please Login first before replying to a comment.",
