@@ -268,7 +268,7 @@
             error
         } = await supabase.from('website-posts').select('id').eq('url', url);
         if (error) {
-            window.alert(`getPostID:
+            console.log(`getPostID:
                 ${error.message}`);
             return;
         }
@@ -283,7 +283,7 @@
             error
         } = await supabase.from('websiteposts-comments').select('users(username, country, prof_img, rank_id), comments(id, content, date)').eq('comments_id', id);
         if (error) {
-            window.alert(`getCommentsAndUsersDataviaCommentID:
+            console.log(`getCommentsAndUsersDataviaCommentID:
                 ${error.message}`);
             return;
         }
@@ -298,7 +298,7 @@
             error
         } = await supabase.from('websiteposts-comments').select('users(username, country, prof_img, rank_id), comments(id, content, date)').eq('websiteposts_id', id);
         if (error) {
-            window.alert(`getCommentsAndUsersData:
+            console.log(`getCommentsAndUsersData:
                 ${error.message}`);
             return;
         }
@@ -313,7 +313,7 @@
             error
         } = await supabase.from('ranks').select('rank_name, rank_image').eq('id', id);
         if (error) {
-            window.alert(`getRanksData:
+            console.log(`getRanksData:
                 ${error.message}`);
             return;
         }
@@ -328,7 +328,7 @@
             error
         } = await supabase.from('comments-replies').select('replies(date, content, id), users(country, username, prof_img, ranks(id, rank_name, rank_image))').eq('comments_id', commentid);
         if (error) {
-            window.alert(`getRepliesData:
+            console.log(`getRepliesData:
                 ${error.message}`);
             return;
         }
