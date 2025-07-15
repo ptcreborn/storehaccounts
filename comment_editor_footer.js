@@ -26,7 +26,7 @@
         const comment_editor = document.querySelector('#ptc_comment_editor');
         let comment_target;
 
-        if (document.getElementById(elem.parentNode.id).includes('reply'))
+        if (elem.parentNode.id.includes('reply'))
             comment_target = document.getElementById(elem.parentNode.parentNode.id);
         else
             comment_target = document.getElementById(elem.parentNode.id);
