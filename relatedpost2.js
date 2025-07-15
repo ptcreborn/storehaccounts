@@ -82,11 +82,14 @@ if (!window.location.href.includes('/p/') && window.location.href.includes('.htm
                     // getting the image from the post       
                     let temp_doc = document.createElement('div');
                     temp_doc.innerHTML = x[q].content.$t;
-                    let img_thumb_src = temp_doc.querySelector('img').src;
-                    r = img_thumb_src;
+
+                    if (temp_doc.querySelector('img')) {
+                        let img_thumb_src = temp_doc.querySelector('img').src;
+                        r = img_thumb_src;
+                    } else r = d.noImage;
 
 
-                    if(temp_doc.querySelector('style')) temp_doc.querySelector('style').remove();
+                    if (temp_doc.querySelector('style')) temp_doc.querySelector('style').remove();
 
                     let desc = temp_doc.innerText;
 
