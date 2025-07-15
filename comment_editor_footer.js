@@ -396,6 +396,8 @@
         }
          */
 
+        if(json_data.user == json_data.to_user) return;
+
         let data = {
             [json_data.date]: {
                 user: json_data.user,
