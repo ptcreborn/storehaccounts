@@ -9,9 +9,10 @@
 
     if (!document.querySelector('#postBody') || window.location.href.includes('/p/')) return;
 
-    await initFunctions(['supabase', 'jQuery']);
+    await initFunctions(['supabase', 'jQuery', 'FirebaseModule']);
     let userData = await supabase.auth.getSession();
     let userid = '';
+    let username = '';
     let commentid = '';
 
     let parent_html = document.createElement('div');
@@ -19,7 +20,7 @@
     document.querySelector('#postBody').appendChild(parent_html);
     const parent_editor = document.getElementById('ptc_comment_editor');
 
-    // Adding a reply
+    // Adding a reply container
     window.appendEditor = async(elem) => {
         await initFunctions(['ModalCreator']);
         const comment_editor = document.querySelector('#ptc_comment_editor');
@@ -40,7 +41,7 @@
 
         if (document.getElementById('ql-comment-action'))
             document.getElementById('ql-comment-action').innerText = "Reply";
-        if(document.getElementById('cancelReplyBtn'))
+        if (document.getElementById('cancelReplyBtn'))
             document.getElementById('cancelReplyBtn').style.display = "block";
     }
 
@@ -74,6 +75,7 @@
         }
 
         userid = userData.data[0].id;
+        username = userData.data[0].username;
 
         let tempo_comment_html = document.createElement('div');
         tempo_comment_html.innerHTML = `<div class='ui floating message'><div class='header'>Please be respectful! Add your <span class='ui inverted large black label' id='ql-comment-action'></span></div></div> <div id="ql-comment-editor" class='ui loading inverted attached segment'> </div> <div id="ql-toolbar-container" class='ui inverted attached segment'> <div class="ui blue image label"> <img src="${userData.data[0].prof_img}"> ${userData.data[0].username} </div> <span class="ql-formats"> <button class="ql-bold"></button> <button class="ql-italic"></button> <button class="ql-underline"></button> <button class="ql-strike"></button> </span> <span class="ql-formats"><button class="ql-blockquote"></button> <button class="ql-code-block"></button> </span> <span class="ql-formats"> <button class="ql-list" value="ordered"></button> <button class="ql-list" value="bullet"></button> </span> <span class="ql-formats"> <button class="ql-link"></button> <button class="ql-image"></button> <button class="ql-video"></button> </span> <span class="ql-formats"> <button class="ql-clean"></button> </span> </div> <div class="ui inverted attached segment" style="min-height: 80px;"> <button id="postBtn" class="ui blue disabled inverted button" style="float: left;">Type something...</button>
@@ -271,6 +273,18 @@
                 url: new URL(window.location.href).pathname + '?comment=' + commentid.replace('ptc-child-comment-', '')
             }).select('id');
 
+            notifyUser({
+                user: username,
+                to_user: document.getElementById(commentid).querySelector('[thread-user-name]').innerText,
+                prof: document.getElementById(commentid).querySelector('[thread-user-img]').src,
+                thumb: document.querySelector('.postBody img') ? document.querySelector('.postBody img') : document.getElementById(commentid).querySelector('[thread-user-img]').src,
+                action: "replied",
+                title: window.document.title,
+                href: "https://storehaccounts.blogspot.com" + new URL(window.location.href).pathname + '?comment=' + commentid.replace('ptc-child-comment-', ''),
+                date: new Date().getTime(),
+                read: false
+            });
+
             if (data.error) {
                 window.alert(`Some encountered problem!
         ~
@@ -359,5 +373,36 @@
                 xhr.send(fd);
             });
         }
+    }
+
+    async function notifyUser(json_data) {
+        /*
+        json_data = {
+            user: str,
+            to_user: str,
+            prof: img,
+            thumb: img,
+            action: str,
+            title: str,
+            href: url,
+            date: in number,
+            read: boolean
+        }
+         */
+
+        let data = {
+            [json_data.date]: {
+                user: json_data.user,
+                prof: json_data.prof,
+                thumb: json_data.thumb,
+                action: json_data.action,
+                title: json_data.title,
+                href: json_data.href,
+                read: false
+            }
+        }
+
+        const db = `https://ptc-database-default-rtdb.firebaseio.com/notifications/${btoa(json_data.to_user)}.json`;
+        FirebaseModule.patch(db, JSON.stringify(data));
     }
 })();
