@@ -29,6 +29,8 @@
 
         app_downloads.innerText = dl_count;
 
+        console.log(mf_link);
+
         await MFLinkGenerator(mf_link);
 
         async function MFLinkGenerator(mf_link) {
