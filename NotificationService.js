@@ -65,10 +65,9 @@
                         return false;
                     });
                     count_notif++;
-                } else {
+                } else
                     read_keys.push(key);
-                    container.querySelector('[notif-unread]').remove();
-                }
+
             }
 
             for (key of read_keys) {
