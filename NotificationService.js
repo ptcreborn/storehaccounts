@@ -59,8 +59,9 @@
                 notif_container.querySelector('div').appendChild(container);
 
                 if (!data.read) {
-                    container.addEventListener('click', async() => {
+                    container.addEventListener('click', async() => {                        
                         markRead(`https://ptc-database-default-rtdb.firebaseio.com/notifications/${encodedUsername}`, key, data.href);
+                        return false;
                     });
                     count_notif++;
                 } else {
