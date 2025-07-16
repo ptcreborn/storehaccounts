@@ -285,6 +285,7 @@
             let users_involved = document.getElementById(commentid).querySelectorAll('div.warning');
 
             for (users of users_involved) {
+                if(!users.querySelector('[thread-user-name]')) return;
                 let recipient = users.querySelector('[thread-user-name]').innerText;
                 notifyUser({
                     recipient: recipient,
