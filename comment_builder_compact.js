@@ -148,7 +148,7 @@
 
         if(!comment_id) return;
 
-        let data = await getCommentsAndUsersDataviaCommentID(comment_id.type);
+        let data = await getCommentsAndUsersDataviaCommentID(comment_id.comment);
 
         let items = data;
         
@@ -187,9 +187,8 @@
 
         // After comment has been built, lets check if there are replies within it..
         // checking for replies within a comment
-        let replies_data = await getRepliesData(comment_id);
-        if (replies_data)
-            for (const reply of replies_data) {
+        let reply = await getRepliesDataViaID(comment_id.reply);
+        if (reply) {
                 let reply_user = reply.users;
                 let reply_content = reply.replies;
                 let reply_user_rank = reply_user.ranks;
@@ -256,13 +255,13 @@
                 comment: url_params.get('comment')
         }
     }
-    function scrollIntoViewport(id) {
+    function scrollIntoViewport(comment_data) {
         let element;
-        if(document.getElementById('ptc-child-comment-' + id))
-            element = document.getElementById('ptc-child-comment-' + id);
+        if(document.getElementById('ptc-child-comment-' + comment_data.comment))
+            element = document.getElementById('ptc-child-comment-' + comment_data.comment);
         
-        if(document.getElementById('ptc-child-reply-' + id))
-            element = document.getElementById('ptc-child-reply-' + id);
+        if(document.getElementById('ptc-child-reply-' + comment_data.reply))
+            element = document.getElementById('ptc-child-reply-' + comment_data.reply);
 
         element.classList.add('ui', 'inverted', 'teal', 'message');
         element.scrollIntoView({
@@ -350,5 +349,20 @@
             return;
         else
             return data;
+    }
+        async function getRepliesDataViaID(replyid) {
+        let {
+            data,
+            error
+        } = await supabase.from('comments-replies').select('replies(date, content, id), users(country, username, prof_img, ranks(id, rank_name, rank_image))').eq('comments_id', replyid);
+        if (error) {
+            console.log(`getRepliesData:
+                ${error.message}`);
+            return;
+        }
+        if (data.length == 0)
+            return;
+        else
+            return data[0];
     }
 })();
