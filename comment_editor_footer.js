@@ -284,8 +284,8 @@
             // notifying all users involved in the comment's reply...
             let users_involved = document.getElementById(commentid).querySelectorAll('div.warning');
 
+            let uniqueUsers = [];
             for (users of users_involved) {
-                let uniqueUsers = [];
                 if (users.querySelector('[thread-user-name]') && !uniqueUsers.includes(users.querySelector('[thread-user-name]').innerText)) {
                     let recipient = users.querySelector('[thread-user-name]').innerText;
                     notifyUser({
