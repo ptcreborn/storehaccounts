@@ -283,7 +283,7 @@
                 user: username,
                 to_user: document.getElementById(commentid).querySelector('[thread-user-name]').innerText,
                 prof: document.getElementById(commentid).querySelector('[thread-user-img]').src,
-                thumb: document.querySelector('.postBody img') ? document.querySelector('.postBody img') : document.getElementById(commentid).querySelector('[thread-user-img]').src,
+                thumb: document.querySelector('.postBody img') ? document.querySelector('.postBody img').src : document.getElementById(commentid).querySelector('[thread-user-img]').src,
                 action: "replied",
                 title: window.document.title,
                 href: "https://storehaccounts.blogspot.com" + new URL(window.location.href).pathname + '?comment=' + commentid.replace('ptc-child-comment-', ''),
