@@ -285,19 +285,20 @@
             let users_involved = document.getElementById(commentid).querySelectorAll('div.warning');
 
             for (users of users_involved) {
-                if(!users.querySelector('[thread-user-name]')) return;
-                let recipient = users.querySelector('[thread-user-name]').innerText;
-                notifyUser({
-                    recipient: recipient,
-                    user: username,
-                    prof: userphoto,
-                    thumb: document.querySelector('.postBody img') ? document.querySelector('.postBody img').src : userphoto,
-                    action: "replied",
-                    title: window.document.title,
-                    href: "https://storehaccounts.blogspot.com" + new URL(window.location.href).pathname + '?comment=' + commentid.replace('ptc-child-comment-', ''),
-                    date: new Date().getTime(),
-                    read: false
-                });
+                if (users.querySelector('[thread-user-name]')) {
+                    let recipient = users.querySelector('[thread-user-name]').innerText;
+                    notifyUser({
+                        recipient: recipient,
+                        user: username,
+                        prof: userphoto,
+                        thumb: document.querySelector('.postBody img') ? document.querySelector('.postBody img').src : userphoto,
+                        action: "replied",
+                        title: window.document.title,
+                        href: "https://storehaccounts.blogspot.com" + new URL(window.location.href).pathname + '?comment=' + commentid.replace('ptc-child-comment-', ''),
+                        date: new Date().getTime(),
+                        read: false
+                    });
+                }
             }
 
             if (data.error) {
