@@ -244,7 +244,7 @@
 
         let  url_params = new URLSearchParams(url);
 
-        if (!url_params.get('comment') || !url_params.get('reply'))
+        if (!url_params.get('comment') && !url_params.get('reply'))
             return;
 
         if(url_params.get('reply'))
