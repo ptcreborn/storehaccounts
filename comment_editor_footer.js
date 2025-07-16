@@ -281,16 +281,23 @@
                 url: new URL(window.location.href).pathname + '?comment=' + commentid.replace('ptc-child-comment-', '')
             }).select('id');
 
-            notifyUser({
-                user: username,
-                prof: userphoto,
-                thumb: document.querySelector('.postBody img') ? document.querySelector('.postBody img').src : userphoto,
-                action: "replied",
-                title: window.document.title,
-                href: "https://storehaccounts.blogspot.com" + new URL(window.location.href).pathname + '?comment=' + commentid.replace('ptc-child-comment-', ''),
-                date: new Date().getTime(),
-                read: false
-            });
+            // notifying all users involved in the comment's reply...
+            let users_involved = document.getElementById(commentid).querySelectorAll('div.warning');
+
+            for (users of users_involved) {
+                let recipient = users.querySelector('[thread-user-name]').innerText;
+                notifyUser({
+                    recipient: recipient,
+                    user: username,
+                    prof: userphoto,
+                    thumb: document.querySelector('.postBody img') ? document.querySelector('.postBody img').src : userphoto,
+                    action: "replied",
+                    title: window.document.title,
+                    href: "https://storehaccounts.blogspot.com" + new URL(window.location.href).pathname + '?comment=' + commentid.replace('ptc-child-comment-', ''),
+                    date: new Date().getTime(),
+                    read: false
+                });
+            }
 
             if (data.error) {
                 window.alert(`Some encountered problem!
@@ -383,24 +390,11 @@
     }
 
     async function notifyUser(json_data) {
-        /*
-        json_data = {
-            user: str,
-            to_user: str,
-            prof: img,
-            thumb: img,
-            action: str,
-            title: str,
-            href: url,
-            date: in number,
-            read: boolean
-        }
-         */
-
-        if(json_data.user == json_data.to_user) return;
+        if (json_data.user == json_data.to_user) return;
 
         let data = {
             [json_data.date]: {
+                recipient: recipient,
                 user: json_data.user,
                 prof: json_data.prof,
                 thumb: json_data.thumb,
@@ -411,7 +405,7 @@
             }
         }
 
-        const db = `https://ptc-database-default-rtdb.firebaseio.com/notifications/${btoa(json_data.to_user)}.json`;
-        FirebaseModule.patch(db, JSON.stringify(data));
+        const db = `https://ptc-database-default-rtdb.firebaseio.com/notifications/${btoa(json_data.recipient)}.json`;
+        await FirebaseModule.patch(db, JSON.stringify(data));
     }
 })();
