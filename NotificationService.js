@@ -44,12 +44,12 @@
             let count_notif = 0;
             let read_keys = [];
 
-            for (key of keys) {
-                let data = notifs_data[key];
+            for (const key_obj of keys) {
+                let data = notifs_data[key_obj];
 
                 if (!data.read) {
                     let container = notif_template.content.cloneNode(true).children[0];
-                    container.href = data.href;
+                    container.id = key_obj;
                     if (container.querySelector('[notif-none]')) container.querySelector('[notif-none]').remove();
                     container.querySelector('[notif-action]').innerText = data.action;
                     container.querySelector('[notif-prof]').src = data.prof;
@@ -58,22 +58,23 @@
                     container.querySelector('[notif-title-snippet]').innerHTML = data.title + `<br/><i
                     style="font-size: 11px; font-weight: 500; color: white; opacity: 0.6;">${data.href}</i>`;
                     container.querySelector('[notif-user]').innerText = data.user;
-                    container.querySelector('[notif-time]').innerText = moment(new Date(parseInt(key))).fromNow();
+                    container.querySelector('[notif-time]').innerText = moment(new Date(parseInt(key_obj))).fromNow();
                     notif_container.querySelector('div').appendChild(container);
-
-                    container.addEventListener('click', async() => {
-                        await markRead(`https://ptc-database-default-rtdb.firebaseio.com/notifications/${encodedUsername}`, key, data.href);
+                    document.getElementById(key_obj).addEventListener('click', async() => {
+                        await markRead(`https://ptc-database-default-rtdb.firebaseio.com/notifications/${encodedUsername}`, key_obj, data.href);
                     });
                     count_notif++;
                 } else
-                    read_keys.push(key);
+                    read_keys.push(key_obj);
 
             }
 
-            for (key of read_keys) {
-                let data = notifs_data[key];
+            for (key_obj of read_keys) {
+                let data = notifs_data[key_obj];
                 let container = notif_template.content.cloneNode(true).children[0];
+
                 if (container.querySelector('[notif-none]')) container.querySelector('[notif-none]').remove();
+                container.id = key_obj;
                 container.querySelector('[notif-action]').innerText = data.action;
                 container.querySelector('[notif-prof]').src = data.prof;
                 container.querySelector('[notif-thumb]').src = data.hasOwnProperty('thumb') ? data.thumb : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png';
@@ -81,16 +82,19 @@
                 container.querySelector('[notif-title-snippet]').innerHTML = data.title + `<br/><i
                     style="font-size: 11px; font-weight: 500; color: white; opacity: 0.6;">${data.href}</i>`;
                 container.querySelector('[notif-user]').innerText = data.user;
-                container.querySelector('[notif-time]').innerText = moment(new Date(parseInt(key))).fromNow();
+                container.querySelector('[notif-time]').innerText = moment(new Date(parseInt(key_obj))).fromNow();
                 notif_container.querySelector('div').appendChild(container);
                 container.querySelector('[notif-unread]').remove();
 
-                container.addEventListener('click', async() => {
-                    await markRead(`https://ptc-database-default-rtdb.firebaseio.com/notifications/${encodedUsername}`, key, data.href);
+                document.getElementById(key_obj).addEventListener('click', async() => {
+                    await markRead(`https://ptc-database-default-rtdb.firebaseio.com/notifications/${encodedUsername}`, key_obj, data.href);
                 });
             }
 
             document.querySelector('#notif_count').innerText = count_notif;
+
+            if(count_notif == 0)
+                notif_parent.querySelector('div').classList.remove('teal');
         }
 
         document.getElementById('notif_dropdown').querySelector('div').addEventListener('click', () => {
@@ -105,9 +109,12 @@
 
     }
 
-    async function markRead(db, key) {
+    async function markRead(db, key, link) {
         const notif_db = `${db}/${key}.json`;
-        await FirebaseModule.patch(notif_db, JSON.stringify({ read: true }));
+        await FirebaseModule.patch(notif_db, JSON.stringify({
+            read: true
+        }));
+        window.location.href = link;
     }
 
     async function getUsername() {
