@@ -305,7 +305,7 @@
 
             let main_recipient = document.getElementById(commentid).querySelector('[thread-user-name]').innerText;
 
-            notifyUser({
+            if(!uniqueUsers.includes(main_recipient)) notifyUser({
                 recipient: main_recipient,
                 user: username,
                 prof: userphoto,
