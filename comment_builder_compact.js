@@ -148,7 +148,7 @@
 
         if(!comment_id) return;
 
-        let data = await getCommentsAndUsersDataviaCommentID(comment_id);
+        let data = await getCommentsAndUsersDataviaCommentID(comment_id.type);
 
         let items = data;
         
@@ -216,7 +216,7 @@
 
                 // build comments info
                 qt(clonedTemplate, 'thread-comments').innerHTML = reply_content.content;
-                qt(clonedTemplate, 'thread-action').innerText = "commented";
+                qt(clonedTemplate, 'thread-action').innerText = "replied";
                 qt(clonedTemplate, 'thread-time-ago').innerText = moment(new Date(reply_content.date)).fromNow();
 
                 // build rank info
@@ -243,13 +243,27 @@
 
         let  url_params = new URLSearchParams(url);
 
-        if (!url_params.get('comment'))
+        if (!url_params.get('comment') || !url_params.get('reply'))
             return;
 
-        return url_params.get('comment');
+        if(url_params.get('reply'))
+            return {
+                comment: url_params.get('comment'),
+                reply: url_params.get(reply)
+        }
+
+        else return {
+                comment: url_params.get('comment')
+        }
     }
     function scrollIntoViewport(id) {
-        let element = document.getElementById('ptc-child-comment-' + id);
+        let element;
+        if(document.getElementById('ptc-child-comment-' + id))
+            element = document.getElementById('ptc-child-comment-' + id);
+        
+        if(document.getElementById('ptc-child-reply-' + id))
+            element = document.getElementById('ptc-child-reply-' + id);
+
         element.classList.add('ui', 'inverted', 'teal', 'message');
         element.scrollIntoView({
             block: "center",
