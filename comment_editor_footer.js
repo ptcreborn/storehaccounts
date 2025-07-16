@@ -412,7 +412,6 @@
 
         let data = {
             [json_data.date]: {
-                recipient: json_data.recipient,
                 user: json_data.user,
                 prof: json_data.prof,
                 thumb: json_data.thumb,
