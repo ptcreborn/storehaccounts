@@ -13,6 +13,7 @@
     let userData = await supabase.auth.getSession();
     let userid = '';
     let username = '';
+    let userphoto = '';
     let commentid = '';
 
     let parent_html = document.createElement('div');
@@ -43,7 +44,7 @@
         comment_target.appendChild(comment_editor);
         scrollIntoViewportByElement(comment_editor);
 
-        commentid = elem.parentNode.id;
+        commentid = comment_target.id;
 
         if (document.getElementById('ql-comment-action'))
             document.getElementById('ql-comment-action').innerText = "Reply";
@@ -82,6 +83,7 @@
 
         userid = userData.data[0].id;
         username = userData.data[0].username;
+        userphoto = userData.data[0].prof_img;
 
         let tempo_comment_html = document.createElement('div');
         tempo_comment_html.innerHTML = `<div class='ui floating message'><div class='header'>Please be respectful! Add your <span class='ui inverted large black label' id='ql-comment-action'></span></div></div> <div id="ql-comment-editor" class='ui loading inverted attached segment'> </div> <div id="ql-toolbar-container" class='ui inverted attached segment'> <div class="ui blue image label"> <img src="${userData.data[0].prof_img}"> ${userData.data[0].username} </div> <span class="ql-formats"> <button class="ql-bold"></button> <button class="ql-italic"></button> <button class="ql-underline"></button> <button class="ql-strike"></button> </span> <span class="ql-formats"><button class="ql-blockquote"></button> <button class="ql-code-block"></button> </span> <span class="ql-formats"> <button class="ql-list" value="ordered"></button> <button class="ql-list" value="bullet"></button> </span> <span class="ql-formats"> <button class="ql-link"></button> <button class="ql-image"></button> <button class="ql-video"></button> </span> <span class="ql-formats"> <button class="ql-clean"></button> </span> </div> <div class="ui inverted attached segment" style="min-height: 80px;"> <button id="postBtn" class="ui blue disabled inverted button" style="float: left;">Type something...</button>
@@ -281,9 +283,8 @@
 
             notifyUser({
                 user: username,
-                to_user: document.getElementById(commentid).querySelector('[thread-user-name]').innerText,
-                prof: document.getElementById(commentid).querySelector('[thread-user-img]').src,
-                thumb: document.querySelector('.postBody img') ? document.querySelector('.postBody img').src : document.getElementById(commentid).querySelector('[thread-user-img]').src,
+                prof: userphoto,
+                thumb: document.querySelector('.postBody img') ? document.querySelector('.postBody img').src : userphoto,
                 action: "replied",
                 title: window.document.title,
                 href: "https://storehaccounts.blogspot.com" + new URL(window.location.href).pathname + '?comment=' + commentid.replace('ptc-child-comment-', ''),
