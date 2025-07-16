@@ -49,6 +49,7 @@
 
                 if (!data.read) {
                     let container = notif_template.content.cloneNode(true).children[0];
+                    container.href = data.href;
                     if (container.querySelector('[notif-none]')) container.querySelector('[notif-none]').remove();
                     container.querySelector('[notif-action]').innerText = data.action;
                     container.querySelector('[notif-prof]').src = data.prof;
@@ -61,7 +62,7 @@
                     notif_container.querySelector('div').appendChild(container);
 
                     container.addEventListener('click', async() => {
-                        markRead(`https://ptc-database-default-rtdb.firebaseio.com/notifications/${encodedUsername}`, key, data.href);
+                        await markRead(`https://ptc-database-default-rtdb.firebaseio.com/notifications/${encodedUsername}`, key, data.href);
                         return false;
                     });
                     count_notif++;
