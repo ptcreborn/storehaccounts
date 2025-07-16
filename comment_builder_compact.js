@@ -354,7 +354,7 @@
         let {
             data,
             error
-        } = await supabase.from('comments-replies').select('replies(date, content, id), users(country, username, prof_img, ranks(id, rank_name, rank_image))').eq('comments_id', replyid);
+        } = await supabase.from('comments-replies').select('replies(date, content, id), users(country, username, prof_img, ranks(id, rank_name, rank_image))').eq('replies_id', replyid);
         if (error) {
             console.log(`getRepliesDataViaID:
                 ${error.message}`);
