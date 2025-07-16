@@ -63,7 +63,6 @@
 
                     container.addEventListener('click', async() => {
                         await markRead(`https://ptc-database-default-rtdb.firebaseio.com/notifications/${encodedUsername}`, key, data.href);
-                        return false;
                     });
                     count_notif++;
                 } else
@@ -74,7 +73,6 @@
             for (key of read_keys) {
                 let data = notifs_data[key];
                 let container = notif_template.content.cloneNode(true).children[0];
-                container.href = data.href;
                 if (container.querySelector('[notif-none]')) container.querySelector('[notif-none]').remove();
                 container.querySelector('[notif-action]').innerText = data.action;
                 container.querySelector('[notif-prof]').src = data.prof;
@@ -86,6 +84,10 @@
                 container.querySelector('[notif-time]').innerText = moment(new Date(parseInt(key))).fromNow();
                 notif_container.querySelector('div').appendChild(container);
                 container.querySelector('[notif-unread]').remove();
+
+                container.addEventListener('click', async() => {
+                    await markRead(`https://ptc-database-default-rtdb.firebaseio.com/notifications/${encodedUsername}`, key, data.href);
+                });
             }
 
             document.querySelector('#notif_count').innerText = count_notif;
@@ -103,10 +105,9 @@
 
     }
 
-    async function markRead(db, key, link) {
+    async function markRead(db, key) {
         const notif_db = `${db}/${key}.json`;
         await FirebaseModule.patch(notif_db, JSON.stringify({ read: true }));
-        window.location.href = link;
     }
 
     async function getUsername() {
