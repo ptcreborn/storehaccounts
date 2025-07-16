@@ -146,6 +146,8 @@
     async function checkQueryComment() {
         let comment_id = extractCommentIDQuery();
 
+        console.log(comment_id);
+
         if(!comment_id) return;
 
         let data = await getCommentsAndUsersDataviaCommentID(comment_id.comment);
