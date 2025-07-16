@@ -40,6 +40,7 @@
             notif_container.querySelector('div').appendChild(container);
         } else {
             let keys = Object.keys(notifs_data);
+            keys.reverse();
             let count_notif = 0;
             let read_keys = [];
 
