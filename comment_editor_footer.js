@@ -392,7 +392,7 @@
     }
 
     async function notifyUser(json_data) {
-        if (json_data.user == json_data.to_user) return;
+        if (json_data.recipient == json_data.user) return;
 
         let data = {
             [json_data.date]: {
