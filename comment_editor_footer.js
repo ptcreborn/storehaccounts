@@ -285,8 +285,9 @@
             let users_involved = document.getElementById(commentid).querySelectorAll('div.warning');
 
             for (users of users_involved) {
-                if (users.querySelector('[thread-user-name]')) {
-                    let recipient = users.querySelector('[thread-user-name]').innerText;
+                let uniqueUsers = [];
+                if (users.querySelector('[thread-user-name]') && !uniqueUsers.includes(users.querySelector('[thread-user-name]').innerText)) {                    
+                    let recipient = users.querySelector('[thread-user-name]').innerText;                    
                     notifyUser({
                         recipient: recipient,
                         user: username,
@@ -298,6 +299,7 @@
                         date: new Date().getTime(),
                         read: false
                     });
+                    uniqueUsers.push(recipient);
                 }
             }
 
