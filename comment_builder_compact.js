@@ -189,8 +189,8 @@
 
         // After comment has been built, lets check if there are replies within it..
         // checking for replies within a comment
-        let reply = await getRepliesDataViaID(comment_id.reply);
-        if (reply) {
+        if (comment_id.reply) {
+                let reply = await getRepliesDataViaID(comment_id.reply);
                 let reply_user = reply.users;
                 let reply_content = reply.replies;
                 let reply_user_rank = reply_user.ranks;
@@ -358,7 +358,7 @@
             error
         } = await supabase.from('comments-replies').select('replies(date, content, id), users(country, username, prof_img, ranks(id, rank_name, rank_image))').eq('comments_id', replyid);
         if (error) {
-            console.log(`getRepliesData:
+            console.log(`getRepliesDataViaID:
                 ${error.message}`);
             return;
         }
