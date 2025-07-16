@@ -42,7 +42,11 @@
             let temp_div = document.createElement('div');
             temp_div.innerHTML = html_text;
 
-            let mf_dl_link = atob(temp_div.querySelector('a.input.popsok').getAttribute('data-scrambled-url'));
+            let mf_dl_link = '';
+
+            if(!temp_div.querySelector('a.input.popsok').getAttribute('data-scrambled-url')) {
+                mf_dl_link = temp_div.querySelector('a.input.popsok').href;
+            } else mf_dl_link = atob(temp_div.querySelector('a.input.popsok').getAttribute('data-scrambled-url'));
 
             if (!mf_dl_link)
                 window.location.href = mf_link;
