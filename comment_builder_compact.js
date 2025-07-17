@@ -16,26 +16,26 @@
         const comments_container = document.querySelector('#ptc_comment_container');
         const comments_count_container = document.querySelector('#ptc_comment_count');
         comments_container.classList.add('notification-parent-comments');
-        // let queried_comment_elem = '';
+        let queried_comment_elem = '';
 
-        // // check if the cookies for all comments are stored
-        // if (sessionStorage.getItem(url)) {
-        //     let cached_comment = JSON.parse(sessionStorage.getItem(url));
-        //     let ms_expiration = 120000;
+        // check if the cookies for all comments are stored
+        if (sessionStorage.getItem(url) && !extractCommentIDQuery()) {
+            let cached_comment = JSON.parse(sessionStorage.getItem(url));
+            let ms_expiration = 120000;
 
-        //     if (new Date().getTime() - (parseInt(cached_comment.date)) < ms_expiration) {
-        //         comments_container.innerHTML = cached_comment.content;
-        //         comments_count_container.innerHTML = cached_comment.count;
+            if (new Date().getTime() - (parseInt(cached_comment.date)) < ms_expiration) {
+                comments_container.innerHTML = cached_comment.content;
+                comments_count_container.innerHTML = cached_comment.count;
 
-        //         queried_comment_elem = extractCommentIDQuery();
-        //         if (queried_comment_elem) {
-        //             if (queried_comment_elem.hasOwnProperty('answer'))
-        //                 scrollIntoViewport(`ptc-child-reply-${queried_comment_elem.answer}`);
-        //             else if (queried_comment_elem.hasOwnProperty('answer'))
-        //                 scrollIntoViewport(`ptc-child-reply-${queried_comment_elem.reply}`);
-        //         } else return;
-        //     }
-        // }
+                queried_comment_elem = extractCommentIDQuery();
+                if (queried_comment_elem) {
+                    if (queried_comment_elem.hasOwnProperty('answer'))
+                        scrollIntoViewport(`ptc-child-reply-${queried_comment_elem.answer}`);
+                    else if (queried_comment_elem.hasOwnProperty('answer'))
+                        scrollIntoViewport(`ptc-child-reply-${queried_comment_elem.reply}`);
+                } else return;
+            }
+        }
 
         const postid = await getPostID(url);
         if (!postid) {
