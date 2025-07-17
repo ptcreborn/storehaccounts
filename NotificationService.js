@@ -11,7 +11,7 @@
     let username = await getUsername();
 
     if (!username) {
-        console.log(`username is invalid`);
+        console.log(`Empty user credentials. User is not logged in.`);
         return;
     }
 
@@ -127,7 +127,7 @@
         }
         if (!data.session) {
             console.log(`Error in getUsername[data] function
-                ${data}`);
+                ${data.session}`);
             return;
         }
 
