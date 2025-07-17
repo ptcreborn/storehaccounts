@@ -59,6 +59,7 @@
                     style="font-size: 11px; font-weight: 500; color: white; opacity: 0.6;">${data.href}</i>`;
                     container.querySelector('[notif-user]').innerText = data.user;
                     container.querySelector('[notif-time]').innerText = moment(new Date(parseInt(key_obj))).fromNow();
+                    notif_container.querySelector('div').classList.add('ui', 'warning', 'message', 'inverted');
                     notif_container.querySelector('div').appendChild(container);
                     document.getElementById(key_obj).addEventListener('click', async() => {
                         await markRead(`https://ptc-database-default-rtdb.firebaseio.com/notifications/${encodedUsername}`, key_obj, data.href);
