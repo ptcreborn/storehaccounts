@@ -29,8 +29,15 @@
         let comment_target;
 
         if (elem.parentNode.id.includes('reply')) {
-            comment_target = document.getElementById(elem.parentNode.parentNode.id);
             replyid = elem.parentNode.id;
+
+            while(elem.parentNode.id.includes('reply')) 
+                elem = elem.parentNode;
+            
+            comment_target = document.getElementById(elem.parentNode.id);
+
+            console.log(replyid);
+            console.log(comment_target.id);
         } else
             comment_target = document.getElementById(elem.parentNode.id);
 
