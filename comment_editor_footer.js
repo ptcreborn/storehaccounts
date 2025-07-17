@@ -63,15 +63,17 @@
                 event.preventDefault();
                 event.stopImmediatePropagation();      
 
-                document.getElementById(replyid).classList.remove('warning');
-                document.getElementById(replyid).classList.add('info');
+                if(document.getElementById(\"${replyid}\")) {                
+                document.getElementById(\"${replyid}\").classList.remove('warning');
+                document.getElementById(\"${replyid}\").classList.add('info');
 
                 setTimeout(function() {
-                    document.getElementById(replyid).classList.remove('info');
-                    document.getElementById(replyid).classList.add('warning');
+                    document.getElementById(\"${replyid}\").classList.remove('info');
+                    document.getElementById(\"${replyid}\").classList.add('warning');
                 }, 2000);
 
-                scrollIntoViewportByElement(document.getElementById(replyid));
+                scrollIntoViewportByElement(document.getElementById(\"${replyid}\"));
+                }
             })();
             `);
             reply_target.appendChild(comment_editor);
