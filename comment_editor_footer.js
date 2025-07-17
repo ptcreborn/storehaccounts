@@ -15,6 +15,7 @@
     let username = '';
     let userphoto = '';
     let commentid = '';
+    let replyid = '';
 
     let parent_html = document.createElement('div');
     parent_html.innerHTML = `<div id='comment_editor_footer_loader' class="ui segment"> <div class="ui active dimmer"> <div class="ui indeterminate text loader">Preparing Comment Editor</div> </div> <br/> <br/> <br/> </div> <div id='ptc_comment_editor' class='ui inverted message' style='display: none;'> </div>`;
@@ -27,9 +28,10 @@
         const comment_editor = document.querySelector('#ptc_comment_editor');
         let comment_target;
 
-        if (elem.parentNode.id.includes('reply'))
+        if (elem.parentNode.id.includes('reply')) {
             comment_target = document.getElementById(elem.parentNode.parentNode.id);
-        else
+            replyid = elem.parentNode.id;
+        } else
             comment_target = document.getElementById(elem.parentNode.id);
 
 
@@ -288,6 +290,7 @@
             for (users of users_involved) {
                 if (users.querySelector('[thread-user-name]') && !uniqueUsers.includes(users.querySelector('[thread-user-name]').innerText)) {
                     let recipient = users.querySelector('[thread-user-name]').innerText;
+                    let url = "https://storehaccounts.blogspot.com" + new URL(window.location.href).pathname;
                     notifyUser({
                         recipient: recipient,
                         user: username,
@@ -295,7 +298,7 @@
                         thumb: document.querySelector('.postBody img') ? document.querySelector('.postBody img').src : userphoto,
                         action: "replied",
                         title: window.document.title,
-                        href: "https://storehaccounts.blogspot.com" + new URL(window.location.href).pathname + '?comment=' + commentid.replace('ptc-child-comment-', ''),
+                        href: replyid.length > 0 ? `${url}?comment=${commentid.replace('ptc-child-comment-', '')}&reply=${replyid.replace('ptc-child-reply-', '')}&answer=${data.data[0].id}` : `${url}?comment=${commentid.replace('ptc-child-comment-', '')}&reply=${replyid.replace('ptc-child-reply-', '')}`,
                         date: new Date().getTime(),
                         read: false
                     });
@@ -305,7 +308,7 @@
 
             let main_recipient = document.getElementById(commentid).querySelector('[thread-user-name]').innerText;
 
-            if(!uniqueUsers.includes(main_recipient)) notifyUser({
+            if (!uniqueUsers.includes(main_recipient)) notifyUser({
                 recipient: main_recipient,
                 user: username,
                 prof: userphoto,
