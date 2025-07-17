@@ -17,6 +17,8 @@
     let commentid = '';
     let replyid = '';
 
+    let replytargetdummy;
+
     let parent_html = document.createElement('div');
     parent_html.innerHTML = `<div id='comment_editor_footer_loader' class="ui segment"> <div class="ui active dimmer"> <div class="ui indeterminate text loader">Preparing Comment Editor</div> </div> <br/> <br/> <br/> </div> <div id='ptc_comment_editor' class='ui inverted message' style='display: none;'> </div>`;
     document.querySelector('#postBody').appendChild(parent_html);
@@ -53,9 +55,17 @@
             return;
         }
 
-        if (reply_target)
-            reply_target.appendChild(comment_editor);
-        else comment_target.appendChild(comment_editor);
+        if (reply_target) {
+            replytargetdummy = reply_target.querySelector('[thread-comments]').cloneNode(true);
+            replytargetdummy.classList.add('ui', 'message');
+            replytargetdummy.addEventListener('click', () => {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+
+                scrollIntoViewportByElement(event.target);
+            });
+            target.appendChild(comment_editor);
+        } else comment_target.appendChild(comment_editor);
 
         scrollIntoViewportByElement(comment_editor);
 
@@ -289,17 +299,6 @@
 
         // STORING REPLY TABLE
         else if (actionText.innerText == "Reply") {
-            let replytargetdummy;
-            if (document.getElementById(replyid)) {
-                replytargetdummy = document.getElementById(replyid).querySelector('[thread-comments]').cloneNode(true);
-                replytargetdummy.classList.add('ui', 'message');
-                replytargetdummy.addEventListener('click', () => {
-                    event.preventDefault();
-                    event.stopImmediatePropagation();
-
-                    scrollIntoViewportByElement(event.target);
-                });
-            }
             let data = await supabase.from('replies').insert({
                 date: "now()",
                 content: replyid && !replytargetdummy ? `${replytargetdummy.outerHTML}<br/>${getContent()}` : getContent(),
