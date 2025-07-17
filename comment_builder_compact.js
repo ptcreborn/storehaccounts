@@ -230,9 +230,8 @@
                 });
 
                 targetElemId = `ptc-child-reply-${comment_id.reply}`;
-            }
 
-            let cloneReplyTemplate = clonedTemplate;
+                let cloneReplyTemplate = clonedTemplate;
 
             if (comment_id.answer) {
                 let reply = await getRepliesDataViaID(comment_id.answer);
@@ -275,13 +274,13 @@
                 });
 
                 targetElemId = `ptc-child-reply-${comment_id.answer}`;                
-            
-                console.log(`clone: ${clonedTemplate}`);
 
-                comment_temp_container.innerHTML += cloneReplyTemplate.innerHTML;
-                comment_temp_container.innerHTML += clonedTemplate.innerHTML;
+                clonedTemplate.appendChild(clonedTemplate);
+                comment_temp_container.appendChild(clonedTemplate);
             }  else 
                 comment_temp_container.appendChild(cloneReplyTemplate);
+            }      
+        }      
 
         scrollIntoViewport(targetElemId);
     }
