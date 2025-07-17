@@ -152,15 +152,12 @@
         if(!comment_id) return;
 
         let data = await getCommentsAndUsersDataviaCommentID(comment_id.comment);
-
         let targetElemId = `ptc-child-comment-${comment_id.comment}`;
-
         let items = data;
-        
         let clonedTemplate = qts('comment-container').cloneNode(true).content.children[0];
-        clonedTemplate.id = `ptc-child-comment-${items.comments.id}`;
-
         let country_name = '';
+
+        clonedTemplate.id = `ptc-child-comment-${items.comments.id}`;
 
         if (items.users.country == "Anonymous") {
             country_name = 'Homeless Catter';
@@ -234,7 +231,9 @@
 
                 targetElemId = `ptc-child-reply-${comment_id.reply}`;
                 comment_temp_container.appendChild(clonedTemplate);
-            }  
+            }
+
+            let cloneReplyTemplate = clonedTemplate;
 
             if (comment_id.answer) {
                 let reply = await getRepliesDataViaID(comment_id.answer);
@@ -277,8 +276,10 @@
                 });
 
                 targetElemId = `ptc-child-reply-${comment_id.answer}`;
+                cloneReplyTemplate.appendChild(clonedTemplate);
+                comment_temp_container.appendChild(cloneReplyTemplate);
+            }  else 
                 comment_temp_container.appendChild(clonedTemplate);
-            }  
 
         scrollIntoViewport(targetElemId);
     }
