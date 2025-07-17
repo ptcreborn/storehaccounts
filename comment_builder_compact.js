@@ -28,9 +28,9 @@
                 comments_count_container.innerHTML = cached_comment.count;
 
                 queried_comment_elem = extractCommentIDQuery();
-                if (queried_comment_elem.answer) 
+                if (queried_comment_elem.hasOwnProperty('answer')) 
                     scrollIntoViewport(`ptc-child-reply-${queried_comment_elem.answer}`);
-                else if(queried_comment_elem.reply)                   
+                else if(queried_comment_elem.hasOwnProperty('answer'))                   
                     scrollIntoViewport(`ptc-child-reply-${queried_comment_elem.reply}`);
                 return;
             }
