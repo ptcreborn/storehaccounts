@@ -64,7 +64,7 @@
 
                 scrollIntoViewportByElement(event.target);
             });
-            target.appendChild(comment_editor);
+            comment_target.appendChild(comment_editor);
         } else comment_target.appendChild(comment_editor);
 
         scrollIntoViewportByElement(comment_editor);
