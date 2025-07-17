@@ -276,6 +276,7 @@
                 targetElemId = `ptc-child-reply-${comment_id.answer}`;             
 
                 cloneReplyTemplate.querySelector('button').remove();
+                console.log(replyid);
                 cloneReplyTemplate.appendChild(clonedTemplate);
                 comment_temp_container.appendChild(cloneReplyTemplate);
             }  else 
