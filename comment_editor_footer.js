@@ -53,10 +53,9 @@
             return;
         }
 
-        if (reply_target) {
+        if (reply_target)
             reply_target.appendChild(comment_editor);
-            document.querySelector('div.ql-comment-editor').appendChild(reply_target);
-        } else comment_target.appendChild(comment_editor);
+        else comment_target.appendChild(comment_editor);
 
         scrollIntoViewportByElement(comment_editor);
 
