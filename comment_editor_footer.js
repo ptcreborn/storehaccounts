@@ -416,10 +416,14 @@
 
             div.innerHTML = div_html;
 
-            if (actionText.innerText == "Comment") document.getElementById('ptc_comment_container').appendChild(div);
-            else if (actionText.innerText = "Reply") document.getElementById(`${commentid}`).appendChild(div);
-
-            scrollIntoViewportByElement(div);
+            if (actionText.innerText == "Comment") {                
+                scrollIntoViewportByElement(document.getElementById('ptc_comment_container'));
+                document.getElementById('ptc_comment_container').appendChild(div);
+            }
+            else if (actionText.innerText = "Reply") {
+                scrollIntoViewportByElement(document.getElementById(`${commentid}`));
+                document.getElementById(`${commentid}`).appendChild(div);
+            }
 
             const comments_container = document.querySelector('#ptc_comment_container');
             const comments_count_container = document.querySelector('#ptc_comment_count');
