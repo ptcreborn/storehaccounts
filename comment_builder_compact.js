@@ -28,8 +28,10 @@
                 comments_count_container.innerHTML = cached_comment.count;
 
                 queried_comment_elem = extractCommentIDQuery();
-                if (queried_comment_elem)
-                    scrollIntoViewport(queried_comment_elem);
+                if (queried_comment_elem.answer) 
+                    scrollIntoViewport(`ptc-child-reply-${queried_comment_elem.answer}`);
+                else if(queried_comment_elem.reply)                   
+                    scrollIntoViewport(`ptc-child-reply-${queried_comment_elem.reply}`);
                 return;
             }
         }
@@ -117,7 +119,7 @@
 
                 // build comments info
                 qt(clonedTemplate, 'thread-comments').innerHTML = reply_content.content;
-                qt(clonedTemplate, 'thread-action').innerText = "commented";
+                qt(clonedTemplate, 'thread-action').innerText = "replied";
                 qt(clonedTemplate, 'thread-time-ago').innerText = moment(new Date(reply_content.date)).fromNow();
 
                 // build rank info
@@ -149,6 +151,8 @@
         if(!comment_id) return;
 
         let data = await getCommentsAndUsersDataviaCommentID(comment_id.comment);
+
+        let targetElemId = `ptc-child-comment-${comment_id.comment}`;
 
         let items = data;
         
@@ -227,6 +231,51 @@
                     clonedTemplate.parentNode.querySelector('[thread-reply]').click();
                 });
 
+                targetElemId = `ptc-child-reply-${comment_id.reply}`;
+                comment_temp_container.appendChild(clonedTemplate);
+            }  
+
+            if (comment_id.answer) {
+                let reply = await getRepliesDataViaID(comment_id.answer);
+                let reply_user = reply.users;
+                let reply_content = reply.replies;
+                let reply_user_rank = reply_user.ranks;
+
+                let clonedTemplate = qts('comment-container').cloneNode(true).content.children[0];
+                clonedTemplate.id = `ptc-child-reply-${reply_content.id}`;
+                clonedTemplate.className = 'ui warning message';
+
+                let country_name = '';
+
+                if (reply_user.country == "Anonymous") {
+                    country_name = 'Homeless Catter';
+                } else {
+                    country_name = await fetch('https://restcountries.com/v3.1/alpha/' + reply_user.country);
+                    country_name = await country_name.json();
+                    country_name = country_name[0].name.official;
+                }
+
+                // build user data first
+                qt(clonedTemplate, 'thread-user-img').src = reply_user.prof_img;
+                qt(clonedTemplate, 'thread-country').querySelector('img').src = `${reply_user.country == "Anonymous" ? ` https: //static.wikia.nocookie.net/361735c0-7535-4dfe-b5d7-6f1683b4550b/scale-to-width/755` : `https://flagsapi.com/${reply_user.country}/shiny/64.png`}`;
+                    qt(clonedTemplate, 'thread-country').querySelector('span').innerText = `${country_name}`;
+                qt(clonedTemplate, 'thread-user-name').innerText = reply_user.username;
+
+                // build comments info
+                qt(clonedTemplate, 'thread-comments').innerHTML = reply_content.content;
+                qt(clonedTemplate, 'thread-action').innerText = "replied";
+                qt(clonedTemplate, 'thread-time-ago').innerText = moment(new Date(reply_content.date)).fromNow();
+
+                // build rank info
+                let ranks_data = await getRanksData(reply_user_rank.id);
+                qt(clonedTemplate, 'thread-rank').querySelector('img').src = ranks_data.rank_image;
+                qt(clonedTemplate, 'thread-rank').querySelector('span').innerText = `Rank ${reply_user_rank.id} ${ranks_data.rank_name}`;
+
+                qt(clonedTemplate, 'thread-reply').addEventListener('click', () => {
+                    clonedTemplate.parentNode.querySelector('[thread-reply]').click();
+                });
+
+                targetElemId = `ptc-child-reply-${comment_id.answer}`;
                 comment_temp_container.appendChild(clonedTemplate);
             }  
 
@@ -234,6 +283,12 @@
     }
 
     function extractCommentIDQuery() {
+
+        // hierarchy of parameters..
+        // comment is the highest user interaction..
+        // reply is the interaction of the user to a comment..
+        // answer is the interaction of the user to a reply..
+
         let url = window.location.href;
         url = new URL(url).search;
 
@@ -242,26 +297,24 @@
 
         let  url_params = new URLSearchParams(url);
 
-        if (!url_params.get('comment') && !url_params.get('reply'))
+        if (!url_params.get('comment') && !url_params.get('reply') && !url_params.get('answer'))
             return;
 
-        if(url_params.get('reply'))
+        if(url_params.get('answer'))
             return {
                 comment: url_params.get('comment'),
-                reply: url_params.get('reply')
+                reply: url_params.get('reply'),
+                answer: url_params.get('answer')
         }
 
         else return {
-                comment: url_params.get('comment')
+                comment: url_params.get('comment'),
+                reply: url_params.get('reply')
         }
     }
-    function scrollIntoViewport(comment_data) {
+    function scrollIntoViewport(id) {
         let element;
-        if(document.getElementById('ptc-child-comment-' + comment_data.comment))
-            element = document.getElementById('ptc-child-comment-' + comment_data.comment);
-        
-        if(document.getElementById('ptc-child-reply-' + comment_data.reply))
-            element = document.getElementById('ptc-child-reply-' + comment_data.reply);
+        element = document.getElementById(id);
 
         element.classList.add('ui', 'inverted', 'teal', 'message');
         element.scrollIntoView({
