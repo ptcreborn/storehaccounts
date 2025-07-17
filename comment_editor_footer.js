@@ -31,7 +31,7 @@
 
         if (elem.parentNode.id.includes('reply')) {
             replyid = elem.parentNode.id;
-            reply_target = document.getElementById(replyid);
+            reply_target = document.getElementById(elem.id);
 
             while (elem.parentNode.id.includes('reply'))
                 elem = elem.parentNode;
