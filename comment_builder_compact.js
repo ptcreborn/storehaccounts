@@ -280,7 +280,7 @@
                 comment_temp_container.appendChild(clonedTemplate);
             }  
 
-        scrollIntoViewport(comment_id);
+        scrollIntoViewport(targetElemId);
     }
 
     function extractCommentIDQuery() {
