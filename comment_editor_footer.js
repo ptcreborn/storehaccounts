@@ -31,7 +31,7 @@
 
         if (elem.parentNode.id.includes('reply')) {
             replyid = elem.parentNode.id;
-            reply_target = document.getElementById(elem.id);
+            reply_target = document.getElementById(replyid);
 
             while (elem.parentNode.id.includes('reply'))
                 elem = elem.parentNode;
@@ -49,6 +49,8 @@
                 });
             return;
         }
+
+        console.log(reply_target);
 
         if (reply_target) reply_target.appendChild(comment_editor);
         else comment_target.appendChild(comment_editor);
