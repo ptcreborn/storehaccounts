@@ -273,7 +273,7 @@
                     clonedTemplate.parentNode.querySelector('[thread-reply]').click();
                 });
 
-                targetElemId = `ptc-child-reply-${comment_id.answer}`;             
+                targetElemId = `ptc-child-reply-${comment_id.reply}`;             
 
                 cloneReplyTemplate.querySelector('button').remove();
                 cloneReplyTemplate.appendChild(clonedTemplate);
