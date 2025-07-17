@@ -276,6 +276,11 @@
                 });
 
                 targetElemId = `ptc-child-reply-${comment_id.answer}`;                
+
+                console.log(clonedTemplate);
+                console.log(cloneReplyTemplate);
+                console.log(comment_temp_container);
+
                 clonedTemplate.appendChild(cloneReplyTemplate);                
                 comment_temp_container.appendChild(clonedTemplate);
             }  else 
