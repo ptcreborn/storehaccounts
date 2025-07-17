@@ -276,8 +276,8 @@
                 targetElemId = `ptc-child-reply-${comment_id.answer}`;             
 
                 cloneReplyTemplate.querySelector('button').remove();
-                clonedTemplate.appendChild(cloneReplyTemplate);
-                comment_temp_container.appendChild(clonedTemplate);
+                cloneReplyTemplate.appendChild(clonedTemplate);
+                comment_temp_container.appendChild(cloneReplyTemplate);
             }  else 
                 comment_temp_container.appendChild(cloneReplyTemplate);            
         }      
