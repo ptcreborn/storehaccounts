@@ -27,9 +27,7 @@
         await initFunctions(['ModalCreator']);
         event.preventDefault();
         event.stopImmediatePropagation();
-    
-        console.log(event);
-        console.log(event.target);
+
         const comment_editor = document.querySelector('#ptc_comment_editor');
         let comment_target;
         let reply_target;
@@ -55,9 +53,10 @@
             return;
         }
 
-        console.log(reply_target);
-
-        if (reply_target) reply_target.appendChild(comment_editor);
+        if (reply_target) {
+            reply_target.appendChild(comment_editor);
+            document.querySelector('div.ql-comment-editor').appendChild(reply_target);
+        }
         else comment_target.appendChild(comment_editor);
 
         scrollIntoViewportByElement(comment_editor);
@@ -303,7 +302,8 @@
             let users_involved = document.getElementById(commentid).querySelectorAll('div.warning');
 
             let uniqueUsers = [];
-            for (users of users_involved) {
+            if (!replyid) // means the user is replying to a general comment that will notify every people who replied on that comment...
+                for (users of users_involved) {
                 if (users.querySelector('[thread-user-name]') && !uniqueUsers.includes(users.querySelector('[thread-user-name]').innerText)) {
                     let recipient = users.querySelector('[thread-user-name]').innerText;
                     let url = "https://storehaccounts.blogspot.com" + new URL(window.location.href).pathname;
@@ -320,6 +320,22 @@
                     });
                     uniqueUsers.push(recipient);
                 }
+            } else {
+                let users = document.getElementById(replyid);
+                let recipient = users.querySelector('[thread-user-name]').innerText;
+                let url = "https://storehaccounts.blogspot.com" + new URL(window.location.href).pathname;
+                notifyUser({
+                    recipient: recipient,
+                    user: username,
+                    prof: userphoto,
+                    thumb: document.querySelector('.postBody img') ? document.querySelector('.postBody img').src : userphoto,
+                    action: "replied",
+                    title: window.document.title,
+                    href: replyid.length > 0 ? `${url}?comment=${commentid.replace('ptc-child-comment-', '')}&reply=${replyid.replace('ptc-child-reply-', '')}&answer=${data.data[0].id}` : `${url}?comment=${commentid.replace('ptc-child-comment-', '')}&reply=${replyid.replace('ptc-child-reply-', '')}`,
+                    date: new Date().getTime(),
+                    read: false
+                });
+                uniqueUsers.push(recipient);
             }
 
             let main_recipient = document.getElementById(commentid).querySelector('[thread-user-name]').innerText;
