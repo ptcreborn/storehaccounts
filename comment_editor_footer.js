@@ -31,6 +31,7 @@
         if (elem.parentNode.id.includes('reply')) {
             comment_target = document.getElementById(elem.parentNode.parentNode.id);
             replyid = elem.parentNode.id;
+            console.log(replyid);
         } else
             comment_target = document.getElementById(elem.parentNode.id);
 
