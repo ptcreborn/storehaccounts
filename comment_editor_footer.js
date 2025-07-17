@@ -291,7 +291,7 @@
         else if (actionText.innerText == "Reply") {
             let replytargetdummy;
             if (document.getElementById(replyid)) {
-                replytargetdummy = document.getElementById(replyid).querySelector('[thread-comments]').cloneNode(true).content.children[0];
+                replytargetdummy = document.getElementById(replyid).querySelector('[thread-comments]').cloneNode(true);
                 replytargetdummy.classList.add('ui', 'message');
                 replytargetdummy.addEventListener('click', () => {
                     event.preventDefault();
@@ -302,7 +302,7 @@
             }
             let data = await supabase.from('replies').insert({
                 date: "now()",
-                content: replyid ? `${replytargetdummy.outerHTML}<br/>${getContent()}` : getContent(),
+                content: replyid && !replytargetdummy ? `${replytargetdummy.outerHTML}<br/>${getContent()}` : getContent(),
                 images: img_json_arr,
                 url: new URL(window.location.href).pathname + '?comment=' + commentid.replace('ptc-child-comment-', '')
             }).select('id');
