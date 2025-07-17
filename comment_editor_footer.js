@@ -27,13 +27,15 @@
         await initFunctions(['ModalCreator']);
         const comment_editor = document.querySelector('#ptc_comment_editor');
         let comment_target;
+        let reply_target;
 
         if (elem.parentNode.id.includes('reply')) {
             replyid = elem.parentNode.id;
+            reply_target = document.getElementById(replyid);
 
-            while(elem.parentNode.id.includes('reply')) 
+            while (elem.parentNode.id.includes('reply'))
                 elem = elem.parentNode;
-            
+
             comment_target = document.getElementById(elem.parentNode.id);
         } else
             comment_target = document.getElementById(elem.parentNode.id);
@@ -47,8 +49,14 @@
                 });
             return;
         }
-        comment_target.appendChild(comment_editor);
-        scrollIntoViewportByElement(comment_editor);
+
+        if (reply_target) reply_target.appendChild(comment_editor);
+        else comment_target.appendChild(comment_editor);
+
+        if (reply_target)
+            scrollIntoViewportByElement(reply_target);
+        else
+            scrollIntoViewportByElement(comment_editor);
 
         commentid = comment_target.id;
 
