@@ -275,11 +275,11 @@
                     clonedTemplate.parentNode.querySelector('[thread-reply]').click();
                 });
 
-                targetElemId = `ptc-child-reply-${comment_id.answer}`;
-                cloneReplyTemplate.appendChild(clonedTemplate);
-                comment_temp_container.appendChild(cloneReplyTemplate);
-            }  else 
+                targetElemId = `ptc-child-reply-${comment_id.answer}`;                
+                clonedTemplate.appendChild(cloneReplyTemplate);                
                 comment_temp_container.appendChild(clonedTemplate);
+            }  else 
+                comment_temp_container.appendChild(cloneReplyTemplate);
 
         scrollIntoViewport(targetElemId);
     }
