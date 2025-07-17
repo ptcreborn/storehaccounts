@@ -302,7 +302,7 @@
         else if (actionText.innerText == "Reply") {
             let data = await supabase.from('replies').insert({
                 date: "now()",
-                content: replyid && !replytargetdummy? `${replytargetdummy.outerHTML}<br/>${getContent()}` : getContent(),
+                content: replyid && replytargetdummy? `${replytargetdummy.outerHTML}<br/>${getContent()}` : getContent(),
                 images: img_json_arr,
                 url: new URL(window.location.href).pathname + '?comment=' + commentid.replace('ptc-child-comment-', '')
             }).select('id');
