@@ -57,13 +57,14 @@
 
         if (reply_target) {
             replytargetdummy = reply_target.querySelector('[thread-comments]').cloneNode(true);
-            replytargetdummy.classList.add('ui', 'message');
-            replytargetdummy.addEventListener('click', () => {
+            replytargetdummy.classList.add('ui', 'basic', 'label');
+            replytargetdummy.style.cursor = 'pointer';
+            replytargetdummy.onclick = () => {
                 event.preventDefault();
                 event.stopImmediatePropagation();
 
                 scrollIntoViewportByElement(event.target);
-            });
+            };
             comment_target.appendChild(comment_editor);
         } else comment_target.appendChild(comment_editor);
 
@@ -299,11 +300,9 @@
 
         // STORING REPLY TABLE
         else if (actionText.innerText == "Reply") {
-            console.log(replytargetdummy);
-            console.log(replytargetdummy.outerHTML);
             let data = await supabase.from('replies').insert({
                 date: "now()",
-                content: replyid ? `${replytargetdummy.outerHTML}<br/>${getContent()}` : getContent(),
+                content: replyid && !replytargetdummy? `${replytargetdummy.outerHTML}<br/>${getContent()}` : getContent(),
                 images: img_json_arr,
                 url: new URL(window.location.href).pathname + '?comment=' + commentid.replace('ptc-child-comment-', '')
             }).select('id');
