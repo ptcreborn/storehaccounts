@@ -56,8 +56,7 @@
         if (reply_target) {
             reply_target.appendChild(comment_editor);
             document.querySelector('div.ql-comment-editor').appendChild(reply_target);
-        }
-        else comment_target.appendChild(comment_editor);
+        } else comment_target.appendChild(comment_editor);
 
         scrollIntoViewportByElement(comment_editor);
 
@@ -291,9 +290,20 @@
 
         // STORING REPLY TABLE
         else if (actionText.innerText == "Reply") {
+
+            if (document.getElementById(replyid)) {
+                let replytargetdummy = document.getElementById(replyid).querySelector('[thread-comments]');
+                replytargetdummy.classList.add('ui', 'message');
+                replytargetdummy.addEventListener('click', () => {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+
+                    scrollIntoViewportByElement(event.target);
+                });
+            }
             let data = await supabase.from('replies').insert({
                 date: "now()",
-                content: getContent(),
+                content: replyid ? `${replytargetdummy.outerHTML}<br/>${getContent()}` : getContent(),
                 images: img_json_arr,
                 url: new URL(window.location.href).pathname + '?comment=' + commentid.replace('ptc-child-comment-', '')
             }).select('id');
