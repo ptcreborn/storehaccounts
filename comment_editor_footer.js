@@ -291,7 +291,7 @@
         else if (actionText.innerText == "Reply") {
             let replytargetdummy;
             if (document.getElementById(replyid)) {
-                document.getElementById(replyid).querySelector('[thread-comments]');
+                replytargetdummy = document.getElementById(replyid).querySelector('[thread-comments]');
                 replytargetdummy.classList.add('ui', 'message');
                 replytargetdummy.addEventListener('click', () => {
                     event.preventDefault();
