@@ -35,9 +35,6 @@
                 elem = elem.parentNode;
             
             comment_target = document.getElementById(elem.parentNode.id);
-
-            console.log(replyid);
-            console.log(comment_target.id);
         } else
             comment_target = document.getElementById(elem.parentNode.id);
 
