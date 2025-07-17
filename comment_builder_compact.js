@@ -233,7 +233,6 @@
             }
 
             let cloneReplyTemplate = clonedTemplate;
-            console.log(`clone reply: ${cloneReplyTemplate}`);
 
             if (comment_id.answer) {
                 let reply = await getRepliesDataViaID(comment_id.answer);
@@ -279,8 +278,8 @@
             
                 console.log(`clone: ${clonedTemplate}`);
 
-                cloneReplyTemplate.appendChild(clonedTemplate);                
-                comment_temp_container.appendChild(cloneReplyTemplate);
+                comment_temp_container.innerHTML += cloneReplyTemplate.innerHTML;
+                comment_temp_container.innerHTML += clonedTemplate.innerHTML;
             }  else 
                 comment_temp_container.appendChild(cloneReplyTemplate);
 
