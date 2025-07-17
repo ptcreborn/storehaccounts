@@ -275,8 +275,8 @@
 
                 targetElemId = `ptc-child-reply-${comment_id.answer}`;             
 
-                cloneReplyTemplate.appendChild(clonedTemplate);
-                comment_temp_container.appendChild(cloneReplyTemplate);
+                clonedTemplate.appendChild(cloneReplyTemplate);
+                comment_temp_container.appendChild(clonedTemplate);
             }  else 
                 comment_temp_container.appendChild(cloneReplyTemplate);            
         }      
