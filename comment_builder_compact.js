@@ -278,8 +278,7 @@
                 clonedTemplate.appendChild(clonedTemplate);
                 comment_temp_container.appendChild(clonedTemplate);
             }  else 
-                comment_temp_container.appendChild(cloneReplyTemplate);
-            }      
+                comment_temp_container.appendChild(cloneReplyTemplate);            
         }      
 
         scrollIntoViewport(targetElemId);
