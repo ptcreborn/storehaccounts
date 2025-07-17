@@ -125,7 +125,7 @@
                 ${error.message}`);
             return;
         }
-        if (!data) {
+        if (!data.session) {
             console.log(`Error in getUsername[data] function
                 ${data}`);
             return;
