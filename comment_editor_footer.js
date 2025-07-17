@@ -1,6 +1,6 @@
 // This script works with Supabase and Storehaccounts website.
 // This will be the official editor for comments!
-// This also uses Quill Editor (Open Source) June 24, 2025
+// This also uses Quill Editor (Open Source) June 24, 2025..
 
 (async() => {
 
