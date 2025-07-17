@@ -55,10 +55,7 @@
         if (reply_target) reply_target.appendChild(comment_editor);
         else comment_target.appendChild(comment_editor);
 
-        if (reply_target)
-            scrollIntoViewportByElement(reply_target);
-        else
-            scrollIntoViewportByElement(comment_editor);
+        scrollIntoViewportByElement(comment_editor);
 
         commentid = comment_target.id;
 
