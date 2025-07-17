@@ -69,7 +69,7 @@
                 setTimeout(function() {
                     document.getElementById(replyid).classList.remove('info');
                     document.getElementById(replyid).classList.add('warning');
-                }, 300);
+                }, 2000);
 
                 scrollIntoViewportByElement(document.getElementById(replyid));
             })();
