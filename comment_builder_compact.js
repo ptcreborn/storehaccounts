@@ -233,6 +233,7 @@
             }
 
             let cloneReplyTemplate = clonedTemplate;
+            console.log(`clone reply: ${cloneReplyTemplate}`);
 
             if (comment_id.answer) {
                 let reply = await getRepliesDataViaID(comment_id.answer);
@@ -275,6 +276,9 @@
                 });
 
                 targetElemId = `ptc-child-reply-${comment_id.answer}`;                
+            
+                console.log(`clone: ${clonedTemplate}`);
+
                 cloneReplyTemplate.appendChild(clonedTemplate);                
                 comment_temp_container.appendChild(cloneReplyTemplate);
             }  else 
