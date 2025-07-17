@@ -230,7 +230,6 @@
                 });
 
                 targetElemId = `ptc-child-reply-${comment_id.reply}`;
-                comment_temp_container.appendChild(clonedTemplate);
             }
 
             let cloneReplyTemplate = clonedTemplate;
@@ -276,13 +275,8 @@
                 });
 
                 targetElemId = `ptc-child-reply-${comment_id.answer}`;                
-
-                console.log(clonedTemplate);
-                console.log(cloneReplyTemplate);
-                console.log(comment_temp_container);
-
-                clonedTemplate.appendChild(cloneReplyTemplate);                
-                comment_temp_container.appendChild(clonedTemplate);
+                cloneReplyTemplate.appendChild(clonedTemplate);                
+                comment_temp_container.appendChild(cloneReplyTemplate);
             }  else 
                 comment_temp_container.appendChild(cloneReplyTemplate);
 
