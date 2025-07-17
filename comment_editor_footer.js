@@ -25,6 +25,11 @@
     // Adding a reply container
     window.appendEditor = async(elem) => {
         await initFunctions(['ModalCreator']);
+        event.preventDefault();
+        event.stopImmediatePropagation();
+    
+        console.log(event);
+        console.log(event.target);
         const comment_editor = document.querySelector('#ptc_comment_editor');
         let comment_target;
         let reply_target;
