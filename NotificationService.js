@@ -55,7 +55,8 @@
                     container.querySelector('[notif-prof]').src = data.prof;
                     container.querySelector('[notif-thumb]').src = data.hasOwnProperty('thumb') ? data.thumb : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png';
 
-                    //container.querySelector('[notif-title-snippet]').innerHTML = data.title + `<br/><i style="font-size: 11px; font-weight: 500; color: white; opacity: 0.6;">${data.href}</i>`;
+                    container.querySelector('[notif-title-snippet]').innerHTML = data.title; //`<br/><i style="font-size: 11px; font-weight: 500; color: white; opacity: 0.6;">${data.href}</i>`;
+
                     container.querySelector('[notif-user]').innerText = data.user;
                     container.querySelector('[notif-time]').innerText = moment(new Date(parseInt(key_obj))).fromNow();
                     container.querySelector('div').classList.add('ui', 'warning', 'message', 'inverted');
@@ -79,7 +80,7 @@
                 container.querySelector('[notif-prof]').src = data.prof;
                 container.querySelector('[notif-thumb]').src = data.hasOwnProperty('thumb') ? data.thumb : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png';
 
-                //container.querySelector('[notif-title-snippet]').innerHTML = data.title + `<br/><i style="font-size: 11px; font-weight: 500; color: white; opacity: 0.6;">${data.href}</i>`;
+                container.querySelector('[notif-title-snippet]').innerHTML = data.title; //`<br/><i style="font-size: 11px; font-weight: 500; color: white; opacity: 0.6;">${data.href}</i>`;
                 container.querySelector('[notif-user]').innerText = data.user;
                 container.querySelector('[notif-time]').innerText = moment(new Date(parseInt(key_obj))).fromNow();
                 notif_container.querySelector('div').appendChild(container);
@@ -92,7 +93,7 @@
 
             document.querySelector('#notif_count').innerText = count_notif;
 
-            if(count_notif == 0)
+            if (count_notif == 0)
                 notif_parent.querySelector('div').classList.remove('teal');
         }
 
