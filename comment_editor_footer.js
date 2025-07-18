@@ -60,23 +60,7 @@
             replytargetdummy.innerHTML = `<span class="ui"><i class="reply icon"></i></span>${reply_target.querySelector('[thread-user-img]').outerHTML} ${reply_target.querySelector('[thread-user-name]').outerHTML} ${reply_target.querySelector('[thread-action]').outerHTML}... ${replytargetdummy.textContent.substring(0, 50)}...`;
             replytargetdummy.classList.add('ui', 'basic', 'label');
             replytargetdummy.style.cursor = 'pointer';
-            replytargetdummy.setAttribute('onclick', `(function() {                
-                event.preventDefault();
-                event.stopImmediatePropagation();      
-
-                if(document.getElementById(\"${replyid}\")) {                
-                document.getElementById(\"${replyid}\").classList.remove('warning');
-                document.getElementById(\"${replyid}\").classList.add('info');
-
-                setTimeout(function() {
-                    document.getElementById(\"${replyid}\").classList.remove('info');
-                    document.getElementById(\"${replyid}\").classList.add('warning');
-                }, 2000);
-
-                scrollIntoViewportByElement(document.getElementById(\"${replyid}\"));
-                }
-            })();
-            `);
+            replytargetdummy.setAttribute('onclick', spotCommentFromCommentEditor(replyid));
             reply_target.appendChild(comment_editor);
         } else comment_target.appendChild(comment_editor);
 
@@ -90,11 +74,26 @@
             document.getElementById('cancelReplyBtn').style.display = "block";
     }
 
-    window.scrollIntoViewportByElement = (element) => {
+    async function scrollIntoViewportByElement(element) {
         element.scrollIntoView({
             block: "center",
             behavior: "smooth"
         });
+    }
+
+    window.spotCommentFromCommentEditor = (replyid) => {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        document.getElementById(`${replyid}`).classList.remove('warning');
+        document.getElementById(`${replyid}`).classList.add('info');
+
+        setTimeout(function() {
+            document.getElementById(`${replyid}`).classList.remove('info');
+            document.getElementById(`${replyid}`).classList.add('warning');
+        }, 2000);
+
+        scrollIntoViewportByElement(document.getElementById(`${replyid}`));
     }
 
     if (userData.error || !userData.data.session) {
@@ -416,11 +415,10 @@
 
             div.innerHTML = div_html;
 
-            if (actionText.innerText == "Comment") {                
+            if (actionText.innerText == "Comment") {
                 scrollIntoViewportByElement(document.getElementById('ptc_comment_container'));
                 document.getElementById('ptc_comment_container').appendChild(div);
-            }
-            else if (actionText.innerText = "Reply") {
+            } else if (actionText.innerText = "Reply") {
                 scrollIntoViewportByElement(document.getElementById(`${commentid}`));
                 document.getElementById(`${commentid}`).appendChild(div);
             }
