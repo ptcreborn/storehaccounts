@@ -56,8 +56,8 @@
         }
 
         if (reply_target) {
-            replytargetdummy = reply_target.querySelector('[thread-comments]').cloneNode(true);
-            replytargetdummy.innerHTML = `<span class="ui"><i class="reply icon"></i></span>${reply_target.querySelector('[thread-user-img]')}${reply_target.querySelector('[thread-user-name]')}${reply_target.querySelector('[thread-action]')}${replytargetdummy.innerHTML}`;
+            replytargetdummy = reply_target.querySelector('[thread-comments] > p').cloneNode(true);
+            replytargetdummy.innerHTML = `<span class="ui"><i class="reply icon"></i></span>${reply_target.querySelector('[thread-user-img]').outerHTML}${reply_target.querySelector('[thread-user-name]').outerHTML}${reply_target.querySelector('[thread-action]').outerHTML}${replytargetdummy.innerHTML}`;
             replytargetdummy.classList.add('ui', 'basic', 'label');
             replytargetdummy.style.cursor = 'pointer';
             replytargetdummy.setAttribute('onclick', `(function() {                
@@ -194,7 +194,7 @@
     document.querySelector('#ql-comment-editor').classList.remove('loading');
 
     function getContent() {
-        return document.querySelector('#ql-comment-editor > div > p').innerHTML;
+        return document.querySelector('#ql-comment-editor div').innerHTML;
     }
 
     function getText() {
