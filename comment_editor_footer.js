@@ -66,6 +66,9 @@
 
         commentid = comment_target.id;
 
+        console.log(replyid);
+        console.log(commentid);
+
         if (document.getElementById('ql-comment-action'))
             document.getElementById('ql-comment-action').innerText = "Reply";
         if (document.getElementById('cancelReplyBtn'))
