@@ -67,9 +67,6 @@
 
         commentid = comment_target.id;
 
-        console.log(replyid);
-        console.log(commentid);
-
         if (document.getElementById('ql-comment-action'))
             document.getElementById('ql-comment-action').innerText = "Reply";
         if (document.getElementById('cancelReplyBtn'))
@@ -321,7 +318,7 @@
             // notifying all users involved in the comment's reply...
             let users_involved = document.getElementById(commentid).querySelectorAll('div.warning');
             let uniqueUsers = [];
-            
+
             if (!replyid) // means the user is replying to a general comment that will notify every people who replied on that comment...
                 for (users of users_involved) {
                 if (users.querySelector('[thread-user-name]') && !uniqueUsers.includes(users.querySelector('[thread-user-name]').innerText)) {
