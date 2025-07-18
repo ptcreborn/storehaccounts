@@ -32,6 +32,7 @@
         const comment_editor = document.querySelector('#ptc_comment_editor');
         let comment_target;
         let reply_target;
+        replyid = undefined;
 
         if (elem.parentNode.id.includes('reply')) {
             replyid = elem.parentNode.id;
@@ -319,6 +320,7 @@
 
             // notifying all users involved in the comment's reply...
             let users_involved = document.getElementById(commentid).querySelectorAll('div.warning');
+            users_involved.push(document.getElementById(commentid));
 
             let uniqueUsers = [];
             if (!replyid) // means the user is replying to a general comment that will notify every people who replied on that comment...
@@ -356,20 +358,6 @@
                 });
                 uniqueUsers.push(recipient);
             }
-
-            let main_recipient = document.getElementById(commentid).querySelector('[thread-user-name]').innerText;
-
-            if (!uniqueUsers.includes(main_recipient)) notifyUser({
-                recipient: main_recipient,
-                user: username,
-                prof: userphoto,
-                thumb: document.querySelector('.postBody img') ? document.querySelector('.postBody img').src : userphoto,
-                action: "replied",
-                title: window.document.title,
-                href: "https://storehaccounts.blogspot.com" + new URL(window.location.href).pathname + '?comment=' + commentid.replace('ptc-child-comment-', ''),
-                date: new Date().getTime(),
-                read: false
-            });
 
             if (data.error) {
                 window.alert(`Some encountered problem!
