@@ -26,7 +26,6 @@
 
     // Adding a reply container
     window.appendEditor = async(elem) => {
-        await initFunctions(['ModalCreator']);
         event.preventDefault();
         event.stopImmediatePropagation();
 
@@ -40,13 +39,12 @@
 
             while (elem.parentNode.id.includes('reply'))
                 elem = elem.parentNode;
-
-            comment_target = document.getElementById(elem.parentNode.id);
-        } else
-            comment_target = document.getElementById(elem.parentNode.id);
+        }
+        comment_target = document.getElementById(elem.parentNode.id);
 
 
         if (!comment_target || !comment_editor) {
+            await initFunctions(['ModalCreator']);
             ModalCreator.popFunction(new Date().getTime(), "Please Login first before replying to a comment.",
                 "You are not yet logged in. To share your ideas and thoughts, you can log in with google account or discord account for free. Do you want to log in?",
                 'google icon', 'Login', () => {
@@ -332,7 +330,7 @@
                         thumb: document.querySelector('.postBody img') ? document.querySelector('.postBody img').src : userphoto,
                         action: "replied",
                         title: window.document.title,
-                        href: replyid.length > 0 ? `${url}?comment=${commentid.replace('ptc-child-comment-', '')}&reply=${replyid.replace('ptc-child-reply-', '')}&answer=${data.data[0].id}` : `${url}?comment=${commentid.replace('ptc-child-comment-', '')}&reply=${replyid.replace('ptc-child-reply-', '')}`,
+                        href: `${url}?comment=${commentid.replace('ptc-child-comment-', '')}&reply=${data.data[0].id}`,
                         date: new Date().getTime(),
                         read: false
                     });
@@ -349,7 +347,7 @@
                     thumb: document.querySelector('.postBody img') ? document.querySelector('.postBody img').src : userphoto,
                     action: "replied",
                     title: window.document.title,
-                    href: replyid.length > 0 ? `${url}?comment=${commentid.replace('ptc-child-comment-', '')}&reply=${replyid.replace('ptc-child-reply-', '')}&answer=${data.data[0].id}` : `${url}?comment=${commentid.replace('ptc-child-comment-', '')}&reply=${replyid.replace('ptc-child-reply-', '')}`,
+                    href: `${url}?comment=${commentid.replace('ptc-child-comment-', '')}&reply=${replyid.replace('ptc-child-reply-', '')}&answer=${data.data[0].id}`,
                     date: new Date().getTime(),
                     read: false
                 });
