@@ -60,7 +60,7 @@
             replytargetdummy.innerHTML = `<span class="ui"><i class="reply icon"></i></span>${reply_target.querySelector('[thread-user-img]').outerHTML} ${reply_target.querySelector('[thread-user-name]').outerHTML} ${reply_target.querySelector('[thread-action]').outerHTML}... ${replytargetdummy.textContent.substring(0, 50)}...`;
             replytargetdummy.classList.add('ui', 'basic', 'label');
             replytargetdummy.style.cursor = 'pointer';
-            replytargetdummy.setAttribute('onclick', `spotCommentFromCommentEditor(${replyid})`);
+            replytargetdummy.setAttribute('onclick', `spotCommentFromCommentEditor("${replyid}")`);
             reply_target.appendChild(comment_editor);
         } else comment_target.appendChild(comment_editor);
 
