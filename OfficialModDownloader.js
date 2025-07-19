@@ -27,6 +27,10 @@
 
         dl_count += 1;
 
+        await FirebaseModule.patch(`${db}/${key}.json`, JSON.stringify({
+            downloads: dl_count
+        }));
+
         app_downloads.innerText = dl_count;
 
         await MFLinkGenerator(mf_link);
