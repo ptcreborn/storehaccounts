@@ -70,8 +70,8 @@
 
         // build user data first
         qt(clonedTemplate, 'thread-user-img').src = items.users.prof_img;
-        qt(clonedTemplate, 'thread-country').querySelector('img').src = `${items.users.country == "Anonymous" ? ` https: //static.wikia.nocookie.net/361735c0-7535-4dfe-b5d7-6f1683b4550b/scale-to-width/755` : `https://flagsapi.com/${items.users.country}/shiny/64.png`}`;
-            qt(clonedTemplate, 'thread-country').querySelector('span').innerText = `${country_name}`;
+        qt(clonedTemplate, 'thread-country').querySelector('img').src = `${items.users.country == "Anonymous" ? ` https://static.wikia.nocookie.net/361735c0-7535-4dfe-b5d7-6f1683b4550b/scale-to-width/755` : `https://flagsapi.com/${items.users.country}/shiny/64.png`}`;
+        qt(clonedTemplate, 'thread-country').querySelector('span').innerText = `${country_name}`;
         qt(clonedTemplate, 'thread-user-name').innerText = items.users.username;
 
         // build comments info
