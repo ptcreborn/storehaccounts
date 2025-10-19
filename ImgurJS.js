@@ -5,10 +5,10 @@ var ImgurJS = {
         // uploadingCallback is a function to execute while uploading is held
         // doneUploadCallback is a function to execute after an upload is held
         document.getElementById(inputID).addEventListener('change', function (e) {
-            uploadingCallback();
             var file = e.target.files[0];
             if (!file || !file.type.match(/image.*/))
-                return;
+                return;        
+            uploadingCallback();
             var fd = new FormData();
             fd.append("image", file); // Append the file
             var xhr = new XMLHttpRequest(); // Create the XHR (Cross-Domain XHR FTW!!!) Thank you sooooo much imgur.com
@@ -29,10 +29,10 @@ var ImgurJS = {
     },
     uploadMultipleImgs: function (inputID, divID, uploadingCallback, doneUploadCallback, errorCallback) {
         document.getElementById(inputID).addEventListener('change', function (e) {
-            uploadingCallback();
             var file = e.target.files[0];
             if (!file || !file.type.match(/image.*/))
-                return;
+                return;            
+            uploadingCallback();
             var fd = new FormData();
             fd.append("image", file); // Append the file
             var xhr = new XMLHttpRequest(); // Create the XHR (Cross-Domain XHR FTW!!!) Thank you sooooo much imgur.com
