@@ -1,5 +1,9 @@
 var ImgurJS = {
     uploadImgUr: function (inputID, imgID, uploadingCallback, doneUploadCallback) {
+        // inputID is the input field
+        // imgID is the DIV that will hold the images preview after being uploaded
+        // uploadingCallback is a function to execute while uploading is held
+        // doneUploadCallback is a function to execute after an upload is held
         document.getElementById(inputID).addEventListener('change', function (e) {
             uploadingCallback();
             var file = e.target.files[0];
