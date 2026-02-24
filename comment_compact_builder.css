@@ -9,6 +9,7 @@
 
 .notification-container-comments {
   background: #22042a;
+  color: #c5c5c5;
   border-bottom: 1px solid rgba(255,255,255,0.3);
   border-top: 1px solid rgba(255,255,255,0.3);
   padding-top: 3px;
