@@ -20,7 +20,6 @@
 }
   
 .notification-container-comments img {
-  height: 300px !important;
   object-fit: cover;
   float: none;
 }
