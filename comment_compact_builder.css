@@ -8,7 +8,7 @@
 }
 
 .notification-container-comments {
-  linear-gradient(135deg, #22042a, #1E1E2F);
+  background: linear-gradient(135deg, #22042a, #1E1E2F);
   color: #c5c5c5;
   border-bottom: 1px solid rgba(255,255,255,0.3);
   border-top: 1px solid rgba(255,255,255,0.3);
