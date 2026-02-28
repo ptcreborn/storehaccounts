@@ -53,14 +53,16 @@
                     if (container.querySelector('[notif-none]')) container.querySelector('[notif-none]').remove();
                     container.querySelector('[notif-action]').innerText = data.action;
                     container.querySelector('[notif-prof]').src = data.prof;
-                    container.querySelector('[notif-thumb]').src = data.hasOwnProperty('thumb') ? data.thumb : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png';
+                    //container.querySelector('[notif-thumb]').src = data.hasOwnProperty('thumb') ? data.thumb : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png';
 
                     container.querySelector('[notif-title-snippet]').innerHTML = data.title; //`<br/><i style="font-size: 11px; font-weight: 500; color: white; opacity: 0.6;">${data.href}</i>`;
 
                     container.querySelector('[notif-user]').innerText = data.user;
                     container.querySelector('[notif-time]').innerText = moment(new Date(parseInt(key_obj))).fromNow();
                     container.querySelector('div').classList.add('ui', 'info', 'message');
+
                     notif_container.querySelector('div').appendChild(container);
+
                     document.getElementById(key_obj).addEventListener('click', async() => {
                         await markRead(`https://ptc-database-default-rtdb.firebaseio.com/notifications/${encodedUsername}`, key_obj, data.href);
                     });
@@ -78,7 +80,7 @@
                 container.id = key_obj;
                 container.querySelector('[notif-action]').innerText = data.action;
                 container.querySelector('[notif-prof]').src = data.prof;
-                container.querySelector('[notif-thumb]').src = data.hasOwnProperty('thumb') ? data.thumb : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png';
+                //container.querySelector('[notif-thumb]').src = data.hasOwnProperty('thumb') ? data.thumb : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png';
 
                 container.querySelector('[notif-title-snippet]').innerHTML = data.title; //`<br/><i style="font-size: 11px; font-weight: 500; color: white; opacity: 0.6;">${data.href}</i>`;
                 container.querySelector('[notif-user]').innerText = data.user;
